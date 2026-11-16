@@ -1,0 +1,113 @@
+[
+  {
+    "id": "perseverance",
+    "title": "Mars-Rover Perseverance & Curiosity",
+    "subtitle": "Unsere rollenden Roboter-Geologen auf dem Roten Planeten",
+    "category": "mars-rover",
+    "categoryLabel": "Mars Rover",
+    "targetBodyId": "mars",
+    "targetBodyName": "Mars",
+    "agency": "NASA / JPL",
+    "launchYear": "2011 (Curiosity) & 2020 (Perseverance)",
+    "statusLabel": "Aktiv auf dem Mars unterwegs",
+    "wikimediaImageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Perseverance_Selfie_at_Rochette_%28cropped%29.jpg?width=640",
+    "imageUrl": "assets/images/perseverance.svg",
+    "imageCredit": "NASA / JPL-Caltech / MSSS – Perseverance & Ingenuity Selfie (Wikimedia Commons)",
+    "childSummary": "Weil der Mars für Menschen noch viel zu weit weg und kalt ist, schicken wir schlaue Roboter auf sechs Rädern voraus! Die Mars-Rover Curiosity und Perseverance fahren durch alte ausgetrocknete Kraterseen, bohren Gesteinsproben an und machen gestochen scharfe Fotos.",
+    "tasksForKids": [
+      "Sucht im Jezero-Krater nach Spuren von uralten Flüssen, Seen und vielleicht winzigen Mikroben aus der Vergangenheit.",
+      "Hat die kleine Mars-Hubschrauberdrohne ‚Ingenuity‘ mitgebracht, die als erstes Luftfahrzeug auf einem fremden Planeten geflogen ist!",
+      "Sammelt Gesteinsröhrchen, die später zur Erde gebracht werden sollen."
+    ],
+    "wikipediaUrl": "https://de.wikipedia.org/wiki/Perseverance_(Rover)"
+  },
+  {
+    "id": "jwst",
+    "title": "James-Webb-Weltraumteleskop (JWST)",
+    "subtitle": "Das goldene Riesen-Auge im tiefen Weltall",
+    "category": "telescope",
+    "categoryLabel": "Weltraumteleskope",
+    "targetBodyId": "sun",
+    "targetBodyName": "Sonne (Lagrange-Punkt L2)",
+    "agency": "NASA / ESA / CSA",
+    "launchYear": "25. Dezember 2021",
+    "statusLabel": "Aktiv im Sonnenorbit (1,5 Mio. km von der Erde)",
+    "wikimediaImageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Webb%27s_First_Deep_Field.jpg?width=640",
+    "imageUrl": "assets/images/jwst.svg",
+    "imageCredit": "NASA, ESA, CSA, and STScI (Wikimedia Commons, Public Domain)",
+    "childSummary": "Das James-Webb-Teleskop (kurz JWT oder JWST) ist das größte und leistungsstärkste Weltraumteleskop, das je gebaut wurde! Mit seinem 6,5 Meter großen Spiegel aus 18 goldbeschichteten Sechsecken kann es durch dichte Staubwolken blicken.",
+    "tasksForKids": [
+      "Beobachtet Wärmestrahlung (Infrarotlicht) und schaut damit zurück bis zu den allerersten Sternen und Galaxien nach dem Urknall.",
+      "Untersucht auch die Wolken von Jupiter, Saturn, Uranus, Neptun sowie ferne Planeten bei anderen Sternen (Exoplaneten).",
+      "Ein Sonnenschutzschild so groß wie ein Tennisplatz hält die Kameras im Dauerschatten bei unter -220 °C kühl."
+    ],
+    "wikipediaUrl": "https://de.wikipedia.org/wiki/James-Webb-Weltraumteleskop"
+  },
+  {
+    "id": "gaia",
+    "title": "Weltraumteleskop Gaia",
+    "subtitle": "Die große 3D-Sternenkarte unserer Milchstraße",
+    "category": "telescope",
+    "categoryLabel": "Weltraumteleskope",
+    "targetBodyId": "sun",
+    "targetBodyName": "Sonne / Milchstraße",
+    "agency": "ESA (Europäische Weltraumorganisation)",
+    "launchYear": "19. Dezember 2013",
+    "statusLabel": "Über 2 Milliarden Sterne vermessen",
+    "wikimediaImageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Gaia_map_of_the_Milky_Way.jpg?width=640",
+    "imageUrl": "assets/images/gaia.svg",
+    "imageCredit": "ESA / Gaia / DPAC (Wikimedia Commons, CC BY-SA 3.0 IGO)",
+    "childSummary": "Das europäische Weltraumteleskop Gaia ist der beste Landvermesser des Universums! Es hat fast zwei Milliarden Sterne unserer Heimatgalaxie (der Milchstraße) aber auch tausende Asteroiden in unserem eigenen Sonnensystem hochgenau vermessen.",
+    "tasksForKids": [
+      "Erstellt die genaueste dreidimensionale Landkarte unserer Milchstraße.",
+      "Misst genau, wie weit die Sterne entfernt sind und wohin sie sich bewegen.",
+      "Hat außerdem über 150.000 Asteroiden in unserem Sonnensystem genau vermessen!"
+    ],
+    "wikipediaUrl": "https://de.wikipedia.org/wiki/Gaia_(Raumsonde)"
+  },
+  {
+    "id": "iss",
+    "title": "Internationale Raumstation (ISS)",
+    "subtitle": "Unser gemeinsames Forschungshaus im Erdorbit",
+    "category": "space-station",
+    "categoryLabel": "Raumstationen",
+    "targetBodyId": "iss",
+    "targetBodyName": "Raumstation ISS (Erdorbit)",
+    "agency": "NASA / ESA / Roskosmos / JAXA / CSA",
+    "launchYear": "Seit 1998 im Bau (seit 2000 durchgehend bewohnt)",
+    "statusLabel": "Live im Erdorbit aktiv (ca. 408 km Höhe)",
+    "wikimediaImageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/International_Space_Station_after_undocking_of_STS-132.jpg?width=640",
+    "imageUrl": "assets/images/iss.svg",
+    "imageCredit": "NASA / Crew of STS-132 (Wikimedia Commons, Public Domain)",
+    "childSummary": "Rund 400 Kilometer über unseren Köpfen saust die Internationale Raumstation ISS mit 28.000 km/h um die Erde! Seit dem Jahr 2000 leben und arbeiten dort ununterbrochen Astronautinnen und Astronauten aus vielen Ländern friedlich zusammen.",
+    "tasksForKids": [
+      "Experimentiert in Schwerelosigkeit: Wie wachsen Pflanzen im All? Wie verhält sich unser Körper ohne Schwerkraft?",
+      "Beobachtet Wetter, Vulkane, Gletscher und Meere auf unserer Erde aus dem großen Aussichtsfenster ‚Cupola‘.",
+      "Testet neue Technik für zukünftige Flüge zum Mond und zum Mars."
+    ],
+    "wikipediaUrl": "https://de.wikipedia.org/wiki/Internationale_Raumstation",
+    "hasIssLiveTracker": true
+  },
+  {
+    "id": "artemis",
+    "title": "Artemis & Neue Flüge zum Mond",
+    "subtitle": "Die Rückkehr der Menschen zum Erdmond",
+    "category": "moon-mission",
+    "categoryLabel": "Neue Mondflüge",
+    "targetBodyId": "moon",
+    "targetBodyName": "Erdmond",
+    "agency": "NASA / ESA (Europäisches Servicemodul aus Bremen)",
+    "launchYear": "2022 (Artemis I) & kommende bemannte Flüge",
+    "statusLabel": "Aktives Mondprogramm",
+    "wikimediaImageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Artemis_I_launch_%28NHQ202211160002%29.jpg?width=640",
+    "imageUrl": "assets/images/artemis.svg",
+    "imageCredit": "NASA / Joel Kowsky – Artemis I Launch (Wikimedia Commons, Public Domain)",
+    "childSummary": "Nach den berühmten Apollo-Mondlandungen (1969–1972) startet mit dem Artemis-Programm die neue Generation von Flügen zum Mond! Mit dem Raumschiff ‚Orion‘ (dessen Antriebsmodul in Deutschland gebaut wird) sollen bald wieder Menschen den Mond umrunden und am Mondsüdpol landen.",
+    "tasksForKids": [
+      "Bei Artemis I umrundete das Orion-Raumschiff bereits erfolgreich den Mond und machte spektakuläre Fotos von Erde und Mond.",
+      "Am Südpol des Mondes soll nach gefrorenem Wassereis in schattigen Kratern gesucht werden.",
+      "Geplant ist außerdem eine kleine Raumstation im Mondorbit namens ‚Lunar Gateway‘."
+    ],
+    "wikipediaUrl": "https://de.wikipedia.org/wiki/Artemis-Programm"
+  }
+]

@@ -1,0 +1,2366 @@
+[
+  {
+    "id": "sun",
+    "name": "Sonne",
+    "englishApiId": "soleil",
+    "subtitle": "Unser leuchtender Stern im Zentrum",
+    "category": "star",
+    "categoryLabel": "Stern (Zentralgestirn)",
+    "childrenIds": [
+      "mercury",
+      "venus",
+      "earth",
+      "mars",
+      "jupiter",
+      "saturn",
+      "uranus",
+      "neptune",
+      "asteroid-belt",
+      "oort-cloud"
+    ],
+    "wikimediaImageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/The_Sun_by_the_Atmospheric_Imaging_Assembly_of_NASA%27s_Solar_Dynamics_Observatory_-_20100819.jpg?width=640",
+    "imageUrl": "assets/images/sun.svg",
+    "imageCredit": "NASA / SDO (Wikimedia Commons, Public Domain)",
+    "colorHex": "#F59E0B",
+    "accentColorHex": "#FDE68A",
+    "diameterKm": 1392700,
+    "distanceFromSunKm": 0,
+    "distanceFromSunAu": 0.0,
+    "distanceFromEarthKm": 149600000,
+    "orbitalPeriodDays": 0,
+    "orbitalPeriodLabel": "Zentrum des Sonnensystems (dreht sich in ca. 25 Tagen um sich selbst)",
+    "inclinationToSolarEquatorDeg": 0.0,
+    "overviewOrbitRadiusSvg": 0,
+    "overviewBodyRadiusSvg": 28,
+    "orbitAngleDeg": 0,
+    "shortSummary": "Die Sonne ist ein riesiger, glühender Feuerball aus heißem Gas (Wasserstoff und Helium). Ohne ihr Licht und ihre Wärme gäbe es auf unserer Erde kein Leben, keine Pflanzen und kein flüssiges Wasser!",
+    "childFriendlyFacts": [
+      "Die Sonne ist so riesig, dass unsere Erde ungefähr 1,3 Millionen Mal in sie hineinpassen würde!",
+      "Ihr Licht braucht etwa 8 Minuten und 20 Sekunden für die Reise bis zu uns auf die Erde.",
+      "Im Inneren der Sonne ist es rund 15 Millionen Grad Celsius heiß."
+    ],
+    "comparisonHint": "Wenn die Sonne so groß wie ein großer Gymnastikball wäre, wäre unsere Erde nur so klein wie eine einzelne Erbse!",
+    "orbitalElements": {
+      "sma": {
+        "code": "SMA",
+        "label": "Große Halbachse (Semi-Major Axis)",
+        "formattedValue": "0.0 AE (0 km – Zentrum)",
+        "numericValue": 0.0,
+        "unit": "AE",
+        "childExplanation": "Das ist der durchschnittliche Abstand der Umlaufbahn zum Zentrum (wie die Größe einer Rennstrecke im Weltall)."
+      },
+      "ecc": {
+        "code": "ECC",
+        "label": "Bahneliptizität / Exzentrizität (Eccentricity)",
+        "formattedValue": "0.0",
+        "numericValue": 0.0,
+        "childExplanation": "Zeigt, ob die Bahn fast kreisrund (nahe 0) oder leicht eiförmig gedehnt ist."
+      },
+      "inc": {
+        "code": "INC",
+        "label": "Bahnneigung (Inclination)",
+        "formattedValue": "0.0°",
+        "numericValue": 0.0,
+        "unit": "°",
+        "childExplanation": "Gibt an, wie stark die Umlaufbahn im Vergleich zum Äquator der Sonne bzw. der Hauptebene gekippt ist."
+      },
+      "lan": {
+        "code": "LAN",
+        "label": "Aufsteigender Knoten (Longitude of Ascending Node)",
+        "formattedValue": "0.0°",
+        "numericValue": 0.0,
+        "unit": "°",
+        "childExplanation": "Der genaue Winkelpunkt, an dem der Himmelskörper auf seiner gekippten Bahn von unten nach oben durch die Hauptebene fliegt."
+      },
+      "lpe": {
+        "code": "LPE",
+        "label": "Länge des Perihels (Longitude of Perihelion)",
+        "formattedValue": "0.0°",
+        "numericValue": 0.0,
+        "unit": "°",
+        "childExplanation": "Zeigt die Himmelsrichtung, in der der Körper der Sonne (oder seinem Planeten) auf seiner Bahn am allernächsten kommt."
+      },
+      "mna": {
+        "code": "MNA",
+        "label": "Mittlere Anomalie (Mean Anomaly)",
+        "formattedValue": "0.0°",
+        "numericValue": 0.0,
+        "unit": "°",
+        "childExplanation": "Verrät Astronomen wie auf einem großen Uhrwerk, an welcher Stelle seiner Runde sich der Körper zum Startzeitpunkt befindet."
+      },
+      "ref": {
+        "code": "REF",
+        "label": "Referenzsystem & Epoche (Reference)",
+        "formattedValue": "Heliozentrisches Zentrum (J2000)",
+        "childExplanation": "Das gemeinsame Mess-Lineal und Startdatum (Jahr 2000), auf das sich alle Astronomen weltweit geeinigt haben."
+      }
+    }
+  },
+  {
+    "id": "mercury",
+    "name": "Merkur",
+    "englishApiId": "mercure",
+    "subtitle": "Der kleine Flitzer ganz nah an der Sonne",
+    "category": "planet",
+    "categoryLabel": "Gesteinsplanet",
+    "parentId": "sun",
+    "childrenIds": [],
+    "wikimediaImageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Mercury_in_true_color.jpg?width=640",
+    "imageUrl": "assets/images/mercury.svg",
+    "imageCredit": "NASA / Johns Hopkins University APL / Carnegie Institution (Wikimedia Commons)",
+    "colorHex": "#94A3B8",
+    "accentColorHex": "#E2E8F0",
+    "diameterKm": 4879,
+    "distanceFromSunKm": 57909000,
+    "distanceFromSunAu": 0.39,
+    "distanceFromEarthKm": 91700000,
+    "orbitalPeriodDays": 88,
+    "orbitalPeriodLabel": "88 Erdtage (ein kurzes Merkur-Jahr)",
+    "inclinationToSolarEquatorDeg": 3.38,
+    "overviewOrbitRadiusSvg": 58,
+    "overviewBodyRadiusSvg": 6,
+    "orbitAngleDeg": 35,
+    "shortSummary": "Merkur ist der kleinste Planet in unserem Sonnensystem und wohnt am allernächsten an der Sonne. Deshalb flitzt er auch am schnellsten um sie herum!",
+    "childFriendlyFacts": [
+      "Auf Merkur gibt es fast keine Lufthülle: Tagsüber wird es über 430 °C heiß, nachts kühlt es auf eisige -170 °C ab!",
+      "Seine Oberfläche sieht mit den vielen Kratern fast genauso aus wie unser Erdmond.",
+      "Merkur hat keinen einzigen eigenen Mond."
+    ],
+    "comparisonHint": "Merkur ist nur ein kleines bisschen größer als unser Erdmond.",
+    "orbitalElements": {
+      "sma": {
+        "code": "SMA",
+        "label": "Große Halbachse (Semi-Major Axis)",
+        "formattedValue": "0.387 AE (57,9 Mio. km)",
+        "numericValue": 0.387,
+        "unit": "AE",
+        "childExplanation": "Das ist der durchschnittliche Abstand der Umlaufbahn zum Zentrum (wie die Größe einer Rennstrecke im Weltall)."
+      },
+      "ecc": {
+        "code": "ECC",
+        "label": "Bahneliptizität / Exzentrizität (Eccentricity)",
+        "formattedValue": "0.2056",
+        "numericValue": 0.2056,
+        "childExplanation": "Zeigt, ob die Bahn fast kreisrund (nahe 0) oder leicht eiförmig gedehnt ist."
+      },
+      "inc": {
+        "code": "INC",
+        "label": "Bahnneigung (Inclination)",
+        "formattedValue": "3.38°",
+        "numericValue": 3.38,
+        "unit": "°",
+        "childExplanation": "Gibt an, wie stark die Umlaufbahn im Vergleich zum Äquator der Sonne bzw. der Hauptebene gekippt ist."
+      },
+      "lan": {
+        "code": "LAN",
+        "label": "Aufsteigender Knoten (Longitude of Ascending Node)",
+        "formattedValue": "48.33°",
+        "numericValue": 48.33,
+        "unit": "°",
+        "childExplanation": "Der genaue Winkelpunkt, an dem der Himmelskörper auf seiner gekippten Bahn von unten nach oben durch die Hauptebene fliegt."
+      },
+      "lpe": {
+        "code": "LPE",
+        "label": "Länge des Perihels (Longitude of Perihelion)",
+        "formattedValue": "77.46°",
+        "numericValue": 77.46,
+        "unit": "°",
+        "childExplanation": "Zeigt die Himmelsrichtung, in der der Körper der Sonne (oder seinem Planeten) auf seiner Bahn am allernächsten kommt."
+      },
+      "mna": {
+        "code": "MNA",
+        "label": "Mittlere Anomalie (Mean Anomaly)",
+        "formattedValue": "174.79°",
+        "numericValue": 174.79,
+        "unit": "°",
+        "childExplanation": "Verrät Astronomen wie auf einem großen Uhrwerk, an welcher Stelle seiner Runde sich der Körper zum Startzeitpunkt befindet."
+      },
+      "ref": {
+        "code": "REF",
+        "label": "Referenzsystem & Epoche (Reference)",
+        "formattedValue": "J2000 / Sonnenäquator",
+        "childExplanation": "Das gemeinsame Mess-Lineal und Startdatum (Jahr 2000), auf das sich alle Astronomen weltweit geeinigt haben."
+      }
+    }
+  },
+  {
+    "id": "venus",
+    "name": "Venus",
+    "englishApiId": "venus",
+    "subtitle": "Der strahlende Morgen- und Abendstern",
+    "category": "planet",
+    "categoryLabel": "Gesteinsplanet",
+    "parentId": "sun",
+    "childrenIds": [],
+    "wikimediaImageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Venus-real_color.jpg?width=640",
+    "imageUrl": "assets/images/venus.svg",
+    "imageCredit": "NASA / Mariner 10 / MESSENGER (Wikimedia Commons)",
+    "colorHex": "#EAB308",
+    "accentColorHex": "#FEF08A",
+    "diameterKm": 12104,
+    "distanceFromSunKm": 108200000,
+    "distanceFromSunAu": 0.72,
+    "distanceFromEarthKm": 41400000,
+    "orbitalPeriodDays": 225,
+    "orbitalPeriodLabel": "225 Erdtage",
+    "inclinationToSolarEquatorDeg": 3.86,
+    "overviewOrbitRadiusSvg": 92,
+    "overviewBodyRadiusSvg": 9,
+    "orbitAngleDeg": 110,
+    "shortSummary": "Die Venus ist fast genauso groß wie unsere Erde und leuchtet am Abend- oder Morgenhimmel wie ein heller Diamant. Unter ihren dichten Wolken ist sie jedoch der heißeste Planet von allen!",
+    "childFriendlyFacts": [
+      "Dicke Wolken speichern die Sonnenwärme wie in einem Treibhaus – es ist dort rund 465 °C heiß!",
+      "Die Venus dreht sich falsch herum (im Uhrzeigersinn): Dort geht die Sonne im Westen auf und im Osten unter.",
+      "Nach Sonne und Mond ist die Venus das hellste Objekt an unserem Himmel."
+    ],
+    "comparisonHint": "Die Venus ist wie die fast gleich große Zwillingsschwester der Erde.",
+    "orbitalElements": {
+      "sma": {
+        "code": "SMA",
+        "label": "Große Halbachse (Semi-Major Axis)",
+        "formattedValue": "0.723 AE (108,2 Mio. km)",
+        "numericValue": 0.723,
+        "unit": "AE",
+        "childExplanation": "Das ist der durchschnittliche Abstand der Umlaufbahn zum Zentrum (wie die Größe einer Rennstrecke im Weltall)."
+      },
+      "ecc": {
+        "code": "ECC",
+        "label": "Bahneliptizität / Exzentrizität (Eccentricity)",
+        "formattedValue": "0.0068",
+        "numericValue": 0.0068,
+        "childExplanation": "Zeigt, ob die Bahn fast kreisrund (nahe 0) oder leicht eiförmig gedehnt ist."
+      },
+      "inc": {
+        "code": "INC",
+        "label": "Bahnneigung (Inclination)",
+        "formattedValue": "3.86°",
+        "numericValue": 3.86,
+        "unit": "°",
+        "childExplanation": "Gibt an, wie stark die Umlaufbahn im Vergleich zum Äquator der Sonne bzw. der Hauptebene gekippt ist."
+      },
+      "lan": {
+        "code": "LAN",
+        "label": "Aufsteigender Knoten (Longitude of Ascending Node)",
+        "formattedValue": "76.68°",
+        "numericValue": 76.68,
+        "unit": "°",
+        "childExplanation": "Der genaue Winkelpunkt, an dem der Himmelskörper auf seiner gekippten Bahn von unten nach oben durch die Hauptebene fliegt."
+      },
+      "lpe": {
+        "code": "LPE",
+        "label": "Länge des Perihels (Longitude of Perihelion)",
+        "formattedValue": "131.53°",
+        "numericValue": 131.53,
+        "unit": "°",
+        "childExplanation": "Zeigt die Himmelsrichtung, in der der Körper der Sonne (oder seinem Planeten) auf seiner Bahn am allernächsten kommt."
+      },
+      "mna": {
+        "code": "MNA",
+        "label": "Mittlere Anomalie (Mean Anomaly)",
+        "formattedValue": "50.12°",
+        "numericValue": 50.12,
+        "unit": "°",
+        "childExplanation": "Verrät Astronomen wie auf einem großen Uhrwerk, an welcher Stelle seiner Runde sich der Körper zum Startzeitpunkt befindet."
+      },
+      "ref": {
+        "code": "REF",
+        "label": "Referenzsystem & Epoche (Reference)",
+        "formattedValue": "J2000 / Sonnenäquator",
+        "childExplanation": "Das gemeinsame Mess-Lineal und Startdatum (Jahr 2000), auf das sich alle Astronomen weltweit geeinigt haben."
+      }
+    }
+  },
+  {
+    "id": "earth",
+    "name": "Erde",
+    "englishApiId": "terre",
+    "subtitle": "Unser blauer Heimatplanet voller Leben",
+    "category": "planet",
+    "categoryLabel": "Gesteinsplanet",
+    "parentId": "sun",
+    "childrenIds": [
+      "moon",
+      "iss",
+      "apollo"
+    ],
+    "wikimediaImageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/The_Earth_seen_from_Apollo_17.jpg?width=640",
+    "imageUrl": "assets/images/earth.svg",
+    "imageCredit": "NASA / Apollo 17 Crew – Blue Marble (Wikimedia Commons)",
+    "colorHex": "#2563EB",
+    "accentColorHex": "#93C5FD",
+    "diameterKm": 12756,
+    "distanceFromSunKm": 149600000,
+    "distanceFromSunAu": 1.0,
+    "distanceFromEarthKm": 0,
+    "orbitalPeriodDays": 365,
+    "orbitalPeriodLabel": "365 Tage und 6 Stunden (1 Erdenjahr)",
+    "inclinationToSolarEquatorDeg": 7.155,
+    "overviewOrbitRadiusSvg": 130,
+    "overviewBodyRadiusSvg": 10,
+    "orbitAngleDeg": 195,
+    "shortSummary": "Die Erde ist unser Zuhause und der einzige bekannte Planet im Universum, auf dem Kinder, Tiere und Pflanzen leben! Aus dem Weltall sieht sie wie eine wunderschöne blaue Murmel mit weißen Wolkenwirbeln aus.",
+    "childFriendlyFacts": [
+      "Über zwei Drittel der Erdoberfläche sind mit blauem Wasser (Ozeanen und Meeren) bedeckt.",
+      "Unsere Lufthülle (Atmosphäre) schützt uns wie ein unsichtbarer Schutzschild vor Kälte und kleinen Meteoriten.",
+      "Der Abstand von der Erde zur Sonne (149,6 Mio. km) heißt in der Astronomie genau 1 Astronomische Einheit (1 AE)."
+    ],
+    "comparisonHint": "Am Äquator ist die Erde rund 40.000 Kilometer weit – ein Flugzeug bräuchte fast 2 Tage ohne Pause einmal außen herum!",
+    "orbitalElements": {
+      "sma": {
+        "code": "SMA",
+        "label": "Große Halbachse (Semi-Major Axis)",
+        "formattedValue": "1.0 AE (149,6 Mio. km)",
+        "numericValue": 1.0,
+        "unit": "AE",
+        "childExplanation": "Das ist der durchschnittliche Abstand der Umlaufbahn zum Zentrum (wie die Größe einer Rennstrecke im Weltall)."
+      },
+      "ecc": {
+        "code": "ECC",
+        "label": "Bahneliptizität / Exzentrizität (Eccentricity)",
+        "formattedValue": "0.0167",
+        "numericValue": 0.0167,
+        "childExplanation": "Zeigt, ob die Bahn fast kreisrund (nahe 0) oder leicht eiförmig gedehnt ist."
+      },
+      "inc": {
+        "code": "INC",
+        "label": "Bahnneigung (Inclination)",
+        "formattedValue": "7.155°",
+        "numericValue": 7.155,
+        "unit": "°",
+        "childExplanation": "Gibt an, wie stark die Umlaufbahn im Vergleich zum Äquator der Sonne bzw. der Hauptebene gekippt ist."
+      },
+      "lan": {
+        "code": "LAN",
+        "label": "Aufsteigender Knoten (Longitude of Ascending Node)",
+        "formattedValue": "-11.26°",
+        "numericValue": -11.26,
+        "unit": "°",
+        "childExplanation": "Der genaue Winkelpunkt, an dem der Himmelskörper auf seiner gekippten Bahn von unten nach oben durch die Hauptebene fliegt."
+      },
+      "lpe": {
+        "code": "LPE",
+        "label": "Länge des Perihels (Longitude of Perihelion)",
+        "formattedValue": "102.95°",
+        "numericValue": 102.95,
+        "unit": "°",
+        "childExplanation": "Zeigt die Himmelsrichtung, in der der Körper der Sonne (oder seinem Planeten) auf seiner Bahn am allernächsten kommt."
+      },
+      "mna": {
+        "code": "MNA",
+        "label": "Mittlere Anomalie (Mean Anomaly)",
+        "formattedValue": "357.52°",
+        "numericValue": 357.52,
+        "unit": "°",
+        "childExplanation": "Verrät Astronomen wie auf einem großen Uhrwerk, an welcher Stelle seiner Runde sich der Körper zum Startzeitpunkt befindet."
+      },
+      "ref": {
+        "code": "REF",
+        "label": "Referenzsystem & Epoche (Reference)",
+        "formattedValue": "J2000 / Sonnenäquator",
+        "childExplanation": "Das gemeinsame Mess-Lineal und Startdatum (Jahr 2000), auf das sich alle Astronomen weltweit geeinigt haben."
+      }
+    }
+  },
+  {
+    "id": "moon",
+    "name": "Erdmond",
+    "englishApiId": "lune",
+    "subtitle": "Der treue Begleiter unserer Erde",
+    "category": "moon",
+    "categoryLabel": "Mond der Erde",
+    "parentId": "earth",
+    "childrenIds": [],
+    "wikimediaImageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/FullMoon2010.jpg?width=640",
+    "imageUrl": "assets/images/moon.svg",
+    "imageCredit": "Gregory H. Revera (Wikimedia Commons, CC BY-SA 3.0)",
+    "colorHex": "#64748B",
+    "accentColorHex": "#CBD5E1",
+    "diameterKm": 3474,
+    "distanceFromSunKm": 149600000,
+    "distanceFromSunAu": 1.0,
+    "distanceFromEarthKm": 384400,
+    "orbitalPeriodDays": 27.3,
+    "orbitalPeriodLabel": "27,3 Tage rund um die Erde",
+    "inclinationToSolarEquatorDeg": 5.14,
+    "overviewOrbitRadiusSvg": 18,
+    "overviewBodyRadiusSvg": 4,
+    "orbitAngleDeg": 45,
+    "shortSummary": "Der Mond kreist jeden Monat einmal um unsere Erde. Er leuchtet nicht selbst, sondern wird von der Sonne angestrahlt – deshalb sehen wir ihn mal als schmale Sichel und mal als runden Vollmond!",
+    "childFriendlyFacts": [
+      "Die Anziehungskraft des Mondes sorgt an unseren Meeren für Ebbe und Flut (die Gezeiten).",
+      "Der Mond zeigt der Erde immer genau dieselbe Seite.",
+      "Auf dem Mond wiegst du nur ein Sechstel so viel wie auf der Erde und kannst riesige Sprünge machen!"
+    ],
+    "comparisonHint": "Etwa 50 Erdmonde hätten zusammen im Bauch unserer Erde Platz.",
+    "orbitalElements": {
+      "sma": {
+        "code": "SMA",
+        "label": "Große Halbachse (Semi-Major Axis)",
+        "formattedValue": "0.00257 AE (384.400 km zur Erde)",
+        "numericValue": 0.00257,
+        "unit": "AE",
+        "childExplanation": "Das ist der durchschnittliche Abstand der Umlaufbahn zum Zentrum (wie die Größe einer Rennstrecke im Weltall)."
+      },
+      "ecc": {
+        "code": "ECC",
+        "label": "Bahneliptizität / Exzentrizität (Eccentricity)",
+        "formattedValue": "0.0549",
+        "numericValue": 0.0549,
+        "childExplanation": "Zeigt, ob die Bahn fast kreisrund (nahe 0) oder leicht eiförmig gedehnt ist."
+      },
+      "inc": {
+        "code": "INC",
+        "label": "Bahnneigung (Inclination)",
+        "formattedValue": "5.145°",
+        "numericValue": 5.145,
+        "unit": "°",
+        "childExplanation": "Gibt an, wie stark die Umlaufbahn im Vergleich zum Äquator der Sonne bzw. der Hauptebene gekippt ist."
+      },
+      "lan": {
+        "code": "LAN",
+        "label": "Aufsteigender Knoten (Longitude of Ascending Node)",
+        "formattedValue": "125.08°",
+        "numericValue": 125.08,
+        "unit": "°",
+        "childExplanation": "Der genaue Winkelpunkt, an dem der Himmelskörper auf seiner gekippten Bahn von unten nach oben durch die Hauptebene fliegt."
+      },
+      "lpe": {
+        "code": "LPE",
+        "label": "Länge des Perihels (Longitude of Perihelion)",
+        "formattedValue": "318.15°",
+        "numericValue": 318.15,
+        "unit": "°",
+        "childExplanation": "Zeigt die Himmelsrichtung, in der der Körper der Sonne (oder seinem Planeten) auf seiner Bahn am allernächsten kommt."
+      },
+      "mna": {
+        "code": "MNA",
+        "label": "Mittlere Anomalie (Mean Anomaly)",
+        "formattedValue": "135.27°",
+        "numericValue": 135.27,
+        "unit": "°",
+        "childExplanation": "Verrät Astronomen wie auf einem großen Uhrwerk, an welcher Stelle seiner Runde sich der Körper zum Startzeitpunkt befindet."
+      },
+      "ref": {
+        "code": "REF",
+        "label": "Referenzsystem & Epoche (Reference)",
+        "formattedValue": "Geozentrisch (Erde)",
+        "childExplanation": "Das gemeinsame Mess-Lineal und Startdatum (Jahr 2000), auf das sich alle Astronomen weltweit geeinigt haben."
+      }
+    }
+  },
+  {
+    "id": "iss",
+    "name": "Raumstation ISS",
+    "subtitle": "Das fliegende Forschungslabor im Erdorbit",
+    "category": "spacecraft",
+    "categoryLabel": "Raumstation im Erdorbit",
+    "parentId": "earth",
+    "childrenIds": [],
+    "wikimediaImageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/International_Space_Station_after_undocking_of_STS-132.jpg?width=640",
+    "imageUrl": "assets/images/iss.svg",
+    "imageCredit": "NASA / Crew of STS-132 (Wikimedia Commons, Public Domain)",
+    "colorHex": "#0EA5E9",
+    "accentColorHex": "#E0F2FE",
+    "diameterKm": 0.109,
+    "distanceFromSunKm": 149600000,
+    "distanceFromSunAu": 1.0,
+    "distanceFromEarthKm": 408,
+    "orbitalPeriodDays": 0.064,
+    "orbitalPeriodLabel": "ca. 92 Minuten für eine Erdumrundung (16 Runden pro Tag!)",
+    "inclinationToSolarEquatorDeg": 51.64,
+    "overviewOrbitRadiusSvg": 12,
+    "overviewBodyRadiusSvg": 3,
+    "orbitAngleDeg": 140,
+    "shortSummary": "Die Internationale Raumstation ISS ist ein echtes Haus im Weltall, so groß wie ein ganzes Fußballfeld! Dort oben leben und forschen Astronautinnen und Astronauten in völliger Schwerelosigkeit.",
+    "childFriendlyFacts": [
+      "Die ISS rast mit rund 28.000 km/h um die Erde – dort oben erlebt man 16 Sonnenaufgänge an einem einzigen Tag!",
+      "Astronauten schlafen in festgeschnallten Schlafsäcken an der Wand, damit sie im Schlaf nicht davonschweben.",
+      "In klaren Nächten kannst du die ISS als hellen, schnell ziehenden Lichtpunkt mit bloßem Auge am Himmel entdecken."
+    ],
+    "comparisonHint": "Mit 109 Metern Spannweite ist die ISS fast genau so groß wie ein Bundesligafußballfeld.",
+    "orbitalElements": {
+      "sma": {
+        "code": "SMA",
+        "label": "Große Halbachse (Semi-Major Axis)",
+        "formattedValue": "4.5e-05 AE (ca. 408 km Flughöhe über der Erde)",
+        "numericValue": 4.5e-05,
+        "unit": "AE",
+        "childExplanation": "Das ist der durchschnittliche Abstand der Umlaufbahn zum Zentrum (wie die Größe einer Rennstrecke im Weltall)."
+      },
+      "ecc": {
+        "code": "ECC",
+        "label": "Bahneliptizität / Exzentrizität (Eccentricity)",
+        "formattedValue": "0.0004",
+        "numericValue": 0.0004,
+        "childExplanation": "Zeigt, ob die Bahn fast kreisrund (nahe 0) oder leicht eiförmig gedehnt ist."
+      },
+      "inc": {
+        "code": "INC",
+        "label": "Bahnneigung (Inclination)",
+        "formattedValue": "51.64°",
+        "numericValue": 51.64,
+        "unit": "°",
+        "childExplanation": "Gibt an, wie stark die Umlaufbahn im Vergleich zum Äquator der Sonne bzw. der Hauptebene gekippt ist."
+      },
+      "lan": {
+        "code": "LAN",
+        "label": "Aufsteigender Knoten (Longitude of Ascending Node)",
+        "formattedValue": "245.1°",
+        "numericValue": 245.1,
+        "unit": "°",
+        "childExplanation": "Der genaue Winkelpunkt, an dem der Himmelskörper auf seiner gekippten Bahn von unten nach oben durch die Hauptebene fliegt."
+      },
+      "lpe": {
+        "code": "LPE",
+        "label": "Länge des Perihels (Longitude of Perihelion)",
+        "formattedValue": "88.4°",
+        "numericValue": 88.4,
+        "unit": "°",
+        "childExplanation": "Zeigt die Himmelsrichtung, in der der Körper der Sonne (oder seinem Planeten) auf seiner Bahn am allernächsten kommt."
+      },
+      "mna": {
+        "code": "MNA",
+        "label": "Mittlere Anomalie (Mean Anomaly)",
+        "formattedValue": "190.0°",
+        "numericValue": 190.0,
+        "unit": "°",
+        "childExplanation": "Verrät Astronomen wie auf einem großen Uhrwerk, an welcher Stelle seiner Runde sich der Körper zum Startzeitpunkt befindet."
+      },
+      "ref": {
+        "code": "REF",
+        "label": "Referenzsystem & Epoche (Reference)",
+        "formattedValue": "Erdorbit (LEO / TLE)",
+        "childExplanation": "Das gemeinsame Mess-Lineal und Startdatum (Jahr 2000), auf das sich alle Astronomen weltweit geeinigt haben."
+      }
+    }
+  },
+  {
+    "id": "apollo",
+    "name": "Apollo & Mondflüge",
+    "subtitle": "Die historischen und neuen Reisen zum Mond",
+    "category": "spacecraft",
+    "categoryLabel": "Mond-Raumschiffe",
+    "parentId": "earth",
+    "childrenIds": [],
+    "wikimediaImageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Aldrin_Apollo_11_original.jpg?width=640",
+    "imageUrl": "assets/images/apollo.svg",
+    "imageCredit": "NASA / Neil Armstrong – Apollo 11 (Wikimedia Commons, Public Domain)",
+    "colorHex": "#0284C7",
+    "accentColorHex": "#BAE6FD",
+    "diameterKm": 0.011,
+    "distanceFromSunKm": 149600000,
+    "distanceFromSunAu": 1.0,
+    "distanceFromEarthKm": 384400,
+    "orbitalPeriodDays": 3.0,
+    "orbitalPeriodLabel": "ca. 3 Tage Flugzeit von der Erde bis zum Mond",
+    "inclinationToSolarEquatorDeg": 31.4,
+    "overviewOrbitRadiusSvg": 15,
+    "overviewBodyRadiusSvg": 3,
+    "orbitAngleDeg": 240,
+    "shortSummary": "Mit Apollo 11 landeten im Juli 1969 zum ersten Mal Menschen auf dem Mond. Heute bereiten die neuen Artemis-Raumschiffe die nächste Reise von Astronautinnen und Astronauten zum Mond vor!",
+    "childFriendlyFacts": [
+      "Weil es auf dem Mond keinen Wind und keinen Regen gibt, sind die Fußabdrücke der Apollo-Astronauten noch heute im Mondstaub zu sehen!",
+      "Die Astronauten brachten 382 Kilogramm echtes Mondgestein zur Untersuchung mit auf die Erde.",
+      "Die riesige Saturn-V-Rakete war mit 110 Metern höher als der Kölner Dom breit ist."
+    ],
+    "comparisonHint": "Für die 384.400 Kilometer zum Mond brauchte das Apollo-Raumschiff rund 3 Tage.",
+    "orbitalElements": {
+      "sma": {
+        "code": "SMA",
+        "label": "Große Halbachse (Semi-Major Axis)",
+        "formattedValue": "0.00257 AE (Transferbahn Erde–Mond (384.400 km))",
+        "numericValue": 0.00257,
+        "unit": "AE",
+        "childExplanation": "Das ist der durchschnittliche Abstand der Umlaufbahn zum Zentrum (wie die Größe einer Rennstrecke im Weltall)."
+      },
+      "ecc": {
+        "code": "ECC",
+        "label": "Bahneliptizität / Exzentrizität (Eccentricity)",
+        "formattedValue": "0.96",
+        "numericValue": 0.96,
+        "childExplanation": "Zeigt, ob die Bahn fast kreisrund (nahe 0) oder leicht eiförmig gedehnt ist."
+      },
+      "inc": {
+        "code": "INC",
+        "label": "Bahnneigung (Inclination)",
+        "formattedValue": "31.4°",
+        "numericValue": 31.4,
+        "unit": "°",
+        "childExplanation": "Gibt an, wie stark die Umlaufbahn im Vergleich zum Äquator der Sonne bzw. der Hauptebene gekippt ist."
+      },
+      "lan": {
+        "code": "LAN",
+        "label": "Aufsteigender Knoten (Longitude of Ascending Node)",
+        "formattedValue": "110.0°",
+        "numericValue": 110.0,
+        "unit": "°",
+        "childExplanation": "Der genaue Winkelpunkt, an dem der Himmelskörper auf seiner gekippten Bahn von unten nach oben durch die Hauptebene fliegt."
+      },
+      "lpe": {
+        "code": "LPE",
+        "label": "Länge des Perihels (Longitude of Perihelion)",
+        "formattedValue": "290.0°",
+        "numericValue": 290.0,
+        "unit": "°",
+        "childExplanation": "Zeigt die Himmelsrichtung, in der der Körper der Sonne (oder seinem Planeten) auf seiner Bahn am allernächsten kommt."
+      },
+      "mna": {
+        "code": "MNA",
+        "label": "Mittlere Anomalie (Mean Anomaly)",
+        "formattedValue": "180.0°",
+        "numericValue": 180.0,
+        "unit": "°",
+        "childExplanation": "Verrät Astronomen wie auf einem großen Uhrwerk, an welcher Stelle seiner Runde sich der Körper zum Startzeitpunkt befindet."
+      },
+      "ref": {
+        "code": "REF",
+        "label": "Referenzsystem & Epoche (Reference)",
+        "formattedValue": "Geozentrischer Mondtransfer",
+        "childExplanation": "Das gemeinsame Mess-Lineal und Startdatum (Jahr 2000), auf das sich alle Astronomen weltweit geeinigt haben."
+      }
+    }
+  },
+  {
+    "id": "mars",
+    "name": "Mars",
+    "englishApiId": "mars",
+    "subtitle": "Der geheimnisvolle Rote Planet mit Riesen-Vulkanen",
+    "category": "planet",
+    "categoryLabel": "Gesteinsplanet",
+    "parentId": "sun",
+    "childrenIds": [
+      "phobos",
+      "deimos"
+    ],
+    "wikimediaImageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/OSIRIS_Mars_true_color.jpg?width=640",
+    "imageUrl": "assets/images/mars.svg",
+    "imageCredit": "ESA / MPS for OSIRIS Team (Wikimedia Commons, CC BY-SA IGO 3.0)",
+    "colorHex": "#DC2626",
+    "accentColorHex": "#FCA5A5",
+    "diameterKm": 6792,
+    "distanceFromSunKm": 227900000,
+    "distanceFromSunAu": 1.52,
+    "distanceFromEarthKm": 78300000,
+    "orbitalPeriodDays": 687,
+    "orbitalPeriodLabel": "687 Erdtage (fast 2 Erdenjahre)",
+    "inclinationToSolarEquatorDeg": 5.65,
+    "overviewOrbitRadiusSvg": 170,
+    "overviewBodyRadiusSvg": 8,
+    "orbitAngleDeg": 295,
+    "shortSummary": "Der Mars wird auch der ‚Rote Planet‘ genannt, weil sein Boden voller eisenhaltigem Roststaub ist. Dort rollen heute echte Forschungs-Roboter (Mars-Rover) herum und suchen nach Spuren von früherem Wasser!",
+    "childFriendlyFacts": [
+      "Auf dem Mars steht der höchste Vulkan im ganzen Sonnensystem: Der Olympus Mons ist über 21 Kilometer hoch – dreimal so hoch wie der Mount Everest!",
+      "Ein Tag auf dem Mars (‚Sol‘ genannt) dauert 24 Stunden und 39 Minuten, also fast genauso lang wie auf der Erde.",
+      "Der Mars wird von zwei kleinen, kartoffelförmigen Monden namens Phobos und Deimos begleitet."
+    ],
+    "comparisonHint": "Der Mars ist ungefähr halb so breit wie unsere Erde.",
+    "orbitalElements": {
+      "sma": {
+        "code": "SMA",
+        "label": "Große Halbachse (Semi-Major Axis)",
+        "formattedValue": "1.524 AE (227,9 Mio. km)",
+        "numericValue": 1.524,
+        "unit": "AE",
+        "childExplanation": "Das ist der durchschnittliche Abstand der Umlaufbahn zum Zentrum (wie die Größe einer Rennstrecke im Weltall)."
+      },
+      "ecc": {
+        "code": "ECC",
+        "label": "Bahneliptizität / Exzentrizität (Eccentricity)",
+        "formattedValue": "0.0934",
+        "numericValue": 0.0934,
+        "childExplanation": "Zeigt, ob die Bahn fast kreisrund (nahe 0) oder leicht eiförmig gedehnt ist."
+      },
+      "inc": {
+        "code": "INC",
+        "label": "Bahnneigung (Inclination)",
+        "formattedValue": "5.65°",
+        "numericValue": 5.65,
+        "unit": "°",
+        "childExplanation": "Gibt an, wie stark die Umlaufbahn im Vergleich zum Äquator der Sonne bzw. der Hauptebene gekippt ist."
+      },
+      "lan": {
+        "code": "LAN",
+        "label": "Aufsteigender Knoten (Longitude of Ascending Node)",
+        "formattedValue": "49.56°",
+        "numericValue": 49.56,
+        "unit": "°",
+        "childExplanation": "Der genaue Winkelpunkt, an dem der Himmelskörper auf seiner gekippten Bahn von unten nach oben durch die Hauptebene fliegt."
+      },
+      "lpe": {
+        "code": "LPE",
+        "label": "Länge des Perihels (Longitude of Perihelion)",
+        "formattedValue": "336.04°",
+        "numericValue": 336.04,
+        "unit": "°",
+        "childExplanation": "Zeigt die Himmelsrichtung, in der der Körper der Sonne (oder seinem Planeten) auf seiner Bahn am allernächsten kommt."
+      },
+      "mna": {
+        "code": "MNA",
+        "label": "Mittlere Anomalie (Mean Anomaly)",
+        "formattedValue": "19.41°",
+        "numericValue": 19.41,
+        "unit": "°",
+        "childExplanation": "Verrät Astronomen wie auf einem großen Uhrwerk, an welcher Stelle seiner Runde sich der Körper zum Startzeitpunkt befindet."
+      },
+      "ref": {
+        "code": "REF",
+        "label": "Referenzsystem & Epoche (Reference)",
+        "formattedValue": "J2000 / Sonnenäquator",
+        "childExplanation": "Das gemeinsame Mess-Lineal und Startdatum (Jahr 2000), auf das sich alle Astronomen weltweit geeinigt haben."
+      }
+    }
+  },
+  {
+    "id": "phobos",
+    "name": "Phobos",
+    "englishApiId": "phobos",
+    "subtitle": "Der größere, kartoffelförmige Marsmond",
+    "category": "moon",
+    "categoryLabel": "Mond des Mars",
+    "parentId": "mars",
+    "childrenIds": [],
+    "wikimediaImageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Phobos_colour_2008.jpg?width=640",
+    "imageUrl": "assets/images/phobos.svg",
+    "imageCredit": "NASA / JPL-Caltech / University of Arizona (Wikimedia Commons)",
+    "colorHex": "#78716C",
+    "accentColorHex": "#D6D3D1",
+    "diameterKm": 22.2,
+    "distanceFromSunKm": 227900000,
+    "distanceFromSunAu": 1.52,
+    "distanceFromEarthKm": 78300000,
+    "orbitalPeriodDays": 0.32,
+    "orbitalPeriodLabel": "Nur 7 Stunden und 39 Minuten um den Mars",
+    "inclinationToSolarEquatorDeg": 1.09,
+    "overviewOrbitRadiusSvg": 12,
+    "overviewBodyRadiusSvg": 3,
+    "orbitAngleDeg": 60,
+    "shortSummary": "Phobos ist nicht kugelrund, sondern sieht aus wie eine riesige verbeulte Kartoffel! Er flitzt dreimal am Tag um den Mars herum.",
+    "childFriendlyFacts": [
+      "Phobos kreist nur 6.000 Kilometer über dem Marsboden – so nah wie kein anderer Mond im Sonnensystem!",
+      "Auf seiner Oberfläche prangt ein riesiger Krater namens ‚Stickney‘."
+    ],
+    "comparisonHint": "Mit 22 Kilometern Breite könnte man Phobos mit dem Fahrrad in einer Stunde überqueren.",
+    "orbitalElements": {
+      "sma": {
+        "code": "SMA",
+        "label": "Große Halbachse (Semi-Major Axis)",
+        "formattedValue": "6.3e-05 AE (9.376 km zum Marszentrum)",
+        "numericValue": 6.3e-05,
+        "unit": "AE",
+        "childExplanation": "Das ist der durchschnittliche Abstand der Umlaufbahn zum Zentrum (wie die Größe einer Rennstrecke im Weltall)."
+      },
+      "ecc": {
+        "code": "ECC",
+        "label": "Bahneliptizität / Exzentrizität (Eccentricity)",
+        "formattedValue": "0.0151",
+        "numericValue": 0.0151,
+        "childExplanation": "Zeigt, ob die Bahn fast kreisrund (nahe 0) oder leicht eiförmig gedehnt ist."
+      },
+      "inc": {
+        "code": "INC",
+        "label": "Bahnneigung (Inclination)",
+        "formattedValue": "1.09°",
+        "numericValue": 1.09,
+        "unit": "°",
+        "childExplanation": "Gibt an, wie stark die Umlaufbahn im Vergleich zum Äquator der Sonne bzw. der Hauptebene gekippt ist."
+      },
+      "lan": {
+        "code": "LAN",
+        "label": "Aufsteigender Knoten (Longitude of Ascending Node)",
+        "formattedValue": "164.9°",
+        "numericValue": 164.9,
+        "unit": "°",
+        "childExplanation": "Der genaue Winkelpunkt, an dem der Himmelskörper auf seiner gekippten Bahn von unten nach oben durch die Hauptebene fliegt."
+      },
+      "lpe": {
+        "code": "LPE",
+        "label": "Länge des Perihels (Longitude of Perihelion)",
+        "formattedValue": "150.2°",
+        "numericValue": 150.2,
+        "unit": "°",
+        "childExplanation": "Zeigt die Himmelsrichtung, in der der Körper der Sonne (oder seinem Planeten) auf seiner Bahn am allernächsten kommt."
+      },
+      "mna": {
+        "code": "MNA",
+        "label": "Mittlere Anomalie (Mean Anomaly)",
+        "formattedValue": "92.0°",
+        "numericValue": 92.0,
+        "unit": "°",
+        "childExplanation": "Verrät Astronomen wie auf einem großen Uhrwerk, an welcher Stelle seiner Runde sich der Körper zum Startzeitpunkt befindet."
+      },
+      "ref": {
+        "code": "REF",
+        "label": "Referenzsystem & Epoche (Reference)",
+        "formattedValue": "Areozentrisch (Mars)",
+        "childExplanation": "Das gemeinsame Mess-Lineal und Startdatum (Jahr 2000), auf das sich alle Astronomen weltweit geeinigt haben."
+      }
+    }
+  },
+  {
+    "id": "deimos",
+    "name": "Deimos",
+    "englishApiId": "deimos",
+    "subtitle": "Der kleine äußere Begleiter des Mars",
+    "category": "moon",
+    "categoryLabel": "Mond des Mars",
+    "parentId": "mars",
+    "childrenIds": [],
+    "wikimediaImageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Deimos-MRO.jpg?width=640",
+    "imageUrl": "assets/images/deimos.svg",
+    "imageCredit": "NASA / JPL-Caltech / University of Arizona (Wikimedia Commons)",
+    "colorHex": "#A8A29E",
+    "accentColorHex": "#E7E5E4",
+    "diameterKm": 12.6,
+    "distanceFromSunKm": 227900000,
+    "distanceFromSunAu": 1.52,
+    "distanceFromEarthKm": 78300000,
+    "orbitalPeriodDays": 1.26,
+    "orbitalPeriodLabel": "30 Stunden und 18 Minuten um den Mars",
+    "inclinationToSolarEquatorDeg": 1.79,
+    "overviewOrbitRadiusSvg": 16,
+    "overviewBodyRadiusSvg": 3,
+    "orbitAngleDeg": 210,
+    "shortSummary": "Deimos ist der kleinere Bruder von Phobos. Vom Mars aus gesehen leuchtet er am Nachthimmel wie ein besonders heller Stern.",
+    "childFriendlyFacts": [
+      "Deimos ist nur rund 12,6 Kilometer groß – kleiner als viele Großstädte auf der Erde.",
+      "Wenn du auf Deimos hochspringen würdest, würdest du minutenlang ganz langsam wieder zu Boden schweben."
+    ],
+    "comparisonHint": "Deimos ist nur etwa so groß wie eine mittelgroße Stadt.",
+    "orbitalElements": {
+      "sma": {
+        "code": "SMA",
+        "label": "Große Halbachse (Semi-Major Axis)",
+        "formattedValue": "0.000157 AE (23.463 km zum Marszentrum)",
+        "numericValue": 0.000157,
+        "unit": "AE",
+        "childExplanation": "Das ist der durchschnittliche Abstand der Umlaufbahn zum Zentrum (wie die Größe einer Rennstrecke im Weltall)."
+      },
+      "ecc": {
+        "code": "ECC",
+        "label": "Bahneliptizität / Exzentrizität (Eccentricity)",
+        "formattedValue": "0.0003",
+        "numericValue": 0.0003,
+        "childExplanation": "Zeigt, ob die Bahn fast kreisrund (nahe 0) oder leicht eiförmig gedehnt ist."
+      },
+      "inc": {
+        "code": "INC",
+        "label": "Bahnneigung (Inclination)",
+        "formattedValue": "1.79°",
+        "numericValue": 1.79,
+        "unit": "°",
+        "childExplanation": "Gibt an, wie stark die Umlaufbahn im Vergleich zum Äquator der Sonne bzw. der Hauptebene gekippt ist."
+      },
+      "lan": {
+        "code": "LAN",
+        "label": "Aufsteigender Knoten (Longitude of Ascending Node)",
+        "formattedValue": "316.6°",
+        "numericValue": 316.6,
+        "unit": "°",
+        "childExplanation": "Der genaue Winkelpunkt, an dem der Himmelskörper auf seiner gekippten Bahn von unten nach oben durch die Hauptebene fliegt."
+      },
+      "lpe": {
+        "code": "LPE",
+        "label": "Länge des Perihels (Longitude of Perihelion)",
+        "formattedValue": "260.7°",
+        "numericValue": 260.7,
+        "unit": "°",
+        "childExplanation": "Zeigt die Himmelsrichtung, in der der Körper der Sonne (oder seinem Planeten) auf seiner Bahn am allernächsten kommt."
+      },
+      "mna": {
+        "code": "MNA",
+        "label": "Mittlere Anomalie (Mean Anomaly)",
+        "formattedValue": "295.0°",
+        "numericValue": 295.0,
+        "unit": "°",
+        "childExplanation": "Verrät Astronomen wie auf einem großen Uhrwerk, an welcher Stelle seiner Runde sich der Körper zum Startzeitpunkt befindet."
+      },
+      "ref": {
+        "code": "REF",
+        "label": "Referenzsystem & Epoche (Reference)",
+        "formattedValue": "Areozentrisch (Mars)",
+        "childExplanation": "Das gemeinsame Mess-Lineal und Startdatum (Jahr 2000), auf das sich alle Astronomen weltweit geeinigt haben."
+      }
+    }
+  },
+  {
+    "id": "asteroid-belt",
+    "name": "Asteroidengürtel",
+    "subtitle": "Der große Ring aus Millionen Gesteinsbrocken zwischen Mars und Jupiter",
+    "category": "belt",
+    "categoryLabel": "Gürtel aus Asteroiden & Zwergplanet Ceres",
+    "parentId": "sun",
+    "childrenIds": [
+      "ceres"
+    ],
+    "wikimediaImageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/243_Ida_and_Dactyl.jpg?width=640",
+    "imageUrl": "assets/images/asteroid-belt.svg",
+    "imageCredit": "NASA / JPL – Asteroid (243) Ida & Mond Dactyl (Wikimedia Commons)",
+    "colorHex": "#57534E",
+    "accentColorHex": "#D6D3D1",
+    "diameterKm": 939,
+    "distanceFromSunKm": 414000000,
+    "distanceFromSunAu": 2.77,
+    "distanceFromEarthKm": 264000000,
+    "orbitalPeriodDays": 1680,
+    "orbitalPeriodLabel": "ca. 3 bis 6 Erdenjahre je nach Asteroid",
+    "inclinationToSolarEquatorDeg": 10.59,
+    "overviewOrbitRadiusSvg": 210,
+    "overviewBodyRadiusSvg": 7,
+    "orbitAngleDeg": 145,
+    "shortSummary": "Zwischen den Bahnen von Mars und Jupiter kreisen Millionen von Gesteins- und Metallbrocken um die Sonne: das ist der Asteroidengürtel! Er trennt die vier inneren Gesteinsplaneten von den äußeren Riesenplaneten.",
+    "childFriendlyFacts": [
+      "In Filmen sieht ein Asteroidenfeld oft gefährlich eng aus – in Wirklichkeit ist zwischen den Brocken aber riesig viel Platz, sodass Raumsonden problemlos hindurchfliegen!",
+      "Das größte Objekt im Asteroidengürtel ist der kugelrunde Zwergplanet Ceres mit fast 940 km Durchmesser.",
+      "Die Asteroiden sind wie übrig gebliebene Bausteine aus der Zeit, als unser Sonnensystem vor 4,6 Milliarden Jahren entstand."
+    ],
+    "comparisonHint": "Alle Asteroiden des Gürtels zusammen wiegen weniger als 4 Prozent unseres Erdmondes.",
+    "orbitalElements": {
+      "sma": {
+        "code": "SMA",
+        "label": "Große Halbachse (Semi-Major Axis)",
+        "formattedValue": "2.77 AE (ca. 329 bis 478 Mio. km)",
+        "numericValue": 2.77,
+        "unit": "AE",
+        "childExplanation": "Das ist der durchschnittliche Abstand der Umlaufbahn zum Zentrum (wie die Größe einer Rennstrecke im Weltall)."
+      },
+      "ecc": {
+        "code": "ECC",
+        "label": "Bahneliptizität / Exzentrizität (Eccentricity)",
+        "formattedValue": "0.079",
+        "numericValue": 0.079,
+        "childExplanation": "Zeigt, ob die Bahn fast kreisrund (nahe 0) oder leicht eiförmig gedehnt ist."
+      },
+      "inc": {
+        "code": "INC",
+        "label": "Bahnneigung (Inclination)",
+        "formattedValue": "10.59°",
+        "numericValue": 10.59,
+        "unit": "°",
+        "childExplanation": "Gibt an, wie stark die Umlaufbahn im Vergleich zum Äquator der Sonne bzw. der Hauptebene gekippt ist."
+      },
+      "lan": {
+        "code": "LAN",
+        "label": "Aufsteigender Knoten (Longitude of Ascending Node)",
+        "formattedValue": "80.3°",
+        "numericValue": 80.3,
+        "unit": "°",
+        "childExplanation": "Der genaue Winkelpunkt, an dem der Himmelskörper auf seiner gekippten Bahn von unten nach oben durch die Hauptebene fliegt."
+      },
+      "lpe": {
+        "code": "LPE",
+        "label": "Länge des Perihels (Longitude of Perihelion)",
+        "formattedValue": "152.8°",
+        "numericValue": 152.8,
+        "unit": "°",
+        "childExplanation": "Zeigt die Himmelsrichtung, in der der Körper der Sonne (oder seinem Planeten) auf seiner Bahn am allernächsten kommt."
+      },
+      "mna": {
+        "code": "MNA",
+        "label": "Mittlere Anomalie (Mean Anomaly)",
+        "formattedValue": "113.4°",
+        "numericValue": 113.4,
+        "unit": "°",
+        "childExplanation": "Verrät Astronomen wie auf einem großen Uhrwerk, an welcher Stelle seiner Runde sich der Körper zum Startzeitpunkt befindet."
+      },
+      "ref": {
+        "code": "REF",
+        "label": "Referenzsystem & Epoche (Reference)",
+        "formattedValue": "J2000 / Hauptgürtel-Mittelwert",
+        "childExplanation": "Das gemeinsame Mess-Lineal und Startdatum (Jahr 2000), auf das sich alle Astronomen weltweit geeinigt haben."
+      }
+    }
+  },
+  {
+    "id": "ceres",
+    "name": "Ceres",
+    "englishApiId": "ceres",
+    "subtitle": "Die Königin im Asteroidengürtel",
+    "category": "dwarf-planet",
+    "categoryLabel": "Zwergplanet im Asteroidengürtel",
+    "parentId": "asteroid-belt",
+    "childrenIds": [],
+    "wikimediaImageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Ceres_-_RC3_-_Haulani_Crater_%2822381131691%29_%28cropped%29.jpg?width=640",
+    "imageUrl": "assets/images/ceres.svg",
+    "imageCredit": "NASA / JPL-Caltech / UCLA / MPS / DLR / IDA (Wikimedia Commons)",
+    "colorHex": "#64748B",
+    "accentColorHex": "#E2E8F0",
+    "diameterKm": 939,
+    "distanceFromSunKm": 413700000,
+    "distanceFromSunAu": 2.77,
+    "distanceFromEarthKm": 264100000,
+    "orbitalPeriodDays": 1682,
+    "orbitalPeriodLabel": "4,6 Erdenjahre",
+    "inclinationToSolarEquatorDeg": 10.59,
+    "overviewOrbitRadiusSvg": 210,
+    "overviewBodyRadiusSvg": 5,
+    "orbitAngleDeg": 152,
+    "shortSummary": "Ceres ist der einzige Zwergplanet im inneren Sonnensystem. Er ist so groß, dass seine eigene Schwerkraft ihn zu einer schönen Kugel geformt hat.",
+    "childFriendlyFacts": [
+      "Die Raumsonde Dawn entdeckte geheimnisvolle, glitzernde weiße Salz-Flecken im Occator-Krater auf Ceres.",
+      "Unter seiner Kruste verbirgt sich sehr viel gefrorenes Wassereis."
+    ],
+    "comparisonHint": "Ceres ist etwa so breit wie Deutschland von Norden nach Süden lang ist.",
+    "orbitalElements": {
+      "sma": {
+        "code": "SMA",
+        "label": "Große Halbachse (Semi-Major Axis)",
+        "formattedValue": "2.767 AE (413,7 Mio. km)",
+        "numericValue": 2.767,
+        "unit": "AE",
+        "childExplanation": "Das ist der durchschnittliche Abstand der Umlaufbahn zum Zentrum (wie die Größe einer Rennstrecke im Weltall)."
+      },
+      "ecc": {
+        "code": "ECC",
+        "label": "Bahneliptizität / Exzentrizität (Eccentricity)",
+        "formattedValue": "0.0758",
+        "numericValue": 0.0758,
+        "childExplanation": "Zeigt, ob die Bahn fast kreisrund (nahe 0) oder leicht eiförmig gedehnt ist."
+      },
+      "inc": {
+        "code": "INC",
+        "label": "Bahnneigung (Inclination)",
+        "formattedValue": "10.59°",
+        "numericValue": 10.59,
+        "unit": "°",
+        "childExplanation": "Gibt an, wie stark die Umlaufbahn im Vergleich zum Äquator der Sonne bzw. der Hauptebene gekippt ist."
+      },
+      "lan": {
+        "code": "LAN",
+        "label": "Aufsteigender Knoten (Longitude of Ascending Node)",
+        "formattedValue": "80.33°",
+        "numericValue": 80.33,
+        "unit": "°",
+        "childExplanation": "Der genaue Winkelpunkt, an dem der Himmelskörper auf seiner gekippten Bahn von unten nach oben durch die Hauptebene fliegt."
+      },
+      "lpe": {
+        "code": "LPE",
+        "label": "Länge des Perihels (Longitude of Perihelion)",
+        "formattedValue": "153.9°",
+        "numericValue": 153.9,
+        "unit": "°",
+        "childExplanation": "Zeigt die Himmelsrichtung, in der der Körper der Sonne (oder seinem Planeten) auf seiner Bahn am allernächsten kommt."
+      },
+      "mna": {
+        "code": "MNA",
+        "label": "Mittlere Anomalie (Mean Anomaly)",
+        "formattedValue": "95.99°",
+        "numericValue": 95.99,
+        "unit": "°",
+        "childExplanation": "Verrät Astronomen wie auf einem großen Uhrwerk, an welcher Stelle seiner Runde sich der Körper zum Startzeitpunkt befindet."
+      },
+      "ref": {
+        "code": "REF",
+        "label": "Referenzsystem & Epoche (Reference)",
+        "formattedValue": "J2000 / Sonnenäquator",
+        "childExplanation": "Das gemeinsame Mess-Lineal und Startdatum (Jahr 2000), auf das sich alle Astronomen weltweit geeinigt haben."
+      }
+    }
+  },
+  {
+    "id": "jupiter",
+    "name": "Jupiter",
+    "englishApiId": "jupiter",
+    "subtitle": "Der König der Planeten mit dem Großen Roten Fleck",
+    "category": "planet",
+    "categoryLabel": "Gasriese",
+    "parentId": "sun",
+    "childrenIds": [
+      "io",
+      "europa",
+      "ganymede",
+      "callisto"
+    ],
+    "wikimediaImageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Jupiter_and_its_shrunken_Great_Red_Spot.jpg?width=640",
+    "imageUrl": "assets/images/jupiter.svg",
+    "imageCredit": "NASA / ESA / Hubble Space Telescope (Wikimedia Commons)",
+    "colorHex": "#D97706",
+    "accentColorHex": "#FDE68A",
+    "diameterKm": 142984,
+    "distanceFromSunKm": 778500000,
+    "distanceFromSunAu": 5.2,
+    "distanceFromEarthKm": 628900000,
+    "orbitalPeriodDays": 4333,
+    "orbitalPeriodLabel": "11,86 Erdenjahre (fast 12 Jahre)",
+    "inclinationToSolarEquatorDeg": 6.09,
+    "overviewOrbitRadiusSvg": 255,
+    "overviewBodyRadiusSvg": 18,
+    "orbitAngleDeg": 20,
+    "shortSummary": "Jupiter ist mit Abstand der größte Planet in unserem Sonnensystem! Er ist ein gewaltiger Gasriese mit bunten Wolkenbändern und hat keinen festen Boden, auf dem man landen könnte.",
+    "childFriendlyFacts": [
+      "Der berühmte ‚Große Rote Fleck‘ auf Jupiter ist ein gigantischer Wirbelsturm, der schon seit über 300 Jahren tobt und größer als unsere ganze Erde ist!",
+      "Jupiter dreht sich rasend schnell: Ein Tag dauert dort nur knapp 10 Stunden.",
+      "Um Jupiter kreisen über 90 Monde – die vier größten (Io, Europa, Ganymed und Kallisto) entdeckte Galileo Galilei schon vor über 400 Jahren mit seinem Fernrohr."
+    ],
+    "comparisonHint": "Unsere Erde passt 11-mal nebeneinander quer durch den Durchmesser von Jupiter (und über 1.300-mal in sein Volumen)!",
+    "orbitalElements": {
+      "sma": {
+        "code": "SMA",
+        "label": "Große Halbachse (Semi-Major Axis)",
+        "formattedValue": "5.204 AE (778,5 Mio. km)",
+        "numericValue": 5.204,
+        "unit": "AE",
+        "childExplanation": "Das ist der durchschnittliche Abstand der Umlaufbahn zum Zentrum (wie die Größe einer Rennstrecke im Weltall)."
+      },
+      "ecc": {
+        "code": "ECC",
+        "label": "Bahneliptizität / Exzentrizität (Eccentricity)",
+        "formattedValue": "0.0489",
+        "numericValue": 0.0489,
+        "childExplanation": "Zeigt, ob die Bahn fast kreisrund (nahe 0) oder leicht eiförmig gedehnt ist."
+      },
+      "inc": {
+        "code": "INC",
+        "label": "Bahnneigung (Inclination)",
+        "formattedValue": "6.09°",
+        "numericValue": 6.09,
+        "unit": "°",
+        "childExplanation": "Gibt an, wie stark die Umlaufbahn im Vergleich zum Äquator der Sonne bzw. der Hauptebene gekippt ist."
+      },
+      "lan": {
+        "code": "LAN",
+        "label": "Aufsteigender Knoten (Longitude of Ascending Node)",
+        "formattedValue": "100.46°",
+        "numericValue": 100.46,
+        "unit": "°",
+        "childExplanation": "Der genaue Winkelpunkt, an dem der Himmelskörper auf seiner gekippten Bahn von unten nach oben durch die Hauptebene fliegt."
+      },
+      "lpe": {
+        "code": "LPE",
+        "label": "Länge des Perihels (Longitude of Perihelion)",
+        "formattedValue": "14.75°",
+        "numericValue": 14.75,
+        "unit": "°",
+        "childExplanation": "Zeigt die Himmelsrichtung, in der der Körper der Sonne (oder seinem Planeten) auf seiner Bahn am allernächsten kommt."
+      },
+      "mna": {
+        "code": "MNA",
+        "label": "Mittlere Anomalie (Mean Anomaly)",
+        "formattedValue": "20.02°",
+        "numericValue": 20.02,
+        "unit": "°",
+        "childExplanation": "Verrät Astronomen wie auf einem großen Uhrwerk, an welcher Stelle seiner Runde sich der Körper zum Startzeitpunkt befindet."
+      },
+      "ref": {
+        "code": "REF",
+        "label": "Referenzsystem & Epoche (Reference)",
+        "formattedValue": "J2000 / Sonnenäquator",
+        "childExplanation": "Das gemeinsame Mess-Lineal und Startdatum (Jahr 2000), auf das sich alle Astronomen weltweit geeinigt haben."
+      }
+    }
+  },
+  {
+    "id": "io",
+    "name": "Io",
+    "englishApiId": "io",
+    "subtitle": "Der bunte Vulkanmond des Jupiter",
+    "category": "moon",
+    "categoryLabel": "Galileischer Jupitermond",
+    "parentId": "jupiter",
+    "childrenIds": [],
+    "wikimediaImageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Io_highest_resolution_true_color.jpg?width=640",
+    "imageUrl": "assets/images/io.svg",
+    "imageCredit": "NASA / JPL / University of Arizona – Galileo (Wikimedia Commons)",
+    "colorHex": "#EAB308",
+    "accentColorHex": "#FEF08A",
+    "diameterKm": 3643,
+    "distanceFromSunKm": 778500000,
+    "distanceFromSunAu": 5.2,
+    "distanceFromEarthKm": 628900000,
+    "orbitalPeriodDays": 1.77,
+    "orbitalPeriodLabel": "1,77 Tage um Jupiter",
+    "inclinationToSolarEquatorDeg": 0.05,
+    "overviewOrbitRadiusSvg": 22,
+    "overviewBodyRadiusSvg": 4,
+    "orbitAngleDeg": 30,
+    "shortSummary": "Io sieht mit seinen gelben, roten und orangen Flecken fast aus wie eine riesige Pizza! Er ist der Himmelskörper mit den meisten aktiven Vulkanen im ganzen Sonnensystem.",
+    "childFriendlyFacts": [
+      "Über 400 aktive Vulkane schleudern Schwefel-Fontänen hunderte Kilometer hoch ins All!",
+      "Die enorme Anziehungskraft von Riesenplanet Jupiter knetet Io innerlich durch und heizt ihn dadurch auf."
+    ],
+    "comparisonHint": "Io ist ein klein wenig größer als unser Erdmond.",
+    "orbitalElements": {
+      "sma": {
+        "code": "SMA",
+        "label": "Große Halbachse (Semi-Major Axis)",
+        "formattedValue": "0.00282 AE (421.700 km zu Jupiter)",
+        "numericValue": 0.00282,
+        "unit": "AE",
+        "childExplanation": "Das ist der durchschnittliche Abstand der Umlaufbahn zum Zentrum (wie die Größe einer Rennstrecke im Weltall)."
+      },
+      "ecc": {
+        "code": "ECC",
+        "label": "Bahneliptizität / Exzentrizität (Eccentricity)",
+        "formattedValue": "0.0041",
+        "numericValue": 0.0041,
+        "childExplanation": "Zeigt, ob die Bahn fast kreisrund (nahe 0) oder leicht eiförmig gedehnt ist."
+      },
+      "inc": {
+        "code": "INC",
+        "label": "Bahnneigung (Inclination)",
+        "formattedValue": "0.05°",
+        "numericValue": 0.05,
+        "unit": "°",
+        "childExplanation": "Gibt an, wie stark die Umlaufbahn im Vergleich zum Äquator der Sonne bzw. der Hauptebene gekippt ist."
+      },
+      "lan": {
+        "code": "LAN",
+        "label": "Aufsteigender Knoten (Longitude of Ascending Node)",
+        "formattedValue": "43.98°",
+        "numericValue": 43.98,
+        "unit": "°",
+        "childExplanation": "Der genaue Winkelpunkt, an dem der Himmelskörper auf seiner gekippten Bahn von unten nach oben durch die Hauptebene fliegt."
+      },
+      "lpe": {
+        "code": "LPE",
+        "label": "Länge des Perihels (Longitude of Perihelion)",
+        "formattedValue": "84.13°",
+        "numericValue": 84.13,
+        "unit": "°",
+        "childExplanation": "Zeigt die Himmelsrichtung, in der der Körper der Sonne (oder seinem Planeten) auf seiner Bahn am allernächsten kommt."
+      },
+      "mna": {
+        "code": "MNA",
+        "label": "Mittlere Anomalie (Mean Anomaly)",
+        "formattedValue": "171.0°",
+        "numericValue": 171.0,
+        "unit": "°",
+        "childExplanation": "Verrät Astronomen wie auf einem großen Uhrwerk, an welcher Stelle seiner Runde sich der Körper zum Startzeitpunkt befindet."
+      },
+      "ref": {
+        "code": "REF",
+        "label": "Referenzsystem & Epoche (Reference)",
+        "formattedValue": "Jovizentrisch (Jupiter)",
+        "childExplanation": "Das gemeinsame Mess-Lineal und Startdatum (Jahr 2000), auf das sich alle Astronomen weltweit geeinigt haben."
+      }
+    }
+  },
+  {
+    "id": "europa",
+    "name": "Europa",
+    "englishApiId": "europe",
+    "subtitle": "Der Eismond mit einem verborgenen Ozean",
+    "category": "moon",
+    "categoryLabel": "Galileischer Jupitermond",
+    "parentId": "jupiter",
+    "childrenIds": [],
+    "wikimediaImageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Europa-moon-with-margins.jpg?width=640",
+    "imageUrl": "assets/images/europa.svg",
+    "imageCredit": "NASA / JPL-Caltech / SETI Institute (Wikimedia Commons)",
+    "colorHex": "#38BDF8",
+    "accentColorHex": "#E0F2FE",
+    "diameterKm": 3122,
+    "distanceFromSunKm": 778500000,
+    "distanceFromSunAu": 5.2,
+    "distanceFromEarthKm": 628900000,
+    "orbitalPeriodDays": 3.55,
+    "orbitalPeriodLabel": "3,55 Tage um Jupiter",
+    "inclinationToSolarEquatorDeg": 0.47,
+    "overviewOrbitRadiusSvg": 26,
+    "overviewBodyRadiusSvg": 4,
+    "orbitAngleDeg": 120,
+    "shortSummary": "Europa ist von einem glatten, dicken Panzer aus Wassereis umhüllt. Darunter vermuten Wissenschaftler einen tiefen, dunklen Ozean aus flüssigem Salzwasser!",
+    "childFriendlyFacts": [
+      "Im verborgenen Ozean unter dem Eis von Europa könnte es doppelt so viel flüssiges Wasser geben wie in allen Meeren der Erde zusammen!",
+      "Deshalb gehört Europa zu den spannendsten Orten für die Suche nach winzigen Lebewesen im All."
+    ],
+    "comparisonHint": "Europa ist etwas kleiner als unser Erdmond.",
+    "orbitalElements": {
+      "sma": {
+        "code": "SMA",
+        "label": "Große Halbachse (Semi-Major Axis)",
+        "formattedValue": "0.00449 AE (671.100 km zu Jupiter)",
+        "numericValue": 0.00449,
+        "unit": "AE",
+        "childExplanation": "Das ist der durchschnittliche Abstand der Umlaufbahn zum Zentrum (wie die Größe einer Rennstrecke im Weltall)."
+      },
+      "ecc": {
+        "code": "ECC",
+        "label": "Bahneliptizität / Exzentrizität (Eccentricity)",
+        "formattedValue": "0.009",
+        "numericValue": 0.009,
+        "childExplanation": "Zeigt, ob die Bahn fast kreisrund (nahe 0) oder leicht eiförmig gedehnt ist."
+      },
+      "inc": {
+        "code": "INC",
+        "label": "Bahnneigung (Inclination)",
+        "formattedValue": "0.47°",
+        "numericValue": 0.47,
+        "unit": "°",
+        "childExplanation": "Gibt an, wie stark die Umlaufbahn im Vergleich zum Äquator der Sonne bzw. der Hauptebene gekippt ist."
+      },
+      "lan": {
+        "code": "LAN",
+        "label": "Aufsteigender Knoten (Longitude of Ascending Node)",
+        "formattedValue": "219.1°",
+        "numericValue": 219.1,
+        "unit": "°",
+        "childExplanation": "Der genaue Winkelpunkt, an dem der Himmelskörper auf seiner gekippten Bahn von unten nach oben durch die Hauptebene fliegt."
+      },
+      "lpe": {
+        "code": "LPE",
+        "label": "Länge des Perihels (Longitude of Perihelion)",
+        "formattedValue": "88.9°",
+        "numericValue": 88.9,
+        "unit": "°",
+        "childExplanation": "Zeigt die Himmelsrichtung, in der der Körper der Sonne (oder seinem Planeten) auf seiner Bahn am allernächsten kommt."
+      },
+      "mna": {
+        "code": "MNA",
+        "label": "Mittlere Anomalie (Mean Anomaly)",
+        "formattedValue": "102.0°",
+        "numericValue": 102.0,
+        "unit": "°",
+        "childExplanation": "Verrät Astronomen wie auf einem großen Uhrwerk, an welcher Stelle seiner Runde sich der Körper zum Startzeitpunkt befindet."
+      },
+      "ref": {
+        "code": "REF",
+        "label": "Referenzsystem & Epoche (Reference)",
+        "formattedValue": "Jovizentrisch (Jupiter)",
+        "childExplanation": "Das gemeinsame Mess-Lineal und Startdatum (Jahr 2000), auf das sich alle Astronomen weltweit geeinigt haben."
+      }
+    }
+  },
+  {
+    "id": "ganymede",
+    "name": "Ganymed",
+    "englishApiId": "ganymede",
+    "subtitle": "Der größte Mond im gesamten Sonnensystem",
+    "category": "moon",
+    "categoryLabel": "Galileischer Jupitermond",
+    "parentId": "jupiter",
+    "childrenIds": [],
+    "wikimediaImageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Ganymede_-_Perijove_34_Composite.png?width=640",
+    "imageUrl": "assets/images/ganymede.svg",
+    "imageCredit": "NASA / JPL-Caltech / SwRI / MSSS – Juno (Wikimedia Commons)",
+    "colorHex": "#64748B",
+    "accentColorHex": "#CBD5E1",
+    "diameterKm": 5268,
+    "distanceFromSunKm": 778500000,
+    "distanceFromSunAu": 5.2,
+    "distanceFromEarthKm": 628900000,
+    "orbitalPeriodDays": 7.15,
+    "orbitalPeriodLabel": "7,15 Tage um Jupiter",
+    "inclinationToSolarEquatorDeg": 0.2,
+    "overviewOrbitRadiusSvg": 30,
+    "overviewBodyRadiusSvg": 5,
+    "orbitAngleDeg": 210,
+    "shortSummary": "Ganymed hält den Rekord als größter Mond im ganzen Sonnensystem! Er ist sogar größer als der Planet Merkur.",
+    "childFriendlyFacts": [
+      "Ganymed ist der einzige Mond im Sonnensystem, der ein eigenes Magnetfeld besitzt.",
+      "Würde er nicht um Jupiter, sondern direkt um die Sonne kreisen, wäre er sofort als vollwertiger Planet anerkannt!"
+    ],
+    "comparisonHint": "Ganymed ist mit 5.268 km Durchmesser größer als der Planet Merkur (4.879 km)!",
+    "orbitalElements": {
+      "sma": {
+        "code": "SMA",
+        "label": "Große Halbachse (Semi-Major Axis)",
+        "formattedValue": "0.00715 AE (1,07 Mio. km zu Jupiter)",
+        "numericValue": 0.00715,
+        "unit": "AE",
+        "childExplanation": "Das ist der durchschnittliche Abstand der Umlaufbahn zum Zentrum (wie die Größe einer Rennstrecke im Weltall)."
+      },
+      "ecc": {
+        "code": "ECC",
+        "label": "Bahneliptizität / Exzentrizität (Eccentricity)",
+        "formattedValue": "0.0013",
+        "numericValue": 0.0013,
+        "childExplanation": "Zeigt, ob die Bahn fast kreisrund (nahe 0) oder leicht eiförmig gedehnt ist."
+      },
+      "inc": {
+        "code": "INC",
+        "label": "Bahnneigung (Inclination)",
+        "formattedValue": "0.2°",
+        "numericValue": 0.2,
+        "unit": "°",
+        "childExplanation": "Gibt an, wie stark die Umlaufbahn im Vergleich zum Äquator der Sonne bzw. der Hauptebene gekippt ist."
+      },
+      "lan": {
+        "code": "LAN",
+        "label": "Aufsteigender Knoten (Longitude of Ascending Node)",
+        "formattedValue": "63.5°",
+        "numericValue": 63.5,
+        "unit": "°",
+        "childExplanation": "Der genaue Winkelpunkt, an dem der Himmelskörper auf seiner gekippten Bahn von unten nach oben durch die Hauptebene fliegt."
+      },
+      "lpe": {
+        "code": "LPE",
+        "label": "Länge des Perihels (Longitude of Perihelion)",
+        "formattedValue": "192.4°",
+        "numericValue": 192.4,
+        "unit": "°",
+        "childExplanation": "Zeigt die Himmelsrichtung, in der der Körper der Sonne (oder seinem Planeten) auf seiner Bahn am allernächsten kommt."
+      },
+      "mna": {
+        "code": "MNA",
+        "label": "Mittlere Anomalie (Mean Anomaly)",
+        "formattedValue": "317.0°",
+        "numericValue": 317.0,
+        "unit": "°",
+        "childExplanation": "Verrät Astronomen wie auf einem großen Uhrwerk, an welcher Stelle seiner Runde sich der Körper zum Startzeitpunkt befindet."
+      },
+      "ref": {
+        "code": "REF",
+        "label": "Referenzsystem & Epoche (Reference)",
+        "formattedValue": "Jovizentrisch (Jupiter)",
+        "childExplanation": "Das gemeinsame Mess-Lineal und Startdatum (Jahr 2000), auf das sich alle Astronomen weltweit geeinigt haben."
+      }
+    }
+  },
+  {
+    "id": "callisto",
+    "name": "Kallisto",
+    "englishApiId": "callisto",
+    "subtitle": "Der uralte Kratermond des Jupiter",
+    "category": "moon",
+    "categoryLabel": "Galileischer Jupitermond",
+    "parentId": "jupiter",
+    "childrenIds": [],
+    "wikimediaImageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Callisto.jpg?width=640",
+    "imageUrl": "assets/images/callisto.svg",
+    "imageCredit": "NASA / JPL / DLR – Galileo (Wikimedia Commons)",
+    "colorHex": "#475569",
+    "accentColorHex": "#94A3B8",
+    "diameterKm": 4821,
+    "distanceFromSunKm": 778500000,
+    "distanceFromSunAu": 5.2,
+    "distanceFromEarthKm": 628900000,
+    "orbitalPeriodDays": 16.69,
+    "orbitalPeriodLabel": "16,7 Tage um Jupiter",
+    "inclinationToSolarEquatorDeg": 0.19,
+    "overviewOrbitRadiusSvg": 34,
+    "overviewBodyRadiusSvg": 5,
+    "orbitAngleDeg": 310,
+    "shortSummary": "Kallisto ist der äußerste der vier großen Jupitermonde. Seine eisige Oberfläche ist über und über mit hellen Einschlagkratern übersät.",
+    "childFriendlyFacts": [
+      "Kallisto hat die älteste Oberfläche im Sonnensystem – seit Milliarden Jahren hat sich dort fast nichts verändert.",
+      "Er ist fast genauso groß wie der Planet Merkur."
+    ],
+    "comparisonHint": "Kallisto ist der drittgrößte Mond im Sonnensystem.",
+    "orbitalElements": {
+      "sma": {
+        "code": "SMA",
+        "label": "Große Halbachse (Semi-Major Axis)",
+        "formattedValue": "0.01259 AE (1,88 Mio. km zu Jupiter)",
+        "numericValue": 0.01259,
+        "unit": "AE",
+        "childExplanation": "Das ist der durchschnittliche Abstand der Umlaufbahn zum Zentrum (wie die Größe einer Rennstrecke im Weltall)."
+      },
+      "ecc": {
+        "code": "ECC",
+        "label": "Bahneliptizität / Exzentrizität (Eccentricity)",
+        "formattedValue": "0.0074",
+        "numericValue": 0.0074,
+        "childExplanation": "Zeigt, ob die Bahn fast kreisrund (nahe 0) oder leicht eiförmig gedehnt ist."
+      },
+      "inc": {
+        "code": "INC",
+        "label": "Bahnneigung (Inclination)",
+        "formattedValue": "0.19°",
+        "numericValue": 0.19,
+        "unit": "°",
+        "childExplanation": "Gibt an, wie stark die Umlaufbahn im Vergleich zum Äquator der Sonne bzw. der Hauptebene gekippt ist."
+      },
+      "lan": {
+        "code": "LAN",
+        "label": "Aufsteigender Knoten (Longitude of Ascending Node)",
+        "formattedValue": "298.8°",
+        "numericValue": 298.8,
+        "unit": "°",
+        "childExplanation": "Der genaue Winkelpunkt, an dem der Himmelskörper auf seiner gekippten Bahn von unten nach oben durch die Hauptebene fliegt."
+      },
+      "lpe": {
+        "code": "LPE",
+        "label": "Länge des Perihels (Longitude of Perihelion)",
+        "formattedValue": "52.6°",
+        "numericValue": 52.6,
+        "unit": "°",
+        "childExplanation": "Zeigt die Himmelsrichtung, in der der Körper der Sonne (oder seinem Planeten) auf seiner Bahn am allernächsten kommt."
+      },
+      "mna": {
+        "code": "MNA",
+        "label": "Mittlere Anomalie (Mean Anomaly)",
+        "formattedValue": "181.0°",
+        "numericValue": 181.0,
+        "unit": "°",
+        "childExplanation": "Verrät Astronomen wie auf einem großen Uhrwerk, an welcher Stelle seiner Runde sich der Körper zum Startzeitpunkt befindet."
+      },
+      "ref": {
+        "code": "REF",
+        "label": "Referenzsystem & Epoche (Reference)",
+        "formattedValue": "Jovizentrisch (Jupiter)",
+        "childExplanation": "Das gemeinsame Mess-Lineal und Startdatum (Jahr 2000), auf das sich alle Astronomen weltweit geeinigt haben."
+      }
+    }
+  },
+  {
+    "id": "saturn",
+    "name": "Saturn",
+    "englishApiId": "saturne",
+    "subtitle": "Der Herr der glitzernden Eisringe",
+    "category": "planet",
+    "categoryLabel": "Gasriese mit Ringsystem",
+    "parentId": "sun",
+    "childrenIds": [
+      "titan",
+      "enceladus"
+    ],
+    "wikimediaImageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Saturn_during_Equinox.jpg?width=640",
+    "imageUrl": "assets/images/saturn.svg",
+    "imageCredit": "NASA / JPL / Space Science Institute – Cassini (Wikimedia Commons)",
+    "colorHex": "#CA8A04",
+    "accentColorHex": "#FEF08A",
+    "diameterKm": 120536,
+    "distanceFromSunKm": 1433500000,
+    "distanceFromSunAu": 9.58,
+    "distanceFromEarthKm": 1283900000,
+    "orbitalPeriodDays": 10759,
+    "orbitalPeriodLabel": "29,45 Erdenjahre",
+    "inclinationToSolarEquatorDeg": 5.51,
+    "overviewOrbitRadiusSvg": 305,
+    "overviewBodyRadiusSvg": 15,
+    "orbitAngleDeg": 75,
+    "shortSummary": "Saturn ist der zweitgrößte Planet und berühmt für seine wunderschönen, hell leuchtenden Ringe! Diese Ringe bestehen nicht aus festem Boden, sondern aus Milliarden glitzernden Eis- und Gesteinsbrocken.",
+    "childFriendlyFacts": [
+      "Saturn besteht aus so leichtem Gas, dass er eine geringere Dichte als Wasser hat – in einer riesigen Badewanne würde er obenauf schwimmen!",
+      "Seine Ringe sind zwar rund 280.000 Kilometer breit, aber an vielen Stellen nur 10 bis 100 Meter dünn.",
+      "Mit über 140 bekannten Monden hat Saturn die größte Mondfamilie im Sonnensystem."
+    ],
+    "comparisonHint": "Etwa 760 Erdkugeln würden in den Gasriesen Saturn hineinpassen!",
+    "orbitalElements": {
+      "sma": {
+        "code": "SMA",
+        "label": "Große Halbachse (Semi-Major Axis)",
+        "formattedValue": "9.582 AE (1,43 Mrd. km)",
+        "numericValue": 9.582,
+        "unit": "AE",
+        "childExplanation": "Das ist der durchschnittliche Abstand der Umlaufbahn zum Zentrum (wie die Größe einer Rennstrecke im Weltall)."
+      },
+      "ecc": {
+        "code": "ECC",
+        "label": "Bahneliptizität / Exzentrizität (Eccentricity)",
+        "formattedValue": "0.0565",
+        "numericValue": 0.0565,
+        "childExplanation": "Zeigt, ob die Bahn fast kreisrund (nahe 0) oder leicht eiförmig gedehnt ist."
+      },
+      "inc": {
+        "code": "INC",
+        "label": "Bahnneigung (Inclination)",
+        "formattedValue": "5.51°",
+        "numericValue": 5.51,
+        "unit": "°",
+        "childExplanation": "Gibt an, wie stark die Umlaufbahn im Vergleich zum Äquator der Sonne bzw. der Hauptebene gekippt ist."
+      },
+      "lan": {
+        "code": "LAN",
+        "label": "Aufsteigender Knoten (Longitude of Ascending Node)",
+        "formattedValue": "113.66°",
+        "numericValue": 113.66,
+        "unit": "°",
+        "childExplanation": "Der genaue Winkelpunkt, an dem der Himmelskörper auf seiner gekippten Bahn von unten nach oben durch die Hauptebene fliegt."
+      },
+      "lpe": {
+        "code": "LPE",
+        "label": "Länge des Perihels (Longitude of Perihelion)",
+        "formattedValue": "92.43°",
+        "numericValue": 92.43,
+        "unit": "°",
+        "childExplanation": "Zeigt die Himmelsrichtung, in der der Körper der Sonne (oder seinem Planeten) auf seiner Bahn am allernächsten kommt."
+      },
+      "mna": {
+        "code": "MNA",
+        "label": "Mittlere Anomalie (Mean Anomaly)",
+        "formattedValue": "317.02°",
+        "numericValue": 317.02,
+        "unit": "°",
+        "childExplanation": "Verrät Astronomen wie auf einem großen Uhrwerk, an welcher Stelle seiner Runde sich der Körper zum Startzeitpunkt befindet."
+      },
+      "ref": {
+        "code": "REF",
+        "label": "Referenzsystem & Epoche (Reference)",
+        "formattedValue": "J2000 / Sonnenäquator",
+        "childExplanation": "Das gemeinsame Mess-Lineal und Startdatum (Jahr 2000), auf das sich alle Astronomen weltweit geeinigt haben."
+      }
+    }
+  },
+  {
+    "id": "titan",
+    "name": "Titan",
+    "englishApiId": "titan",
+    "subtitle": "Saturns Riesenmond mit dichter Lufthülle",
+    "category": "moon",
+    "categoryLabel": "Mond des Saturn",
+    "parentId": "saturn",
+    "childrenIds": [],
+    "wikimediaImageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Titan_in_true_color.jpg?width=640",
+    "imageUrl": "assets/images/titan.svg",
+    "imageCredit": "NASA / JPL-Caltech / Space Science Institute – Cassini (Wikimedia Commons)",
+    "colorHex": "#D97706",
+    "accentColorHex": "#FDE68A",
+    "diameterKm": 5149,
+    "distanceFromSunKm": 1433500000,
+    "distanceFromSunAu": 9.58,
+    "distanceFromEarthKm": 1283900000,
+    "orbitalPeriodDays": 15.95,
+    "orbitalPeriodLabel": "15,95 Tage um Saturn",
+    "inclinationToSolarEquatorDeg": 0.35,
+    "overviewOrbitRadiusSvg": 24,
+    "overviewBodyRadiusSvg": 5,
+    "orbitAngleDeg": 80,
+    "shortSummary": "Titan ist der größte Mond des Saturn und der einzige Mond im ganzen Sonnensystem mit einer dichten, orangefarbenen Lufthülle und echten Wolken!",
+    "childFriendlyFacts": [
+      "Auf Titan gibt es Flüsse, Seen und Regen – allerdings nicht aus Wasser, sondern aus eiskaltem flüssigem Methan (-179 °C)!",
+      "Im Jahr 2005 landete die europäische Sonde ‚Huygens‘ am Fallschirm direkt auf der Oberfläche von Titan."
+    ],
+    "comparisonHint": "Auch Titan ist mit 5.149 km Durchmesser größer als der Planet Merkur!",
+    "orbitalElements": {
+      "sma": {
+        "code": "SMA",
+        "label": "Große Halbachse (Semi-Major Axis)",
+        "formattedValue": "0.00817 AE (1,22 Mio. km zu Saturn)",
+        "numericValue": 0.00817,
+        "unit": "AE",
+        "childExplanation": "Das ist der durchschnittliche Abstand der Umlaufbahn zum Zentrum (wie die Größe einer Rennstrecke im Weltall)."
+      },
+      "ecc": {
+        "code": "ECC",
+        "label": "Bahneliptizität / Exzentrizität (Eccentricity)",
+        "formattedValue": "0.0288",
+        "numericValue": 0.0288,
+        "childExplanation": "Zeigt, ob die Bahn fast kreisrund (nahe 0) oder leicht eiförmig gedehnt ist."
+      },
+      "inc": {
+        "code": "INC",
+        "label": "Bahnneigung (Inclination)",
+        "formattedValue": "0.35°",
+        "numericValue": 0.35,
+        "unit": "°",
+        "childExplanation": "Gibt an, wie stark die Umlaufbahn im Vergleich zum Äquator der Sonne bzw. der Hauptebene gekippt ist."
+      },
+      "lan": {
+        "code": "LAN",
+        "label": "Aufsteigender Knoten (Longitude of Ascending Node)",
+        "formattedValue": "28.06°",
+        "numericValue": 28.06,
+        "unit": "°",
+        "childExplanation": "Der genaue Winkelpunkt, an dem der Himmelskörper auf seiner gekippten Bahn von unten nach oben durch die Hauptebene fliegt."
+      },
+      "lpe": {
+        "code": "LPE",
+        "label": "Länge des Perihels (Longitude of Perihelion)",
+        "formattedValue": "180.5°",
+        "numericValue": 180.5,
+        "unit": "°",
+        "childExplanation": "Zeigt die Himmelsrichtung, in der der Körper der Sonne (oder seinem Planeten) auf seiner Bahn am allernächsten kommt."
+      },
+      "mna": {
+        "code": "MNA",
+        "label": "Mittlere Anomalie (Mean Anomaly)",
+        "formattedValue": "163.0°",
+        "numericValue": 163.0,
+        "unit": "°",
+        "childExplanation": "Verrät Astronomen wie auf einem großen Uhrwerk, an welcher Stelle seiner Runde sich der Körper zum Startzeitpunkt befindet."
+      },
+      "ref": {
+        "code": "REF",
+        "label": "Referenzsystem & Epoche (Reference)",
+        "formattedValue": "Kronozentrisch (Saturn)",
+        "childExplanation": "Das gemeinsame Mess-Lineal und Startdatum (Jahr 2000), auf das sich alle Astronomen weltweit geeinigt haben."
+      }
+    }
+  },
+  {
+    "id": "enceladus",
+    "name": "Enceladus",
+    "englishApiId": "encelade",
+    "subtitle": "Der schneeweiße Eismond mit Wasser-Geysiren",
+    "category": "moon",
+    "categoryLabel": "Mond des Saturn",
+    "parentId": "saturn",
+    "childrenIds": [],
+    "wikimediaImageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/PIA17202_-_Approaching_Enceladus.jpg?width=640",
+    "imageUrl": "assets/images/enceladus.svg",
+    "imageCredit": "NASA / JPL-Caltech / Space Science Institute – Cassini (Wikimedia Commons)",
+    "colorHex": "#0284C7",
+    "accentColorHex": "#E0F2FE",
+    "diameterKm": 504,
+    "distanceFromSunKm": 1433500000,
+    "distanceFromSunAu": 9.58,
+    "distanceFromEarthKm": 1283900000,
+    "orbitalPeriodDays": 1.37,
+    "orbitalPeriodLabel": "1,37 Tage um Saturn",
+    "inclinationToSolarEquatorDeg": 0.02,
+    "overviewOrbitRadiusSvg": 20,
+    "overviewBodyRadiusSvg": 3,
+    "orbitAngleDeg": 240,
+    "shortSummary": "Enceladus ist von frischem, blendend weißem Eis bedeckt und wirft fast das gesamte Sonnenlicht wie ein Spiegel zurück.",
+    "childFriendlyFacts": [
+      "An seinem Südpol schießen riesige Geysire aus Wasserdampf und Eiskristallen ins Weltall und speisen damit sogar einen der Saturnringe!",
+      "Unter dem Eis verbirgt sich ein warmer Ozean mit heißen Quellen am Meeresboden."
+    ],
+    "comparisonHint": "Mit rund 500 km Durchmesser würde Enceladus bequem zwischen Berlin und München passen.",
+    "orbitalElements": {
+      "sma": {
+        "code": "SMA",
+        "label": "Große Halbachse (Semi-Major Axis)",
+        "formattedValue": "0.00159 AE (238.000 km zu Saturn)",
+        "numericValue": 0.00159,
+        "unit": "AE",
+        "childExplanation": "Das ist der durchschnittliche Abstand der Umlaufbahn zum Zentrum (wie die Größe einer Rennstrecke im Weltall)."
+      },
+      "ecc": {
+        "code": "ECC",
+        "label": "Bahneliptizität / Exzentrizität (Eccentricity)",
+        "formattedValue": "0.0047",
+        "numericValue": 0.0047,
+        "childExplanation": "Zeigt, ob die Bahn fast kreisrund (nahe 0) oder leicht eiförmig gedehnt ist."
+      },
+      "inc": {
+        "code": "INC",
+        "label": "Bahnneigung (Inclination)",
+        "formattedValue": "0.02°",
+        "numericValue": 0.02,
+        "unit": "°",
+        "childExplanation": "Gibt an, wie stark die Umlaufbahn im Vergleich zum Äquator der Sonne bzw. der Hauptebene gekippt ist."
+      },
+      "lan": {
+        "code": "LAN",
+        "label": "Aufsteigender Knoten (Longitude of Ascending Node)",
+        "formattedValue": "40.6°",
+        "numericValue": 40.6,
+        "unit": "°",
+        "childExplanation": "Der genaue Winkelpunkt, an dem der Himmelskörper auf seiner gekippten Bahn von unten nach oben durch die Hauptebene fliegt."
+      },
+      "lpe": {
+        "code": "LPE",
+        "label": "Länge des Perihels (Longitude of Perihelion)",
+        "formattedValue": "326.8°",
+        "numericValue": 326.8,
+        "unit": "°",
+        "childExplanation": "Zeigt die Himmelsrichtung, in der der Körper der Sonne (oder seinem Planeten) auf seiner Bahn am allernächsten kommt."
+      },
+      "mna": {
+        "code": "MNA",
+        "label": "Mittlere Anomalie (Mean Anomaly)",
+        "formattedValue": "200.0°",
+        "numericValue": 200.0,
+        "unit": "°",
+        "childExplanation": "Verrät Astronomen wie auf einem großen Uhrwerk, an welcher Stelle seiner Runde sich der Körper zum Startzeitpunkt befindet."
+      },
+      "ref": {
+        "code": "REF",
+        "label": "Referenzsystem & Epoche (Reference)",
+        "formattedValue": "Kronozentrisch (Saturn)",
+        "childExplanation": "Das gemeinsame Mess-Lineal und Startdatum (Jahr 2000), auf das sich alle Astronomen weltweit geeinigt haben."
+      }
+    }
+  },
+  {
+    "id": "uranus",
+    "name": "Uranus",
+    "englishApiId": "uranus",
+    "subtitle": "Der türkisblaue Eisriese, der auf der Seite rollt",
+    "category": "planet",
+    "categoryLabel": "Eisriese",
+    "parentId": "sun",
+    "childrenIds": [
+      "titania"
+    ],
+    "wikimediaImageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Uranus2.jpg?width=640",
+    "imageUrl": "assets/images/uranus.svg",
+    "imageCredit": "NASA / JPL-Caltech – Voyager 2 (Wikimedia Commons)",
+    "colorHex": "#06B6D4",
+    "accentColorHex": "#A5F3FC",
+    "diameterKm": 51118,
+    "distanceFromSunKm": 2872500000,
+    "distanceFromSunAu": 19.19,
+    "distanceFromEarthKm": 2722900000,
+    "orbitalPeriodDays": 30687,
+    "orbitalPeriodLabel": "84 Erdenjahre",
+    "inclinationToSolarEquatorDeg": 6.48,
+    "overviewOrbitRadiusSvg": 350,
+    "overviewBodyRadiusSvg": 13,
+    "orbitAngleDeg": 160,
+    "shortSummary": "Uranus ist ein eiskalter, sanft türkisblauer Eisriese. Das Verrückteste an ihm: Seine Drehachse ist um fast 98 Grad gekippt – er rollt also wie eine Murmel auf der Seite liegend um die Sonne!",
+    "childFriendlyFacts": [
+      "Durch seine gekippte Achse dauert an seinem Nordpol der Sommer 42 Erdenjahre lang, gefolgt von 42 Jahren dunklem Winter!",
+      "Seine schöne blaugrüne Farbe kommt von Methangas in seiner eiskalten oberen Wolkenschicht.",
+      "Auch Uranus hat feine, dunkle Ringe und 28 bekannte Monde, die nach Figuren von William Shakespeare benannt sind."
+    ],
+    "comparisonHint": "Unsere Erde passt 4-mal nebeneinander durch den Durchmesser von Uranus (und 63-mal in sein Volumen).",
+    "orbitalElements": {
+      "sma": {
+        "code": "SMA",
+        "label": "Große Halbachse (Semi-Major Axis)",
+        "formattedValue": "19.191 AE (2,87 Mrd. km)",
+        "numericValue": 19.191,
+        "unit": "AE",
+        "childExplanation": "Das ist der durchschnittliche Abstand der Umlaufbahn zum Zentrum (wie die Größe einer Rennstrecke im Weltall)."
+      },
+      "ecc": {
+        "code": "ECC",
+        "label": "Bahneliptizität / Exzentrizität (Eccentricity)",
+        "formattedValue": "0.0472",
+        "numericValue": 0.0472,
+        "childExplanation": "Zeigt, ob die Bahn fast kreisrund (nahe 0) oder leicht eiförmig gedehnt ist."
+      },
+      "inc": {
+        "code": "INC",
+        "label": "Bahnneigung (Inclination)",
+        "formattedValue": "6.48°",
+        "numericValue": 6.48,
+        "unit": "°",
+        "childExplanation": "Gibt an, wie stark die Umlaufbahn im Vergleich zum Äquator der Sonne bzw. der Hauptebene gekippt ist."
+      },
+      "lan": {
+        "code": "LAN",
+        "label": "Aufsteigender Knoten (Longitude of Ascending Node)",
+        "formattedValue": "74.01°",
+        "numericValue": 74.01,
+        "unit": "°",
+        "childExplanation": "Der genaue Winkelpunkt, an dem der Himmelskörper auf seiner gekippten Bahn von unten nach oben durch die Hauptebene fliegt."
+      },
+      "lpe": {
+        "code": "LPE",
+        "label": "Länge des Perihels (Longitude of Perihelion)",
+        "formattedValue": "170.96°",
+        "numericValue": 170.96,
+        "unit": "°",
+        "childExplanation": "Zeigt die Himmelsrichtung, in der der Körper der Sonne (oder seinem Planeten) auf seiner Bahn am allernächsten kommt."
+      },
+      "mna": {
+        "code": "MNA",
+        "label": "Mittlere Anomalie (Mean Anomaly)",
+        "formattedValue": "142.24°",
+        "numericValue": 142.24,
+        "unit": "°",
+        "childExplanation": "Verrät Astronomen wie auf einem großen Uhrwerk, an welcher Stelle seiner Runde sich der Körper zum Startzeitpunkt befindet."
+      },
+      "ref": {
+        "code": "REF",
+        "label": "Referenzsystem & Epoche (Reference)",
+        "formattedValue": "J2000 / Sonnenäquator",
+        "childExplanation": "Das gemeinsame Mess-Lineal und Startdatum (Jahr 2000), auf das sich alle Astronomen weltweit geeinigt haben."
+      }
+    }
+  },
+  {
+    "id": "titania",
+    "name": "Titania",
+    "englishApiId": "titania",
+    "subtitle": "Die Königin der Uranusmonde",
+    "category": "moon",
+    "categoryLabel": "Mond des Uranus",
+    "parentId": "uranus",
+    "childrenIds": [],
+    "wikimediaImageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Titania_%28moon%29_color_cropped.jpg?width=640",
+    "imageUrl": "assets/images/titania.svg",
+    "imageCredit": "NASA / JPL – Voyager 2 (Wikimedia Commons)",
+    "colorHex": "#0891B2",
+    "accentColorHex": "#CFFAFE",
+    "diameterKm": 1578,
+    "distanceFromSunKm": 2872500000,
+    "distanceFromSunAu": 19.19,
+    "distanceFromEarthKm": 2722900000,
+    "orbitalPeriodDays": 8.71,
+    "orbitalPeriodLabel": "8,7 Tage um Uranus",
+    "inclinationToSolarEquatorDeg": 0.34,
+    "overviewOrbitRadiusSvg": 20,
+    "overviewBodyRadiusSvg": 4,
+    "orbitAngleDeg": 140,
+    "shortSummary": "Titania ist der größte Mond des Uranus und besteht je zur Hälfte aus Wassereis und Gestein. Benannt wurde er nach der Elfenkönigin aus Shakespeares ‚Sommernachtstraum‘.",
+    "childFriendlyFacts": [
+      "Über Titania zieht sich eine gigantische Eisschlucht (Messina Chasma), die fast 1.500 Kilometer lang ist!",
+      "Bisher hat nur eine einzige Raumsonde (Voyager 2 im Jahr 1986) Titania aus der Nähe fotografiert."
+    ],
+    "comparisonHint": "Titania ist knapp halb so breit wie unser Erdmond.",
+    "orbitalElements": {
+      "sma": {
+        "code": "SMA",
+        "label": "Große Halbachse (Semi-Major Axis)",
+        "formattedValue": "0.00291 AE (435.910 km zu Uranus)",
+        "numericValue": 0.00291,
+        "unit": "AE",
+        "childExplanation": "Das ist der durchschnittliche Abstand der Umlaufbahn zum Zentrum (wie die Größe einer Rennstrecke im Weltall)."
+      },
+      "ecc": {
+        "code": "ECC",
+        "label": "Bahneliptizität / Exzentrizität (Eccentricity)",
+        "formattedValue": "0.0011",
+        "numericValue": 0.0011,
+        "childExplanation": "Zeigt, ob die Bahn fast kreisrund (nahe 0) oder leicht eiförmig gedehnt ist."
+      },
+      "inc": {
+        "code": "INC",
+        "label": "Bahnneigung (Inclination)",
+        "formattedValue": "0.34°",
+        "numericValue": 0.34,
+        "unit": "°",
+        "childExplanation": "Gibt an, wie stark die Umlaufbahn im Vergleich zum Äquator der Sonne bzw. der Hauptebene gekippt ist."
+      },
+      "lan": {
+        "code": "LAN",
+        "label": "Aufsteigender Knoten (Longitude of Ascending Node)",
+        "formattedValue": "99.8°",
+        "numericValue": 99.8,
+        "unit": "°",
+        "childExplanation": "Der genaue Winkelpunkt, an dem der Himmelskörper auf seiner gekippten Bahn von unten nach oben durch die Hauptebene fliegt."
+      },
+      "lpe": {
+        "code": "LPE",
+        "label": "Länge des Perihels (Longitude of Perihelion)",
+        "formattedValue": "284.4°",
+        "numericValue": 284.4,
+        "unit": "°",
+        "childExplanation": "Zeigt die Himmelsrichtung, in der der Körper der Sonne (oder seinem Planeten) auf seiner Bahn am allernächsten kommt."
+      },
+      "mna": {
+        "code": "MNA",
+        "label": "Mittlere Anomalie (Mean Anomaly)",
+        "formattedValue": "25.0°",
+        "numericValue": 25.0,
+        "unit": "°",
+        "childExplanation": "Verrät Astronomen wie auf einem großen Uhrwerk, an welcher Stelle seiner Runde sich der Körper zum Startzeitpunkt befindet."
+      },
+      "ref": {
+        "code": "REF",
+        "label": "Referenzsystem & Epoche (Reference)",
+        "formattedValue": "Uranozentrisch (Uranus)",
+        "childExplanation": "Das gemeinsame Mess-Lineal und Startdatum (Jahr 2000), auf das sich alle Astronomen weltweit geeinigt haben."
+      }
+    }
+  },
+  {
+    "id": "neptune",
+    "name": "Neptun",
+    "englishApiId": "neptune",
+    "subtitle": "Der tiefblaue Windplanet am äußeren Rand",
+    "category": "planet",
+    "categoryLabel": "Eisriese",
+    "parentId": "sun",
+    "childrenIds": [
+      "triton"
+    ],
+    "wikimediaImageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Neptune_-_Voyager_2_%2829347980845%29_flatten_crop.jpg?width=640",
+    "imageUrl": "assets/images/neptune.svg",
+    "imageCredit": "NASA / JPL-Caltech – Voyager 2 (Wikimedia Commons)",
+    "colorHex": "#1D4ED8",
+    "accentColorHex": "#93C5FD",
+    "diameterKm": 49528,
+    "distanceFromSunKm": 4495100000,
+    "distanceFromSunAu": 30.07,
+    "distanceFromEarthKm": 4345500000,
+    "orbitalPeriodDays": 60190,
+    "orbitalPeriodLabel": "164,8 Erdenjahre",
+    "inclinationToSolarEquatorDeg": 6.43,
+    "overviewOrbitRadiusSvg": 395,
+    "overviewBodyRadiusSvg": 13,
+    "orbitAngleDeg": 245,
+    "shortSummary": "Neptun ist der achte und äußerste große Planet in unserem Sonnensystem. Er leuchtet in einem kräftigen Meeresblau und trägt deshalb den Namen des römischen Meeresgottes!",
+    "childFriendlyFacts": [
+      "Auf Neptun wehen die schnellsten Stürme im ganzen Sonnensystem – mit bis zu 2.100 Kilometern pro Stunde (schneller als ein Überschallflugzeug)!",
+      "Neptun wurde 1846 als erster Planet nicht durch Zufall am Himmel gefunden, sondern vorher mit Mathematik genau ausgerechnet.",
+      "Seit seiner Entdeckung im Jahr 1846 hat Neptun erst ein einziges Mal (im Jahr 2011) seine 165 Jahre dauernde Runde um die Sonne vollendet!"
+    ],
+    "comparisonHint": "Neptun ist 30-mal weiter von der Sonne entfernt als unsere Erde (30 AE) und fast 4-mal so breit wie die Erde.",
+    "orbitalElements": {
+      "sma": {
+        "code": "SMA",
+        "label": "Große Halbachse (Semi-Major Axis)",
+        "formattedValue": "30.069 AE (4,50 Mrd. km)",
+        "numericValue": 30.069,
+        "unit": "AE",
+        "childExplanation": "Das ist der durchschnittliche Abstand der Umlaufbahn zum Zentrum (wie die Größe einer Rennstrecke im Weltall)."
+      },
+      "ecc": {
+        "code": "ECC",
+        "label": "Bahneliptizität / Exzentrizität (Eccentricity)",
+        "formattedValue": "0.0086",
+        "numericValue": 0.0086,
+        "childExplanation": "Zeigt, ob die Bahn fast kreisrund (nahe 0) oder leicht eiförmig gedehnt ist."
+      },
+      "inc": {
+        "code": "INC",
+        "label": "Bahnneigung (Inclination)",
+        "formattedValue": "6.43°",
+        "numericValue": 6.43,
+        "unit": "°",
+        "childExplanation": "Gibt an, wie stark die Umlaufbahn im Vergleich zum Äquator der Sonne bzw. der Hauptebene gekippt ist."
+      },
+      "lan": {
+        "code": "LAN",
+        "label": "Aufsteigender Knoten (Longitude of Ascending Node)",
+        "formattedValue": "131.78°",
+        "numericValue": 131.78,
+        "unit": "°",
+        "childExplanation": "Der genaue Winkelpunkt, an dem der Himmelskörper auf seiner gekippten Bahn von unten nach oben durch die Hauptebene fliegt."
+      },
+      "lpe": {
+        "code": "LPE",
+        "label": "Länge des Perihels (Longitude of Perihelion)",
+        "formattedValue": "44.96°",
+        "numericValue": 44.96,
+        "unit": "°",
+        "childExplanation": "Zeigt die Himmelsrichtung, in der der Körper der Sonne (oder seinem Planeten) auf seiner Bahn am allernächsten kommt."
+      },
+      "mna": {
+        "code": "MNA",
+        "label": "Mittlere Anomalie (Mean Anomaly)",
+        "formattedValue": "256.23°",
+        "numericValue": 256.23,
+        "unit": "°",
+        "childExplanation": "Verrät Astronomen wie auf einem großen Uhrwerk, an welcher Stelle seiner Runde sich der Körper zum Startzeitpunkt befindet."
+      },
+      "ref": {
+        "code": "REF",
+        "label": "Referenzsystem & Epoche (Reference)",
+        "formattedValue": "J2000 / Sonnenäquator",
+        "childExplanation": "Das gemeinsame Mess-Lineal und Startdatum (Jahr 2000), auf das sich alle Astronomen weltweit geeinigt haben."
+      }
+    }
+  },
+  {
+    "id": "triton",
+    "name": "Triton",
+    "englishApiId": "triton",
+    "subtitle": "Neptuns eiskalter Geisterfahrer-Mond",
+    "category": "moon",
+    "categoryLabel": "Mond des Neptun",
+    "parentId": "neptune",
+    "childrenIds": [],
+    "wikimediaImageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Triton_moon_mosaic_Voyager_2_%28large%29.jpg?width=640",
+    "imageUrl": "assets/images/triton.svg",
+    "imageCredit": "NASA / JPL / USGS – Voyager 2 (Wikimedia Commons)",
+    "colorHex": "#3B82F6",
+    "accentColorHex": "#DBEAFE",
+    "diameterKm": 2707,
+    "distanceFromSunKm": 4495100000,
+    "distanceFromSunAu": 30.07,
+    "distanceFromEarthKm": 4345500000,
+    "orbitalPeriodDays": 5.88,
+    "orbitalPeriodLabel": "5,88 Tage um Neptun (entgegen der Drehrichtung!)",
+    "inclinationToSolarEquatorDeg": 156.87,
+    "overviewOrbitRadiusSvg": 20,
+    "overviewBodyRadiusSvg": 4,
+    "orbitAngleDeg": 300,
+    "shortSummary": "Triton ist der größte Mond von Neptun und ein echter Sonderling: Als einziger großer Mond im Sonnensystem läuft er verkehrt herum (entgegen der Drehung seines Planeten) auf seiner Bahn!",
+    "childFriendlyFacts": [
+      "Mit rund -235 °C gehört Triton zu den kältesten Orten im gesamten Sonnensystem.",
+      "Trotz der Eiseskälte spucken dort Eis-Vulkane dunkle Stickstoff-Wolken kilometerhoch in den Himmel."
+    ],
+    "comparisonHint": "Triton ist etwas kleiner als unser Erdmond, aber größer als der Zwergplanet Pluto.",
+    "orbitalElements": {
+      "sma": {
+        "code": "SMA",
+        "label": "Große Halbachse (Semi-Major Axis)",
+        "formattedValue": "0.00237 AE (354.759 km zu Neptun)",
+        "numericValue": 0.00237,
+        "unit": "AE",
+        "childExplanation": "Das ist der durchschnittliche Abstand der Umlaufbahn zum Zentrum (wie die Größe einer Rennstrecke im Weltall)."
+      },
+      "ecc": {
+        "code": "ECC",
+        "label": "Bahneliptizität / Exzentrizität (Eccentricity)",
+        "formattedValue": "2e-05",
+        "numericValue": 2e-05,
+        "childExplanation": "Zeigt, ob die Bahn fast kreisrund (nahe 0) oder leicht eiförmig gedehnt ist."
+      },
+      "inc": {
+        "code": "INC",
+        "label": "Bahnneigung (Inclination)",
+        "formattedValue": "156.87°",
+        "numericValue": 156.87,
+        "unit": "°",
+        "childExplanation": "Gibt an, wie stark die Umlaufbahn im Vergleich zum Äquator der Sonne bzw. der Hauptebene gekippt ist."
+      },
+      "lan": {
+        "code": "LAN",
+        "label": "Aufsteigender Knoten (Longitude of Ascending Node)",
+        "formattedValue": "177.7°",
+        "numericValue": 177.7,
+        "unit": "°",
+        "childExplanation": "Der genaue Winkelpunkt, an dem der Himmelskörper auf seiner gekippten Bahn von unten nach oben durch die Hauptebene fliegt."
+      },
+      "lpe": {
+        "code": "LPE",
+        "label": "Länge des Perihels (Longitude of Perihelion)",
+        "formattedValue": "293.1°",
+        "numericValue": 293.1,
+        "unit": "°",
+        "childExplanation": "Zeigt die Himmelsrichtung, in der der Körper der Sonne (oder seinem Planeten) auf seiner Bahn am allernächsten kommt."
+      },
+      "mna": {
+        "code": "MNA",
+        "label": "Mittlere Anomalie (Mean Anomaly)",
+        "formattedValue": "152.0°",
+        "numericValue": 152.0,
+        "unit": "°",
+        "childExplanation": "Verrät Astronomen wie auf einem großen Uhrwerk, an welcher Stelle seiner Runde sich der Körper zum Startzeitpunkt befindet."
+      },
+      "ref": {
+        "code": "REF",
+        "label": "Referenzsystem & Epoche (Reference)",
+        "formattedValue": "Neptunozentrisch (retrograd)",
+        "childExplanation": "Das gemeinsame Mess-Lineal und Startdatum (Jahr 2000), auf das sich alle Astronomen weltweit geeinigt haben."
+      }
+    }
+  },
+  {
+    "id": "pluto",
+    "name": "Pluto",
+    "englishApiId": "pluton",
+    "subtitle": "Der berühmte Zwergplanet mit dem Eisherz",
+    "category": "dwarf-planet",
+    "categoryLabel": "Zwergplanet im Kuipergürtel",
+    "parentId": "sun",
+    "childrenIds": [],
+    "wikimediaImageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Pluto_in_True_Color_-_High-Res.jpg?width=640",
+    "imageUrl": "assets/images/pluto.svg",
+    "imageCredit": "NASA / Johns Hopkins University APL / SwRI – New Horizons (Wikimedia Commons)",
+    "colorHex": "#7C3AED",
+    "accentColorHex": "#DDD6FE",
+    "diameterKm": 2376,
+    "distanceFromSunKm": 5906400000,
+    "distanceFromSunAu": 39.48,
+    "distanceFromEarthKm": 5756800000,
+    "orbitalPeriodDays": 90560,
+    "orbitalPeriodLabel": "248 Erdenjahre",
+    "inclinationToSolarEquatorDeg": 17.16,
+    "overviewOrbitRadiusSvg": 430,
+    "overviewBodyRadiusSvg": 6,
+    "orbitAngleDeg": 325,
+    "shortSummary": "Lange Zeit galt Pluto als neunter Planet, heute ist er der bekannteste Zwergplanet! Als die Raumsonde New Horizons 2015 an ihm vorbeiflog, entdeckte sie eine riesige helle Eisfläche in Form eines Herzens.",
+    "childFriendlyFacts": [
+      "Den Namen ‚Pluto‘ schlug 1930 das damals erst 11-jährige englische Schulmädchen Venetia Burney vor!",
+      "Seine Bahn ist stark gekippt (17,16°) und so elliptisch, dass er der Sonne manchmal näher kommt als Neptun.",
+      "Pluto und sein großer Mond Charon tanzen im All immer Gesicht an Gesicht umeinander."
+    ],
+    "comparisonHint": "Pluto ist kleiner als unser Erdmond (2.376 km vs. 3.474 km).",
+    "orbitalElements": {
+      "sma": {
+        "code": "SMA",
+        "label": "Große Halbachse (Semi-Major Axis)",
+        "formattedValue": "39.482 AE (5,91 Mrd. km)",
+        "numericValue": 39.482,
+        "unit": "AE",
+        "childExplanation": "Das ist der durchschnittliche Abstand der Umlaufbahn zum Zentrum (wie die Größe einer Rennstrecke im Weltall)."
+      },
+      "ecc": {
+        "code": "ECC",
+        "label": "Bahneliptizität / Exzentrizität (Eccentricity)",
+        "formattedValue": "0.2488",
+        "numericValue": 0.2488,
+        "childExplanation": "Zeigt, ob die Bahn fast kreisrund (nahe 0) oder leicht eiförmig gedehnt ist."
+      },
+      "inc": {
+        "code": "INC",
+        "label": "Bahnneigung (Inclination)",
+        "formattedValue": "17.16°",
+        "numericValue": 17.16,
+        "unit": "°",
+        "childExplanation": "Gibt an, wie stark die Umlaufbahn im Vergleich zum Äquator der Sonne bzw. der Hauptebene gekippt ist."
+      },
+      "lan": {
+        "code": "LAN",
+        "label": "Aufsteigender Knoten (Longitude of Ascending Node)",
+        "formattedValue": "110.3°",
+        "numericValue": 110.3,
+        "unit": "°",
+        "childExplanation": "Der genaue Winkelpunkt, an dem der Himmelskörper auf seiner gekippten Bahn von unten nach oben durch die Hauptebene fliegt."
+      },
+      "lpe": {
+        "code": "LPE",
+        "label": "Länge des Perihels (Longitude of Perihelion)",
+        "formattedValue": "224.07°",
+        "numericValue": 224.07,
+        "unit": "°",
+        "childExplanation": "Zeigt die Himmelsrichtung, in der der Körper der Sonne (oder seinem Planeten) auf seiner Bahn am allernächsten kommt."
+      },
+      "mna": {
+        "code": "MNA",
+        "label": "Mittlere Anomalie (Mean Anomaly)",
+        "formattedValue": "14.53°",
+        "numericValue": 14.53,
+        "unit": "°",
+        "childExplanation": "Verrät Astronomen wie auf einem großen Uhrwerk, an welcher Stelle seiner Runde sich der Körper zum Startzeitpunkt befindet."
+      },
+      "ref": {
+        "code": "REF",
+        "label": "Referenzsystem & Epoche (Reference)",
+        "formattedValue": "J2000 / Sonnenäquator",
+        "childExplanation": "Das gemeinsame Mess-Lineal und Startdatum (Jahr 2000), auf das sich alle Astronomen weltweit geeinigt haben."
+      }
+    }
+  },
+  {
+    "id": "eris",
+    "name": "Eris",
+    "englishApiId": "eris",
+    "subtitle": "Der eisige Zwergplanet weit draußen",
+    "category": "dwarf-planet",
+    "categoryLabel": "Zwergplanet",
+    "parentId": "sun",
+    "childrenIds": [],
+    "wikimediaImageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Eris_and_dysnomia2.jpg?width=640",
+    "imageUrl": "assets/images/eris.svg",
+    "imageCredit": "NASA / ESA / M. Brown – Hubble Space Telescope (Wikimedia Commons)",
+    "colorHex": "#6366F1",
+    "accentColorHex": "#E0E7FF",
+    "diameterKm": 2326,
+    "distanceFromSunKm": 10125000000,
+    "distanceFromSunAu": 67.78,
+    "distanceFromEarthKm": 9975000000,
+    "orbitalPeriodDays": 203830,
+    "orbitalPeriodLabel": "558 Erdenjahre",
+    "inclinationToSolarEquatorDeg": 44.04,
+    "overviewOrbitRadiusSvg": 455,
+    "overviewBodyRadiusSvg": 6,
+    "orbitAngleDeg": 15,
+    "shortSummary": "Eris ist ein extrem kalter, hell glänzender Zwergplanet, der fast so groß wie Pluto ist, aber noch viel weiter draußen auf einer steil gekippten Bahn um die Sonne zieht.",
+    "childFriendlyFacts": [
+      "Als Eris 2005 entdeckt wurde, führte das dazu, dass Astronomen die neue Klasse der ‚Zwergplaneten‘ erfanden.",
+      "Seine Bahn ist mit 44 Grad extrem stark gegen die Ebene der Planeten geneigt!"
+    ],
+    "comparisonHint": "Ein einziges Jahr auf Eris dauert 558 Erdenjahre!",
+    "orbitalElements": {
+      "sma": {
+        "code": "SMA",
+        "label": "Große Halbachse (Semi-Major Axis)",
+        "formattedValue": "67.781 AE (10,13 Mrd. km)",
+        "numericValue": 67.781,
+        "unit": "AE",
+        "childExplanation": "Das ist der durchschnittliche Abstand der Umlaufbahn zum Zentrum (wie die Größe einer Rennstrecke im Weltall)."
+      },
+      "ecc": {
+        "code": "ECC",
+        "label": "Bahneliptizität / Exzentrizität (Eccentricity)",
+        "formattedValue": "0.4407",
+        "numericValue": 0.4407,
+        "childExplanation": "Zeigt, ob die Bahn fast kreisrund (nahe 0) oder leicht eiförmig gedehnt ist."
+      },
+      "inc": {
+        "code": "INC",
+        "label": "Bahnneigung (Inclination)",
+        "formattedValue": "44.04°",
+        "numericValue": 44.04,
+        "unit": "°",
+        "childExplanation": "Gibt an, wie stark die Umlaufbahn im Vergleich zum Äquator der Sonne bzw. der Hauptebene gekippt ist."
+      },
+      "lan": {
+        "code": "LAN",
+        "label": "Aufsteigender Knoten (Longitude of Ascending Node)",
+        "formattedValue": "35.87°",
+        "numericValue": 35.87,
+        "unit": "°",
+        "childExplanation": "Der genaue Winkelpunkt, an dem der Himmelskörper auf seiner gekippten Bahn von unten nach oben durch die Hauptebene fliegt."
+      },
+      "lpe": {
+        "code": "LPE",
+        "label": "Länge des Perihels (Longitude of Perihelion)",
+        "formattedValue": "151.6°",
+        "numericValue": 151.6,
+        "unit": "°",
+        "childExplanation": "Zeigt die Himmelsrichtung, in der der Körper der Sonne (oder seinem Planeten) auf seiner Bahn am allernächsten kommt."
+      },
+      "mna": {
+        "code": "MNA",
+        "label": "Mittlere Anomalie (Mean Anomaly)",
+        "formattedValue": "205.9°",
+        "numericValue": 205.9,
+        "unit": "°",
+        "childExplanation": "Verrät Astronomen wie auf einem großen Uhrwerk, an welcher Stelle seiner Runde sich der Körper zum Startzeitpunkt befindet."
+      },
+      "ref": {
+        "code": "REF",
+        "label": "Referenzsystem & Epoche (Reference)",
+        "formattedValue": "J2000 / Sonnenäquator",
+        "childExplanation": "Das gemeinsame Mess-Lineal und Startdatum (Jahr 2000), auf das sich alle Astronomen weltweit geeinigt haben."
+      }
+    }
+  },
+  {
+    "id": "oort-cloud",
+    "name": "Oortscher Gürtel",
+    "subtitle": "Die gigantische Kugelschale aus Milliarden Kometen am Rand des Sonnensystems",
+    "category": "belt",
+    "categoryLabel": "Äußere Kometen-Schale (Oortsche Wolke)",
+    "parentId": "sun",
+    "childrenIds": [],
+    "wikimediaImageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Oort_cloud_Sedna_orbit.svg?width=640",
+    "imageUrl": "assets/images/oort-cloud.svg",
+    "imageCredit": "NASA / JPL-Caltech (Wikimedia Commons, Public Domain)",
+    "colorHex": "#1E40AF",
+    "accentColorHex": "#BFDBFE",
+    "diameterKm": 15000000000000,
+    "distanceFromSunKm": 7500000000000,
+    "distanceFromSunAu": 50000.0,
+    "distanceFromEarthKm": 7499850000000,
+    "orbitalPeriodDays": 365000000,
+    "orbitalPeriodLabel": "Mehrere Millionen Erdenjahre für eine Umrundung",
+    "inclinationToSolarEquatorDeg": 45.0,
+    "overviewOrbitRadiusSvg": 485,
+    "overviewBodyRadiusSvg": 8,
+    "orbitAngleDeg": 90,
+    "shortSummary": "Ganz weit draußen schließt der Oortsche Gürtel (auch Oortsche Wolke genannt) unser gesamtes Sonnensystem wie eine riesige Seifenblase ein! Dort schweben Milliarden tiefgefrorener Eisbrocken.",
+    "childFriendlyFacts": [
+      "Wenn einer dieser Eisbrocken aus dem Oortschen Gürtel Richtung Sonne geschubst wird, taut das Eis in Sonnennähe auf und er wird zu einem leuchtenden Kometen mit langem Schweif!",
+      "Der Oortsche Gürtel ist bis zu 50.000- bis 100.000-mal weiter von der Sonne entfernt als unsere Erde – selbst das Sonnenlicht braucht über ein ganzes Jahr bis dorthin!",
+      "Benannt wurde er nach dem niederländischen Astronomen Jan Hendrik Oort."
+    ],
+    "comparisonHint": "Der Oortsche Gürtel bildet die äußerste Grenze unseres Sonnensystems auf dem Weg zu den Nachbarsternen.",
+    "orbitalElements": {
+      "sma": {
+        "code": "SMA",
+        "label": "Große Halbachse (Semi-Major Axis)",
+        "formattedValue": "50000.0 AE (ca. 2.000 bis 100.000 AE (bis 1,5 Lichtjahre))",
+        "numericValue": 50000.0,
+        "unit": "AE",
+        "childExplanation": "Das ist der durchschnittliche Abstand der Umlaufbahn zum Zentrum (wie die Größe einer Rennstrecke im Weltall)."
+      },
+      "ecc": {
+        "code": "ECC",
+        "label": "Bahneliptizität / Exzentrizität (Eccentricity)",
+        "formattedValue": "0.85",
+        "numericValue": 0.85,
+        "childExplanation": "Zeigt, ob die Bahn fast kreisrund (nahe 0) oder leicht eiförmig gedehnt ist."
+      },
+      "inc": {
+        "code": "INC",
+        "label": "Bahnneigung (Inclination)",
+        "formattedValue": "45.0°",
+        "numericValue": 45.0,
+        "unit": "°",
+        "childExplanation": "Gibt an, wie stark die Umlaufbahn im Vergleich zum Äquator der Sonne bzw. der Hauptebene gekippt ist."
+      },
+      "lan": {
+        "code": "LAN",
+        "label": "Aufsteigender Knoten (Longitude of Ascending Node)",
+        "formattedValue": "0.0°",
+        "numericValue": 0.0,
+        "unit": "°",
+        "childExplanation": "Der genaue Winkelpunkt, an dem der Himmelskörper auf seiner gekippten Bahn von unten nach oben durch die Hauptebene fliegt."
+      },
+      "lpe": {
+        "code": "LPE",
+        "label": "Länge des Perihels (Longitude of Perihelion)",
+        "formattedValue": "180.0°",
+        "numericValue": 180.0,
+        "unit": "°",
+        "childExplanation": "Zeigt die Himmelsrichtung, in der der Körper der Sonne (oder seinem Planeten) auf seiner Bahn am allernächsten kommt."
+      },
+      "mna": {
+        "code": "MNA",
+        "label": "Mittlere Anomalie (Mean Anomaly)",
+        "formattedValue": "0.0°",
+        "numericValue": 0.0,
+        "unit": "°",
+        "childExplanation": "Verrät Astronomen wie auf einem großen Uhrwerk, an welcher Stelle seiner Runde sich der Körper zum Startzeitpunkt befindet."
+      },
+      "ref": {
+        "code": "REF",
+        "label": "Referenzsystem & Epoche (Reference)",
+        "formattedValue": "Sphärische Außenhülle (J2000)",
+        "childExplanation": "Das gemeinsame Mess-Lineal und Startdatum (Jahr 2000), auf das sich alle Astronomen weltweit geeinigt haben."
+      }
+    }
+  }
+]

@@ -1,0 +1,81 @@
+/**
+ * Projekt / Modul: SSI App – Solar System Info App / CelestialBody & OrbitalElements Models (celestial-body.model.ts)
+ * FCPP-Referenz: P10 (P10-U20, P10-U40), P20 (P20-U20, P20-U30), P30 (P30-U20)
+ * Erstellt mit: KI-Assistent (Antigravity AI / Pair-Programming Agent)
+ * Erstellt für / Autor: Joshua Mößmer (J-Moessmer)
+ * Datum / Version: 16.11.2026 / v1.0
+ * Hinweis: TypeScript-Interfaces für Himmelskörper, Gürtel, Raumstationen sowie die 7 Bahnelemente (SMA, ECC, INC, LAN, LPE, MNA, REF) inkl. Wikimedia-Commons-Bild-URL und lokalem Bild-Fallback mit KI-Unterstützung erstellt.
+ */
+
+export type BodyCategory =
+  | 'star'
+  | 'planet'
+  | 'dwarf-planet'
+  | 'moon'
+  | 'belt'
+  | 'spacecraft';
+
+export interface OrbitalElementDetail {
+  code: 'SMA' | 'ECC' | 'INC' | 'LAN' | 'LPE' | 'MNA' | 'REF';
+  label: string;
+  formattedValue: string;
+  numericValue?: number;
+  unit?: string;
+  childExplanation: string;
+}
+
+/**
+ * Die 7 Bahnelemente (Kepler-Elemente + Referenzsystem) gemäß P20-A30 / P20-U20
+ */
+export interface OrbitalElements {
+  /** Semi-Major Axis (Große Halbachse) */
+  sma: OrbitalElementDetail;
+  /** Eccentricity (Numerische Exzentrizität) */
+  ecc: OrbitalElementDetail;
+  /** Inclination (Bahnneigung zum Sonnenäquator / Referenzebene) */
+  inc: OrbitalElementDetail;
+  /** Longitude of the Ascending Node (Länge des aufsteigenden Knotens) */
+  lan: OrbitalElementDetail;
+  /** Longitude of Perihelion (Länge des Perihels) */
+  lpe: OrbitalElementDetail;
+  /** Mean Anomaly (Mittlere Anomalie) */
+  mna: OrbitalElementDetail;
+  /** Reference System & Epoch (Referenzsystem / Epoche) */
+  ref: OrbitalElementDetail;
+}
+
+export interface CelestialBody {
+  id: string;
+  name: string;
+  englishApiId?: string;
+  subtitle: string;
+  category: BodyCategory;
+  categoryLabel: string;
+  parentId?: string;
+  childrenIds: string[];
+  /** Echte Foto-URL von Wikimedia Commons (NASA/ESA Public Domain / CC) */
+  wikimediaImageUrl: string;
+  /** Lokaler relativer Fallback-Pfad unter assets/images/... für 100% Offline-Sicherheit */
+  imageUrl: string;
+  imageCredit: string;
+  colorHex: string;
+  accentColorHex: string;
+  diameterKm: number;
+  distanceFromSunKm: number;
+  distanceFromSunAu: number;
+  distanceFromEarthKm: number;
+  orbitalPeriodDays: number;
+  orbitalPeriodLabel: string;
+  /** Bahnneigung zur Ebene des Sonnenäquators in Grad (für P10-U40 Seitenansicht) */
+  inclinationToSolarEquatorDeg: number;
+  /** Optimierter SVG-Bahnradius für die Übersichtsansicht (P10-U40) */
+  overviewOrbitRadiusSvg: number;
+  /** Optimierter SVG-Körperradius für die Übersichtsansicht (P10-U30) */
+  overviewBodyRadiusSvg: number;
+  /** Startwinkel in Grad für die 2D-Draufsicht im Sonnensystem */
+  orbitAngleDeg: number;
+  shortSummary: string;
+  childFriendlyFacts: string[];
+  comparisonHint: string;
+  orbitalElements: OrbitalElements;
+}

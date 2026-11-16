@@ -1,0 +1,23 @@
+/*
+ * Projekt / Modul: SSI App – Solar System Info App / Root Styles (app.css)
+ * FCPP-Referenz: P10-U10 (Haupt-Shell & Viewport-Container)
+ * Erstellt mit: KI-Assistent (Antigravity AI / Pair-Programming Agent)
+ * Erstellt für / Autor: Joshua Mößmer (J-Moessmer)
+ * Datum / Version: 16.11.2026 / v1.1
+ * Hinweis: Layout-Container für TopNavComponent und RouterOutlet auf Marineblau-Hintergrund (#0B132B).
+ */
+
+.ssi-app-shell {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--space-bg-primary);
+}
+
+.ssi-main-viewport {
+  flex: 1;
+  max-width: 1440px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 1.25rem 1.5rem;
+}

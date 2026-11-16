@@ -1,0 +1,10 @@
+{
+  "latitude": 51.5136,
+  "longitude": 7.4653,
+  "altitudeKm": 416.8,
+  "velocityKmh": 27584.0,
+  "visibility": "daylight",
+  "timestamp": 1794826000,
+  "locationHint": "Überflug Europa / Dortmund (Lokaler Offline-Fallback aktiv)",
+  "isFallbackData": true
+}

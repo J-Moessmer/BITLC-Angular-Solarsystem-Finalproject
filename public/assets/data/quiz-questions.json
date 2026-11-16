@@ -1,0 +1,156 @@
+[
+  {
+    "id": "q-cel-1",
+    "category": "celestial",
+    "questionText": "Welcher Planet in unserem Sonnensystem ist mit Abstand der größte?",
+    "options": [
+      "Mars",
+      "Jupiter",
+      "Merkur",
+      "Venus"
+    ],
+    "correctOptionIndex": 1,
+    "childExplanation": "Richtig! Jupiter ist der König der Planeten: Unsere Erde würde 11-mal nebeneinander durch seinen Durchmesser passen!",
+    "relatedBodyId": "jupiter"
+  },
+  {
+    "id": "q-cel-2",
+    "category": "celestial",
+    "questionText": "Wie oft passt unsere Erde ungefähr in die riesige Sonne hinein (vom Volumen her)?",
+    "options": [
+      "Ungefähr 10-mal",
+      "Ungefähr 500-mal",
+      "Ungefähr 1,3 Millionen Mal",
+      "Genau 2-mal"
+    ],
+    "correctOptionIndex": 2,
+    "childExplanation": "Stark! Die Sonne hat den 109-fachen Durchmesser der Erde – dadurch passen rund 1,3 Millionen Erdkugeln in die Sonne!",
+    "relatedBodyId": "sun"
+  },
+  {
+    "id": "q-cel-3",
+    "category": "celestial",
+    "questionText": "Wo befindet sich der große Asteroidengürtel in unserem Sonnensystem?",
+    "options": [
+      "Zwischen den Bahnen von Mars und Jupiter",
+      "Direkt zwischen Erde und Erdmond",
+      "Innerhalb der Bahn von Merkur",
+      "Hinter dem Oortschen Gürtel"
+    ],
+    "correctOptionIndex": 0,
+    "childExplanation": "Genau! Der Asteroidengürtel (mit dem Zwergplaneten Ceres) bildet die Grenze zwischen dem Gesteinsplaneten Mars und dem Gasriesen Jupiter.",
+    "relatedBodyId": "asteroid-belt"
+  },
+  {
+    "id": "q-cel-4",
+    "category": "celestial",
+    "questionText": "Welche riesige Kugelschale aus Milliarden Eisbrocken schließt unser Sonnensystem ganz außen ein?",
+    "options": [
+      "Die Milchstraße",
+      "Der Oortsche Gürtel (Oortsche Wolke)",
+      "Die Ringe des Saturn",
+      "Der Große Rote Fleck"
+    ],
+    "correctOptionIndex": 1,
+    "childExplanation": "Super! Der Oortsche Gürtel umhüllt unser Sonnensystem in bis zu 50.000–100.000 AE Entfernung. Von dort kommen viele langperiodische Kometen!",
+    "relatedBodyId": "oort-cloud"
+  },
+  {
+    "id": "q-cel-5",
+    "category": "celestial",
+    "questionText": "Welcher Eisriese ist um fast 98 Grad gekippt und rollt wie eine Murmel auf der Seite um die Sonne?",
+    "options": [
+      "Uranus",
+      "Saturn",
+      "Erde",
+      "Merkur"
+    ],
+    "correctOptionIndex": 0,
+    "childExplanation": "Klasse! Uranus liegt durch seine stark gekippte Drehachse fast auf der Seite.",
+    "relatedBodyId": "uranus"
+  },
+  {
+    "id": "q-cel-6",
+    "category": "celestial",
+    "questionText": "Wofür steht das Bahnelement ‚INC‘ (Bahnneigung) in unserer Astronomen-Box?",
+    "options": [
+      "Für die Anzahl der Monde eines Planeten",
+      "Für den Kipp-Winkel der Umlaufbahn zum Sonnenäquator",
+      "Für die Temperatur im Inneren der Sonne",
+      "Für das Gewicht einer Raumsonde"
+    ],
+    "correctOptionIndex": 1,
+    "childExplanation": "Spitze! INC (Inclination) verrät uns in Grad, wie stark die Bahn eines Himmelskörpers gegenüber der Referenzebene gekippt ist.",
+    "relatedBodyId": "earth"
+  },
+  {
+    "id": "q-mis-1",
+    "category": "missions",
+    "questionText": "Auf welchem Planeten rollen die Forschungs-Roboter (Rover) ‚Curiosity‘ und ‚Perseverance‘ herum?",
+    "options": [
+      "Auf der Venus",
+      "Auf dem Mars",
+      "Auf dem Jupiter",
+      "Auf dem Neptun"
+    ],
+    "correctOptionIndex": 1,
+    "childExplanation": "Volltreffer! Auf dem Roten Planeten Mars erforschen die Rover Gestein und alte ausgetrocknete Kraterseen.",
+    "relatedBodyId": "mars"
+  },
+  {
+    "id": "q-mis-2",
+    "category": "missions",
+    "questionText": "Woran erkennt man das berühmte James-Webb-Weltraumteleskop (JWST) sofort?",
+    "options": [
+      "An seinem großen Spiegel aus 18 goldglänzenden Sechsecken",
+      "An seinen sechs Gummirädern",
+      "An seinen drei Schiffsschrauben",
+      "Daran, dass es auf dem Mond geparkt ist"
+    ],
+    "correctOptionIndex": 0,
+    "childExplanation": "Richtig! Der 6,5 Meter große Hauptspiegel des James-Webb-Teleskops besteht aus 18 goldbeschichteten Beryllium-Sechsecken.",
+    "relatedBodyId": "sun"
+  },
+  {
+    "id": "q-mis-3",
+    "category": "missions",
+    "questionText": "Was ist die Hauptaufgabe des europäischen Weltraumteleskops ‚Gaia‘?",
+    "options": [
+      "Auf der Sonne zu landen",
+      "Über 2 Milliarden Sterne unserer Milchstraße und tausende Asteroiden für eine 3D-Karte zu vermessen",
+      "Wasser vom Saturn zur Erde zu holen",
+      "Fernsehprogramme zu übertragen"
+    ],
+    "correctOptionIndex": 1,
+    "childExplanation": "Genau! Gaia hat die bisher genaueste 3D-Sternenkarte unserer Milchstraße und vieler Asteroiden erstellt.",
+    "relatedBodyId": "sun"
+  },
+  {
+    "id": "q-mis-4",
+    "category": "missions",
+    "questionText": "Wie lange braucht die Internationale Raumstation ISS ungefähr für eine komplette Runde um die Erde?",
+    "options": [
+      "Ungefähr 92 Minuten (1,5 Stunden)",
+      "Ein ganzes Jahr",
+      "Einen Monat",
+      "10 Tage"
+    ],
+    "correctOptionIndex": 0,
+    "childExplanation": "Stark! Mit rund 28.000 km/h umrundet die ISS unsere Erde in gut 90 Minuten – also etwa 16-mal an einem Tag!",
+    "relatedBodyId": "iss"
+  },
+  {
+    "id": "q-mis-5",
+    "category": "missions",
+    "questionText": "Wie heißt das aktuelle Raumfahrtprogramm, mit dem bald wieder Astronautinnen und Astronauten zum Mond fliegen sollen?",
+    "options": [
+      "Voyager",
+      "Artemis",
+      "Cassini",
+      "Galileo"
+    ],
+    "correctOptionIndex": 1,
+    "childExplanation": "Super! In der griechischen Sage ist Artemis die Zwillingsschwester von Apollo – so heißt auch das neue Mondprogramm mit dem Orion-Raumschiff!",
+    "relatedBodyId": "moon"
+  }
+]

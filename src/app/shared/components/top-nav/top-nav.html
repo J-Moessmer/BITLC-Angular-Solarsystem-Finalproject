@@ -1,0 +1,36 @@
+<!--
+  Projekt / Modul: SSI App – Solar System Info App / TopNavComponent Template (top-nav.html)
+  FCPP-Referenz: P10-U10 (A10), P20-U10, P30-U10, P40-U10, P50-U10
+  Erstellt mit: KI-Assistent (Antigravity AI / Pair-Programming Agent)
+  Erstellt für / Autor: Joshua Mößmer (J-Moessmer)
+  Datum / Version: 16.11.2026 / v1.0
+  Hinweis: Barrierearmes Navigations-Template mit aktiv hervorgehobenen Tabs.
+-->
+<header class="top-nav-bar">
+  <a class="brand-link" routerLink="/solar-system" aria-label="Zur Startseite Sonnensystem">
+    <span class="brand-icon" aria-hidden="true">☀️</span>
+    <div class="brand-titles">
+      <span class="brand-main">SSI App</span>
+      <span class="brand-sub">Solar System Info APP</span>
+    </div>
+  </a>
+
+  <nav class="main-nav" aria-label="Hauptnavigation">
+    <ul class="nav-list">
+      @for (item of navItems; track item.route) {
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            [routerLink]="item.route"
+            routerLinkActive="active-link"
+            #rla="routerLinkActive"
+            [attr.aria-current]="rla.isActive ? 'page' : null"
+          >
+            <span class="nav-icon" aria-hidden="true">{{ item.icon }}</span>
+            <span class="nav-label">{{ item.label }}</span>
+          </a>
+        </li>
+      }
+    </ul>
+  </nav>
+</header>

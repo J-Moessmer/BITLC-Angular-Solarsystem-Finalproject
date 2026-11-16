@@ -1,0 +1,74 @@
+/*
+ * Projekt / Modul: SSI App – Solar System Info App / Globales Design-System (styles.css)
+ * FCPP-Referenz: P10, P20, P30, P40, P50 (Übergreifendes Farb- und Kartensystem)
+ * Erstellt mit: KI-Assistent (Antigravity AI / Pair-Programming Agent)
+ * Erstellt für / Autor: Joshua Mößmer (J-Moessmer)
+ * Datum / Version: 16.11.2026 / v1.0
+ * Hinweis: Farb- und Layoutsystem mit tiefem Marine-/Nachtblau (#0B132B / #111D3B) statt reinem Schwarz (#000000) sowie hellen, kontraststarken UI-Karten für Doku-konforme Screenshots erstellt.
+ */
+
+:root {
+  /* Weltraum-Hintergrund in Marine-/Nachtblau (KEIN #000000 wegen Prüfungsregel!) */
+  --space-bg-primary: #0b132b;
+  --space-bg-secondary: #111d3b;
+  --space-bg-canvas: #162447;
+  --space-orbit-line: #3a506b;
+
+  /* Helle, kontraststarke UI-Karten für Infobox, Sidebar, Missionen & Quiz */
+  --card-bg: #f8fafc;
+  --card-bg-elevated: #ffffff;
+  --card-bg-subtle: #eef2ff;
+  --card-border: #cbd5e1;
+  --card-text-primary: #0f172a;
+  --card-text-secondary: #334155;
+  --card-text-muted: #64748b;
+
+  /* Kindgerechte Akzentfarben */
+  --accent-sun: #f59e0b;
+  --accent-primary: #2563eb;
+  --accent-primary-hover: #1d4ed8;
+  --accent-secondary: #0ea5e9;
+  --accent-success: #16a34a;
+  --accent-danger: #dc2626;
+  --accent-astronomy-box: #e0f2fe;
+
+  /* Layout-Konstanten */
+  --top-nav-height: 64px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --shadow-card: 0 8px 24px rgba(11, 19, 43, 0.25);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  background-color: var(--space-bg-primary);
+  color: var(--card-text-primary);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+button,
+select,
+input {
+  font-family: inherit;
+  font-size: inherit;
+}
+
+a {
+  color: var(--accent-primary);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}

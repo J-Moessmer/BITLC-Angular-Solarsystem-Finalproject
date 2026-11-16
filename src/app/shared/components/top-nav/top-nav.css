@@ -1,0 +1,106 @@
+/*
+ * Projekt / Modul: SSI App – Solar System Info App / TopNavComponent Styles (top-nav.css)
+ * FCPP-Referenz: P10-U10 (Fixierte Top-Navigation mit aktivem Menüpunkt)
+ * Erstellt mit: KI-Assistent (Antigravity AI / Pair-Programming Agent)
+ * Erstellt für / Autor: Joshua Mößmer (J-Moessmer)
+ * Datum / Version: 16.11.2026 / v1.0
+ * Hinweis: Helle, kontraststarke Navigationsleiste passend zum Marineblau-Designsystem.
+ */
+
+.top-nav-bar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  min-height: var(--top-nav-height);
+  padding: 0.6rem 1.5rem;
+  background-color: var(--card-bg-elevated);
+  border-bottom: 2px solid var(--card-border);
+  box-shadow: 0 4px 12px rgba(11, 19, 43, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.brand-link {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  text-decoration: none;
+  color: var(--card-text-primary);
+}
+
+.brand-link:hover {
+  text-decoration: none;
+}
+
+.brand-icon {
+  font-size: 1.8rem;
+  line-height: 1;
+}
+
+.brand-titles {
+  display: flex;
+  flex-direction: column;
+}
+
+.brand-main {
+  font-size: 1.15rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  color: var(--card-text-primary);
+}
+
+.brand-sub {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--card-text-secondary);
+}
+
+.main-nav {
+  display: flex;
+  align-items: center;
+}
+
+.nav-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.nav-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.55rem 1rem;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--card-text-secondary);
+  background-color: var(--card-bg);
+  border: 2px solid transparent;
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease,
+    border-color 0.15s ease,
+    transform 0.1s ease;
+}
+
+.nav-link:hover {
+  text-decoration: none;
+  background-color: var(--card-bg-subtle);
+  color: var(--accent-primary);
+  border-color: #bfdbfe;
+}
+
+.nav-link.active-link {
+  background-color: var(--accent-primary);
+  color: #ffffff;
+  border-color: var(--accent-primary-hover);
+  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.35);
+}
