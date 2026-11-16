@@ -114,14 +114,18 @@ export class SolarSystemDataService {
     const buildBodyNode = (id: string, icon: string): PathTreeNode => {
       const body = byId(id);
       const label = body?.name ?? id;
-      const children = (body?.childrenIds ?? [])
-        .filter((cid) => body?.id !== 'sun')
-        .map((cid) =>
-          buildBodyNode(
-            cid,
-            cid === 'iss' ? '🛰️' : cid === 'apollo' ? '🚀' : '🌙',
-          ),
-        );
+      const children = (body?.childrenIds ?? []).map((cid) => {
+        const childBody = byId(cid);
+        const childIcon =
+          childBody?.category === 'spacecraft'
+            ? cid === 'iss'
+              ? '🛰️'
+              : cid === 'jwst' || cid === 'gaia'
+                ? '🔭'
+                : '🚀'
+            : '🌙';
+        return buildBodyNode(cid, childIcon);
+      });
       return {
         id,
         label,
@@ -166,12 +170,36 @@ export class SolarSystemDataService {
           },
           {
             id: 'dwarf-planets-group',
-            label: 'Zwergplaneten',
+            label: 'Zwergplaneten & Monde',
             icon: '❄️',
             children: [
               buildBodyNode('ceres', '🪨'),
               buildBodyNode('pluto', '❄️'),
+              buildBodyNode('haumea', '🥚'),
+              buildBodyNode('makemake', '🔴'),
               buildBodyNode('eris', '✨'),
+            ],
+          },
+          {
+            id: 'probes-group',
+            label: 'Raumsonden & Teleskope',
+            icon: '🛰️',
+            children: [
+              buildBodyNode('parker', '☀️'),
+              buildBodyNode('solar-orbiter', '🛰️'),
+              buildBodyNode('bepicolombo', '🚀'),
+              buildBodyNode('iss', '🛰️'),
+              buildBodyNode('apollo', '🌕'),
+              buildBodyNode('artemis', '🚀'),
+              buildBodyNode('jwst', '🔭'),
+              buildBodyNode('gaia', '✨'),
+              buildBodyNode('perseverance', '🤖'),
+              buildBodyNode('dawn', '🛰️'),
+              buildBodyNode('juno', '🌀'),
+              buildBodyNode('juice', '🧊'),
+              buildBodyNode('cassini', '🪐'),
+              buildBodyNode('new-horizons', '❄️'),
+              buildBodyNode('voyager', '🌌'),
             ],
           },
           buildBodyNode('asteroid-belt', '☄️'),

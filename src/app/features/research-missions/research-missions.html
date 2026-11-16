@@ -1,0 +1,151 @@
+<!--
+  Projekt / Modul: SSI App – Solar System Info App / ResearchMissionsComponent Template (research-missions.html)
+  FCPP-Referenz: P40-U10 (A10), P40-U20 (A20, A30 – Forschungsprojekte & Raumfahrt)
+  Erstellt mit: KI-Assistent (Antigravity AI / Pair-Programming Agent)
+  Erstellt für / Autor: Joshua Mößmer (J-Moessmer)
+  Datum / Version: 16.11.2026 / v2.0
+  Hinweis: Bereinigte Missionsansicht ohne Deko-Badges und ohne redundante Klammer-Zusätze.
+-->
+<section class="p40-container" aria-labelledby="p40-heading">
+  <div class="p40-header-card">
+    <div class="header-top">
+      <div>
+        <h2 id="p40-heading">Weltraummissionen, Teleskope & Raumstationen</h2>
+      </div>
+      <a class="back-btn" routerLink="/solar-system">Zurück zum Sonnensystem</a>
+    </div>
+
+    <p class="intro-text">
+      Wähle eine Kategorie und klicke auf eine Missionskarte, um den Steckbrief mit Fotos,
+      Forschungsaufgaben und den aktuellen Flugdaten der Raumstation ISS zu öffnen.
+    </p>
+
+    <div class="filter-bar" role="group" aria-label="Forschungsprojekte nach Kategorie filtern">
+      @for (chip of categoryFilters; track chip.id) {
+        <button
+          type="button"
+          class="filter-chip"
+          [class.active-chip]="missionService.selectedCategory() === chip.id"
+          (click)="onSelectCategory(chip.id)"
+        >
+          <span>{{ chip.label }}</span>
+        </button>
+      }
+    </div>
+  </div>
+
+  <div class="p40-content-grid">
+    <div class="missions-list-column" role="list" aria-label="Missions-Übersichtskarten">
+      @for (mission of missionService.filteredMissions(); track mission.id) {
+        <button
+          type="button"
+          class="mission-summary-card"
+          [class.selected-card]="missionService.selectedMission()?.id === mission.id"
+          (click)="onSelectMission(mission.id)"
+        >
+          <span class="card-cat-pill">{{ mission.categoryLabel }}</span>
+          <h3>{{ mission.title }}</h3>
+          <p>{{ mission.subtitle }}</p>
+          <div class="card-meta">
+            <span>Ziel: {{ mission.targetBodyName }}</span>
+            <span>{{ mission.agency }}</span>
+          </div>
+        </button>
+      }
+    </div>
+
+    @if (missionService.selectedMission(); as current) {
+      <article class="mission-detail-card" aria-labelledby="detail-mission-title">
+        <div class="detail-top-badges">
+          <span class="status-pill">{{ current.statusLabel }}</span>
+          <span class="year-pill">Start: {{ current.launchYear }}</span>
+        </div>
+
+        <div class="detail-hero">
+          <div class="mission-img-frame">
+            <img
+              [src]="activeImageSrc()"
+              [alt]="'Foto zu ' + current.title"
+              (error)="onImageError(current.imageUrl)"
+            />
+            <span class="img-credit">Quelle: {{ current.imageCredit }}</span>
+          </div>
+
+          <div class="detail-text">
+            <h3 id="detail-mission-title">{{ current.title }}</h3>
+            <p class="detail-sub">{{ current.subtitle }} · {{ current.agency }}</p>
+            <p class="detail-summary">{{ current.childSummary }}</p>
+          </div>
+        </div>
+
+        <div class="tasks-box">
+          <h4>Forschungsaufgaben</h4>
+          <ul>
+            @for (task of current.tasksForKids; track task) {
+              <li>{{ task }}</li>
+            }
+          </ul>
+        </div>
+
+        @if (missionService.issStatus(); as iss) {
+          <div class="iss-live-box" role="region" aria-label="Live-Status der Raumstation ISS">
+            <div class="iss-header">
+              <div>
+                <span class="iss-badge">
+                  {{ iss.isFallbackData ? 'Offline-Fallback aktiv' : 'Live Satelliten-Daten' }}
+                </span>
+                <h4>Aktuelle Flugdaten der Raumstation ISS</h4>
+              </div>
+              <button
+                type="button"
+                class="refresh-iss-btn"
+                (click)="refreshIssTelemetry()"
+                [disabled]="isRefreshingIss()"
+              >
+                {{ isRefreshingIss() ? 'Aktualisiere...' : 'Position aktualisieren' }}
+              </button>
+            </div>
+
+            <div class="iss-metrics-grid">
+              <div class="iss-metric">
+                <span>Breitengrad</span>
+                <strong>{{ iss.latitude | number: '1.2-4' }}°</strong>
+              </div>
+              <div class="iss-metric">
+                <span>Längengrad</span>
+                <strong>{{ iss.longitude | number: '1.2-4' }}°</strong>
+              </div>
+              <div class="iss-metric">
+                <span>Flughöhe</span>
+                <strong>{{ iss.altitudeKm | number: '1.1-1' }} km</strong>
+              </div>
+              <div class="iss-metric">
+                <span>Geschwindigkeit</span>
+                <strong>{{ iss.velocityKmh | number: '1.0-0' }} km/h</strong>
+              </div>
+            </div>
+            <p class="iss-hint">Status: {{ iss.locationHint }}</p>
+          </div>
+        }
+
+        <div class="detail-actions">
+          <a
+            class="jump-solar-btn"
+            [routerLink]="['/solar-system', current.targetBodyId]"
+          >
+            Im Sonnensystem zeigen: {{ current.targetBodyName }}
+          </a>
+
+          <a
+            class="wiki-external-btn"
+            [href]="current.wikipediaUrl"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Mehr Infos auf Wikipedia
+          </a>
+        </div>
+      </article>
+    }
+  </div>
+</section>

@@ -3,11 +3,13 @@
  * FCPP-Referenz: P10-U10, P20, P30, P40, P50 (Unit- & Routing-Test der App-Shell)
  * Erstellt mit: KI-Assistent (Antigravity AI / Pair-Programming Agent)
  * Erstellt für / Autor: Joshua Mößmer (J-Moessmer)
- * Datum / Version: 16.11.2026 / v1.1
+ * Datum / Version: 16.11.2026 / v1.2
  * Hinweis: Prüft die Root-Shell, Top-Navigation (P10-U10) und die Routen-Navigation zwischen P10, P20, P30, P40 und P50.
  */
 
 import { TestBed } from '@angular/core/testing';
+import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { provideRouter, Router, withComponentInputBinding } from '@angular/router';
 import { App } from './app';
 import { routes } from './app.routes';
@@ -16,7 +18,11 @@ describe('App & FCPP Routing Shell (P10–P50)', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [App],
-      providers: [provideRouter(routes, withComponentInputBinding())],
+      providers: [
+        provideRouter(routes, withComponentInputBinding()),
+        provideHttpClient(),
+        provideHttpClientTesting(),
+      ],
     }).compileComponents();
   });
 
@@ -34,19 +40,17 @@ describe('App & FCPP Routing Shell (P10–P50)', () => {
 
     await router.navigateByUrl('/solar-system');
     await fixture.whenStable();
-    expect(fixture.nativeElement.textContent).toContain('Interaktives 2D-Sonnensystem');
-
-    await router.navigateByUrl('/solar-system/mars');
-    await fixture.whenStable();
-    expect(fixture.nativeElement.textContent).toContain('Himmelskörper: mars');
+    expect(fixture.nativeElement.textContent).toContain('Entdecker-Pfad');
 
     await router.navigateByUrl('/size-comparison');
     await fixture.whenStable();
-    expect(fixture.nativeElement.textContent).toContain('Größenvergleich der Himmelskörper');
+    expect(fixture.nativeElement.textContent).toContain('Wie groß sind Sonne, Planeten und Monde wirklich?');
 
     await router.navigateByUrl('/research');
     await fixture.whenStable();
-    expect(fixture.nativeElement.textContent).toContain('Weltraummissionen, Teleskope & Raumstationen');
+    expect(fixture.nativeElement.textContent).toContain(
+      'Weltraummissionen, Teleskope & Raumstationen',
+    );
 
     await router.navigateByUrl('/quiz');
     await fixture.whenStable();

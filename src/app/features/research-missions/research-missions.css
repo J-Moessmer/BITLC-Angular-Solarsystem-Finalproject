@@ -1,0 +1,380 @@
+/*
+ * Projekt / Modul: SSI App – Solar System Info App / ResearchMissionsComponent Styles (research-missions.css)
+ * FCPP-Referenz: P40-U10, P40-U20 (Forschungsprojekte, ISS-Live-Box & Sprung nach P20)
+ * Erstellt mit: KI-Assistent (Antigravity AI / Pair-Programming Agent)
+ * Erstellt für / Autor: Joshua Mößmer (J-Moessmer)
+ * Datum / Version: 16.11.2026 / v2.0
+ * Hinweis: Helle, kontraststarke Missionskarten mit 1px Rahmen und dezenten Kurvenradien.
+ */
+
+.p40-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.p40-header-card,
+.mission-detail-card {
+  background-color: var(--card-bg-elevated);
+  color: var(--card-text-primary);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-lg);
+  padding: 1.15rem;
+  box-shadow: var(--shadow-card);
+}
+
+.header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 0.45rem;
+}
+
+h2 {
+  margin: 0;
+  font-size: 1.3rem;
+  font-weight: 800;
+}
+
+.back-btn {
+  padding: 0.38rem 0.8rem;
+  border-radius: var(--radius-sm);
+  background-color: var(--card-bg);
+  border: 1px solid var(--card-border);
+  color: var(--card-text-primary);
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+
+.back-btn:hover {
+  background-color: var(--card-bg-subtle);
+  color: var(--accent-primary);
+  text-decoration: none;
+}
+
+.intro-text {
+  margin: 0 0 0.85rem;
+  color: var(--card-text-secondary);
+  font-size: 0.92rem;
+}
+
+.filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.filter-chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.36rem 0.8rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--card-border);
+  background-color: var(--card-bg);
+  color: var(--card-text-primary);
+  font-weight: 600;
+  font-size: 0.84rem;
+  cursor: pointer;
+}
+
+.filter-chip:hover {
+  background-color: var(--card-bg-subtle);
+  border-color: #93c5fd;
+  color: var(--accent-primary);
+}
+
+.filter-chip.active-chip {
+  background-color: var(--accent-primary);
+  color: #ffffff;
+  border-color: var(--accent-primary-hover);
+}
+
+.p40-content-grid {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 1rem;
+  align-items: start;
+}
+
+.missions-list-column {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.mission-summary-card {
+  text-align: left;
+  background-color: var(--card-bg-elevated);
+  color: var(--card-text-primary);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-md);
+  padding: 0.85rem;
+  cursor: pointer;
+  box-shadow: var(--shadow-card);
+  transition: border-color 0.12s ease;
+}
+
+.mission-summary-card:hover {
+  border-color: #60a5fa;
+}
+
+.mission-summary-card.selected-card {
+  border-color: var(--accent-primary);
+  background-color: #eff6ff;
+}
+
+.card-cat-pill {
+  display: inline-block;
+  padding: 0.12rem 0.45rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.72rem;
+  font-weight: 700;
+  background-color: var(--card-bg-subtle);
+  color: var(--accent-primary);
+  border: 1px solid #bfdbfe;
+  margin-bottom: 0.3rem;
+}
+
+.mission-summary-card h3 {
+  margin: 0 0 0.2rem;
+  font-size: 0.98rem;
+}
+
+.mission-summary-card p {
+  margin: 0 0 0.5rem;
+  font-size: 0.83rem;
+  color: var(--card-text-secondary);
+}
+
+.card-meta {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: var(--card-text-muted);
+}
+
+.mission-detail-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.95rem;
+}
+
+.detail-top-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.status-pill,
+.year-pill {
+  padding: 0.2rem 0.6rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.status-pill {
+  background-color: #dcfce7;
+  border: 1px solid #86efac;
+  color: #166534;
+}
+
+.year-pill {
+  background-color: var(--card-bg);
+  border: 1px solid var(--card-border);
+  color: var(--card-text-secondary);
+}
+
+.detail-hero {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 1.15rem;
+  align-items: start;
+}
+
+.mission-img-frame {
+  background-color: var(--space-bg-secondary);
+  border-radius: var(--radius-md);
+  padding: 0.45rem;
+  border: 1px solid var(--card-border);
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.mission-img-frame img {
+  width: 100%;
+  height: 170px;
+  object-fit: cover;
+  border-radius: var(--radius-sm);
+  display: block;
+}
+
+.img-credit {
+  font-size: 0.7rem;
+  color: #cbd5e1;
+}
+
+.detail-text h3 {
+  margin: 0 0 0.2rem;
+  font-size: 1.28rem;
+}
+
+.detail-sub {
+  margin: 0 0 0.55rem;
+  font-weight: 600;
+  color: var(--accent-primary);
+  font-size: 0.9rem;
+}
+
+.detail-summary {
+  margin: 0;
+  color: var(--card-text-secondary);
+  font-size: 0.92rem;
+}
+
+.tasks-box {
+  background-color: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-md);
+  padding: 0.8rem 1rem;
+}
+
+.tasks-box h4 {
+  margin: 0 0 0.4rem;
+  font-size: 0.95rem;
+}
+
+.tasks-box ul {
+  margin: 0;
+  padding-left: 1.2rem;
+  color: var(--card-text-secondary);
+  font-size: 0.9rem;
+}
+
+.tasks-box li {
+  margin-bottom: 0.25rem;
+}
+
+.iss-live-box {
+  background-color: #f0f9ff;
+  border: 1px solid #7dd3fc;
+  border-radius: var(--radius-md);
+  padding: 0.9rem;
+}
+
+.iss-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  margin-bottom: 0.65rem;
+}
+
+.iss-badge {
+  display: inline-block;
+  font-size: 0.74rem;
+  font-weight: 700;
+  color: #0369a1;
+}
+
+.iss-header h4 {
+  margin: 0.1rem 0 0;
+  font-size: 0.96rem;
+}
+
+.refresh-iss-btn {
+  padding: 0.35rem 0.75rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid #38bdf8;
+  background-color: #ffffff;
+  color: #0369a1;
+  font-weight: 600;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
+.iss-metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 0.55rem;
+}
+
+.iss-metric {
+  background-color: #ffffff;
+  border: 1px solid #bae6fd;
+  border-radius: var(--radius-sm);
+  padding: 0.45rem 0.65rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.iss-metric span {
+  font-size: 0.74rem;
+  color: var(--card-text-muted);
+  font-weight: 600;
+}
+
+.iss-metric strong {
+  font-size: 0.92rem;
+  color: var(--card-text-primary);
+}
+
+.iss-hint {
+  margin: 0.5rem 0 0;
+  font-size: 0.78rem;
+  color: #0369a1;
+  font-weight: 600;
+}
+
+.detail-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  padding-top: 0.3rem;
+}
+
+.jump-solar-btn {
+  padding: 0.52rem 1rem;
+  border-radius: var(--radius-sm);
+  background-color: var(--accent-primary);
+  border: 1px solid var(--accent-primary-hover);
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 0.88rem;
+}
+
+.jump-solar-btn:hover {
+  background-color: var(--accent-primary-hover);
+  text-decoration: none;
+}
+
+.wiki-external-btn {
+  padding: 0.52rem 1rem;
+  border-radius: var(--radius-sm);
+  background-color: var(--card-bg);
+  border: 1px solid var(--card-border);
+  color: var(--card-text-primary);
+  font-weight: 600;
+  font-size: 0.88rem;
+}
+
+.wiki-external-btn:hover {
+  background-color: var(--card-bg-subtle);
+  border-color: #93c5fd;
+  color: var(--accent-primary);
+  text-decoration: none;
+}
+
+@media (max-width: 920px) {
+  .p40-content-grid,
+  .detail-hero {
+    grid-template-columns: 1fr;
+  }
+}

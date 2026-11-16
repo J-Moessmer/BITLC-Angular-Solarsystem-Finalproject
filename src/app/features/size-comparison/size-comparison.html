@@ -1,0 +1,184 @@
+<!--
+  Projekt / Modul: SSI App – Solar System Info App / SizeComparisonComponent Template (size-comparison.html)
+  FCPP-Referenz: P30-U10 (A10), P30-U20 (A20, A30 – Maßstabs- & Größenvergleich)
+  Erstellt mit: KI-Assistent (Antigravity AI / Pair-Programming Agent)
+  Erstellt für / Autor: Joshua Mößmer (J-Moessmer)
+  Datum / Version: 16.11.2026 / v2.0
+  Hinweis: Bereinigte Vergleichsansicht ohne Deko-Tags und redundante Klammern, mit 1px Rahmen.
+-->
+<section class="p30-container" aria-labelledby="p30-title">
+  <!-- Kopfzeile & Schnellwahl-Presets (P30-A20) -->
+  <div class="p30-header-card">
+    <div class="title-row">
+      <div>
+        <h2 id="p30-title">Wie groß sind Sonne, Planeten und Monde wirklich?</h2>
+      </div>
+      <a class="back-link-btn" routerLink="/solar-system">Zurück zum Sonnensystem</a>
+    </div>
+
+    <p class="intro-text">
+      Wähle zwei oder mehr Himmelskörper über die Auswahlfelder oder klicke auf eine Schnellwahl.
+      Die Vergleichsbühne zeichnet die Durchmesser im wahren Größenverhältnis nebeneinander.
+    </p>
+
+    <div class="preset-bar" role="group" aria-label="Schnellwahl für Größenvergleiche">
+      <span class="preset-label">Schnellwahl:</span>
+      @for (preset of presets; track preset.id) {
+        <button type="button" class="preset-btn" (click)="applyPreset(preset)">
+          <span>{{ preset.label }}</span>
+        </button>
+      }
+    </div>
+
+    <!-- Dropdown-Auswahlleiste gemäß StorySheet P30 -->
+    <div class="dropdown-slots-row">
+      @for (selectedId of selectedIds(); track $index; let idx = $index) {
+        <div class="dropdown-slot">
+          <label [for]="'body-select-' + idx">Himmelskörper {{ idx + 1 }}</label>
+          <div class="select-with-remove">
+            <select
+              [id]="'body-select-' + idx"
+              class="body-select"
+              [value]="selectedId"
+              (change)="updateSelectionAt(idx, $any($event.target).value)"
+            >
+              @for (body of comparableBodies(); track body.id) {
+                <option [value]="body.id" [selected]="body.id === selectedId">
+                  {{ body.name }} · {{ body.diameterKm | number: '1.0-0' }} km
+                </option>
+              }
+            </select>
+
+            @if (selectedIds().length > 2) {
+              <button
+                type="button"
+                class="remove-slot-btn"
+                (click)="removeComparisonSlot(idx)"
+                [attr.aria-label]="'Himmelskörper ' + (idx + 1) + ' entfernen'"
+              >
+                ✕
+              </button>
+            }
+          </div>
+        </div>
+      }
+
+      @if (selectedIds().length < 5) {
+        <button type="button" class="add-slot-btn" (click)="addComparisonSlot()">
+          + Weiteren Körper vergleichen
+        </button>
+      }
+    </div>
+  </div>
+
+  <!-- Proportionale SVG-Vergleichsbühne (P30-A30 / P30-U20) -->
+  <div class="svg-comparison-card">
+    <svg
+      class="comparison-svg"
+      viewBox="0 0 960 360"
+      role="img"
+      aria-label="Maßstabsgetreuer Größenvergleich der ausgewählten Himmelskörper"
+    >
+      <line
+        x1="40"
+        y1="175"
+        x2="920"
+        y2="175"
+        stroke="#38BDF8"
+        stroke-width="1.2"
+        stroke-dasharray="6 6"
+        opacity="0.55"
+      />
+
+      @for (item of scaledItems(); track item.slotIndex) {
+        <g [attr.transform]="'translate(' + item.centerX + ', 175)'">
+          @if (item.body.id === 'saturn') {
+            <ellipse
+              cx="0"
+              cy="0"
+              [attr.rx]="item.svgRadiusPx * 1.85"
+              [attr.ry]="item.svgRadiusPx * 0.45"
+              fill="none"
+              stroke="#FDE68A"
+              stroke-width="4"
+              opacity="0.85"
+            />
+          }
+
+          @if (item.truePixelRadius < 4) {
+            <circle
+              cx="0"
+              cy="0"
+              r="12"
+              fill="none"
+              stroke="#38BDF8"
+              stroke-width="1.5"
+              stroke-dasharray="3 2"
+            />
+          }
+
+          <circle
+            cx="0"
+            cy="0"
+            [attr.r]="item.svgRadiusPx"
+            [attr.fill]="item.body.colorHex"
+            stroke="#FFFFFF"
+            stroke-width="1.5"
+          />
+
+          <text
+            x="0"
+            y="152"
+            text-anchor="middle"
+            fill="#F8FAFC"
+            font-size="15"
+            font-weight="700"
+          >
+            {{ item.body.name }}
+          </text>
+          <text
+            x="0"
+            y="172"
+            text-anchor="middle"
+            fill="#BAE6FD"
+            font-size="12"
+            font-weight="600"
+          >
+            Ø {{ item.body.diameterKm | number: '1.0-0' }} km
+          </text>
+        </g>
+      }
+    </svg>
+  </div>
+
+  <!-- Auswertungs-Box für Durchmesser- und Volumenverhältnis (P30-A30 / P30-U20) -->
+  @if (comparisonSummary(); as summary) {
+    <div class="ratio-explanation-card">
+      <div class="ratio-text-block">
+        <span class="question-badge">{{ summary.childQuestion }}</span>
+        <h3>Ergebnis des Größenvergleichs</h3>
+        <p>{{ summary.childAnswer }}</p>
+      </div>
+
+      <div class="ratio-kpi-boxes">
+        <div class="kpi-card">
+          <span class="kpi-label">Durchmesser-Verhältnis</span>
+          <strong class="kpi-value">{{ summary.diameterRatio | number: '1.0-1' }} : 1</strong>
+          <span class="kpi-sub">
+            {{ summary.smallest.name }} passt {{ summary.diameterRatio | number: '1.0-1' }}-mal
+            nebeneinander quer durch {{ summary.largest.name }}
+          </span>
+        </div>
+
+        <div class="kpi-card highlight-kpi">
+          <span class="kpi-label">Volumen-Verhältnis</span>
+          <strong class="kpi-value">{{ summary.volumeRatio | number: '1.0-1' }} : 1</strong>
+          <span class="kpi-sub">
+            So viele Kugeln von {{ summary.smallest.name }} passen in das Volumen von
+            {{ summary.largest.name }}
+          </span>
+        </div>
+      </div>
+    </div>
+  }
+</section>

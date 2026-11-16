@@ -1,0 +1,457 @@
+<!--
+  Projekt / Modul: SSI App – Solar System Info App / SolarSystemViewComponent Template (solar-system-view.html)
+  FCPP-Referenz: P10 (P10-U20, P10-U30, P10-U40) & P20 (P20-U10 bis P20-U40)
+  Erstellt mit: KI-Assistent (Antigravity AI / Pair-Programming Agent)
+  Erstellt für / Autor: Joshua Mößmer (J-Moessmer)
+  Datum / Version: 16.11.2026 / v2.1
+  Hinweis: Bereinigtes UI ohne redundante Klammer-Zusätze, ohne Deko-Badges, mit 1px Rahmen und dezenten Kurvenradien.
+-->
+<div class="p10-workspace">
+  <!-- Linke Spalte: Rekursive Pfad-Seitenleiste (P10-A20 / P10-U20 & P20-U10) -->
+  <app-path-sidebar
+    [nodes]="dataService.navigationTree()"
+    [activeBodyId]="dataService.selectedBodyId()"
+    (bodySelected)="onSelectBody($event)"
+  />
+
+  <!-- Rechte Hauptspalte: Breadcrumb, 2D-SVG-Bühne (P10) und Infobox (P20) -->
+  <div class="p10-main-column">
+    <app-breadcrumb-bar
+      [items]="dataService.breadcrumbTrail()"
+      (crumbSelected)="onSelectBody($event)"
+    />
+
+    <!-- Kompakt aufgeräumte Steuerleiste -->
+    <section class="stage-toolbar-card" aria-label="Maßstabs- und Ansichtssteuerung">
+      <div class="mode-switch-group">
+        <span class="toolbar-label">Ansicht:</span>
+        <div class="btn-group" role="group" aria-label="Ansichtsmodus wählen">
+          <button
+            type="button"
+            class="mode-btn"
+            [class.active-mode]="viewport.viewMode() === 'overview'"
+            (click)="setViewMode('overview')"
+          >
+            Übersicht
+          </button>
+          <button
+            type="button"
+            class="mode-btn"
+            [class.active-mode]="viewport.viewMode() === 'true-scale'"
+            (click)="setViewMode('true-scale')"
+          >
+            Echter Maßstab
+          </button>
+          <button
+            type="button"
+            class="mode-btn"
+            [class.active-mode]="viewport.viewMode() === 'side-view'"
+            (click)="setViewMode('side-view')"
+          >
+            Seitenansicht
+          </button>
+        </div>
+      </div>
+
+      <div class="scale-switch-group">
+        <span class="toolbar-label">Körpergröße:</span>
+        <div class="btn-group" role="group" aria-label="Körpergrößen-Maßstab wählen">
+          <button
+            type="button"
+            class="scale-chip"
+            [class.active-chip]="viewport.bodyScaleMode() === 'didactic'"
+            (click)="setBodyScaleMode('didactic')"
+          >
+            Standard
+          </button>
+          <button
+            type="button"
+            class="scale-chip"
+            [class.active-chip]="viewport.bodyScaleMode() === 'strict-distance-scale'"
+            (click)="setBodyScaleMode('strict-distance-scale')"
+          >
+            1:1 Maßstab
+          </button>
+        </div>
+      </div>
+
+      <!-- Echtzeit-Positionssteuerung -->
+      <div class="true-scale-focus-bar">
+        <span class="toolbar-label">
+          Datum:
+          <strong class="live-date-pill">{{ viewport.formattedSimulationDate() }}</strong>
+        </span>
+        <div class="btn-group" role="group" aria-label="Echtzeit und Zeitraffer steuern">
+          <button type="button" class="scale-chip" (click)="resetToLiveNow()">
+            Heute
+          </button>
+          <button type="button" class="scale-chip" (click)="viewport.addSimulationDays(30)">
+            +1 Monat
+          </button>
+          <button type="button" class="scale-chip" (click)="viewport.addSimulationDays(365.25)">
+            +1 Jahr
+          </button>
+          <button
+            type="button"
+            class="scale-chip"
+            [class.active-chip]="viewport.isTimeLapsePlaying()"
+            (click)="toggleTimeLapse()"
+          >
+            {{ viewport.isTimeLapsePlaying() ? 'Pause' : 'Zeitraffer' }}
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Interaktive 2D-SVG-Bühne (P10-A30 / P10-U30 & P10-U40) -->
+    <div
+      class="svg-stage-wrapper"
+      (wheel)="onWheelZoom($event)"
+      (pointerdown)="onPointerDown($event)"
+      (pointermove)="onPointerMove($event)"
+      (pointerup)="onPointerUp()"
+      (pointercancel)="onPointerUp()"
+    >
+      <!-- Stufenlose Zoom-Kontrollleiste rechts -->
+      <div class="zoom-controls-panel" aria-label="Stufenlose Zoom-Steuerung">
+        <span class="zoom-title">Zoom {{ viewport.zoomSliderPercent() }}%</span>
+        <button
+          type="button"
+          class="zoom-btn"
+          (click)="viewport.zoomIn()"
+          aria-label="Hineinzoomen"
+        >
+          +
+        </button>
+
+        <input
+          type="range"
+          class="zoom-slider"
+          min="0"
+          max="100"
+          step="0.5"
+          [value]="viewport.zoomSliderPercent()"
+          (input)="onZoomSliderInput($event)"
+          aria-label="Stufenloser Zoom-Regler von 0 Prozent bis 100 Prozent"
+        />
+
+        <button
+          type="button"
+          class="zoom-btn"
+          (click)="viewport.zoomOut()"
+          aria-label="Herauszoomen"
+        >
+          -
+        </button>
+        <button
+          type="button"
+          class="zoom-btn reset-btn"
+          (click)="viewport.resetCamera()"
+          aria-label="Kamera und Zoom zurücksetzen"
+        >
+          Reset
+        </button>
+      </div>
+
+      <!-- Maßstabs-Lineal unten links in der SVG-Bühne -->
+      <div class="scale-ruler-overlay">
+        <div class="ruler-bar" [style.width.px]="viewport.scaleRulerInfo().widthPx"></div>
+        <div class="ruler-texts">
+          <strong>{{ viewport.scaleRulerInfo().labelAu }}</strong>
+          <span>{{ viewport.scaleRulerInfo().labelKm }}</span>
+        </div>
+      </div>
+
+      <svg
+        class="solar-system-svg"
+        viewBox="-540 -330 1080 660"
+        role="img"
+        aria-label="Interaktive 2D-Karte unseres Sonnensystems"
+      >
+        <defs>
+          <radialGradient id="sunGlow" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#FEF08A" stop-opacity="0.95" />
+            <stop offset="55%" stop-color="#F59E0B" stop-opacity="0.55" />
+            <stop offset="100%" stop-color="#F59E0B" stop-opacity="0" />
+          </radialGradient>
+        </defs>
+
+        <!-- Dezente helle Sterne auf dem Marineblau-Hintergrund (#111D3B) -->
+        <g class="background-stars" aria-hidden="true">
+          <circle cx="-460" cy="-250" r="1.5" fill="#F8FAFC" opacity="0.6" />
+          <circle cx="-310" cy="210" r="1.8" fill="#BAE6FD" opacity="0.7" />
+          <circle cx="-180" cy="-260" r="1.2" fill="#FDE68A" opacity="0.6" />
+          <circle cx="240" cy="-240" r="1.8" fill="#F8FAFC" opacity="0.7" />
+          <circle cx="420" cy="-160" r="1.5" fill="#BAE6FD" opacity="0.6" />
+          <circle cx="390" cy="230" r="2" fill="#FDE68A" opacity="0.7" />
+          <circle cx="-410" cy="90" r="1.4" fill="#F8FAFC" opacity="0.5" />
+        </g>
+
+        <g class="camera-viewport">
+          <!-- 1. SEITENANSICHT: Sonnenäquator-Referenzebene (0°) & geneigte Bahnen (INC) -->
+          @if (viewport.viewMode() === 'side-view') {
+            <line
+              x1="-520"
+              [attr.y1]="viewport.panY()"
+              x2="520"
+              [attr.y2]="viewport.panY()"
+              stroke="#38BDF8"
+              stroke-width="1.5"
+              stroke-dasharray="8 6"
+              opacity="0.85"
+            />
+            <text
+              x="-510"
+              [attr.y]="viewport.panY() - 8"
+              fill="#BAE6FD"
+              font-size="11"
+              font-weight="700"
+            >
+              Sonnenäquator-Ebene · 0°
+            </text>
+
+            @for (pos of primaryOrbitPositions(); track pos.body.id) {
+              @if (pos.sideOrbitLine; as line) {
+                <line
+                  [attr.x1]="line.x1"
+                  [attr.y1]="line.y1"
+                  [attr.x2]="line.x2"
+                  [attr.y2]="line.y2"
+                  [attr.stroke]="pos.body.colorHex"
+                  stroke-width="1.5"
+                  stroke-opacity="0.75"
+                />
+              }
+            }
+          } @else {
+            <!-- 2. DRAUFSICHT (Übersicht & Echter Maßstab): AE-Referenzringe + analytisch geclippte Ellipsenbahnen -->
+            @if (viewport.viewMode() === 'true-scale') {
+              @for (ring of auReferenceCircles(); track ring.au) {
+                <circle
+                  [attr.cx]="viewport.panX()"
+                  [attr.cy]="viewport.panY()"
+                  [attr.r]="ring.radiusPx"
+                  fill="none"
+                  stroke="#38BDF8"
+                  stroke-width="0.9"
+                  stroke-dasharray="3 5"
+                  opacity="0.4"
+                />
+                <text
+                  [attr.x]="viewport.panX() + ring.radiusPx + 4"
+                  [attr.y]="viewport.panY() - 3"
+                  fill="#93C5FD"
+                  font-size="10"
+                  font-weight="700"
+                  class="svg-body-label"
+                >
+                  {{ ring.au }} AE
+                </text>
+              }
+            }
+
+            @for (pos of primaryOrbitPositions(); track pos.body.id) {
+              @if (pos.clippedOrbitPath; as pathData) {
+                <path
+                  [attr.d]="pathData"
+                  fill="none"
+                  [attr.stroke]="pos.body.colorHex"
+                  stroke-width="1.6"
+                  stroke-dasharray="5 5"
+                  opacity="0.85"
+                />
+              } @else {
+                <ellipse
+                  [attr.cx]="pos.orbitCenterX"
+                  [attr.cy]="pos.orbitCenterY"
+                  [attr.rx]="pos.orbitRxPx"
+                  [attr.ry]="pos.orbitRyPx"
+                  fill="none"
+                  [attr.stroke]="
+                    viewport.bodyScaleMode() === 'strict-distance-scale' ||
+                    viewport.viewMode() === 'true-scale'
+                      ? pos.body.colorHex
+                      : pos.body.category === 'belt'
+                        ? '#94A3B8'
+                        : '#64748B'
+                  "
+                  [attr.stroke-width]="
+                    pos.body.id === 'asteroid-belt'
+                      ? 5
+                      : pos.body.id === 'oort-cloud'
+                        ? 7
+                        : viewport.bodyScaleMode() === 'strict-distance-scale'
+                          ? 1.6
+                          : 1.25
+                  "
+                  [attr.stroke-dasharray]="
+                    pos.body.category === 'belt'
+                      ? '3 6'
+                      : pos.body.category === 'dwarf-planet'
+                        ? '5 4'
+                        : null
+                  "
+                  [attr.opacity]="
+                    viewport.bodyScaleMode() === 'strict-distance-scale'
+                      ? 0.9
+                      : pos.body.category === 'belt'
+                        ? 0.5
+                        : 0.72
+                  "
+                />
+              }
+            }
+
+            <!-- Mond- & Raumsonden-Umlaufbahnen rund um ihren Mutterkörper -->
+            @for (satPos of satelliteOrbitPositions(); track satPos.body.id) {
+              @if (satPos.clippedOrbitPath; as satPath) {
+                <path
+                  [attr.d]="satPath"
+                  fill="none"
+                  [attr.stroke]="satPos.body.colorHex"
+                  stroke-width="1.4"
+                  stroke-dasharray="3 3"
+                  opacity="0.8"
+                />
+              } @else {
+                <circle
+                  [attr.cx]="satPos.orbitCenterX"
+                  [attr.cy]="satPos.orbitCenterY"
+                  [attr.r]="satPos.orbitRxPx"
+                  fill="none"
+                  [attr.stroke]="satPos.body.colorHex"
+                  [attr.stroke-width]="satPos.body.id === 'iss' ? 1.8 : 1.2"
+                  stroke-dasharray="3 3"
+                  opacity="0.8"
+                />
+              }
+            }
+          }
+
+          <!-- 3. Sichtbare Himmelskörper, Monde & Raumsonden stufenlos rendern -->
+          @for (pos of visibleSvgBodies(); track pos.body.id) {
+            <g
+              class="svg-body-group"
+              [class.selected-svg-body]="dataService.selectedBodyId() === pos.body.id"
+              [attr.transform]="'translate(' + pos.x + ',' + pos.y + ')'"
+              (click)="onSelectBody(pos.body.id)"
+              role="button"
+              tabindex="0"
+              [attr.aria-label]="pos.body.name + ' auswählen'"
+            >
+              <!-- Sonnen-Korona -->
+              @if (pos.body.id === 'sun') {
+                <circle cx="0" cy="0" [attr.r]="pos.bodyRadiusPx * 1.55" fill="url(#sunGlow)" />
+              }
+
+              <!-- Bei tiefem Nahzoom auf die Erde blenden wir den 100 km Atmosphären-Saum ein -->
+              @if (pos.body.id === 'earth' && pos.strictTrueRadiusPx >= 18) {
+                <circle
+                  cx="0"
+                  cy="0"
+                  [attr.r]="pos.bodyRadiusPx * 1.05"
+                  fill="#38BDF8"
+                  fill-opacity="0.18"
+                  stroke="#7DD3FC"
+                  stroke-width="1"
+                  stroke-dasharray="3 2"
+                />
+              }
+
+              <!-- Saturn-Ring in der SVG-Karte -->
+              @if (pos.body.id === 'saturn') {
+                <ellipse
+                  cx="0"
+                  cy="0"
+                  [attr.rx]="pos.bodyRadiusPx * 1.8"
+                  [attr.ry]="pos.bodyRadiusPx * 0.48"
+                  fill="none"
+                  stroke="#FDE68A"
+                  stroke-width="2"
+                />
+              }
+
+              <!-- Dezenter Orbit-Pin im 1:1-Modus oder für den ausgewählten Körper -->
+              @if (
+                viewport.bodyScaleMode() === 'strict-distance-scale' ||
+                dataService.selectedBodyId() === pos.body.id
+              ) {
+                <circle
+                  cx="0"
+                  cy="0"
+                  [attr.r]="pos.bodyRadiusPx + 3.5"
+                  fill="none"
+                  [attr.stroke]="
+                    dataService.selectedBodyId() === pos.body.id
+                      ? '#FDE047'
+                      : pos.body.accentColorHex
+                  "
+                  stroke-width="1.4"
+                  stroke-dasharray="2.5 2"
+                />
+              }
+
+              <!-- Unsichtbare Mindest-Klickfläche (Hitbox) -->
+              <circle cx="0" cy="0" [attr.r]="pos.bodyRadiusPx + 6" fill="transparent" />
+
+              <!-- Eigentlicher Himmelskörper-Kreis -->
+              <circle
+                cx="0"
+                cy="0"
+                [attr.r]="pos.bodyRadiusPx"
+                [attr.fill]="pos.body.colorHex"
+                stroke="#FFFFFF"
+                stroke-width="1.2"
+              />
+
+              <!-- Konstante, gestochen scharfe 11px Beschriftung -->
+              @if (
+                pos.body.parentId === 'sun' ||
+                pos.body.id === 'sun' ||
+                viewport.zoomLevel() >= 12 ||
+                dataService.selectedBodyId() === pos.body.id ||
+                dataService.selectedBodyId() === pos.body.parentId
+              ) {
+                <text
+                  x="0"
+                  [attr.y]="pos.bodyRadiusPx + 12"
+                  text-anchor="middle"
+                  fill="#F8FAFC"
+                  font-size="11"
+                  font-weight="700"
+                  class="svg-body-label"
+                >
+                  {{ pos.body.name }}
+                  @if (pos.body.id === 'iss' && viewport.zoomLevel() >= 300) {
+                    · 408 km
+                  } @else if (viewport.viewMode() === 'side-view' && pos.body.id !== 'sun') {
+                    · {{ pos.body.inclinationToSolarEquatorDeg }}°
+                  }
+                </text>
+              }
+            </g>
+          }
+        </g>
+      </svg>
+    </div>
+
+    <!-- P20: Infobox / Detailansicht -->
+    @if (dataService.selectedBody(); as activeBody) {
+      <app-infobox-detail
+        [body]="activeBody"
+        [childBodies]="dataService.selectedBodyChildren()"
+        [parentBody]="selectedParentBody()"
+        (bodySelected)="onSelectBody($event)"
+        (closed)="onCloseInfobox()"
+      />
+    } @else {
+      <div class="welcome-hint-card">
+        <p>
+          Wähle in der Karte oder links im <strong>Entdecker-Pfad</strong> einen Himmelskörper aus,
+          um den Steckbrief und die 7 Bahnelemente zu öffnen. Mit dem Regler rechts oder dem Mausrad
+          kannst du stufenlos bis an die Oberfläche heranzoomen.
+        </p>
+      </div>
+    }
+  </div>
+</div>

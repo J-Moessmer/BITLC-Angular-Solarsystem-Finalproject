@@ -1,0 +1,361 @@
+/*
+ * Projekt / Modul: SSI App – Solar System Info App / SpaceQuizComponent Styles (space-quiz.css)
+ * FCPP-Referenz: P50-U10, P50-U20, P50-U30 (Weltraum-Quiz & Auswertung)
+ * Erstellt mit: KI-Assistent (Antigravity AI / Pair-Programming Agent)
+ * Erstellt für / Autor: Joshua Mößmer (J-Moessmer)
+ * Datum / Version: 16.11.2026 / v2.0
+ * Hinweis: Helle, kontrastreiche Quiz-Oberfläche mit 1px Rahmen und dezenten Kurvenradien.
+ */
+
+.p50-workspace {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: 1rem;
+  align-items: start;
+}
+
+.quiz-sidebar-card,
+.question-stage-card,
+.result-evaluation-card {
+  background-color: var(--card-bg-elevated);
+  color: var(--card-text-primary);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-lg);
+  padding: 1.15rem;
+  box-shadow: var(--shadow-card);
+}
+
+.quiz-sidebar-card h2 {
+  margin: 0 0 0.25rem;
+  font-size: 1.18rem;
+  font-weight: 800;
+}
+
+.sidebar-hint {
+  margin: 0 0 0.75rem;
+  font-size: 0.85rem;
+  color: var(--card-text-secondary);
+}
+
+.category-menu-list {
+  list-style: none;
+  margin: 0 0 0.9rem;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.category-menu-btn {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  text-align: left;
+  padding: 0.65rem 0.75rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--card-border);
+  background-color: var(--card-bg);
+  color: var(--card-text-primary);
+  cursor: pointer;
+  transition: border-color 0.12s ease, background-color 0.12s ease;
+}
+
+.category-menu-btn:hover {
+  border-color: #93c5fd;
+  background-color: var(--card-bg-subtle);
+}
+
+.category-menu-btn.active-category {
+  border-color: var(--accent-primary);
+  background-color: #eff6ff;
+}
+
+.cat-texts {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.cat-texts strong {
+  font-size: 0.92rem;
+}
+
+.cat-texts span {
+  font-size: 0.76rem;
+  color: var(--card-text-secondary);
+}
+
+.live-score-box {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.45rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--card-border);
+}
+
+.score-pill {
+  padding: 0.42rem 0.6rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.82rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.correct-pill {
+  background-color: #dcfce7;
+  border: 1px solid #86efac;
+  color: #166534;
+}
+
+.wrong-pill {
+  background-color: #fee2e2;
+  border: 1px solid #fca5a5;
+  color: #991b1b;
+}
+
+.stage-top-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  margin-bottom: 0.85rem;
+}
+
+.question-counter {
+  font-size: 0.84rem;
+  font-weight: 700;
+  color: var(--accent-primary);
+}
+
+.home-link {
+  font-size: 0.83rem;
+  font-weight: 600;
+  color: var(--card-text-secondary);
+}
+
+.question-prompt-box {
+  background-color: #f0f9ff;
+  border: 1px solid #bae6fd;
+  border-radius: var(--radius-md);
+  padding: 1rem 1.15rem;
+  margin-bottom: 1rem;
+}
+
+.question-prompt-box h3 {
+  margin: 0;
+  font-size: 1.15rem;
+  color: var(--card-text-primary);
+}
+
+.options-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.option-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  text-align: left;
+  padding: 0.8rem 0.9rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--card-border);
+  background-color: var(--card-bg);
+  color: var(--card-text-primary);
+  font-weight: 600;
+  font-size: 0.92rem;
+  cursor: pointer;
+  transition:
+    background-color 0.12s ease,
+    border-color 0.12s ease;
+}
+
+.option-btn:hover:not(:disabled) {
+  border-color: var(--accent-primary);
+  background-color: var(--card-bg-subtle);
+}
+
+.option-btn.selected-option {
+  border-color: var(--accent-primary);
+  background-color: #dbeafe;
+}
+
+.option-btn.correct-option {
+  border-color: #16a34a;
+  background-color: #dcfce7;
+  color: #14532d;
+}
+
+.option-btn.wrong-option {
+  border-color: #dc2626;
+  background-color: #fee2e2;
+  color: #7f1d1d;
+}
+
+.letter-badge {
+  width: 28px;
+  height: 28px;
+  border-radius: var(--radius-sm);
+  background-color: var(--accent-primary);
+  color: #ffffff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 0.84rem;
+  flex-shrink: 0;
+}
+
+.explanation-banner {
+  background-color: #fefce8;
+  border: 1px solid #fde047;
+  color: #713f12;
+  padding: 0.8rem 1rem;
+  border-radius: var(--radius-md);
+  margin-bottom: 1rem;
+}
+
+.explanation-banner.is-correct {
+  background-color: #dcfce7;
+  border-color: #86efac;
+  color: #14532d;
+}
+
+.explanation-banner p {
+  margin: 0 0 0.35rem;
+  font-weight: 600;
+}
+
+.jump-body-link {
+  font-size: 0.84rem;
+  font-weight: 700;
+}
+
+.quiz-controls-bar {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+}
+
+.check-btn,
+.next-btn,
+.restart-btn,
+.return-home-btn {
+  padding: 0.55rem 1.05rem;
+  border-radius: var(--radius-sm);
+  font-weight: 700;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.check-btn {
+  background-color: #0284c7;
+  color: #ffffff;
+  border: 1px solid #0369a1;
+}
+
+.check-btn:disabled,
+.next-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.next-btn,
+.restart-btn {
+  background-color: var(--accent-primary);
+  color: #ffffff;
+  border: 1px solid var(--accent-primary-hover);
+}
+
+.result-evaluation-card {
+  text-align: center;
+  padding: 1.75rem 1.35rem;
+}
+
+.praise-badge {
+  display: inline-block;
+  padding: 0.3rem 0.8rem;
+  border-radius: var(--radius-sm);
+  background-color: #fef3c7;
+  border: 1px solid #fde047;
+  color: #92400e;
+  font-weight: 800;
+  font-size: 0.92rem;
+  margin-bottom: 0.65rem;
+}
+
+.result-evaluation-card h3 {
+  margin: 0 0 0.45rem;
+  font-size: 1.35rem;
+}
+
+.praise-message {
+  margin: 0 auto 1.25rem;
+  max-width: 580px;
+  color: var(--card-text-secondary);
+}
+
+.final-score-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+}
+
+.final-score-box {
+  padding: 0.85rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--card-border);
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.final-score-box strong {
+  font-size: 1.4rem;
+}
+
+.good-box {
+  background-color: #dcfce7;
+  border-color: #86efac;
+  color: #166534;
+}
+
+.wrong-box {
+  background-color: #fee2e2;
+  border-color: #fca5a5;
+  color: #991b1b;
+}
+
+.pass-box {
+  background-color: #e0f2fe;
+  border-color: #7dd3fc;
+  color: #0369a1;
+}
+
+.result-actions {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.return-home-btn {
+  background-color: var(--card-bg);
+  border: 1px solid var(--card-border);
+  color: var(--card-text-primary);
+  text-decoration: none;
+}
+
+@media (max-width: 860px) {
+  .p50-workspace,
+  .options-grid,
+  .final-score-grid {
+    grid-template-columns: 1fr;
+  }
+}

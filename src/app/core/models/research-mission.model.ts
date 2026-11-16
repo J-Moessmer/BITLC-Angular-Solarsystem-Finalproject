@@ -12,7 +12,9 @@ export type MissionCategory =
   | 'mars-rover'
   | 'telescope'
   | 'space-station'
-  | 'moon-mission';
+  | 'moon-mission'
+  | 'solar-probe'
+  | 'deep-space';
 
 export interface ResearchMission {
   id: string;

@@ -52,6 +52,8 @@ export interface CelestialBody {
   category: BodyCategory;
   categoryLabel: string;
   parentId?: string;
+  /** true bei gelandeten Oberflächen-Missionen (z. B. Apollo 11-17 auf dem Erdmond, Rover Perseverance & Curiosity auf dem Mars) */
+  isSurfaceLanded?: boolean;
   childrenIds: string[];
   /** Echte Foto-URL von Wikimedia Commons (NASA/ESA Public Domain / CC) */
   wikimediaImageUrl: string;

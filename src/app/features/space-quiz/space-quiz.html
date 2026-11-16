@@ -1,0 +1,149 @@
+<!--
+  Projekt / Modul: SSI App – Solar System Info App / SpaceQuizComponent Template (space-quiz.html)
+  FCPP-Referenz: P50-U10 (A10), P50-U20 (A20, A30), P50-U30 (A40)
+  Erstellt mit: KI-Assistent (Antigravity AI / Pair-Programming Agent)
+  Erstellt für / Autor: Joshua Mößmer (J-Moessmer)
+  Datum / Version: 16.11.2026 / v2.0
+  Hinweis: Bereinigte Quiz-Oberfläche ohne Deko-Badges und ohne redundante Klammer-Zusätze, mit 1px Rahmen.
+-->
+<section class="p50-workspace" aria-labelledby="p50-heading">
+  <aside class="quiz-sidebar-card" aria-label="Quiz-Kategorien wählen">
+    <h2 id="p50-heading">Teste dein Weltraum-Wissen!</h2>
+    <p class="sidebar-hint">Wähle links deine Quiz-Kategorie:</p>
+
+    <ul class="category-menu-list">
+      @for (cat of quizService.categories; track cat.id) {
+        <li>
+          <button
+            type="button"
+            class="category-menu-btn"
+            [class.active-category]="quizService.selectedCategory() === cat.id"
+            (click)="onSelectCategory(cat.id)"
+          >
+            <div class="cat-texts">
+              <strong>{{ cat.label }}</strong>
+              <span>{{ cat.description }}</span>
+            </div>
+          </button>
+        </li>
+      }
+    </ul>
+
+    <div class="live-score-box" aria-live="polite">
+      <div class="score-pill correct-pill">
+        <span>Richtig:</span>
+        <strong>{{ quizService.scoreCorrect() }}</strong>
+      </div>
+      <div class="score-pill wrong-pill">
+        <span>Falsch:</span>
+        <strong>{{ quizService.scoreWrong() }}</strong>
+      </div>
+    </div>
+  </aside>
+
+  <div class="quiz-stage-column">
+    @if (!quizService.isQuizFinished() && quizService.currentQuestion(); as q) {
+      <div class="question-stage-card">
+        <div class="stage-top-meta">
+          <span class="question-counter">
+            Frage {{ quizService.currentQuestionIndex() + 1 }} von {{ quizService.totalQuestions() }}
+          </span>
+          <a class="home-link" routerLink="/solar-system">Zurück zum Sonnensystem</a>
+        </div>
+
+        <div class="question-prompt-box">
+          <h3>{{ q.questionText }}</h3>
+        </div>
+
+        <div class="options-grid" role="group" aria-label="Vier Antwortmöglichkeiten A bis D">
+          @for (optionText of q.options; track $index; let idx = $index) {
+            <button
+              type="button"
+              class="option-btn"
+              [class.selected-option]="
+                quizService.selectedOptionIndex() === idx && !quizService.isAnswerChecked()
+              "
+              [class.correct-option]="
+                quizService.isAnswerChecked() && idx === q.correctOptionIndex
+              "
+              [class.wrong-option]="
+                quizService.isAnswerChecked() &&
+                quizService.selectedOptionIndex() === idx &&
+                idx !== q.correctOptionIndex
+              "
+              [disabled]="quizService.isAnswerChecked()"
+              (click)="onChooseOption(idx)"
+            >
+              <span class="letter-badge">{{ optionLetters[idx] }}</span>
+              <span class="option-text">{{ optionText }}</span>
+            </button>
+          }
+        </div>
+
+        @if (quizService.isAnswerChecked()) {
+          <div
+            class="explanation-banner"
+            [class.is-correct]="quizService.selectedOptionIndex() === q.correctOptionIndex"
+          >
+            <p>{{ q.childExplanation }}</p>
+            @if (q.relatedBodyId) {
+              <a class="jump-body-link" [routerLink]="['/solar-system', q.relatedBodyId]">
+                Steckbrief im Sonnensystem öffnen
+              </a>
+            }
+          </div>
+        }
+
+        <div class="quiz-controls-bar">
+          <button
+            type="button"
+            class="check-btn"
+            [disabled]="quizService.selectedOptionIndex() === null || quizService.isAnswerChecked()"
+            (click)="onCheckAnswer()"
+          >
+            Lösung prüfen
+          </button>
+
+          <button
+            type="button"
+            class="next-btn"
+            [disabled]="!quizService.isAnswerChecked()"
+            (click)="onNextQuestion()"
+          >
+            {{ quizService.isLastQuestion() ? 'Auswertung anzeigen' : 'Nächste Frage' }}
+          </button>
+        </div>
+      </div>
+    } @else if (quizService.isQuizFinished()) {
+      <div class="result-evaluation-card" aria-labelledby="result-heading">
+        <span class="praise-badge">{{ quizService.childPraiseSummary().badge }}</span>
+        <h3 id="result-heading">{{ quizService.childPraiseSummary().title }}</h3>
+        <p class="praise-message">{{ quizService.childPraiseSummary().message }}</p>
+
+        <div class="final-score-grid">
+          <div class="final-score-box good-box">
+            <span>Richtige Antworten</span>
+            <strong>{{ quizService.scoreCorrect() }}</strong>
+          </div>
+          <div class="final-score-box wrong-box">
+            <span>Falsche Antworten</span>
+            <strong>{{ quizService.scoreWrong() }}</strong>
+          </div>
+          <div class="final-score-box pass-box">
+            <span>Ergebnis</span>
+            <strong>Bestanden! :)</strong>
+          </div>
+        </div>
+
+        <div class="result-actions">
+          <button type="button" class="restart-btn" (click)="onRestartQuiz()">
+            Quiz neu starten
+          </button>
+          <a class="return-home-btn" routerLink="/solar-system">
+            Zurück zur Startseite
+          </a>
+        </div>
+      </div>
+    }
+  </div>
+</section>
