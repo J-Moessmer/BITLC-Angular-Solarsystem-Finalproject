@@ -12,7 +12,9 @@
       <div>
         <h2 id="p40-heading">Weltraummissionen, Teleskope & Raumstationen</h2>
       </div>
-      <a class="back-btn" routerLink="/solar-system">Zurück zum Sonnensystem</a>
+      <a class="back-btn" routerLink="/solar-system">
+        <i class="fa-solid fa-arrow-left" aria-hidden="true"></i> Zurück zum Sonnensystem
+      </a>
     </div>
 
     <p class="intro-text">
@@ -102,6 +104,7 @@
                 (click)="refreshIssTelemetry()"
                 [disabled]="isRefreshingIss()"
               >
+                <i class="fa-solid fa-rotate" aria-hidden="true"></i>
                 {{ isRefreshingIss() ? 'Aktualisiere...' : 'Position aktualisieren' }}
               </button>
             </div>
@@ -133,6 +136,7 @@
             class="jump-solar-btn"
             [routerLink]="['/solar-system', current.targetBodyId]"
           >
+            <i class="fa-solid fa-location-crosshairs" aria-hidden="true"></i>
             Im Sonnensystem zeigen: {{ current.targetBodyName }}
           </a>
 
@@ -142,6 +146,7 @@
             target="_blank"
             rel="noopener noreferrer"
           >
+            <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
             Mehr Infos auf Wikipedia
           </a>
         </div>

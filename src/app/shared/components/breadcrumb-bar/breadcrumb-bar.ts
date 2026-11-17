@@ -19,7 +19,7 @@ export interface BreadcrumbItem {
   selector: 'app-breadcrumb-bar',
   template: `
     <nav class="breadcrumb-card" aria-label="Aktueller Pfad im Sonnensystem">
-      <span class="crumb-prefix">Pfad:</span>
+      <span class="crumb-prefix"><i class="fa-solid fa-location-dot" aria-hidden="true"></i> Pfad:</span>
       <ol class="crumb-list">
         @for (crumb of items(); track crumb.id; let isLast = $last) {
           <li class="crumb-item">

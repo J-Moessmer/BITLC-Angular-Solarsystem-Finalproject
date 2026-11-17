@@ -27,7 +27,7 @@ import { CelestialBody, OrbitalElementDetail } from '../../../core/models/celest
             (click)="closed.emit()"
             aria-label="Infobox schließen"
           >
-            Schließen
+            <i class="fa-solid fa-xmark" aria-hidden="true"></i> Schließen
           </button>
         </div>
 
@@ -136,8 +136,16 @@ import { CelestialBody, OrbitalElementDetail } from '../../../core/models/celest
             (click)="toggleOrbitalBox()"
             [attr.aria-expanded]="isOrbitalBoxOpen()"
           >
-            <span>Astronomen-Box: Die 7 Bahnelemente</span>
-            <span class="toggle-arrow">{{ isOrbitalBoxOpen() ? 'Einklappen' : 'Ausklappen' }}</span>
+            <span><i class="fa-solid fa-compass-drafting" aria-hidden="true"></i> Astronomen-Box: Die 7 Bahnelemente</span>
+            <span class="toggle-arrow">
+              <i
+                class="fa-solid"
+                [class.fa-chevron-up]="isOrbitalBoxOpen()"
+                [class.fa-chevron-down]="!isOrbitalBoxOpen()"
+                aria-hidden="true"
+              ></i>
+              {{ isOrbitalBoxOpen() ? 'Einklappen' : 'Ausklappen' }}
+            </span>
           </button>
 
           @if (isOrbitalBoxOpen()) {

@@ -3,11 +3,12 @@
   FCPP-Referenz: P10-U10 (A10), P20-U10, P30-U10, P40-U10, P50-U10
   Erstellt mit: KI-Assistent (Antigravity AI / Pair-Programming Agent)
   Erstellt für / Autor: Joshua Mößmer (J-Moessmer)
-  Datum / Version: 16.11.2026 / v2.0
-  Hinweis: Aufgeräumtes Navigations-Template ohne Emoji-Overload.
+  Datum / Version: 17.11.2026 / v2.1
+  Hinweis: Navigations-Template mit Font Awesome 7.3 Icons.
 -->
 <header class="top-nav-bar">
   <a class="brand-link" routerLink="/solar-system" aria-label="Zur Startseite Sonnensystem">
+    <i class="fa-solid fa-sun brand-icon" aria-hidden="true"></i>
     <div class="brand-titles">
       <span class="brand-main">SSI App</span>
       <span class="brand-sub">Solar System Info APP</span>
@@ -25,6 +26,7 @@
             #rla="routerLinkActive"
             [attr.aria-current]="rla.isActive ? 'page' : null"
           >
+            <i [class]="item.faIcon" aria-hidden="true"></i>
             <span class="nav-label">{{ item.label }}</span>
           </a>
         </li>

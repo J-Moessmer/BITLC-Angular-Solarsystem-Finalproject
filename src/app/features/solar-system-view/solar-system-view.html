@@ -78,7 +78,7 @@
       <!-- Echtzeit-Positionssteuerung -->
       <div class="true-scale-focus-bar">
         <span class="toolbar-label">
-          Datum:
+          <i class="fa-regular fa-calendar" aria-hidden="true"></i> Datum:
           <strong class="live-date-pill">{{ viewport.formattedSimulationDate() }}</strong>
         </span>
         <div class="btn-group" role="group" aria-label="Echtzeit und Zeitraffer steuern">
@@ -97,6 +97,12 @@
             [class.active-chip]="viewport.isTimeLapsePlaying()"
             (click)="toggleTimeLapse()"
           >
+            <i
+              class="fa-solid"
+              [class.fa-pause]="viewport.isTimeLapsePlaying()"
+              [class.fa-play]="!viewport.isTimeLapsePlaying()"
+              aria-hidden="true"
+            ></i>
             {{ viewport.isTimeLapsePlaying() ? 'Pause' : 'Zeitraffer' }}
           </button>
         </div>
@@ -121,7 +127,7 @@
           (click)="viewport.zoomIn()"
           aria-label="Hineinzoomen"
         >
-          +
+          <i class="fa-solid fa-plus" aria-hidden="true"></i>
         </button>
 
         <input
@@ -141,7 +147,7 @@
           (click)="viewport.zoomOut()"
           aria-label="Herauszoomen"
         >
-          -
+          <i class="fa-solid fa-minus" aria-hidden="true"></i>
         </button>
         <button
           type="button"
@@ -149,7 +155,7 @@
           (click)="viewport.resetCamera()"
           aria-label="Kamera und Zoom zurücksetzen"
         >
-          Reset
+          <i class="fa-solid fa-rotate-left" aria-hidden="true"></i> Reset
         </button>
       </div>
 

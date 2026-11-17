@@ -13,7 +13,9 @@
       <div>
         <h2 id="p30-title">Wie groß sind Sonne, Planeten und Monde wirklich?</h2>
       </div>
-      <a class="back-link-btn" routerLink="/solar-system">Zurück zum Sonnensystem</a>
+      <a class="back-link-btn" routerLink="/solar-system">
+        <i class="fa-solid fa-arrow-left" aria-hidden="true"></i> Zurück zum Sonnensystem
+      </a>
     </div>
 
     <p class="intro-text">
@@ -65,7 +67,7 @@
 
       @if (selectedIds().length < 5) {
         <button type="button" class="add-slot-btn" (click)="addComparisonSlot()">
-          + Weiteren Körper vergleichen
+          <i class="fa-solid fa-plus" aria-hidden="true"></i> Weiteren Körper vergleichen
         </button>
       }
     </div>

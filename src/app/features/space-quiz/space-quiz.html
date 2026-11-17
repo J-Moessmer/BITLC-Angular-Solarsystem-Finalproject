@@ -101,7 +101,7 @@
             [disabled]="quizService.selectedOptionIndex() === null || quizService.isAnswerChecked()"
             (click)="onCheckAnswer()"
           >
-            Lösung prüfen
+            <i class="fa-solid fa-circle-check" aria-hidden="true"></i> Lösung prüfen
           </button>
 
           <button
@@ -111,6 +111,7 @@
             (click)="onNextQuestion()"
           >
             {{ quizService.isLastQuestion() ? 'Auswertung anzeigen' : 'Nächste Frage' }}
+            <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
           </button>
         </div>
       </div>
@@ -137,10 +138,10 @@
 
         <div class="result-actions">
           <button type="button" class="restart-btn" (click)="onRestartQuiz()">
-            Quiz neu starten
+            <i class="fa-solid fa-rotate-right" aria-hidden="true"></i> Quiz neu starten
           </button>
           <a class="return-home-btn" routerLink="/solar-system">
-            Zurück zur Startseite
+            <i class="fa-solid fa-arrow-left" aria-hidden="true"></i> Zurück zur Startseite
           </a>
         </div>
       </div>

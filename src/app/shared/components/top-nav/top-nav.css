@@ -34,6 +34,11 @@
   text-decoration: none;
 }
 
+.brand-icon {
+  color: var(--accent-sun);
+  font-size: 1.35rem;
+}
+
 .brand-titles {
   display: flex;
   align-items: baseline;
@@ -70,6 +75,7 @@
 .nav-link {
   display: inline-flex;
   align-items: center;
+  gap: 0.45rem;
   padding: 0.45rem 0.9rem;
   border-radius: var(--radius-md);
   font-weight: 600;

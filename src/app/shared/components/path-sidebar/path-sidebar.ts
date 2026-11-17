@@ -3,8 +3,8 @@
  * FCPP-Referenz: P10-U20 (A20, A50), P20-U10 (A10)
  * Erstellt mit: KI-Assistent (Antigravity AI / Pair-Programming Agent)
  * Erstellt für / Autor: Joshua Mößmer (J-Moessmer)
- * Datum / Version: 16.11.2026 / v2.0
- * Hinweis: Rekursive Tree-Komponente ohne überflüssige Deko-Tags, mit 1px Rahmen und klaren 6px/8px Radien.
+ * Datum / Version: 17.11.2026 / v2.1
+ * Hinweis: Rekursive Tree-Komponente mit Font Awesome 7.3 Vektor-Icons, 1px Rahmen und klaren 6px/8px Radien.
  */
 
 import { Component, input, output, signal } from '@angular/core';
@@ -17,6 +17,7 @@ import { PathTreeNode } from '../../../core/services/solar-system-data.service';
     @if (isRoot()) {
       <nav class="path-tree-card" aria-label="Pfad-Navigation im Sonnensystem">
         <div class="tree-header">
+          <i class="fa-solid fa-sitemap tree-header-icon" aria-hidden="true"></i>
           <h2>Entdecker-Pfad</h2>
         </div>
 
@@ -32,10 +33,15 @@ import { PathTreeNode } from '../../../core/services/solar-system-data.service';
                     [attr.aria-expanded]="isExpanded(node.id)"
                     [attr.aria-label]="node.label + ' ein- oder ausklappen'"
                   >
-                    {{ isExpanded(node.id) ? '▾' : '▸' }}
+                    <i
+                      class="fa-solid"
+                      [class.fa-chevron-down]="isExpanded(node.id)"
+                      [class.fa-chevron-right]="!isExpanded(node.id)"
+                      aria-hidden="true"
+                    ></i>
                   </button>
                 } @else {
-                  <span class="branch-spacer" aria-hidden="true">•</span>
+                  <span class="branch-spacer" aria-hidden="true"></span>
                 }
 
                 <button
@@ -45,6 +51,7 @@ import { PathTreeNode } from '../../../core/services/solar-system-data.service';
                   [class.group-node]="!node.bodyId"
                   (click)="onNodeActivate(node)"
                 >
+                  <i [class]="node.icon + ' node-fa-icon'" aria-hidden="true"></i>
                   <span class="node-label">{{ node.label }}</span>
                 </button>
               </div>
@@ -74,10 +81,15 @@ import { PathTreeNode } from '../../../core/services/solar-system-data.service';
                   [attr.aria-expanded]="isExpanded(node.id)"
                   [attr.aria-label]="node.label + ' ein- oder ausklappen'"
                 >
-                  {{ isExpanded(node.id) ? '▾' : '▸' }}
+                  <i
+                    class="fa-solid"
+                    [class.fa-chevron-down]="isExpanded(node.id)"
+                    [class.fa-chevron-right]="!isExpanded(node.id)"
+                    aria-hidden="true"
+                  ></i>
                 </button>
               } @else {
-                <span class="branch-spacer" aria-hidden="true">└</span>
+                <span class="branch-spacer" aria-hidden="true"></span>
               }
 
               <button
@@ -87,6 +99,7 @@ import { PathTreeNode } from '../../../core/services/solar-system-data.service';
                 [class.group-node]="!node.bodyId"
                 (click)="onNodeActivate(node)"
               >
+                <i [class]="node.icon + ' node-fa-icon'" aria-hidden="true"></i>
                 <span class="node-label">{{ node.label }}</span>
               </button>
             </div>
@@ -114,9 +127,16 @@ import { PathTreeNode } from '../../../core/services/solar-system-data.service';
       box-shadow: var(--shadow-card);
     }
     .tree-header {
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
       margin-bottom: 0.6rem;
       padding-bottom: 0.45rem;
       border-bottom: 1px solid var(--card-border);
+    }
+    .tree-header-icon {
+      color: var(--accent-primary);
+      font-size: 0.9rem;
     }
     h2 {
       margin: 0;
@@ -150,25 +170,24 @@ import { PathTreeNode } from '../../../core/services/solar-system-data.service';
       background: transparent;
       color: var(--card-text-secondary);
       cursor: pointer;
-      font-size: 0.82rem;
-      font-weight: 700;
+      font-size: 0.68rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
     }
     .toggle-branch-btn:hover {
       background-color: var(--card-bg-subtle);
       color: var(--accent-primary);
     }
     .branch-spacer {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
+      display: inline-block;
       width: 20px;
-      font-size: 0.75rem;
-      color: var(--card-text-muted);
     }
     .node-select-btn {
       flex: 1;
       display: flex;
       align-items: center;
+      gap: 0.45rem;
       text-align: left;
       padding: 0.28rem 0.5rem;
       border-radius: var(--radius-sm);
@@ -180,8 +199,17 @@ import { PathTreeNode } from '../../../core/services/solar-system-data.service';
       cursor: pointer;
       transition: background-color 0.12s ease, color 0.12s ease;
     }
+    .node-fa-icon {
+      width: 14px;
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--card-text-muted);
+    }
     .node-select-btn:hover {
       background-color: var(--card-bg-subtle);
+      color: var(--accent-primary);
+    }
+    .node-select-btn:hover .node-fa-icon {
       color: var(--accent-primary);
     }
     .node-select-btn.group-node {
@@ -192,6 +220,9 @@ import { PathTreeNode } from '../../../core/services/solar-system-data.service';
       background-color: var(--accent-primary);
       color: #ffffff;
       font-weight: 600;
+    }
+    .node-select-btn.active-node .node-fa-icon {
+      color: #ffffff;
     }
   `,
 })

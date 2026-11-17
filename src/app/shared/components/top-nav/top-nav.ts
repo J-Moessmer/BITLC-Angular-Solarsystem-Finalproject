@@ -3,8 +3,8 @@
  * FCPP-Referenz: P10-U10 (A10), P20-U10, P30-U10, P40-U10, P50-U10
  * Erstellt mit: KI-Assistent (Antigravity AI / Pair-Programming Agent)
  * Erstellt für / Autor: Joshua Mößmer (J-Moessmer)
- * Datum / Version: 16.11.2026 / v1.0
- * Hinweis: Fixierte Top-Navigation mit RouterLink und RouterLinkActive gemäß FCPP P10-U10 mit KI-Unterstützung erstellt.
+ * Datum / Version: 17.11.2026 / v2.1
+ * Hinweis: Fixierte Top-Navigation mit Font Awesome 7.3 Vektor-Icons eingerichtet.
  */
 
 import { Component } from '@angular/core';
@@ -13,7 +13,7 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 export interface NavItem {
   label: string;
   route: string;
-  icon: string;
+  faIcon: string;
   fcppRef: string;
 }
 
@@ -28,25 +28,25 @@ export class TopNavComponent {
     {
       label: 'Sonnensystem',
       route: '/solar-system',
-      icon: '🪐',
+      faIcon: 'fa-solid fa-earth-europe',
       fcppRef: 'P10 / P20',
     },
     {
       label: 'Größenvergleich',
       route: '/size-comparison',
-      icon: '📏',
+      faIcon: 'fa-solid fa-ruler-combined',
       fcppRef: 'P30',
     },
     {
       label: 'Forschungsprojekte',
       route: '/research',
-      icon: '🛰️',
+      faIcon: 'fa-solid fa-satellite',
       fcppRef: 'P40',
     },
     {
       label: 'Weltraum-Quiz',
       route: '/quiz',
-      icon: '🚀',
+      faIcon: 'fa-solid fa-rocket',
       fcppRef: 'P50',
     },
   ];

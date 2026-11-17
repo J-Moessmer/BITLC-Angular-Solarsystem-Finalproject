@@ -119,11 +119,11 @@ export class SolarSystemDataService {
         const childIcon =
           childBody?.category === 'spacecraft'
             ? cid === 'iss'
-              ? '🛰️'
+              ? 'fa-solid fa-satellite'
               : cid === 'jwst' || cid === 'gaia'
-                ? '🔭'
-                : '🚀'
-            : '🌙';
+                ? 'fa-solid fa-satellite-dish'
+                : 'fa-solid fa-shuttle-space'
+            : 'fa-regular fa-moon';
         return buildBodyNode(cid, childIcon);
       });
       return {
@@ -135,28 +135,17 @@ export class SolarSystemDataService {
       };
     };
 
-    const planetIcons: Record<string, string> = {
-      mercury: '🪨',
-      venus: '🌕',
-      earth: '🌍',
-      mars: '🔴',
-      jupiter: '🟠',
-      saturn: '🪐',
-      uranus: '🔵',
-      neptune: '🔵',
-    };
-
     return [
       {
         id: 'solar-system-root',
         label: 'Sonnensystem',
-        icon: '🌌',
+        icon: 'fa-solid fa-compass',
         children: [
-          buildBodyNode('sun', '☀️'),
+          buildBodyNode('sun', 'fa-solid fa-sun'),
           {
             id: 'planets-group',
             label: 'Planeten',
-            icon: '🪐',
+            icon: 'fa-solid fa-globe',
             children: [
               'mercury',
               'venus',
@@ -166,44 +155,49 @@ export class SolarSystemDataService {
               'saturn',
               'uranus',
               'neptune',
-            ].map((pid) => buildBodyNode(pid, planetIcons[pid] ?? '🪐')),
+            ].map((pid) =>
+              buildBodyNode(
+                pid,
+                pid === 'earth' ? 'fa-solid fa-earth-europe' : 'fa-solid fa-circle-dot',
+              ),
+            ),
           },
           {
             id: 'dwarf-planets-group',
             label: 'Zwergplaneten & Monde',
-            icon: '❄️',
+            icon: 'fa-regular fa-snowflake',
             children: [
-              buildBodyNode('ceres', '🪨'),
-              buildBodyNode('pluto', '❄️'),
-              buildBodyNode('haumea', '🥚'),
-              buildBodyNode('makemake', '🔴'),
-              buildBodyNode('eris', '✨'),
+              buildBodyNode('ceres', 'fa-regular fa-circle-dot'),
+              buildBodyNode('pluto', 'fa-regular fa-circle-dot'),
+              buildBodyNode('haumea', 'fa-regular fa-circle-dot'),
+              buildBodyNode('makemake', 'fa-regular fa-circle-dot'),
+              buildBodyNode('eris', 'fa-regular fa-circle-dot'),
             ],
           },
           {
             id: 'probes-group',
             label: 'Raumsonden & Teleskope',
-            icon: '🛰️',
+            icon: 'fa-solid fa-satellite',
             children: [
-              buildBodyNode('parker', '☀️'),
-              buildBodyNode('solar-orbiter', '🛰️'),
-              buildBodyNode('bepicolombo', '🚀'),
-              buildBodyNode('iss', '🛰️'),
-              buildBodyNode('apollo', '🌕'),
-              buildBodyNode('artemis', '🚀'),
-              buildBodyNode('jwst', '🔭'),
-              buildBodyNode('gaia', '✨'),
-              buildBodyNode('perseverance', '🤖'),
-              buildBodyNode('dawn', '🛰️'),
-              buildBodyNode('juno', '🌀'),
-              buildBodyNode('juice', '🧊'),
-              buildBodyNode('cassini', '🪐'),
-              buildBodyNode('new-horizons', '❄️'),
-              buildBodyNode('voyager', '🌌'),
+              buildBodyNode('parker', 'fa-solid fa-shuttle-space'),
+              buildBodyNode('solar-orbiter', 'fa-solid fa-satellite'),
+              buildBodyNode('bepicolombo', 'fa-solid fa-shuttle-space'),
+              buildBodyNode('iss', 'fa-solid fa-satellite'),
+              buildBodyNode('apollo', 'fa-solid fa-rocket'),
+              buildBodyNode('artemis', 'fa-solid fa-rocket'),
+              buildBodyNode('jwst', 'fa-solid fa-satellite-dish'),
+              buildBodyNode('gaia', 'fa-solid fa-satellite-dish'),
+              buildBodyNode('perseverance', 'fa-solid fa-robot'),
+              buildBodyNode('dawn', 'fa-solid fa-satellite'),
+              buildBodyNode('juno', 'fa-solid fa-satellite'),
+              buildBodyNode('juice', 'fa-solid fa-satellite'),
+              buildBodyNode('cassini', 'fa-solid fa-shuttle-space'),
+              buildBodyNode('new-horizons', 'fa-solid fa-shuttle-space'),
+              buildBodyNode('voyager', 'fa-solid fa-satellite-dish'),
             ],
           },
-          buildBodyNode('asteroid-belt', '☄️'),
-          buildBodyNode('oort-cloud', '🌌'),
+          buildBodyNode('asteroid-belt', 'fa-solid fa-braille'),
+          buildBodyNode('oort-cloud', 'fa-solid fa-circle-nodes'),
         ],
       },
     ];
