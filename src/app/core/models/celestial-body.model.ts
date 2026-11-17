@@ -12,6 +12,7 @@ export type BodyCategory =
   | 'planet'
   | 'dwarf-planet'
   | 'moon'
+  | 'comet'
   | 'belt'
   | 'spacecraft';
 

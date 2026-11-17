@@ -53,34 +53,20 @@
         </div>
       </div>
 
-      <div class="scale-switch-group">
-        <span class="toolbar-label">Körpergröße:</span>
-        <div class="btn-group" role="group" aria-label="Körpergrößen-Maßstab wählen">
-          <button
-            type="button"
-            class="scale-chip"
-            [class.active-chip]="viewport.bodyScaleMode() === 'didactic'"
-            (click)="setBodyScaleMode('didactic')"
-          >
-            Standard
-          </button>
-          <button
-            type="button"
-            class="scale-chip"
-            [class.active-chip]="viewport.bodyScaleMode() === 'strict-distance-scale'"
-            (click)="setBodyScaleMode('strict-distance-scale')"
-          >
-            1:1 Maßstab
-          </button>
-        </div>
-      </div>
-
-      <!-- Echtzeit-Positionssteuerung -->
+      <!-- Echtzeit- & Zeitreise-Positionssteuerung -->
       <div class="true-scale-focus-bar">
-        <span class="toolbar-label">
+        <label class="toolbar-label date-picker-label">
           <i class="fa-regular fa-calendar" aria-hidden="true"></i> Datum:
-          <strong class="live-date-pill">{{ viewport.formattedSimulationDate() }}</strong>
-        </span>
+          <input
+            type="date"
+            class="date-picker-input"
+            min="1950-01-01"
+            max="2100-12-31"
+            [value]="viewport.isoSimulationDate()"
+            (change)="onDateInputChange($event)"
+            aria-label="Simulationsdatum auswählen"
+          />
+        </label>
         <div class="btn-group" role="group" aria-label="Echtzeit und Zeitraffer steuern">
           <button type="button" class="scale-chip" (click)="resetToLiveNow()">
             Heute
@@ -105,6 +91,16 @@
             ></i>
             {{ viewport.isTimeLapsePlaying() ? 'Pause' : 'Zeitraffer' }}
           </button>
+          <select
+            class="milestone-select"
+            (change)="onHistoricalMilestoneSelect($event)"
+            aria-label="Historisches Ereignis auswählen"
+          >
+            <option value="">Zeitreise: Meilenstein...</option>
+            @for (m of historicalMilestones; track m.isoDate) {
+              <option [value]="m.isoDate">{{ m.label }}</option>
+            }
+          </select>
         </div>
       </div>
     </section>
@@ -400,15 +396,39 @@
               <!-- Unsichtbare Mindest-Klickfläche (Hitbox) -->
               <circle cx="0" cy="0" [attr.r]="pos.bodyRadiusPx + 6" fill="transparent" />
 
-              <!-- Eigentlicher Himmelskörper-Kreis -->
-              <circle
-                cx="0"
-                cy="0"
-                [attr.r]="pos.bodyRadiusPx"
-                [attr.fill]="pos.body.colorHex"
-                stroke="#FFFFFF"
-                stroke-width="1.2"
-              />
+              <!-- Raumsonden, Rover, Teleskope & Kometen als Font-Awesome-7-Symbol statt schlichtem Kreis -->
+              @if (getSvgIconGlyph(pos.body); as glyph) {
+                <circle
+                  cx="0"
+                  cy="0"
+                  [attr.r]="pos.bodyRadiusPx + 4.5"
+                  fill="#111D3B"
+                  fill-opacity="0.9"
+                  [attr.stroke]="pos.body.colorHex"
+                  stroke-width="1.3"
+                />
+                <text
+                  x="0"
+                  y="0"
+                  text-anchor="middle"
+                  dominant-baseline="central"
+                  class="svg-fa-icon"
+                  [attr.font-size]="pos.bodyRadiusPx * 2.6"
+                  [attr.fill]="pos.body.accentColorHex"
+                >
+                  {{ glyph }}
+                </text>
+              } @else {
+                <!-- Eigentlicher Himmelskörper-Kreis -->
+                <circle
+                  cx="0"
+                  cy="0"
+                  [attr.r]="pos.bodyRadiusPx"
+                  [attr.fill]="pos.body.colorHex"
+                  stroke="#FFFFFF"
+                  stroke-width="1.2"
+                />
+              }
 
               <!-- Konstante, gestochen scharfe 11px Beschriftung -->
               @if (

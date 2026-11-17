@@ -35,7 +35,6 @@
 }
 
 .mode-switch-group,
-.scale-switch-group,
 .true-scale-focus-bar {
   display: flex;
   align-items: center;
@@ -43,21 +42,39 @@
   gap: 0.45rem;
 }
 
-.true-scale-focus-bar {
-  width: 100%;
-  padding-top: 0.5rem;
-  border-top: 1px solid var(--card-border);
+.date-picker-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
 }
 
-.live-date-pill {
-  display: inline-block;
-  padding: 0.1rem 0.45rem;
-  margin-left: 0.2rem;
+.date-picker-input {
+  padding: 0.22rem 0.45rem;
   border-radius: var(--radius-sm);
   background-color: #dcfce7;
   color: #166534;
   border: 1px solid #86efac;
+  font-family: inherit;
+  font-size: 0.82rem;
   font-weight: 700;
+  cursor: pointer;
+}
+
+.milestone-select {
+  padding: 0.3rem 0.55rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--card-border);
+  background-color: var(--card-bg);
+  color: var(--card-text-primary);
+  font-family: inherit;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.milestone-select:hover {
+  border-color: #93c5fd;
+  background-color: var(--card-bg-subtle);
 }
 
 .toolbar-label {
@@ -250,6 +267,13 @@
 
 .welcome-hint-card p {
   margin: 0;
+}
+
+.svg-fa-icon {
+  font-family: 'Font Awesome 7 Free';
+  font-weight: 900;
+  pointer-events: none;
+  user-select: none;
 }
 
 @media (max-width: 960px) {

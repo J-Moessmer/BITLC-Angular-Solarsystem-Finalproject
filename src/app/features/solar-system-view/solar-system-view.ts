@@ -250,9 +250,40 @@ export class SolarSystemViewComponent implements OnInit, OnDestroy {
     }
   }
 
+  readonly historicalMilestones = [
+    { isoDate: '1969-07-20', label: '20.07.1969 · Apollo 11 (Mondlandung)', bodyId: 'apollo-11' },
+    { isoDate: '1970-04-14', label: '14.04.1970 · Apollo 13 (Mond-Umrundung)', bodyId: 'apollo-13' },
+    { isoDate: '1986-02-09', label: '09.02.1986 · Halleyscher Komet (Sonnennähe)', bodyId: 'halley' },
+    { isoDate: '1989-08-25', label: '25.08.1989 · Voyager 2 bei Neptun', bodyId: 'voyager-2' },
+    { isoDate: '1997-04-01', label: '01.04.1997 · Komet Hale-Bopp', bodyId: 'hale-bopp' },
+    { isoDate: '2014-11-12', label: '12.11.2014 · Rosetta & Philae auf 67P', bodyId: 'rosetta' },
+    { isoDate: '2015-07-14', label: '14.07.2015 · New Horizons bei Pluto', bodyId: 'new-horizons' },
+  ];
+
   resetToLiveNow(): void {
     this.stopTimeLapse();
     this.viewport.resetToRealTimeNow();
+  }
+
+  onDateInputChange(event: Event): void {
+    this.stopTimeLapse();
+    const isoDate = (event.target as HTMLInputElement).value;
+    this.viewport.setSimulationDateIso(isoDate);
+  }
+
+  onHistoricalMilestoneSelect(event: Event): void {
+    const select = event.target as HTMLSelectElement;
+    const isoDate = select.value;
+    if (!isoDate) {
+      return;
+    }
+    this.stopTimeLapse();
+    this.viewport.setSimulationDateIso(isoDate);
+    const milestone = this.historicalMilestones.find((m) => m.isoDate === isoDate);
+    if (milestone) {
+      this.onSelectBody(milestone.bodyId);
+    }
+    select.value = '';
   }
 
   /** Auswahl eines Himmelskörpers im Pfad-Baum, Breadcrumb oder SVG-Canvas (P10-U20, P20-U30) */
@@ -345,5 +376,35 @@ export class SolarSystemViewComponent implements OnInit, OnDestroy {
 
   onPointerUp(): void {
     this.isDragging.set(false);
+  }
+
+  /** Liefert das passende Font-Awesome-7-Icon-Zeichen für Raumsonden, Rover, Teleskope & Kometen in der 2D-SVG-Karte */
+  protected getSvgIconGlyph(body: CelestialBody): string | null {
+    if (body.category === 'comet') {
+      return '\uf753'; // fa-meteor
+    }
+    if (body.category !== 'spacecraft') {
+      return null;
+    }
+    const id = body.id;
+    if (id === 'iss' || id === 'solar-orbiter' || id === 'dawn' || id === 'juno' || id === 'juice') {
+      return '\uf7bf'; // fa-satellite
+    }
+    if (id === 'jwst' || id === 'gaia' || id === 'hubble' || id === 'voyager-1' || id === 'voyager-2') {
+      return '\uf7c0'; // fa-satellite-dish
+    }
+    if (
+      id === 'perseverance' ||
+      id === 'curiosity' ||
+      id === 'opportunity' ||
+      id === 'spirit' ||
+      id === 'sojourner'
+    ) {
+      return '\uf544'; // fa-robot
+    }
+    if (id.startsWith('apollo') || id === 'artemis') {
+      return '\uf135'; // fa-rocket
+    }
+    return '\uf197'; // fa-shuttle-space
   }
 }

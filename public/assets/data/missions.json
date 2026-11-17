@@ -11,7 +11,7 @@
     "launchYear": "Seit 1998 im Bau (seit 2000 durchgehend bewohnt)",
     "statusLabel": "Live im Erdorbit aktiv (ca. 408 km Höhe)",
     "wikimediaImageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/The_station_pictured_from_the_SpaceX_Crew_Dragon_5.jpg/960px-The_station_pictured_from_the_SpaceX_Crew_Dragon_5.jpg",
-    "imageUrl": "assets/images/iss.svg",
+    "imageUrl": "assets/images/space-station.svg",
     "imageCredit": "NASA / SpaceX Crew-5 (Wikimedia Commons, Public Domain)",
     "childSummary": "Rund 408 Kilometer über unseren Köpfen saust die Internationale Raumstation ISS mit 28.000 km/h um die Erde! Seit dem Jahr 2000 leben und arbeiten dort ununterbrochen Astronautinnen und Astronauten aus vielen Ländern friedlich zusammen.",
     "tasksForKids": [
@@ -34,7 +34,7 @@
     "launchYear": "30. Juli 2020 (Landung: 18. Feb. 2021)",
     "statusLabel": "Aktiv im Jezero-Krater auf dem Mars",
     "wikimediaImageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Perseverance-Selfie-at-Rochette-Horizontal-V2.gif/960px-Perseverance-Selfie-at-Rochette-Horizontal-V2.gif",
-    "imageUrl": "assets/images/perseverance.svg",
+    "imageUrl": "assets/images/rover.svg",
     "imageCredit": "NASA / JPL-Caltech / MSSS – Perseverance & Ingenuity Selfie (Wikimedia Commons, Public Domain)",
     "childSummary": "Perseverance (‚Ausdauer‘) ist das modernste rollende Forschungslabor auf dem Mars! Seit Februar 2021 erkundet der sechsrädrige Rover ein altes Flussdelta im Jezero-Krater.",
     "tasksForKids": [
@@ -56,7 +56,7 @@
     "launchYear": "26. November 2011 (Landung: 6. Aug. 2012)",
     "statusLabel": "Aktiv im Gale-Krater auf dem Mars",
     "wikimediaImageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f3/Curiosity_Self-Portrait_at_%27Big_Sky%27_Drilling_Site.jpg/960px-Curiosity_Self-Portrait_at_%27Big_Sky%27_Drilling_Site.jpg",
-    "imageUrl": "assets/images/curiosity.svg",
+    "imageUrl": "assets/images/rover.svg",
     "imageCredit": "NASA / JPL-Caltech / MSSS – Curiosity Selfie (Wikimedia Commons, Public Domain)",
     "childSummary": "Der fast 900 Kilogramm schwere Rover Curiosity (‚Neugier‘) landete 2012 im Gale-Krater und klettert seitdem den 5.500 Meter hohen Berg Aeolis Mons hinauf, um die Klimageschichte des Mars wie in einem offenen Geschichtsbuch zu lesen.",
     "tasksForKids": [
@@ -78,7 +78,7 @@
     "launchYear": "7. Juli 2003 (Landung: 25. Jan. 2004)",
     "statusLabel": "Mission erfolgreich abgeschlossen (2004–2018)",
     "wikimediaImageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/NASA_Mars_Rover.jpg/960px-NASA_Mars_Rover.jpg",
-    "imageUrl": "assets/images/opportunity.svg",
+    "imageUrl": "assets/images/rover.svg",
     "imageCredit": "NASA / JPL-Caltech – Mars Exploration Rover (Wikimedia Commons, Public Domain)",
     "childSummary": "Opportunity war für nur 90 Tage geplant, rollte aber fast 15 Jahre lang durch die Ebene Meridiani Planum! Erst ein gewaltiger globaler Staubsturm im Jahr 2018 beendete seine Rekordfahrt.",
     "tasksForKids": [
@@ -100,7 +100,7 @@
     "launchYear": "10. Juni 2003 (Landung: 4. Jan. 2004)",
     "statusLabel": "Mission erfolgreich abgeschlossen (2004–2010)",
     "wikimediaImageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/KSC-03PD-0786.jpg/960px-KSC-03PD-0786.jpg",
-    "imageUrl": "assets/images/spirit.svg",
+    "imageUrl": "assets/images/rover.svg",
     "imageCredit": "NASA / Kennedy Space Center – Spirit Rover (Wikimedia Commons, Public Domain)",
     "childSummary": "Spirit war der Zwillings-Rover von Opportunity und landete im Januar 2004 im Gusev-Krater. Er erklomm als erster Roboter der Geschichte einen Berg auf dem Mars und entdeckte Spuren von alten heißen Quellen.",
     "tasksForKids": [
@@ -122,7 +122,7 @@
     "launchYear": "4. Dezember 1996 (Landung: 4. Juli 1997)",
     "statusLabel": "Historischer Meilenstein im Ares Vallis (1997)",
     "wikimediaImageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Sojourner_on_Mars_PIA01122.jpg/960px-Sojourner_on_Mars_PIA01122.jpg",
-    "imageUrl": "assets/images/sojourner.svg",
+    "imageUrl": "assets/images/rover.svg",
     "imageCredit": "NASA / JPL – Sojourner auf dem Mars (Wikimedia Commons, Public Domain)",
     "childSummary": "Am 4. Juli 1997 rollte der nur 65 Zentimeter lange Rover Sojourner über eine kleine Rampe von der Landestation ‚Mars Pathfinder‘ auf den Marsboden – als allererster Mars-Rover überhaupt!",
     "tasksForKids": [
@@ -143,7 +143,7 @@
     "launchYear": "5. September 1977",
     "statusLabel": "Aktiv im interstellaren Raum (> 24,6 Mrd. km entfernt!)",
     "wikimediaImageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Voyager_spacecraft_model.png/960px-Voyager_spacecraft_model.png",
-    "imageUrl": "assets/images/voyager-1.svg",
+    "imageUrl": "assets/images/probe.svg",
     "imageCredit": "NASA / JPL-Caltech (Wikimedia Commons, Public Domain)",
     "childSummary": "Voyager 1 ist das am weitesten von der Erde entfernte Bauwerk der Menschheit! Nach ihren Vorbeiflügen an Jupiter (1979) und Saturn mit seinem Mond Titan (1980) verließ sie 2012 die schützende Blase unseres Sonnenwindes.",
     "tasksForKids": [
@@ -165,7 +165,7 @@
     "launchYear": "20. August 1977",
     "statusLabel": "Aktiv im interstellaren Raum (> 20,6 Mrd. km entfernt!)",
     "wikimediaImageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/The_Sounds_of_Earth_-_GPN-2000-001976.jpg/960px-The_Sounds_of_Earth_-_GPN-2000-001976.jpg",
-    "imageUrl": "assets/images/voyager-2.svg",
+    "imageUrl": "assets/images/probe.svg",
     "imageCredit": "NASA / JPL – Voyager Golden Record (Wikimedia Commons, Public Domain)",
     "childSummary": "Voyager 2 nutzte eine seltene Planeten-Stellung, die nur alle 176 Jahre vorkommt, und besuchte als einzige Raumsonde überhaupt alle vier großen Gas- und Eisriesen: Jupiter, Saturn, Uranus und Neptun!",
     "tasksForKids": [
@@ -187,7 +187,7 @@
     "launchYear": "16. – 24. Juli 1969",
     "statusLabel": "Historische Erstlandung im Mare Tranquillitatis",
     "wikimediaImageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/A_Man_on_the_Moon%2C_AS11-40-5903_%28cropped%29.jpg/960px-A_Man_on_the_Moon%2C_AS11-40-5903_%28cropped%29.jpg",
-    "imageUrl": "assets/images/apollo-11.svg",
+    "imageUrl": "assets/images/moon-flight.svg",
     "imageCredit": "NASA / Neil Armstrong – Buzz Aldrin (Wikimedia Commons, Public Domain)",
     "childSummary": "Am 20. Juli 1969 verfolgten über 500 Millionen Menschen am Fernseher, wie Neil Armstrong und Buzz Aldrin mit der Landefähre ‚Eagle‘ im Meer der Ruhe landeten und als erste Menschen ihren Fuß auf einen fremden Himmelskörper setzten.",
     "tasksForKids": [
@@ -208,7 +208,7 @@
     "launchYear": "14. – 24. November 1969",
     "statusLabel": "Gelandet im Oceanus Procellarum",
     "wikimediaImageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Surveyor_3-Apollo_12.jpg/960px-Surveyor_3-Apollo_12.jpg",
-    "imageUrl": "assets/images/apollo-12.svg",
+    "imageUrl": "assets/images/moon-flight.svg",
     "imageCredit": "NASA / Alan Bean – Pete Conrad bei Surveyor 3 (Wikimedia Commons, Public Domain)",
     "childSummary": "Mit der Landefähre ‚Intrepid‘ bewiesen Pete Conrad und Alan Bean im November 1969, dass man auf dem Mond auf wenige Meter genau neben einem Ziel landen kann: Sie setzten direkt in Sichtweite der älteren Mondsonde Surveyor 3 auf!",
     "tasksForKids": [
@@ -216,6 +216,27 @@
       "Untersuchte, wie sich zweieinhalb Jahre im extremen Mondklima auf die Bauteile der Sonde Surveyor 3 ausgewirkt hatten."
     ],
     "wikipediaUrl": "https://de.wikipedia.org/wiki/Apollo_12"
+  },
+  {
+    "id": "apollo-13",
+    "title": "Apollo 13 – Dramatische Rettung um den Mond",
+    "subtitle": "Mond-Umrundung ohne Landung nach Explosion eines Sauerstofftanks (April 1970)",
+    "category": "moon-mission",
+    "categoryLabel": "Mondflüge",
+    "targetBodyId": "apollo-13",
+    "targetBodyName": "Apollo 13 (Mond-Vorbeiflug)",
+    "agency": "NASA",
+    "launchYear": "11. – 17. April 1970",
+    "statusLabel": "Freie Rückkehrbahn um den Mond (keine Landung)",
+    "wikimediaImageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Apollo_13-insignia.png/960px-Apollo_13-insignia.png",
+    "imageUrl": "assets/images/moon-flight.svg",
+    "imageCredit": "NASA – Apollo 13 Mission Patch (Wikimedia Commons, Public Domain)",
+    "childSummary": "Nach der berühmten Funkmeldung ‚Houston, we've had a problem‘ musste die geplante dritte Mondlandung abgebrochen werden. Die Crew nutzte die Mondlandefähre ‚Aquarius‘ als Rettungsboot, schwang einmal um den Mond herum und landete sicher im Pazifik!",
+    "tasksForKids": [
+      "Nutze die Anziehungskraft des Mondes wie eine Steinschleuder, um ohne großes Haupttriebwerk zur Erde zurückzukehren.",
+      "Stellte bei 400.171 Kilometern den Entfernungsrekord für Menschen von der Erde auf."
+    ],
+    "wikipediaUrl": "https://de.wikipedia.org/wiki/Apollo_13"
   },
   {
     "id": "apollo-14",
@@ -229,7 +250,7 @@
     "launchYear": "31. Januar – 9. Februar 1971",
     "statusLabel": "Gelandet im Fra-Mauro-Hochland",
     "wikimediaImageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/Apollo_14_Shepard.jpg/960px-Apollo_14_Shepard.jpg",
-    "imageUrl": "assets/images/apollo-14.svg",
+    "imageUrl": "assets/images/moon-flight.svg",
     "imageCredit": "NASA / Edgar Mitchell – Alan Shepard (Wikimedia Commons, Public Domain)",
     "childSummary": "Apollo 14 führte Alan Shepard und Edgar Mitchell im Februar 1971 erstmals in das hügelige Mond-Hochland von Fra Mauro, um Auswurfgestein des riesigen Mare-Imbrium-Einschlags zu sammeln.",
     "tasksForKids": [
@@ -250,7 +271,7 @@
     "launchYear": "26. Juli – 7. August 1971",
     "statusLabel": "Gelandet an der Hadley-Rille",
     "wikimediaImageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/62/AS15-88-11866_-_Apollo_15_flag%2C_rover%2C_LM%2C_Irwin_-_restoration1.jpg/960px-AS15-88-11866_-_Apollo_15_flag%2C_rover%2C_LM%2C_Irwin_-_restoration1.jpg",
-    "imageUrl": "assets/images/apollo-15.svg",
+    "imageUrl": "assets/images/moon-flight.svg",
     "imageCredit": "NASA / David Scott – James Irwin mit Mondauto (Wikimedia Commons, Public Domain)",
     "childSummary": "Bei Apollo 15 kam im Juli 1971 zum ersten Mal das zusammenklappbare elektrische Mondauto (Lunar Roving Vehicle) zum Einsatz! Damit konnten David Scott und James Irwin fast 28 Kilometer weit durch die Gebirgslandschaft der Hadley-Apenninen fahren.",
     "tasksForKids": [
@@ -271,7 +292,7 @@
     "launchYear": "16. – 27. April 1972",
     "statusLabel": "Gelandet im Descartes-Hochland",
     "wikimediaImageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/John_W._Young_on_the_Moon.jpg/960px-John_W._Young_on_the_Moon.jpg",
-    "imageUrl": "assets/images/apollo-16.svg",
+    "imageUrl": "assets/images/moon-flight.svg",
     "imageCredit": "NASA / Charles Duke – John Young auf dem Mond (Wikimedia Commons, Public Domain)",
     "childSummary": "Apollo 16 landete im April 1972 mitten im hellen Descartes-Hochland. John Young und Charles Duke erkundeten mit ihrem Mondauto drei Tage lang Krater und Berghänge und brachten fast 96 kg Hochlandgestein mit.",
     "tasksForKids": [
@@ -292,7 +313,7 @@
     "launchYear": "7. – 19. Dezember 1972",
     "statusLabel": "Gelandet im Taurus-Littrow-Tal",
     "wikimediaImageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Eugene_Cernan_at_the_LM%2C_Apollo_17%2C_AS17-134-20378.jpg/960px-Eugene_Cernan_at_the_LM%2C_Apollo_17%2C_AS17-134-20378.jpg",
-    "imageUrl": "assets/images/apollo-17.svg",
+    "imageUrl": "assets/images/moon-flight.svg",
     "imageCredit": "NASA / Harrison Schmitt – Eugene Cernan (Wikimedia Commons, Public Domain)",
     "childSummary": "Bei Apollo 17 im Dezember 1972 flog mit Harrison Schmitt erstmals ein ausgebildeter Geologe zusammen mit Eugene Cernan auf den Mond. In drei Außenbord-Touren sammelten sie über 110 Kilogramm Mondgestein!",
     "tasksForKids": [
@@ -313,7 +334,7 @@
     "launchYear": "Seit November 2022 (Artemis I)",
     "statusLabel": "Aktives Mondprogramm",
     "wikimediaImageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Artemis_program_%28solid_contrast_with_wordmark%29.svg/960px-Artemis_program_%28solid_contrast_with_wordmark%29.svg.png",
-    "imageUrl": "assets/images/artemis.svg",
+    "imageUrl": "assets/images/moon-flight.svg",
     "imageCredit": "NASA – Artemis Program Emblem (Wikimedia Commons, Public Domain)",
     "childSummary": "Mit dem Artemis-Programm und dem Raumschiff ‚Orion‘ (dessen wichtiges Antriebs- und Versorgungsmodul in Bremen gebaut wird) kehren Menschen zum Mond zurück, um den eisigen Mondsüdpol zu erforschen!",
     "tasksForKids": [
@@ -335,7 +356,7 @@
     "launchYear": "25. Dezember 2021",
     "statusLabel": "Aktiv im Sonnenorbit (1,5 Mio. km von der Erde)",
     "wikimediaImageUrl": "https://upload.wikimedia.org/wikipedia/commons/2/2a/JWST_spacecraft_model_3.png",
-    "imageUrl": "assets/images/jwst.svg",
+    "imageUrl": "assets/images/telescope.svg",
     "imageCredit": "NASA, ESA, CSA, and STScI (Wikimedia Commons, Public Domain)",
     "childSummary": "Das James-Webb-Teleskop (JWST) ist das größte und leistungsstärkste Weltraumteleskop, das je gebaut wurde! Mit seinem 6,5 Meter großen Spiegel aus 18 goldbeschichteten Sechsecken kann es durch dichte Staubwolken blicken.",
     "tasksForKids": [
@@ -357,7 +378,7 @@
     "launchYear": "19. Dezember 2013",
     "statusLabel": "Über 2 Milliarden Sterne vermessen",
     "wikimediaImageUrl": "https://upload.wikimedia.org/wikipedia/commons/4/49/Gaia_spacecraft.jpeg",
-    "imageUrl": "assets/images/gaia.svg",
+    "imageUrl": "assets/images/telescope.svg",
     "imageCredit": "ESA – ATG medialab (Wikimedia Commons, CC BY-SA 3.0 IGO)",
     "childSummary": "Das europäische Weltraumteleskop Gaia ist der beste Landvermesser des Universums! Es hat fast zwei Milliarden Sterne unserer Heimatgalaxie (der Milchstraße) sowie tausende Asteroiden in unserem eigenen Sonnensystem hochgenau vermessen.",
     "tasksForKids": [
@@ -366,6 +387,48 @@
       "Hat außerdem über 150.000 Asteroiden in unserem Sonnensystem genau vermessen!"
     ],
     "wikipediaUrl": "https://de.wikipedia.org/wiki/Gaia_(Raumsonde)"
+  },
+  {
+    "id": "hubble",
+    "title": "Hubble-Weltraumteleskop",
+    "subtitle": "Seit 1990 das berühmte Fenster ins tiefe Universum im Erdorbit",
+    "category": "telescope",
+    "categoryLabel": "Weltraumteleskope",
+    "targetBodyId": "hubble",
+    "targetBodyName": "Hubble-Teleskop (Erdorbit)",
+    "agency": "NASA / ESA",
+    "launchYear": "24. April 1990",
+    "statusLabel": "Aktiv im Erdorbit (540 km Höhe)",
+    "wikimediaImageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Hubble_2009_close-up_2.jpg/960px-Hubble_2009_close-up_2.jpg",
+    "imageUrl": "assets/images/telescope.svg",
+    "imageCredit": "NASA / STS-125 Crew (Wikimedia Commons, Public Domain)",
+    "childSummary": "Das Hubble-Teleskop umkreist unsere Erde in 540 Kilometern Höhe und liefert seit über 35 Jahren gestochen scharfe Farbfotos von bunten Sternenwiegen, Galaxien und unseren Nachbarplaneten.",
+    "tasksForKids": [
+      "Wurde fünfmal von Space-Shuttle-Astronauten direkt im Weltall gewartet und modernisiert.",
+      "Entdeckte unter anderem die kleinen Monde Nix und Hydra bei Pluto sowie MK 2 bei Makemake."
+    ],
+    "wikipediaUrl": "https://de.wikipedia.org/wiki/Hubble-Weltraumteleskop"
+  },
+  {
+    "id": "rosetta",
+    "title": "ESA-Mission Rosetta & Philae",
+    "subtitle": "Erste weiche Landung auf einem Kometen (67P/Tschurjumow-Gerassimenko)",
+    "category": "deep-space",
+    "categoryLabel": "Äußere Raumsonden",
+    "targetBodyId": "rosetta",
+    "targetBodyName": "Rosetta & Philae (Komet 67P)",
+    "agency": "ESA (Europäische Weltraumorganisation)",
+    "launchYear": "2. März 2004 (Kometenlandung: 12. Nov. 2014)",
+    "statusLabel": "Historische Kometen-Landung (2014–2016)",
+    "wikimediaImageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Rosetta_spacecraft_model.png/960px-Rosetta_spacecraft_model.png",
+    "imageUrl": "assets/images/probe.svg",
+    "imageCredit": "ESA / ATG medialab (Wikimedia Commons, CC BY-SA 3.0 IGO)",
+    "childSummary": "Rosetta flog zehn Jahre lang durch das Sonnensystem, bis sie den entenförmigen Kometen 67P/Tschuri einholte und den kleinen Lander ‚Philae‘ auf seinem eisigen Kern absetzte!",
+    "tasksForKids": [
+      "Begleitete den Kometen über zwei Jahre lang auf seinem Weg um die Sonne.",
+      "Untersuchte Wassereis, Staub und organische Moleküle direkt auf der Kometenoberfläche."
+    ],
+    "wikipediaUrl": "https://de.wikipedia.org/wiki/Rosetta_(Sonde)"
   },
   {
     "id": "parker",
@@ -379,7 +442,7 @@
     "launchYear": "12. August 2018",
     "statusLabel": "Aktiv im extrem nahen Sonnenorbit (6,16 Mio. km)",
     "wikimediaImageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Parker_Solar_Probe_spacecraft_model.png/960px-Parker_Solar_Probe_spacecraft_model.png",
-    "imageUrl": "assets/images/parker.svg",
+    "imageUrl": "assets/images/probe.svg",
     "imageCredit": "NASA / Johns Hopkins APL (Wikimedia Commons, Public Domain)",
     "childSummary": "Wie schafft man es, zur Sonne zu fliegen, ohne zu schmelzen? Die NASA-Sonde ‚Parker Solar Probe‘ versteckt sich hinter einem dicken Kohlenstoff-Hitzeschild und rast mit Rekordtempo von 692.000 km/h mitten durch die äußere Sonnen-Atmosphäre!",
     "tasksForKids": [
@@ -400,7 +463,7 @@
     "launchYear": "10. Februar 2020",
     "statusLabel": "Aktiv auf geneigter Sonnenbahn",
     "wikimediaImageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Solar_Orbiter_ESA20813950.jpg/960px-Solar_Orbiter_ESA20813950.jpg",
-    "imageUrl": "assets/images/solar-orbiter.svg",
+    "imageUrl": "assets/images/probe.svg",
     "imageCredit": "ESA / ATG medialab (Wikimedia Commons)",
     "childSummary": "Der europäische Solar Orbiter fliegt auf einer immer stärker gekippten Bahn um die Sonne, um zum allerersten Mal direkt auf den Nord- und Südpol unseres Zentralsterns zu blicken.",
     "tasksForKids": [
@@ -421,7 +484,7 @@
     "launchYear": "20. Oktober 2018",
     "statusLabel": "Aktiv bei Merkur",
     "wikimediaImageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/BepiColombo_stack_cropped.jpg/960px-BepiColombo_stack_cropped.jpg",
-    "imageUrl": "assets/images/bepicolombo.svg",
+    "imageUrl": "assets/images/probe.svg",
     "imageCredit": "ESA / ATG medialab (Wikimedia Commons)",
     "childSummary": "Merkur ist wegen der gewaltigen Anziehungskraft und Hitze der nahen Sonne extrem schwer zu erreichen. Deshalb fliegen die europäische Sonde MPO und die japanische Sonde Mio gemeinsam als ‚BepiColombo‘ zum kleinsten Planeten!",
     "tasksForKids": [
@@ -442,7 +505,7 @@
     "launchYear": "5. August 2011 (Ankunft bei Jupiter: Juli 2016)",
     "statusLabel": "Aktiv im polaren Jupiterorbit",
     "wikimediaImageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/Juno_spacecraft_model_1.png/960px-Juno_spacecraft_model_1.png",
-    "imageUrl": "assets/images/juno.svg",
+    "imageUrl": "assets/images/probe.svg",
     "imageCredit": "NASA / JPL-Caltech (Wikimedia Commons, Public Domain)",
     "childSummary": "Die solarbetriebene NASA-Sonde Juno umkreist den Gasriesen Jupiter seit 2016 auf einer steilen Bahn über seine beiden Pole und blickt tief unter seine bunten Wolkengürtel.",
     "tasksForKids": [
@@ -463,7 +526,7 @@
     "launchYear": "14. April 2023",
     "statusLabel": "Auf dem Weg ins Jupiter-System",
     "wikimediaImageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/Juice_launch_kit_cover_close-up.png/960px-Juice_launch_kit_cover_close-up.png",
-    "imageUrl": "assets/images/juice.svg",
+    "imageUrl": "assets/images/probe.svg",
     "imageCredit": "ESA / ATG medialab (Wikimedia Commons, CC BY-SA 3.0 IGO)",
     "childSummary": "JUICE (‚Jupiter Icy Moons Explorer‘) ist die große europäische Flaggschiff-Mission zu den drei großen Eismonden des Jupiter: Ganymed, Europa und Kallisto!",
     "tasksForKids": [
@@ -484,7 +547,7 @@
     "launchYear": "15. Oktober 1997 (im Saturn-Orbit 2004–2017)",
     "statusLabel": "Historische Saturn- & Titan-Mission",
     "wikimediaImageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Cassini_Saturn_Orbit_Insertion.jpg/960px-Cassini_Saturn_Orbit_Insertion.jpg",
-    "imageUrl": "assets/images/cassini.svg",
+    "imageUrl": "assets/images/probe.svg",
     "imageCredit": "NASA / JPL-Caltech (Wikimedia Commons, Public Domain)",
     "childSummary": "Cassini erforschte 13 Jahre lang Saturn und seine glitzernden Ringe, setzte 2005 die europäische Tochtersonde ‚Huygens‘ auf dem Riesenmond Titan ab und entdeckte warme Wasser-Geysire auf dem Eismond Enceladus!",
     "tasksForKids": [
@@ -505,7 +568,7 @@
     "launchYear": "19. Januar 2006 (Pluto-Vorbeiflug: 14. Juli 2015)",
     "statusLabel": "Aktiv im äußeren Kuipergürtel (> 60 AE)",
     "wikimediaImageUrl": "https://upload.wikimedia.org/wikipedia/commons/e/ee/New_Horizons_spacecraft_model_1.png",
-    "imageUrl": "assets/images/new-horizons.svg",
+    "imageUrl": "assets/images/probe.svg",
     "imageCredit": "NASA / Johns Hopkins APL (Wikimedia Commons, Public Domain)",
     "childSummary": "New Horizons startete 2006 als schnellste direkt gestartete Raumsonde und enthüllte am 14. Juli 2015 zum allerersten Mal das Gesicht von Zwergplanet Pluto mit seinem berühmten Eisherz und seinem großen Mond Charon!",
     "tasksForKids": [

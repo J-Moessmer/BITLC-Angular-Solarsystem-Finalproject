@@ -98,6 +98,8 @@ export class SolarSystemDataService {
       trail.push({ id: 'group-planets', label: 'Planeten' });
     } else if (current.category === 'dwarf-planet' && current.parentId !== 'asteroid-belt') {
       trail.push({ id: 'group-dwarfs', label: 'Zwergplaneten' });
+    } else if (current.category === 'comet') {
+      trail.push({ id: 'group-comets', label: 'Kometen' });
     }
 
     for (const item of chain) {
@@ -175,6 +177,16 @@ export class SolarSystemDataService {
             ],
           },
           {
+            id: 'comets-group',
+            label: 'Kometen',
+            icon: 'fa-solid fa-meteor',
+            children: [
+              buildBodyNode('halley', 'fa-solid fa-meteor'),
+              buildBodyNode('churyumov', 'fa-solid fa-meteor'),
+              buildBodyNode('hale-bopp', 'fa-solid fa-meteor'),
+            ],
+          },
+          {
             id: 'probes-group',
             label: 'Raumsonden & Teleskope',
             icon: 'fa-solid fa-satellite',
@@ -183,6 +195,7 @@ export class SolarSystemDataService {
               buildBodyNode('solar-orbiter', 'fa-solid fa-satellite'),
               buildBodyNode('bepicolombo', 'fa-solid fa-shuttle-space'),
               buildBodyNode('iss', 'fa-solid fa-satellite'),
+              buildBodyNode('hubble', 'fa-solid fa-satellite-dish'),
               buildBodyNode('artemis', 'fa-solid fa-rocket'),
               buildBodyNode('jwst', 'fa-solid fa-satellite-dish'),
               buildBodyNode('gaia', 'fa-solid fa-satellite-dish'),
@@ -190,16 +203,18 @@ export class SolarSystemDataService {
               buildBodyNode('juno', 'fa-solid fa-satellite'),
               buildBodyNode('juice', 'fa-solid fa-satellite'),
               buildBodyNode('cassini', 'fa-solid fa-shuttle-space'),
+              buildBodyNode('rosetta', 'fa-solid fa-shuttle-space'),
               buildBodyNode('new-horizons', 'fa-solid fa-shuttle-space'),
               buildBodyNode('voyager-1', 'fa-solid fa-satellite-dish'),
               buildBodyNode('voyager-2', 'fa-solid fa-satellite-dish'),
               {
                 id: 'apollo-group',
-                label: 'Apollo-Mondlandungen',
+                label: 'Apollo-Mondflüge',
                 icon: 'fa-solid fa-rocket',
                 children: [
                   buildBodyNode('apollo-11', 'fa-solid fa-rocket'),
                   buildBodyNode('apollo-12', 'fa-solid fa-rocket'),
+                  buildBodyNode('apollo-13', 'fa-solid fa-rocket'),
                   buildBodyNode('apollo-14', 'fa-solid fa-rocket'),
                   buildBodyNode('apollo-15', 'fa-solid fa-rocket'),
                   buildBodyNode('apollo-16', 'fa-solid fa-rocket'),

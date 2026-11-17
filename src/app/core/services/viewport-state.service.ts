@@ -99,6 +99,15 @@ export class ViewportStateService {
     });
   });
 
+  /** ISO-Datum (YYYY-MM-DD) für das Zeitauswahl-Feld (<input type="date">) */
+  readonly isoSimulationDate = computed<string>(() => {
+    const d = this.simulationDate();
+    const yyyy = d.getFullYear();
+    const mm = String(d.getMonth() + 1).padStart(2, '0');
+    const dd = String(d.getDate()).padStart(2, '0');
+    return `${yyyy}-${mm}-${dd}`;
+  });
+
   /** Kompatibilitäts-Signal für Tests & Debug-Anzeige */
   readonly svgTransform = computed<string>(() => {
     const z = this.zoomLevel();
@@ -233,14 +242,22 @@ export class ViewportStateService {
     this.simulationDate.update((curr) => new Date(curr.getTime() + days * this.msPerDay));
   }
 
-  /** Wechselt zwischen 'overview', 'true-scale' und 'side-view' (P10-U40) */
+  /** Setzt das Simulationsdatum über ein ISO-Datum (YYYY-MM-DD) aus dem Datums-Picker */
+  setSimulationDateIso(isoDate: string): void {
+    if (!isoDate || !/^\d{4}-\d{2}-\d{2}$/.test(isoDate)) {
+      return;
+    }
+    const [y, m, d] = isoDate.split('-').map(Number);
+    const parsed = new Date(Date.UTC(y, m - 1, d, 12, 0, 0));
+    if (!Number.isNaN(parsed.getTime())) {
+      this.simulationDate.set(parsed);
+    }
+  }
+
+  /** Wechselt zwischen 'overview', 'true-scale' und 'side-view' inkl. passendem Körpergrößen-Maßstab (P10-U40) */
   setViewMode(mode: SolarViewMode): void {
     this.viewMode.set(mode);
-    if (mode === 'true-scale') {
-      this.bodyScaleMode.set('strict-distance-scale');
-    } else if (mode === 'overview') {
-      this.bodyScaleMode.set('didactic');
-    }
+    this.bodyScaleMode.set(mode === 'true-scale' ? 'strict-distance-scale' : 'didactic');
     this.resetCamera();
   }
 
@@ -265,36 +282,63 @@ export class ViewportStateService {
     const yearsSinceJ2000 = days / 365.25;
 
     if (body.id === 'voyager-1') {
-      const liveDistAu = Math.max(30, Number((76.0 + 3.57 * yearsSinceJ2000).toFixed(2)));
+      const year = 2000 + yearsSinceJ2000;
+      let liveDistAu = 1.0;
+      if (year >= 1980.86) {
+        liveDistAu = 9.54 + 3.57 * (year - 1980.86);
+      } else if (year >= 1979.18) {
+        liveDistAu = 5.2 + 2.58 * (year - 1979.18);
+      } else if (year >= 1977.68) {
+        liveDistAu = 1.0 + 2.8 * (year - 1977.68);
+      }
       const lonRad = (255.4 * Math.PI) / 180;
       return {
         longitudeDeg: 255.4,
         eccentricAnomalyRad: lonRad,
         trueAnomalyRad: lonRad,
-        currentDistanceAu: liveDistAu,
+        currentDistanceAu: Number(liveDistAu.toFixed(2)),
       };
     }
 
     if (body.id === 'voyager-2') {
-      const liveDistAu = Math.max(30, Number((61.0 + 3.13 * yearsSinceJ2000).toFixed(2)));
+      const year = 2000 + yearsSinceJ2000;
+      let liveDistAu = 1.0;
+      if (year >= 1989.65) {
+        liveDistAu = 30.07 + 3.13 * (year - 1989.65);
+      } else if (year >= 1986.06) {
+        liveDistAu = 19.19 + 3.03 * (year - 1986.06);
+      } else if (year >= 1981.65) {
+        liveDistAu = 9.54 + 2.19 * (year - 1981.65);
+      } else if (year >= 1979.52) {
+        liveDistAu = 5.2 + 2.04 * (year - 1979.52);
+      } else if (year >= 1977.63) {
+        liveDistAu = 1.0 + 2.22 * (year - 1977.63);
+      }
       const lonRad = (289.4 * Math.PI) / 180;
       return {
         longitudeDeg: 289.4,
         eccentricAnomalyRad: lonRad,
         trueAnomalyRad: lonRad,
-        currentDistanceAu: liveDistAu,
+        currentDistanceAu: Number(liveDistAu.toFixed(2)),
       };
     }
 
     if (body.id === 'new-horizons') {
-      const yearsSince2006 = (days - 2209) / 365.25;
-      const liveDistAu = Math.max(1.0, Number((1.0 + 2.92 * yearsSince2006).toFixed(2)));
+      const year = 2000 + yearsSinceJ2000;
+      let liveDistAu = 1.0;
+      if (year >= 2015.53) {
+        liveDistAu = 32.9 + 2.92 * (year - 2015.53);
+      } else if (year >= 2007.16) {
+        liveDistAu = 5.2 + 3.31 * (year - 2007.16);
+      } else if (year >= 2006.05) {
+        liveDistAu = 1.0 + 3.78 * (year - 2006.05);
+      }
       const lonRad = (293.5 * Math.PI) / 180;
       return {
         longitudeDeg: 293.5,
         eccentricAnomalyRad: lonRad,
         trueAnomalyRad: lonRad,
-        currentDistanceAu: liveDistAu,
+        currentDistanceAu: Number(liveDistAu.toFixed(2)),
       };
     }
 
@@ -324,7 +368,7 @@ export class ViewportStateService {
 
     const m0Deg = body.orbitalElements.mna.numericValue ?? body.orbitAngleDeg;
     const lpeDeg = body.orbitalElements.lpe.numericValue ?? 0;
-    const ecc = Math.min(0.88, Math.max(0, body.orbitalElements.ecc.numericValue ?? 0));
+    const ecc = Math.min(0.97, Math.max(0, body.orbitalElements.ecc.numericValue ?? 0));
     const smaAu = body.orbitalElements.sma.numericValue ?? body.distanceFromSunAu;
 
     const meanMotionDegPerDay = 360.0 / body.orbitalPeriodDays;
@@ -503,14 +547,14 @@ export class ViewportStateService {
       const parentPos = parent
         ? this.computeBodyPosition(parent, allBodies)
         : {
-            x: px,
-            y: py,
-            worldX: 0,
-            worldY: 0,
-            bodyRadiusPx: 6,
-            strictTrueRadiusPx: 1,
-            liveDistanceAu: body.distanceFromSunAu,
-          };
+          x: px,
+          y: py,
+          worldX: 0,
+          worldY: 0,
+          bodyRadiusPx: 6,
+          strictTrueRadiusPx: 1,
+          liveDistanceAu: body.distanceFromSunAu,
+        };
 
       // Spezialfall: Gelandete Oberflächen-Missionen (isSurfaceLanded === true, z. B. Apollo 11-17 auf dem Erdmond, Rover Perseverance & Curiosity auf dem Mars)
       // Sitzen direkt auf der Oberfläche ihres Zielkörpers und haben KEINE eigene Umlaufbahn im All!
@@ -624,7 +668,8 @@ export class ViewportStateService {
     }
 
     // Große Halbachse a (SMA) und Exzentrizität e (ECC) für Hauptkörper um die Sonne
-    const ecc = Math.min(0.75, Math.max(0, body.orbitalElements.ecc.numericValue ?? 0));
+    const rawEcc = body.orbitalElements.ecc.numericValue ?? 0;
+    const ecc = Math.min(mode === 'true-scale' ? 0.97 : 0.75, Math.max(0, rawEcc));
     const effectiveAu =
       body.id === 'voyager-1' || body.id === 'voyager-2' || body.id === 'new-horizons'
         ? kepler.currentDistanceAu
