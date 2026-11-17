@@ -1,5 +1,215 @@
 [
   {
+    "id": "sputnik-1",
+    "title": "Sputnik 1 – Der erste Satellit der Welt",
+    "subtitle": "Der Startschuss für das Raumfahrtzeitalter am 4. Oktober 1957",
+    "category": "deep-space",
+    "categoryLabel": "Historische Meilensteine (UdSSR)",
+    "targetBodyId": "sputnik-1",
+    "targetBodyName": "Sputnik 1 (Erdorbit)",
+    "agency": "Sowjetunion (UdSSR)",
+    "launchYear": "4. Oktober 1957",
+    "statusLabel": "Historischer Meilenstein (1957)",
+    "wikimediaImageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/%D0%9F%D0%B5%D1%80%D0%B2%D1%8B%D0%B9_%D0%B2_%D0%BC%D0%B8%D1%80%D0%B5_%D0%B8%D1%81%D0%BA%D1%83%D1%81%D1%81%D1%82%D0%B2%D0%B5%D0%BD%D0%BD%D1%8B%D0%B9_%D1%81%D0%BF%D1%83%D1%82%D0%BD%D0%B8%D0%BA_%D0%97%D0%B5%D0%BC%D0%BB%D0%B8.jpg/960px-%D0%9F%D0%B5%D1%80%D0%B2%D1%8B%D0%B9_%D0%B2_%D0%BC%D0%B8%D1%80%D0%B5_%D0%B8%D1%81%D0%BA%D1%83%D1%81%D1%81%D1%82%D0%B2%D0%B5%D0%BD%D0%BD%D1%8B%D0%B9_%D1%81%D0%BF%D1%83%D1%82%D0%BD%D0%B8%D0%BA_%D0%97%D0%B5%D0%BC%D0%BB%D0%B8.jpg",
+    "imageUrl": "assets/images/probe.svg",
+    "imageCredit": "NASA / NSSDC – Sputnik 1 (Wikimedia Commons, Public Domain)",
+    "childSummary": "Am 4. Oktober 1957 brachte eine sowjetische Rakete die kleine glänzende Metallkugel ‚Sputnik 1‘ in den Erdorbit. Es war der allererste von Menschen gebaute Satellit im Weltall!",
+    "tasksForKids": [
+      "Funkte 21 Tage lang ein ‚Piep-Piep‘-Signal rund um die Erde.",
+      "Half Forschern erstmals, die Dichte der obersten Erdatmosphäre zu messen."
+    ],
+    "wikipediaUrl": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1957-001B"
+  },
+  {
+    "id": "vostok-1",
+    "title": "Wostok 1 – Juri Gagarin als erster Mensch im All",
+    "subtitle": "Einmal rund um die Erde in 106 Minuten (12. April 1961)",
+    "category": "deep-space",
+    "categoryLabel": "Historische Meilensteine (UdSSR)",
+    "targetBodyId": "vostok-1",
+    "targetBodyName": "Wostok 1 (Erdorbit)",
+    "agency": "Sowjetunion (UdSSR)",
+    "launchYear": "12. April 1961",
+    "statusLabel": "Erster bemannter Raumflug (1961)",
+    "wikimediaImageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/%D0%9A%D0%BE%D1%81%D0%BC%D0%BE%D0%BD%D0%B0%D0%B2%D1%82_%D0%AE%D1%80%D0%B8%D0%B9_%D0%93%D0%B0%D0%B3%D0%B0%D1%80%D0%B8%D0%BD_%28cropped%29.jpg/960px-%D0%9A%D0%BE%D1%81%D0%BC%D0%BE%D0%BD%D0%B0%D0%B2%D1%82_%D0%AE%D1%80%D0%B8%D0%B9_%D0%93%D0%B0%D0%B3%D0%B0%D1%80%D0%B8%D0%BD_%28cropped%29.jpg",
+    "imageUrl": "assets/images/probe.svg",
+    "imageCredit": "Sowjetisches Archiv – Juri Gagarin (Wikimedia Commons)",
+    "childSummary": "Am 12. April 1961 startete der 27-jährige Kosmonaut Juri Gagarin in der Kapsel Wostok 1 und bewies als allererster Mensch, dass wir im Weltall und in Schwerelosigkeit sicher überleben können!",
+    "tasksForKids": [
+      "Umrundete die Erde einmal komplett in rund 300 Kilometern Höhe.",
+      "Der 12. April wird bis heute weltweit als ‚Tag der bemannten Raumfahrt‘ (Yuri's Night) gefeiert."
+    ],
+    "wikipediaUrl": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1961-012A"
+  },
+  {
+    "id": "tiangong",
+    "title": "Chinesische Raumstation Tiangong",
+    "subtitle": "Der ‚Himmelspalast‘ – dauerhaft bewohnte Station im Erdorbit",
+    "category": "space-station",
+    "categoryLabel": "Raumstationen",
+    "targetBodyId": "tiangong",
+    "targetBodyName": "Raumstation Tiangong (Erdorbit)",
+    "agency": "CNSA (China)",
+    "launchYear": "Seit April 2021 im Bau (seit 2022 fertig)",
+    "statusLabel": "Aktiv und dauerhaft bewohnt im Erdorbit",
+    "wikimediaImageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/Chinese_Tiangong_Space_Station.jpg/960px-Chinese_Tiangong_Space_Station.jpg",
+    "imageUrl": "assets/images/space-station.svg",
+    "imageCredit": "CMSA / Wikimedia Commons (CC BY-SA 4.0)",
+    "childSummary": "Tiangong (‚Himmelspalast‘) ist nach der ISS die zweite dauerhaft bewohnte Raumstation in unserer Erdumlaufbahn. Chinesische Taikonauten forschen dort in drei miteinander verbundenen Modulen.",
+    "tasksForKids": [
+      "Testet neue Lebenserhaltungssysteme, Pflanzenzucht und Weltraum-Aquarien.",
+      "Hat einen großen Roboterarm an der Außenseite für Außenbordeinsätze."
+    ],
+    "wikipediaUrl": "https://de.wikipedia.org/wiki/Tiangong_(Raumstation)"
+  },
+  {
+    "id": "venera-13",
+    "title": "Venera 13 – Landung in der Venus-Hitze",
+    "subtitle": "Die ersten Farbfotos von der Oberfläche der Venus (1982)",
+    "category": "deep-space",
+    "categoryLabel": "Äußere & Innere Sonden (UdSSR)",
+    "targetBodyId": "venera-13",
+    "targetBodyName": "Venera 13 (Venus)",
+    "agency": "Sowjetunion (UdSSR)",
+    "launchYear": "30. Okt. 1981 (Venuslandung: 1. März 1982)",
+    "statusLabel": "Historische Venus-Landung (1982)",
+    "wikimediaImageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/57/1982_CPA_5278.jpg/960px-1982_CPA_5278.jpg",
+    "imageUrl": "assets/images/probe.svg",
+    "imageCredit": "Sowjetische Post / Venera 13 (Wikimedia Commons)",
+    "childSummary": "Die sowjetische Sonde Venera 13 landete 1982 auf unserer glühend heißen Nachbarwelt Venus. Bei 457 °C und gigantischem Luftdruck überlebte sie über zwei Stunden und funkte die ersten echten Farbbilder des Venusbodens!",
+    "tasksForKids": [
+      "Fotografierte die gelb-orange Landschaft unter den dichten Schwefelsäurewolken der Venus.",
+      "Bohrte erstmals eine Bodenprobe direkt auf der Venus an und nahm Windgeräusche auf."
+    ],
+    "wikipediaUrl": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1981-106D"
+  },
+  {
+    "id": "lunokhod-1",
+    "title": "Lunochod 1 – Erster Mond-Rover",
+    "subtitle": "Das ferngesteuerte achträdrige Mondauto der Sowjetunion (1970)",
+    "category": "moon-mission",
+    "categoryLabel": "Mondflüge",
+    "targetBodyId": "lunokhod-1",
+    "targetBodyName": "Lunochod 1 (Erdmond)",
+    "agency": "Sowjetunion (UdSSR)",
+    "launchYear": "10. Nov. 1970 (Landung: 17. Nov. 1970)",
+    "statusLabel": "Historischer Meilenstein im Mare Imbrium",
+    "wikimediaImageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/Soviet_moonrover.JPG/960px-Soviet_moonrover.JPG",
+    "imageUrl": "assets/images/moon-flight.svg",
+    "imageCredit": "Memorial Museum of Cosmonautics (Wikimedia Commons, CC BY-SA 3.0)",
+    "childSummary": "Lunochod 1 (‚Mondgänger 1‘) war im November 1970 der allererste ferngesteuerte Rover, der über einen fremden Himmelskörper rollte! Ein fünfköpfiges Team auf der Erde steuerte ihn über 10,5 Kilometer durch das Mare Imbrium.",
+    "tasksForKids": [
+      "Fuhr 322 Tage lang über den Mond und untersuchte mehr als 500 Mondboden-Stellen.",
+      "Trug einen französischen Laser-Spiegel auf dem Rücken, mit dem der Mondabstand noch heute gemessen wird!"
+    ],
+    "wikipediaUrl": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1970-095D"
+  },
+  {
+    "id": "change-4",
+    "title": "Chang'e 4 & Yutu-2 – Mondrückseite",
+    "subtitle": "Die allererste weiche Landung auf der erdabgewandten Mondseite (2019)",
+    "category": "moon-mission",
+    "categoryLabel": "Mondflüge",
+    "targetBodyId": "change-4",
+    "targetBodyName": "Chang'e 4 (Mondrückseite)",
+    "agency": "CNSA (China)",
+    "launchYear": "7. Dez. 2018 (Landung: 3. Jan. 2019)",
+    "statusLabel": "Aktiv auf der Mondrückseite",
+    "wikimediaImageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/ChangE-4_-_PCAM.png/960px-ChangE-4_-_PCAM.png",
+    "imageUrl": "assets/images/moon-flight.svg",
+    "imageCredit": "CNSA / CLEP – Chang'e 4 & Yutu-2 (Wikimedia Commons)",
+    "childSummary": "China landete mit Chang'e 4 und dem Rover Yutu-2 im Januar 2019 als allererste Nation auf der geheimnisvollen Rückseite des Mondes, die wir von der Erde aus niemals direkt sehen können.",
+    "tasksForKids": [
+      "Nutzt den Relais-Satelliten ‚Queqiao‘ für die Funkverbindung um den Mond herum.",
+      "Untersucht tiefes Gestein im uralten Südpol-Aitken-Becken und testete erstes Pflanzenwachstum auf dem Mond."
+    ],
+    "wikipediaUrl": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=2018-103A"
+  },
+  {
+    "id": "chandrayaan-3",
+    "title": "Chandrayaan-3 – Indiens Südpol-Landung",
+    "subtitle": "Erste weiche Landung nahe dem Südpol des Erdmondes (August 2023)",
+    "category": "moon-mission",
+    "categoryLabel": "Mondflüge",
+    "targetBodyId": "chandrayaan-3",
+    "targetBodyName": "Chandrayaan-3 (Mondsüdpol)",
+    "agency": "ISRO (Indien)",
+    "launchYear": "14. Juli 2023 (Landung: 23. Aug. 2023)",
+    "statusLabel": "Erfolgreiche Südpol-Landung (2023)",
+    "wikimediaImageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/aa/Chandrayaan-3_%E2%80%93_Image_of_Vikram_lander_on_lunar_surface_taken_by_Pragyan_rover_navcam_at_1104_IST%2C_30_August_2023_from_15_meters_away_%28with_text%29.webp/960px-Chandrayaan-3_%E2%80%93_Image_of_Vikram_lander_on_lunar_surface_taken_by_Pragyan_rover_navcam_at_1104_IST%2C_30_August_2023_from_15_meters_away_%28with_text%29.webp",
+    "imageUrl": "assets/images/moon-flight.svg",
+    "imageCredit": "ISRO – Lander Vikram (Wikimedia Commons)",
+    "childSummary": "Die indische Raumfahrtagentur ISRO schrieb am 23. August 2023 Raumfahrtgeschichte: Lander ‚Vikram‘ und Rover ‚Pragyan‘ landeten als erste Sonden nahe dem Mondsüdpol!",
+    "tasksForKids": [
+      "Pragyan fuhr über 100 Meter durch die Südpol-Region und wies Schwefel im Mondboden nach.",
+      "Vikram führte am Ende sogar noch einen kleinen Hüpfer mit seinen Triebwerken auf dem Mond aus!"
+    ],
+    "wikipediaUrl": "https://www.isro.gov.in/Chandrayaan3.html"
+  },
+  {
+    "id": "slim",
+    "title": "SLIM – Japans ‚Moon Sniper‘",
+    "subtitle": "Ultrapräzise Punktlandung auf dem Erdmond (Januar 2024)",
+    "category": "moon-mission",
+    "categoryLabel": "Mondflüge",
+    "targetBodyId": "slim",
+    "targetBodyName": "SLIM (Erdmond)",
+    "agency": "JAXA (Japan)",
+    "launchYear": "6. Sept. 2023 (Landung: 19. Jan. 2024)",
+    "statusLabel": "Erfolgreiche Punktlandung (2024)",
+    "wikimediaImageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/SLIM_half_scale_model_%28close_cropped%29.png/960px-SLIM_half_scale_model_%28close_cropped%29.png",
+    "imageUrl": "assets/images/moon-flight.svg",
+    "imageCredit": "JAXA – SLIM (Wikimedia Commons)",
+    "childSummary": "Japan landete im Januar 2024 mit SLIM auf 55 Meter genau am Rand des Shioli-Kraters! Mit an Bord waren zwei winzige rollende bzw. hüpfende Mini-Roboter.",
+    "tasksForKids": [
+      "Demonstrierte eine neue Kamera-Navigation für exakte Krater-Punktlandungen.",
+      "Der kugelförmige Mini-Rover SORA-Q fotografierte den kopfüber gelandeten SLIM-Lander auf dem Mond."
+    ],
+    "wikipediaUrl": "https://global.jaxa.jp/projects/sas/slim/"
+  },
+  {
+    "id": "zhurong",
+    "title": "Mars-Rover Zhurong (Tianwen-1)",
+    "subtitle": "Chinas erster Mars-Rover in Utopia Planitia (2021)",
+    "category": "mars-rover",
+    "categoryLabel": "Mars Rover",
+    "targetBodyId": "zhurong",
+    "targetBodyName": "Rover Zhurong (Mars)",
+    "agency": "CNSA (China)",
+    "launchYear": "23. Juli 2020 (Landung: 14. Mai 2021)",
+    "statusLabel": "Erfolgreiche Mars-Expedition (2021–2022)",
+    "wikimediaImageUrl": "https://upload.wikimedia.org/wikipedia/commons/b/b9/Zhurong_rover_3x2_crop.png",
+    "imageUrl": "assets/images/rover.svg",
+    "imageCredit": "CNSA – Mars-Rover Zhurong (Wikimedia Commons)",
+    "childSummary": "China landete mit Tianwen-1 und dem Rover Zhurong im Mai 2021 direkt beim ersten Versuch sicher auf dem Mars und erkundete die riesige Ebene Utopia Planitia.",
+    "tasksForKids": [
+      "Fuhr 1.921 Meter weit über rote Marsdünen und Felsbrocken.",
+      "Durchleuchtete den Marsboden mit Radar und entdeckte Schichten eines früheren Ozeans oder Sees."
+    ],
+    "wikipediaUrl": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=2020-049A"
+  },
+  {
+    "id": "hayabusa-2",
+    "title": "Hayabusa2 – Japans Asteroiden-Jäger",
+    "subtitle": "Echte Bodenproben vom Asteroiden Ryugu zur Erde gebracht",
+    "category": "deep-space",
+    "categoryLabel": "Äußere Raumsonden (JAXA)",
+    "targetBodyId": "hayabusa-2",
+    "targetBodyName": "Hayabusa2 (Asteroidengürtel)",
+    "agency": "JAXA (Japan) & DLR (MASCOT)",
+    "launchYear": "3. Dez. 2014 (Probenrückkehr: Dez. 2020)",
+    "statusLabel": "Proben auf der Erde · Weiterflug im All",
+    "wikimediaImageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Hayabusa2_Ion_thruster.jpg/960px-Hayabusa2_Ion_thruster.jpg",
+    "imageUrl": "assets/images/probe.svg",
+    "imageCredit": "JAXA – Hayabusa2 (Wikimedia Commons, CC BY-SA 4.0)",
+    "childSummary": "Die japanische Raumsonde Hayabusa2 besuchte den dunklen Asteroiden Ryugu, setzte dort auch den deutsch-französischen Hüpf-Roboter ‚MASCOT‘ ab und brachte echte Asteroiden-Brösel zur Erde!",
+    "tasksForKids": [
+      "Sammelte 5,4 Gramm Ur-Gestein aus den ersten Tagen unseres Sonnensystems.",
+      "Fliegt inzwischen weiter zum nächsten Asteroiden (1998 KY26)!"
+    ],
+    "wikipediaUrl": "https://global.jaxa.jp/projects/sas/hayabusa2/"
+  },
+  {
     "id": "iss",
     "title": "Internationale Raumstation (ISS)",
     "subtitle": "Unser gemeinsames Forschungshaus im Erdorbit mit Live-Positionsdaten",
@@ -19,7 +229,7 @@
       "Beobachtet Wetter, Vulkane, Gletscher und Meere auf unserer Erde aus dem großen Aussichtsfenster ‚Cupola‘.",
       "Testet neue Technik für zukünftige Flüge zum Mond und zum Mars."
     ],
-    "wikipediaUrl": "https://de.wikipedia.org/wiki/Internationale_Raumstation",
+    "wikipediaUrl": "https://www.nasa.gov/international-space-station/",
     "hasIssLiveTracker": true
   },
   {
@@ -42,7 +252,7 @@
       "Hat die kleine Mars-Hubschrauberdrohne ‚Ingenuity‘ mitgebracht, die 72 Flüge in der dünnen Marsluft absolvierte!",
       "Füllt Gesteinsröhrchen ab, die später zur Erde gebracht werden sollen, und erzeugte mit dem Gerät MOXIE Sauerstoff auf dem Mars."
     ],
-    "wikipediaUrl": "https://de.wikipedia.org/wiki/Perseverance_(Rover)"
+    "wikipediaUrl": "https://science.nasa.gov/mission/mars-2020-perseverance/"
   },
   {
     "id": "curiosity",
@@ -64,7 +274,7 @@
       "Analysiert Gesteinsmehl in seinem eingebauten Chemielabor und untersucht Marssteine mit einem Laserstrahl.",
       "Misst die Strahlung auf der Marsoberfläche, um zukünftige Astronauten-Missionen vorzubereiten."
     ],
-    "wikipediaUrl": "https://de.wikipedia.org/wiki/Curiosity"
+    "wikipediaUrl": "https://science.nasa.gov/mission/msl-curiosity/"
   },
   {
     "id": "opportunity",
@@ -86,7 +296,7 @@
       "Entdeckte Hämatit-Kügelchen (‚Blueberries‘) und Gipsadern als Beweis für früheres flüssiges Wasser.",
       "Untersuchte vier große Einschlagkrater (Eagle, Endurance, Victoria und Endeavour) direkt vor Ort."
     ],
-    "wikipediaUrl": "https://de.wikipedia.org/wiki/Opportunity"
+    "wikipediaUrl": "https://science.nasa.gov/mission/mer-opportunity/"
   },
   {
     "id": "spirit",
@@ -108,7 +318,7 @@
       "Entdeckte helles Silikat-Gestein, das auf frühere heiße Wasserquellen oder Dampfquellen auf dem Mars hinweist.",
       "Fotografierte wirbelnde Staubteufel (Windhosen), die über die Marsebene fegten und dabei sogar seine Solarzellen vom Staub reinigten!"
     ],
-    "wikipediaUrl": "https://de.wikipedia.org/wiki/Spirit_(Raumsonde)"
+    "wikipediaUrl": "https://science.nasa.gov/mission/mer-spirit/"
   },
   {
     "id": "sojourner",
@@ -129,7 +339,7 @@
       "Bewies, dass ein sechsrädriges Fahrwerk (‚Rocker-Bogie‘) über spitze Marssteine klettern kann – genau diese Technik nutzen auch Curiosity und Perseverance!",
       "Untersuchte die chemische Zusammensetzung von Marssteinen mit einem Röntgenspektrometer."
     ],
-    "wikipediaUrl": "https://de.wikipedia.org/wiki/Mars_Pathfinder"
+    "wikipediaUrl": "https://science.nasa.gov/mission/mars-pathfinder/"
   },
   {
     "id": "voyager-1",
@@ -151,7 +361,7 @@
       "Untersuchte 1980 die dichte Stickstoff-Atmosphäre des großen Saturnmondes Titan.",
       "Misst seit August 2012 direkt die Teilchen und Magnetfelder im interstellaren Raum zwischen den Sternen!"
     ],
-    "wikipediaUrl": "https://de.wikipedia.org/wiki/Voyager_1"
+    "wikipediaUrl": "https://science.nasa.gov/mission/voyager/"
   },
   {
     "id": "voyager-2",
@@ -173,7 +383,7 @@
       "Flog 1989 dicht über den tiefblauen Neptun und entdeckte eisige Stickstoff-Geysire auf seinem Mond Triton.",
       "Überquerte im November 2018 ebenfalls die Grenze zum interstellaren Raum auf der Südseite des Sonnensystems."
     ],
-    "wikipediaUrl": "https://de.wikipedia.org/wiki/Voyager_2"
+    "wikipediaUrl": "https://science.nasa.gov/mission/voyager/"
   },
   {
     "id": "apollo-11",
@@ -194,7 +404,7 @@
       "Sammelte 21,5 Kilogramm Basaltgestein und Mondstaub aus dem Mare Tranquillitatis.",
       "Stellte ein Seismometer (für Mondbeben) und einen Laser-Spiegel zur genauen Abstandsmessung Erde–Mond auf."
     ],
-    "wikipediaUrl": "https://de.wikipedia.org/wiki/Apollo_11"
+    "wikipediaUrl": "https://www.nasa.gov/mission/apollo-11/"
   },
   {
     "id": "apollo-12",
@@ -215,7 +425,7 @@
       "Baute eine automatische Forschungsstation (ALSEP) auf dem Mondboden auf.",
       "Untersuchte, wie sich zweieinhalb Jahre im extremen Mondklima auf die Bauteile der Sonde Surveyor 3 ausgewirkt hatten."
     ],
-    "wikipediaUrl": "https://de.wikipedia.org/wiki/Apollo_12"
+    "wikipediaUrl": "https://www.nasa.gov/mission/apollo-12/"
   },
   {
     "id": "apollo-13",
@@ -236,7 +446,7 @@
       "Nutze die Anziehungskraft des Mondes wie eine Steinschleuder, um ohne großes Haupttriebwerk zur Erde zurückzukehren.",
       "Stellte bei 400.171 Kilometern den Entfernungsrekord für Menschen von der Erde auf."
     ],
-    "wikipediaUrl": "https://de.wikipedia.org/wiki/Apollo_13"
+    "wikipediaUrl": "https://www.nasa.gov/mission/apollo-13/"
   },
   {
     "id": "apollo-14",
@@ -257,7 +467,7 @@
       "Nutzte den zweirädrigen Handwagen ‚MET‘ für Werkzeuge und 42,3 Kilogramm Gesteinsproben.",
       "Erforschte die innere Struktur des Mondes mit seismischen Messungen."
     ],
-    "wikipediaUrl": "https://de.wikipedia.org/wiki/Apollo_14"
+    "wikipediaUrl": "https://www.nasa.gov/mission/apollo-14/"
   },
   {
     "id": "apollo-15",
@@ -278,7 +488,7 @@
       "Entdeckte den über 4 Milliarden Jahre alten ‚Genesis-Stein‘ aus der Urkruste des Mondes.",
       "Bewies mit dem berühmten Hammer-und-Feder-Experiment vor laufender TV-Kamera das Fallgesetz von Galileo Galilei im Vakuum."
     ],
-    "wikipediaUrl": "https://de.wikipedia.org/wiki/Apollo_15"
+    "wikipediaUrl": "https://www.nasa.gov/mission/apollo-15/"
   },
   {
     "id": "apollo-16",
@@ -299,7 +509,7 @@
       "Betrieb das erste astronomische Ultraviolett-Teleskop auf der Oberfläche des Mondes.",
       "Wies nach, dass das Descartes-Hochland nicht durch Vulkane, sondern durch uralte Meteoriteneinschläge geformt wurde."
     ],
-    "wikipediaUrl": "https://de.wikipedia.org/wiki/Apollo_16"
+    "wikipediaUrl": "https://www.nasa.gov/mission/apollo-16/"
   },
   {
     "id": "apollo-17",
@@ -320,7 +530,7 @@
       "Entdeckte am Krater Shorty orangefarbene vulkanische Glasperlen (‚Orange Soil‘) aus alten Feuerfontänen des Mondes.",
       "Stellte mit 35,7 Kilometern Fahrstrecke und 22 Stunden Außenbordeinsatz die Rekorde aller Apollo-Missionen auf."
     ],
-    "wikipediaUrl": "https://de.wikipedia.org/wiki/Apollo_17"
+    "wikipediaUrl": "https://www.nasa.gov/mission/apollo-17/"
   },
   {
     "id": "artemis",
@@ -342,7 +552,7 @@
       "Am Südpol des Mondes soll nach gefrorenem Wassereis in schattigen Kratern gesucht werden.",
       "Geplant ist außerdem eine kleine Raumstation im Mondorbit namens ‚Lunar Gateway‘."
     ],
-    "wikipediaUrl": "https://de.wikipedia.org/wiki/Artemis-Programm"
+    "wikipediaUrl": "https://www.nasa.gov/humans-in-space/artemis/"
   },
   {
     "id": "jwst",
@@ -364,7 +574,7 @@
       "Untersucht auch die Wolken von Jupiter, Saturn, Uranus, Neptun sowie die Zwergplaneten Eris und Pluto.",
       "Ein Sonnenschutzschild so groß wie ein Tennisplatz hält die Kameras im Dauerschatten bei unter -220 °C kühl."
     ],
-    "wikipediaUrl": "https://de.wikipedia.org/wiki/James-Webb-Weltraumteleskop"
+    "wikipediaUrl": "https://science.nasa.gov/mission/webb/"
   },
   {
     "id": "gaia",
@@ -386,7 +596,7 @@
       "Misst genau, wie weit die Sterne entfernt sind und wohin sie sich bewegen.",
       "Hat außerdem über 150.000 Asteroiden in unserem Sonnensystem genau vermessen!"
     ],
-    "wikipediaUrl": "https://de.wikipedia.org/wiki/Gaia_(Raumsonde)"
+    "wikipediaUrl": "https://www.esa.int/Science_Exploration/Space_Science/Gaia"
   },
   {
     "id": "hubble",
@@ -407,7 +617,7 @@
       "Wurde fünfmal von Space-Shuttle-Astronauten direkt im Weltall gewartet und modernisiert.",
       "Entdeckte unter anderem die kleinen Monde Nix und Hydra bei Pluto sowie MK 2 bei Makemake."
     ],
-    "wikipediaUrl": "https://de.wikipedia.org/wiki/Hubble-Weltraumteleskop"
+    "wikipediaUrl": "https://science.nasa.gov/mission/hubble/"
   },
   {
     "id": "rosetta",
@@ -428,7 +638,7 @@
       "Begleitete den Kometen über zwei Jahre lang auf seinem Weg um die Sonne.",
       "Untersuchte Wassereis, Staub und organische Moleküle direkt auf der Kometenoberfläche."
     ],
-    "wikipediaUrl": "https://de.wikipedia.org/wiki/Rosetta_(Sonde)"
+    "wikipediaUrl": "https://www.esa.int/Science_Exploration/Space_Science/Rosetta"
   },
   {
     "id": "parker",
@@ -449,7 +659,7 @@
       "Findet heraus, warum die äußere Sonnen-Korona über 1 Million Grad heiß ist, während die Oberfläche darunter ‚nur‘ 5.500 °C warm ist.",
       "Misst vor Ort, wie der schnelle Sonnenwind entsteht und beschleunigt wird."
     ],
-    "wikipediaUrl": "https://de.wikipedia.org/wiki/Parker_Solar_Probe"
+    "wikipediaUrl": "https://science.nasa.gov/mission/parker-solar-probe/"
   },
   {
     "id": "solar-orbiter",
@@ -470,7 +680,7 @@
       "Fotografiert durch kleine verschließbare Luken im Hitzeschild die Sonne aus nur 42 Millionen Kilometern Entfernung.",
       "Entdeckte tausende kleine ‚Lagerfeuer‘-Eruptionen auf der Sonnenoberfläche."
     ],
-    "wikipediaUrl": "https://de.wikipedia.org/wiki/Solar_Orbiter"
+    "wikipediaUrl": "https://www.esa.int/Science_Exploration/Space_Science/Solar_Orbiter"
   },
   {
     "id": "bepicolombo",
@@ -491,7 +701,7 @@
       "Erklärt, warum der kleine Merkur einen riesigen Eisenkern und ein eigenes Magnetfeld hat.",
       "Sucht in tiefen, ewig schattigen Kratern an Merkurs Nord- und Südpol nach gefrorenem Wassereis – mitten auf einem 430 °C heißen Planeten!"
     ],
-    "wikipediaUrl": "https://de.wikipedia.org/wiki/BepiColombo"
+    "wikipediaUrl": "https://www.esa.int/Science_Exploration/Space_Science/BepiColombo"
   },
   {
     "id": "juno",
@@ -512,7 +722,7 @@
       "Misst, wie tief der Große Rote Fleck in Jupiters Gashülle hinabreicht.",
       "Fotografierte Jupiters Nord- und Südpol sowie nahe Vorbeiflüge an den Monden Ganymed, Europa und Io."
     ],
-    "wikipediaUrl": "https://de.wikipedia.org/wiki/Juno_(Raumsonde)"
+    "wikipediaUrl": "https://science.nasa.gov/mission/juno/"
   },
   {
     "id": "juice",
@@ -533,7 +743,7 @@
       "Prüft mit Eis-Radar, wie dick die Eiskrusten und wie tief die darunterliegenden Salzwasser-Ozeane sind.",
       "Schwenkt als allererste Raumsonde überhaupt in eine feste Umlaufbahn um einen fremden Mond (Ganymed) ein."
     ],
-    "wikipediaUrl": "https://de.wikipedia.org/wiki/Jupiter_Icy_Moons_Explorer"
+    "wikipediaUrl": "https://www.esa.int/Science_Exploration/Space_Science/Juice"
   },
   {
     "id": "cassini",
@@ -554,7 +764,7 @@
       "Huygens funkte am 14. Januar 2005 die ersten Bilder direkt von der Oberfläche des Saturnmondes Titan mit seinen Methan-Flüssen.",
       "Cassini flog direkt durch die aufsteigenden Wasserdampf-Fontänen am Südpol von Enceladus."
     ],
-    "wikipediaUrl": "https://de.wikipedia.org/wiki/Cassini-Huygens"
+    "wikipediaUrl": "https://science.nasa.gov/mission/cassini/"
   },
   {
     "id": "new-horizons",
@@ -575,6 +785,6 @@
       "Fotografierte das Stickstoff-Eisherz (Tombaugh Regio) und Eisberge aus Wassereis auf Pluto.",
       "Flog am 1. Januar 2019 in 6,5 Milliarden Kilometern Entfernung dicht am schneemannförmigen Kuipergürtel-Objekt ‚Arrokoth‘ vorbei."
     ],
-    "wikipediaUrl": "https://de.wikipedia.org/wiki/New_Horizons"
+    "wikipediaUrl": "https://science.nasa.gov/mission/new-horizons/"
   }
 ]

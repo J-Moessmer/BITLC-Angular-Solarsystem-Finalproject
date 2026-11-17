@@ -47,13 +47,15 @@
           (click)="onSelectMission(mission.id)"
         >
           <div class="summary-card-row">
-            <img
-              class="mission-thumb"
-              [src]="mission.wikimediaImageUrl || mission.imageUrl"
-              [alt]="mission.title"
-              loading="lazy"
-              (error)="onThumbnailError($event, mission.imageUrl)"
-            />
+            @if (mission.wikimediaImageUrl) {
+              <img
+                class="mission-thumb"
+                [src]="mission.wikimediaImageUrl"
+                [alt]="mission.title"
+                loading="lazy"
+                (error)="onThumbnailError($event)"
+              />
+            }
             <div class="summary-card-body">
               <span class="card-cat-pill">{{ mission.categoryLabel }}</span>
               <h3>{{ mission.title }}</h3>
@@ -70,59 +72,57 @@
 
     @if (missionService.selectedMission(); as current) {
       <article class="mission-detail-card" aria-labelledby="detail-mission-title">
-        <div class="detail-top-badges">
-          <span class="status-pill">{{ current.statusLabel }}</span>
-          <span class="year-pill">Start: {{ current.launchYear }}</span>
-        </div>
-
-        <div class="detail-hero">
-          <div class="mission-img-frame">
-            <button
-              type="button"
-              class="img-zoom-trigger"
-              (click)="isLightboxOpen.set(true)"
-              aria-label="Foto in Originalgröße vergrößern"
-            >
-              <img
-                [src]="activeImageSrc()"
-                [alt]="'Foto zu ' + current.title"
-                (error)="onImageError(current.imageUrl)"
-              />
-              <span class="zoom-hint-badge">
-                <i class="fa-solid fa-magnifying-glass-plus" aria-hidden="true"></i> Originalgröße
-              </span>
-            </button>
-            @if (missionGalleryItems().length > 1) {
-              <div class="mission-mini-gallery" role="group" aria-label="Weitere Missionsfotos">
-                @for (item of missionGalleryItems(); track item.url) {
-                  <button
-                    type="button"
-                    class="gallery-thumb-btn"
-                    [class.active-thumb]="activeImageSrc() === item.url"
-                    (click)="selectGalleryPhoto(item.url)"
-                    [title]="item.caption"
-                  >
-                    <img
-                      [src]="item.url"
-                      [alt]="item.caption"
-                      (error)="onThumbnailError($event, current.imageUrl)"
-                    />
-                  </button>
-                }
-              </div>
-            }
-            <span class="img-credit">Quelle: {{ current.imageCredit }}</span>
-          </div>
+        <!-- 1. Kindgerechter Entdecker-Bereich oben: Großes Bild, Galerie, verständliche Erklärung & Fun Facts -->
+        <div class="detail-hero" [class.no-hero-image]="isHeroImageHidden()">
+          @if (!isHeroImageHidden()) {
+            <div class="mission-img-frame">
+              <button
+                type="button"
+                class="img-zoom-trigger"
+                (click)="isLightboxOpen.set(true)"
+                aria-label="Foto in Originalgröße vergrößern"
+              >
+                <img
+                  [src]="activeImageSrc()"
+                  [alt]="'Foto zu ' + current.title"
+                  (error)="onImageError()"
+                />
+                <span class="zoom-hint-badge">
+                  <i class="fa-solid fa-magnifying-glass-plus" aria-hidden="true"></i> Originalgröße
+                </span>
+              </button>
+              @if (missionGalleryItems().length > 1) {
+                <div class="mission-mini-gallery" role="group" aria-label="Weitere Missionsfotos">
+                  @for (item of missionGalleryItems(); track item.url) {
+                    <button
+                      type="button"
+                      class="gallery-thumb-btn"
+                      [class.active-thumb]="activeImageSrc() === item.url"
+                      (click)="selectGalleryPhoto(item.url)"
+                      [title]="item.caption"
+                    >
+                      <img
+                        [src]="item.url"
+                        [alt]="item.caption"
+                        (error)="onGalleryThumbError($event)"
+                      />
+                    </button>
+                  }
+                </div>
+              }
+              <span class="img-credit">Quelle: {{ current.imageCredit }}</span>
+            </div>
+          }
 
           <div class="detail-text">
             <h3 id="detail-mission-title">{{ current.title }}</h3>
-            <p class="detail-sub">{{ current.subtitle }} · {{ current.agency }}</p>
+            <p class="detail-sub">{{ current.subtitle }}</p>
             <p class="detail-summary">{{ current.childSummary }}</p>
           </div>
         </div>
 
         <div class="tasks-box">
-          <h4>Forschungsaufgaben</h4>
+          <h4>Spannende Aufgaben & Fun Facts</h4>
           <ul>
             @for (task of current.tasksForKids; track task) {
               <li>{{ task }}</li>
@@ -137,7 +137,7 @@
                 <span class="iss-badge">
                   {{ iss.isFallbackData ? 'Offline-Fallback aktiv' : 'Live Satelliten-Daten' }}
                 </span>
-                <h4>Aktuelle Flugdaten der Raumstation ISS</h4>
+                <h4>Wo fliegt die ISS gerade über die Erde?</h4>
               </div>
               <div class="btn-group">
                 <button
@@ -187,6 +187,26 @@
           </div>
         }
 
+        <!-- 2. Profi-Bereich unten: Technische Missionsdaten & weiterführende Links -->
+        <div class="profi-meta-grid" aria-label="Technische Missionsdaten">
+          <div class="profi-meta-box">
+            <span>Weltraumagentur</span>
+            <strong>{{ current.agency }}</strong>
+          </div>
+          <div class="profi-meta-box">
+            <span>Start / Zeitraum</span>
+            <strong>{{ current.launchYear }}</strong>
+          </div>
+          <div class="profi-meta-box">
+            <span>Missionsstatus</span>
+            <strong>{{ current.statusLabel }}</strong>
+          </div>
+          <div class="profi-meta-box">
+            <span>Zielobjekt</span>
+            <strong>{{ current.targetBodyName }}</strong>
+          </div>
+        </div>
+
         <div class="detail-actions">
           <a
             class="jump-solar-btn"
@@ -203,7 +223,7 @@
             rel="noopener noreferrer"
           >
             <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
-            Mehr Infos auf Wikipedia
+            Offizielle Missionsseite ({{ current.agency }})
           </a>
         </div>
       </article>

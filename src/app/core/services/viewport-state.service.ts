@@ -69,15 +69,19 @@ export class ViewportStateService {
 
   /** Offizielle Start- bzw. Landedaten (ISO) für die historische Sichtbarkeitsfilterung von Raumsonden & Missionen */
   readonly spacecraftActiveFromIso: Readonly<Record<string, string>> = {
+    'sputnik-1': '1957-10-04',
+    'vostok-1': '1961-04-12',
     'apollo-11': '1969-07-20',
     'apollo-12': '1969-11-19',
     'apollo-13': '1970-04-11',
+    'lunokhod-1': '1970-11-17',
     'apollo-14': '1971-02-05',
     'apollo-15': '1971-07-30',
     'apollo-16': '1972-04-21',
     'apollo-17': '1972-12-11',
     'voyager-2': '1977-08-20',
     'voyager-1': '1977-09-05',
+    'venera-13': '1982-03-01',
     hubble: '1990-04-24',
     sojourner: '1997-07-04',
     cassini: '1997-10-15',
@@ -90,13 +94,19 @@ export class ViewportStateService {
     juno: '2011-08-05',
     curiosity: '2012-08-06',
     gaia: '2013-12-19',
+    'hayabusa-2': '2014-12-03',
     parker: '2018-08-12',
     bepicolombo: '2018-10-20',
+    'change-4': '2019-01-03',
     'solar-orbiter': '2020-02-10',
     perseverance: '2021-02-18',
+    tiangong: '2021-04-29',
+    zhurong: '2021-05-14',
     jwst: '2021-12-25',
     artemis: '2022-11-16',
     juice: '2023-04-14',
+    'chandrayaan-3': '2023-08-23',
+    slim: '2024-01-19',
   };
 
   /** Prüft, ob eine Raumsonde / Mission zum aktuellen Simulationsdatum bereits gestartet war */
@@ -798,16 +808,25 @@ export class ViewportStateService {
 
     // Große Halbachse a (SMA) und Exzentrizität e (ECC) für Hauptkörper um die Sonne
     const rawEcc = body.orbitalElements.ecc.numericValue ?? 0;
-    const ecc = Math.min(
-      mode === 'true-scale' || body.id === 'parker' || body.id === 'solar-orbiter' ? 0.97 : 0.75,
-      Math.max(0, rawEcc),
-    );
+    const isEllipticalSpotlight =
+      mode === 'true-scale' ||
+      body.id === 'parker' ||
+      body.id === 'solar-orbiter' ||
+      body.category === 'comet';
+    let ecc = Math.min(isEllipticalSpotlight ? 0.97 : 0.75, Math.max(0, rawEcc));
     const effectiveAu =
       body.id === 'voyager-1' || body.id === 'voyager-2' || body.id === 'new-horizons'
         ? kepler.currentDistanceAu
-        : body.distanceFromSunAu;
+        : body.id === 'parker' || body.id === 'solar-orbiter'
+          ? (body.orbitalElements.sma.numericValue ?? body.distanceFromSunAu)
+          : body.distanceFromSunAu;
 
-    let worldSemiMajorPx = body.overviewOrbitRadiusSvg;
+    let worldSemiMajorPx =
+      body.id === 'parker'
+        ? 78
+        : body.id === 'solar-orbiter'
+          ? 74
+          : body.overviewOrbitRadiusSvg;
     if (mode === 'true-scale') {
       if (body.id === 'oort-cloud') {
         worldSemiMajorPx = 220 * this.pixelsPerAu;
@@ -816,11 +835,21 @@ export class ViewportStateService {
       }
     }
 
+    // Sicherheitsabstand zur Sonne für Sonnensonden (Parker Solar Probe & Solar Orbiter),
+    // damit das Perihel a*(1-e) niemals innerhalb der gezeichneten Sonnenscheibe liegt!
+    if (body.id === 'parker' || body.id === 'solar-orbiter') {
+      const sun = allBodies.find((b) => b.id === 'sun');
+      const sunScreenR = sun ? this.computeScaledBodyRadius(sun).displayRadiusPx : 13;
+      const minPerihelWorld = (sunScreenR + 4) / Math.max(0.001, z);
+      if (worldSemiMajorPx * (1 - ecc) < minPerihelWorld && worldSemiMajorPx > minPerihelWorld) {
+        ecc = Math.max(0.1, Number((1 - minPerihelWorld / worldSemiMajorPx).toFixed(3)));
+      }
+    }
+
     const worldSemiMinorPx = Number((worldSemiMajorPx * Math.sqrt(1 - ecc * ecc)).toFixed(3));
-    const worldFocusOffsetX =
-      mode === 'true-scale' || body.id === 'parker' || body.id === 'solar-orbiter'
-        ? Number((-worldSemiMajorPx * ecc).toFixed(3))
-        : 0;
+    const worldFocusOffsetX = isEllipticalSpotlight
+      ? Number((-worldSemiMajorPx * ecc).toFixed(3))
+      : 0;
 
     const scaledRx = Number((worldSemiMajorPx * z).toFixed(1));
     const scaledRy = Number((worldSemiMinorPx * z).toFixed(1));
@@ -868,7 +897,18 @@ export class ViewportStateService {
     }
 
     // 3. Draufsicht auf die elliptische Bahn mit analytischem SVG-Orbit-Clipping gegen VM-Stottern!
-    const angleRad = (-kepler.longitudeDeg * Math.PI) / 180;
+    // Exzentrische Anomalie E bestimmt den exakten Punkt auf der Ellipse (E=0 ist Perihel bei +a(1-e), E=pi ist Aphel bei -a(1+e)).
+    // Bei retrograden Bahnen (INC > 90°, z. B. Halleyscher Komet) läuft die Bewegung im Uhrzeigersinn (+E).
+    const isRetrograde = body.inclinationToSolarEquatorDeg > 90;
+    const angleRad =
+      body.id === 'voyager-1' ||
+      body.id === 'voyager-2' ||
+      body.id === 'new-horizons' ||
+      body.category === 'belt'
+        ? (-kepler.longitudeDeg * Math.PI) / 180
+        : isRetrograde
+          ? kepler.eccentricAnomalyRad
+          : -kepler.eccentricAnomalyRad;
     const worldX = Number((worldFocusOffsetX + Math.cos(angleRad) * worldSemiMajorPx).toFixed(4));
     const worldY = Number((Math.sin(angleRad) * worldSemiMinorPx).toFixed(4));
     const orbitClip = this.computeOrbitClipping(

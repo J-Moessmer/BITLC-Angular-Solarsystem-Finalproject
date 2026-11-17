@@ -19,20 +19,20 @@ import { IssWorldMapComponent } from './iss-world-map/iss-world-map';
 const EXTRA_MISSION_GALLERY: Readonly<Record<string, Array<{ url: string; caption: string }>>> = {
   iss: [
     {
-      url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d2/ISS-40_Cupola_view_of_the_Earth.jpg/960px-ISS-40_Cupola_view_of_the_Earth.jpg',
-      caption: 'Blick aus der ISS-Kuppel auf die Erde',
+      url: 'https://images-assets.nasa.gov/image/iss039e005387/iss039e005387~thumb.jpg',
+      caption: 'Blick aus der ISS-Kuppel auf die Erde (NASA)',
     },
   ],
   'apollo-11': [
     {
-      url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/00/Apollo_11_bootprint.jpg/960px-Apollo_11_bootprint.jpg',
-      caption: 'Berühmter Fußabdruck im Mondstaub',
+      url: 'https://images-assets.nasa.gov/image/PIA24439/PIA24439~thumb.jpg',
+      caption: 'Apollo 11 auf dem Mond (NASA)',
     },
   ],
   perseverance: [
     {
-      url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/PIA24647-MarsIngenuityHelicopter-PerseveranceRover-Selfie-20210406.jpg/960px-PIA24647-MarsIngenuityHelicopter-PerseveranceRover-Selfie-20210406.jpg',
-      caption: 'Perseverance zusammen mit Mars-Hubschrauber Ingenuity',
+      url: 'https://images-assets.nasa.gov/image/PIA24542/PIA24542~thumb.jpg',
+      caption: 'Perseverance zusammen mit Mars-Hubschrauber Ingenuity (NASA)',
     },
   ],
   jwst: [
@@ -73,6 +73,7 @@ export class ResearchMissionsComponent implements OnInit, OnDestroy {
   readonly activeImageSrc = signal<string>('');
   readonly isRefreshingIss = signal<boolean>(false);
   readonly isLightboxOpen = signal<boolean>(false);
+  readonly isHeroImageHidden = signal<boolean>(false);
   readonly issAutoRefreshEnabled = signal<boolean>(true);
   private issPollTimerId: ReturnType<typeof setInterval> | null = null;
 
@@ -101,7 +102,9 @@ export class ResearchMissionsComponent implements OnInit, OnDestroy {
     effect(() => {
       const current = this.missionService.selectedMission();
       if (current) {
-        this.activeImageSrc.set(current.wikimediaImageUrl || current.imageUrl);
+        const hasRealPhoto = Boolean(current.wikimediaImageUrl);
+        this.isHeroImageHidden.set(!hasRealPhoto);
+        this.activeImageSrc.set(current.wikimediaImageUrl || '');
       }
     });
   }
@@ -151,14 +154,23 @@ export class ResearchMissionsComponent implements OnInit, OnDestroy {
     }
   }
 
-  onThumbnailError(event: Event, fallbackUrl: string): void {
+  onThumbnailError(event: Event): void {
     const img = event.target as HTMLImageElement | null;
-    if (img && !img.src.endsWith(fallbackUrl)) {
-      img.src = fallbackUrl;
+    if (img) {
+      img.style.display = 'none';
+    }
+  }
+
+  onGalleryThumbError(event: Event): void {
+    const img = event.target as HTMLImageElement | null;
+    const btn = img?.closest('button') as HTMLElement | null;
+    if (btn) {
+      btn.style.display = 'none';
     }
   }
 
   selectGalleryPhoto(url: string): void {
+    this.isHeroImageHidden.set(false);
     this.activeImageSrc.set(url);
   }
 
@@ -170,10 +182,8 @@ export class ResearchMissionsComponent implements OnInit, OnDestroy {
     this.missionService.selectMission(missionId);
   }
 
-  onImageError(localFallbackUrl: string): void {
-    if (this.activeImageSrc() !== localFallbackUrl) {
-      this.activeImageSrc.set(localFallbackUrl);
-    }
+  onImageError(): void {
+    this.isHeroImageHidden.set(true);
   }
 
   async refreshIssTelemetry(): Promise<void> {

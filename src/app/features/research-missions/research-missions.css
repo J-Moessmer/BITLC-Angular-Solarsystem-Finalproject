@@ -93,7 +93,7 @@ h2 {
 
 .p40-content-grid {
   display: grid;
-  grid-template-columns: 320px 1fr;
+  grid-template-columns: 340px 1fr;
   gap: 1rem;
   align-items: start;
 }
@@ -387,14 +387,13 @@ h2 {
 
 .summary-card-row {
   display: flex;
-  align-items: flex-start;
-  gap: 0.65rem;
+  flex-direction: column;
+  gap: 0.55rem;
 }
 
 .mission-thumb {
-  width: 56px;
-  height: 56px;
-  flex-shrink: 0;
+  width: 100%;
+  height: 124px;
   border-radius: var(--radius-sm);
   object-fit: cover;
   background-color: #111d3b;
@@ -403,7 +402,34 @@ h2 {
 
 .summary-card-body {
   min-width: 0;
-  flex: 1;
+  width: 100%;
+}
+
+.profi-meta-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 0.55rem;
+}
+
+.profi-meta-box {
+  background-color: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-sm);
+  padding: 0.5rem 0.7rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.profi-meta-box span {
+  font-size: 0.74rem;
+  font-weight: 600;
+  color: var(--card-text-muted);
+}
+
+.profi-meta-box strong {
+  font-size: 0.88rem;
+  color: var(--card-text-primary);
 }
 
 .img-zoom-trigger {
@@ -459,6 +485,10 @@ h2 {
   object-fit: cover;
 }
 
+.detail-hero.no-hero-image {
+  grid-template-columns: 1fr;
+}
+
 .iss-live-layout {
   display: grid;
   grid-template-columns: 1.55fr 1fr;
@@ -470,7 +500,11 @@ h2 {
 @media (max-width: 920px) {
   .p40-content-grid,
   .detail-hero,
-  .iss-live-layout {
+  .detail-hero.no-hero-image {
+  grid-template-columns: 1fr;
+}
+
+.iss-live-layout {
     grid-template-columns: 1fr;
   }
 

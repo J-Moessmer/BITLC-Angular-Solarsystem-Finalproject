@@ -191,6 +191,10 @@ export class SolarSystemDataService {
             label: 'Raumsonden & Teleskope',
             icon: 'fa-solid fa-satellite',
             children: [
+              buildBodyNode('sputnik-1', 'fa-solid fa-satellite'),
+              buildBodyNode('vostok-1', 'fa-solid fa-rocket'),
+              buildBodyNode('tiangong', 'fa-solid fa-satellite'),
+              buildBodyNode('venera-13', 'fa-solid fa-shuttle-space'),
               buildBodyNode('parker', 'fa-solid fa-shuttle-space'),
               buildBodyNode('solar-orbiter', 'fa-solid fa-satellite'),
               buildBodyNode('bepicolombo', 'fa-solid fa-shuttle-space'),
@@ -200,6 +204,7 @@ export class SolarSystemDataService {
               buildBodyNode('jwst', 'fa-solid fa-satellite-dish'),
               buildBodyNode('gaia', 'fa-solid fa-satellite-dish'),
               buildBodyNode('dawn', 'fa-solid fa-satellite'),
+              buildBodyNode('hayabusa-2', 'fa-solid fa-shuttle-space'),
               buildBodyNode('juno', 'fa-solid fa-satellite'),
               buildBodyNode('juice', 'fa-solid fa-satellite'),
               buildBodyNode('cassini', 'fa-solid fa-shuttle-space'),
@@ -222,11 +227,23 @@ export class SolarSystemDataService {
                 ],
               },
               {
+                id: 'lunar-pioneers-group',
+                label: 'Internationale Mond-Pioniere',
+                icon: 'fa-solid fa-moon',
+                children: [
+                  buildBodyNode('lunokhod-1', 'fa-solid fa-robot'),
+                  buildBodyNode('change-4', 'fa-solid fa-robot'),
+                  buildBodyNode('chandrayaan-3', 'fa-solid fa-shuttle-space'),
+                  buildBodyNode('slim', 'fa-solid fa-shuttle-space'),
+                ],
+              },
+              {
                 id: 'mars-rovers-group',
                 label: 'Mars-Rover',
                 icon: 'fa-solid fa-robot',
                 children: [
                   buildBodyNode('perseverance', 'fa-solid fa-robot'),
+                  buildBodyNode('zhurong', 'fa-solid fa-robot'),
                   buildBodyNode('curiosity', 'fa-solid fa-robot'),
                   buildBodyNode('opportunity', 'fa-solid fa-robot'),
                   buildBodyNode('spirit', 'fa-solid fa-robot'),

@@ -445,7 +445,9 @@
     "category": "planet",
     "categoryLabel": "Gesteinsplanet",
     "parentId": "sun",
-    "childrenIds": [],
+    "childrenIds": [
+      "venera-13"
+    ],
     "wikimediaImageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Venus_from_Mariner_10.jpg/960px-Venus_from_Mariner_10.jpg",
     "imageUrl": "assets/images/planet.svg",
     "imageCredit": "NASA / JPL-Caltech – Mariner 10 (Wikimedia Commons, Public Domain)",
@@ -535,7 +537,10 @@
     "childrenIds": [
       "moon",
       "iss",
+      "tiangong",
       "hubble",
+      "sputnik-1",
+      "vostok-1",
       "artemis"
     ],
     "wikimediaImageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/The_Earth_seen_from_Apollo_17.jpg/960px-The_Earth_seen_from_Apollo_17.jpg",
@@ -631,7 +636,11 @@
       "apollo-14",
       "apollo-15",
       "apollo-16",
-      "apollo-17"
+      "apollo-17",
+      "lunokhod-1",
+      "change-4",
+      "chandrayaan-3",
+      "slim"
     ],
     "wikimediaImageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/FullMoon2010.jpg/960px-FullMoon2010.jpg",
     "imageUrl": "assets/images/moon.svg",
@@ -1583,7 +1592,8 @@
       "curiosity",
       "opportunity",
       "spirit",
-      "sojourner"
+      "sojourner",
+      "zhurong"
     ],
     "wikimediaImageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/Mars_-_August_30_2021_-_Flickr_-_Kevin_M._Gill.png/960px-Mars_-_August_30_2021_-_Flickr_-_Kevin_M._Gill.png",
     "imageUrl": "assets/images/planet.svg",
@@ -2273,7 +2283,8 @@
     "categoryLabel": "Gürtel aus Asteroiden & Zwergplanet Ceres",
     "parentId": "sun",
     "childrenIds": [
-      "ceres"
+      "ceres",
+      "hayabusa-2"
     ],
     "wikimediaImageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Asteroid_belt_positions-en.png/960px-Asteroid_belt_positions-en.png",
     "imageUrl": "assets/images/belt.svg",
@@ -5630,6 +5641,862 @@
         "code": "REF",
         "label": "Referenzsystem",
         "formattedValue": "J2000 / Sonnenäquator",
+        "childExplanation": "Das gemeinsame Messsystem und Startdatum (Jahr 2000) der Astronomie."
+      }
+    }
+  },
+  {
+    "id": "sputnik-1",
+    "name": "Sputnik 1",
+    "subtitle": "Der allererste künstliche Satellit der Menschheit (4. Oktober 1957)",
+    "category": "spacecraft",
+    "categoryLabel": "Erster Erdsatellit (UdSSR)",
+    "parentId": "earth",
+    "childrenIds": [],
+    "wikimediaImageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/%D0%9F%D0%B5%D1%80%D0%B2%D1%8B%D0%B9_%D0%B2_%D0%BC%D0%B8%D1%80%D0%B5_%D0%B8%D1%81%D0%BA%D1%83%D1%81%D1%81%D1%82%D0%B2%D0%B5%D0%BD%D0%BD%D1%8B%D0%B9_%D1%81%D0%BF%D1%83%D1%82%D0%BD%D0%B8%D0%BA_%D0%97%D0%B5%D0%BC%D0%BB%D0%B8.jpg/960px-%D0%9F%D0%B5%D1%80%D0%B2%D1%8B%D0%B9_%D0%B2_%D0%BC%D0%B8%D1%80%D0%B5_%D0%B8%D1%81%D0%BA%D1%83%D1%81%D1%81%D1%82%D0%B2%D0%B5%D0%BD%D0%BD%D1%8B%D0%B9_%D1%81%D0%BF%D1%83%D1%82%D0%BD%D0%B8%D0%BA_%D0%97%D0%B5%D0%BC%D0%BB%D0%B8.jpg",
+    "imageUrl": "assets/images/probe.svg",
+    "imageCredit": "NASA / NSSDC – Sputnik 1 (Wikimedia Commons, Public Domain)",
+    "colorHex": "#94A3B8",
+    "accentColorHex": "#F1F5F9",
+    "diameterKm": 0.0006,
+    "distanceFromSunKm": 149600000,
+    "distanceFromSunAu": 1.0,
+    "distanceFromEarthKm": 577,
+    "orbitalPeriodDays": 0.067,
+    "orbitalPeriodLabel": "96 Minuten für eine Erdumrundung (Oktober 1957)",
+    "inclinationToSolarEquatorDeg": 65.1,
+    "overviewOrbitRadiusSvg": 12,
+    "overviewBodyRadiusSvg": 2.8,
+    "orbitAngleDeg": 30,
+    "shortSummary": "Mit Sputnik 1 begann am 4. Oktober 1957 das Raumfahrtzeitalter! Die glänzende Metallkugel der Sowjetunion mit vier langen Funkantennen umkreiste die Erde und sendete ein berühmtes ‚Piep-Piep‘-Signal, das man weltweit im Radio empfangen konnte.",
+    "childFriendlyFacts": [
+      "Sputnik 1 war nur 58 Zentimeter groß – etwa so groß wie ein Strandball!",
+      "Der Start von Sputnik löste den großen Wettlauf ins All zwischen der Sowjetunion und den USA aus."
+    ],
+    "comparisonHint": "Sputnik 1 wog 83,6 Kilogramm und umkreiste die Erde 1.440-mal.",
+    "orbitalElements": {
+      "sma": {
+        "code": "SMA",
+        "label": "Große Halbachse",
+        "formattedValue": "4.6e-05 AE · ca. 215–939 km Erdorbit",
+        "numericValue": 4.6e-05,
+        "unit": "AE",
+        "childExplanation": "Das ist der durchschnittliche Abstand der Umlaufbahn zum Zentrum."
+      },
+      "ecc": {
+        "code": "ECC",
+        "label": "Exzentrizität",
+        "formattedValue": "0.052",
+        "numericValue": 0.052,
+        "childExplanation": "Zeigt, ob die Bahn fast kreisrund (nahe 0) oder leicht elliptisch gedehnt ist."
+      },
+      "inc": {
+        "code": "INC",
+        "label": "Bahnneigung",
+        "formattedValue": "65.1°",
+        "numericValue": 65.1,
+        "unit": "°",
+        "childExplanation": "Gibt an, wie stark die Umlaufbahn im Vergleich zum Sonnenäquator gekippt ist."
+      },
+      "lan": {
+        "code": "LAN",
+        "label": "Aufsteigender Knoten",
+        "formattedValue": "0.0°",
+        "numericValue": 0.0,
+        "unit": "°",
+        "childExplanation": "Der Winkelpunkt, an dem der Himmelskörper auf seiner Bahn von unten nach oben durch die Hauptebene fliegt."
+      },
+      "lpe": {
+        "code": "LPE",
+        "label": "Länge des Perihels",
+        "formattedValue": "0.0°",
+        "numericValue": 0.0,
+        "unit": "°",
+        "childExplanation": "Zeigt die Richtung, in der der Körper der Sonne auf seiner Bahn am nächsten kommt."
+      },
+      "mna": {
+        "code": "MNA",
+        "label": "Mittlere Anomalie",
+        "formattedValue": "30.0°",
+        "numericValue": 30.0,
+        "unit": "°",
+        "childExplanation": "Gibt an, an welcher Stelle seiner Umlaufbahn sich der Körper zum Startzeitpunkt J2000 befindet."
+      },
+      "ref": {
+        "code": "REF",
+        "label": "Referenzsystem",
+        "formattedValue": "Erdorbit · LEO (1957)",
+        "childExplanation": "Das gemeinsame Messsystem und Startdatum (Jahr 2000) der Astronomie."
+      }
+    }
+  },
+  {
+    "id": "vostok-1",
+    "name": "Wostok 1 (Juri Gagarin)",
+    "subtitle": "Der erste Mensch im Weltall (12. April 1961)",
+    "category": "spacecraft",
+    "categoryLabel": "Erster bemannter Raumflug (UdSSR)",
+    "parentId": "earth",
+    "childrenIds": [],
+    "wikimediaImageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/%D0%9A%D0%BE%D1%81%D0%BC%D0%BE%D0%BD%D0%B0%D0%B2%D1%82_%D0%AE%D1%80%D0%B8%D0%B9_%D0%93%D0%B0%D0%B3%D0%B0%D1%80%D0%B8%D0%BD_%28cropped%29.jpg/960px-%D0%9A%D0%BE%D1%81%D0%BC%D0%BE%D0%BD%D0%B0%D0%B2%D1%82_%D0%AE%D1%80%D0%B8%D0%B9_%D0%93%D0%B0%D0%B3%D0%B0%D1%80%D0%B8%D0%BD_%28cropped%29.jpg",
+    "imageUrl": "assets/images/probe.svg",
+    "imageCredit": "Sowjetisches Archiv – Juri Gagarin (Wikimedia Commons)",
+    "colorHex": "#EF4444",
+    "accentColorHex": "#FEE2E2",
+    "diameterKm": 0.004,
+    "distanceFromSunKm": 149600000,
+    "distanceFromSunAu": 1.0,
+    "distanceFromEarthKm": 248,
+    "orbitalPeriodDays": 0.062,
+    "orbitalPeriodLabel": "106 Minuten (1 Erdumrundung am 12. April 1961)",
+    "inclinationToSolarEquatorDeg": 64.95,
+    "overviewOrbitRadiusSvg": 11,
+    "overviewBodyRadiusSvg": 2.8,
+    "orbitAngleDeg": 85,
+    "shortSummary": "Am 12. April 1961 flog der Kosmonaut Juri Gagarin an Bord von Wostok 1 als allererster Mensch ins Weltall! In 106 Minuten umrundete er einmal die Erde und sah unseren Planeten als erster Mensch aus dem All.",
+    "childFriendlyFacts": [
+      "Sein berühmter Ausruf beim Raketenstart lautete ‚Pojechali!‘ (Los geht’s!).",
+      "Während des Flugs rief Juri Gagarin begeistert: ‚Die Erde ist blau! Wie wunderschön!‘"
+    ],
+    "comparisonHint": "Die kugelförmige Landekapsel hatte nur 2,3 Meter Durchmesser.",
+    "orbitalElements": {
+      "sma": {
+        "code": "SMA",
+        "label": "Große Halbachse",
+        "formattedValue": "4.4e-05 AE · 169–327 km Erdorbit",
+        "numericValue": 4.4e-05,
+        "unit": "AE",
+        "childExplanation": "Das ist der durchschnittliche Abstand der Umlaufbahn zum Zentrum."
+      },
+      "ecc": {
+        "code": "ECC",
+        "label": "Exzentrizität",
+        "formattedValue": "0.012",
+        "numericValue": 0.012,
+        "childExplanation": "Zeigt, ob die Bahn fast kreisrund (nahe 0) oder leicht elliptisch gedehnt ist."
+      },
+      "inc": {
+        "code": "INC",
+        "label": "Bahnneigung",
+        "formattedValue": "64.95°",
+        "numericValue": 64.95,
+        "unit": "°",
+        "childExplanation": "Gibt an, wie stark die Umlaufbahn im Vergleich zum Sonnenäquator gekippt ist."
+      },
+      "lan": {
+        "code": "LAN",
+        "label": "Aufsteigender Knoten",
+        "formattedValue": "0.0°",
+        "numericValue": 0.0,
+        "unit": "°",
+        "childExplanation": "Der Winkelpunkt, an dem der Himmelskörper auf seiner Bahn von unten nach oben durch die Hauptebene fliegt."
+      },
+      "lpe": {
+        "code": "LPE",
+        "label": "Länge des Perihels",
+        "formattedValue": "0.0°",
+        "numericValue": 0.0,
+        "unit": "°",
+        "childExplanation": "Zeigt die Richtung, in der der Körper der Sonne auf seiner Bahn am nächsten kommt."
+      },
+      "mna": {
+        "code": "MNA",
+        "label": "Mittlere Anomalie",
+        "formattedValue": "85.0°",
+        "numericValue": 85.0,
+        "unit": "°",
+        "childExplanation": "Gibt an, an welcher Stelle seiner Umlaufbahn sich der Körper zum Startzeitpunkt J2000 befindet."
+      },
+      "ref": {
+        "code": "REF",
+        "label": "Referenzsystem",
+        "formattedValue": "Erdorbit · LEO (1961)",
+        "childExplanation": "Das gemeinsame Messsystem und Startdatum (Jahr 2000) der Astronomie."
+      }
+    }
+  },
+  {
+    "id": "tiangong",
+    "name": "Raumstation Tiangong",
+    "subtitle": "Chinas moderne Raumstation ‚Himmelspalast‘ im Erdorbit",
+    "category": "spacecraft",
+    "categoryLabel": "Raumstation im Erdorbit (CNSA)",
+    "parentId": "earth",
+    "childrenIds": [],
+    "wikimediaImageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/Chinese_Tiangong_Space_Station.jpg/960px-Chinese_Tiangong_Space_Station.jpg",
+    "imageUrl": "assets/images/probe.svg",
+    "imageCredit": "CMSA / Wikimedia Commons (CC BY-SA 4.0)",
+    "colorHex": "#EAB308",
+    "accentColorHex": "#FEF08A",
+    "diameterKm": 0.055,
+    "distanceFromSunKm": 149600000,
+    "distanceFromSunAu": 1.0,
+    "distanceFromEarthKm": 390,
+    "orbitalPeriodDays": 0.064,
+    "orbitalPeriodLabel": "ca. 92 Minuten für eine Erdumrundung (ca. 390 km Höhe)",
+    "inclinationToSolarEquatorDeg": 41.5,
+    "overviewOrbitRadiusSvg": 12,
+    "overviewBodyRadiusSvg": 3.0,
+    "orbitAngleDeg": 310,
+    "shortSummary": "Tiangong (‚Himmelspalast‘) ist die dauerhaft bewohnte Raumstation der chinesischen Raumfahrtagentur CNSA! Dort leben und forschen Taikonauten in Schwerelosigkeit genauso wie auf der ISS.",
+    "childFriendlyFacts": [
+      "Tiangong besteht aus drei großen Modulen in T-Form und ist seit 2022 fertig ausgebaut.",
+      "An Bord werden sogar Fische und Pflanzen in einem kleinen Weltraum-Aquarium erforscht!"
+    ],
+    "comparisonHint": "Tiangong ist etwa halb so groß wie die ISS und bietet Platz für bis zu 6 Raumfahrer.",
+    "orbitalElements": {
+      "sma": {
+        "code": "SMA",
+        "label": "Große Halbachse",
+        "formattedValue": "4.5e-05 AE · ca. 390 km Flughöhe über der Erde",
+        "numericValue": 4.5e-05,
+        "unit": "AE",
+        "childExplanation": "Das ist der durchschnittliche Abstand der Umlaufbahn zum Zentrum."
+      },
+      "ecc": {
+        "code": "ECC",
+        "label": "Exzentrizität",
+        "formattedValue": "0.0005",
+        "numericValue": 0.0005,
+        "childExplanation": "Zeigt, ob die Bahn fast kreisrund (nahe 0) oder leicht elliptisch gedehnt ist."
+      },
+      "inc": {
+        "code": "INC",
+        "label": "Bahnneigung",
+        "formattedValue": "41.5°",
+        "numericValue": 41.5,
+        "unit": "°",
+        "childExplanation": "Gibt an, wie stark die Umlaufbahn im Vergleich zum Sonnenäquator gekippt ist."
+      },
+      "lan": {
+        "code": "LAN",
+        "label": "Aufsteigender Knoten",
+        "formattedValue": "110.0°",
+        "numericValue": 110.0,
+        "unit": "°",
+        "childExplanation": "Der Winkelpunkt, an dem der Himmelskörper auf seiner Bahn von unten nach oben durch die Hauptebene fliegt."
+      },
+      "lpe": {
+        "code": "LPE",
+        "label": "Länge des Perihels",
+        "formattedValue": "45.0°",
+        "numericValue": 45.0,
+        "unit": "°",
+        "childExplanation": "Zeigt die Richtung, in der der Körper der Sonne auf seiner Bahn am nächsten kommt."
+      },
+      "mna": {
+        "code": "MNA",
+        "label": "Mittlere Anomalie",
+        "formattedValue": "310.0°",
+        "numericValue": 310.0,
+        "unit": "°",
+        "childExplanation": "Gibt an, an welcher Stelle seiner Umlaufbahn sich der Körper zum Startzeitpunkt J2000 befindet."
+      },
+      "ref": {
+        "code": "REF",
+        "label": "Referenzsystem",
+        "formattedValue": "Erdorbit · LEO",
+        "childExplanation": "Das gemeinsame Messsystem und Startdatum (Jahr 2000) der Astronomie."
+      }
+    }
+  },
+  {
+    "id": "venera-13",
+    "name": "Venera 13",
+    "subtitle": "Erste Farbfotos direkt von der glühend heißen Venus-Oberfläche (1982)",
+    "category": "spacecraft",
+    "categoryLabel": "Venus-Lander (UdSSR)",
+    "parentId": "venus",
+    "isSurfaceLanded": true,
+    "childrenIds": [],
+    "wikimediaImageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/57/1982_CPA_5278.jpg/960px-1982_CPA_5278.jpg",
+    "imageUrl": "assets/images/probe.svg",
+    "imageCredit": "Sowjetische Post / Venera 13 (Wikimedia Commons)",
+    "colorHex": "#EAB308",
+    "accentColorHex": "#FEF08A",
+    "diameterKm": 0.002,
+    "distanceFromSunKm": 108200000,
+    "distanceFromSunAu": 0.72,
+    "distanceFromEarthKm": 41400000,
+    "orbitalPeriodDays": 225,
+    "orbitalPeriodLabel": "Gelandet auf der Venus (1. März 1982 · 127 Minuten aktiv)",
+    "inclinationToSolarEquatorDeg": 3.86,
+    "overviewOrbitRadiusSvg": 0,
+    "overviewBodyRadiusSvg": 2.8,
+    "orbitAngleDeg": 65,
+    "shortSummary": "Die sowjetische Landefähre Venera 13 schaffte 1982 etwas Unglaubliches: Sie landete mitten in der 457 °C heißen und extrem dichten Giftwolken-Hölle der Venus und funkte die allerersten Farbfotos vom Venusboden zur Erde!",
+    "childFriendlyFacts": [
+      "Trotz 457 °C Hitze und einem Luftdruck wie in 900 Metern Meerestiefe hielt Venera 13 stolze 127 Minuten durch (geplant waren nur 32 Minuten!).",
+      "Ein eingebauter Bohrer untersuchte den vulkanischen Basaltboden der Venus und nahm sogar die Windgeräusche der Venus mit einem Mikrofon auf."
+    ],
+    "comparisonHint": "Venera 13 war wie ein kleiner gepanzerter Druckkochtopf aus Titan gebaut.",
+    "orbitalElements": {
+      "sma": {
+        "code": "SMA",
+        "label": "Große Halbachse",
+        "formattedValue": "0.723 AE · Venusoberfläche · Phoebe Regio (7,5° S, 303° O)",
+        "numericValue": 0.723,
+        "unit": "AE",
+        "childExplanation": "Das ist der durchschnittliche Abstand der Umlaufbahn zum Zentrum."
+      },
+      "ecc": {
+        "code": "ECC",
+        "label": "Exzentrizität",
+        "formattedValue": "0.0068",
+        "numericValue": 0.0068,
+        "childExplanation": "Zeigt, ob die Bahn fast kreisrund (nahe 0) oder leicht elliptisch gedehnt ist."
+      },
+      "inc": {
+        "code": "INC",
+        "label": "Bahnneigung",
+        "formattedValue": "3.86°",
+        "numericValue": 3.86,
+        "unit": "°",
+        "childExplanation": "Gibt an, wie stark die Umlaufbahn im Vergleich zum Sonnenäquator gekippt ist."
+      },
+      "lan": {
+        "code": "LAN",
+        "label": "Aufsteigender Knoten",
+        "formattedValue": "76.68°",
+        "numericValue": 76.68,
+        "unit": "°",
+        "childExplanation": "Der Winkelpunkt, an dem der Himmelskörper auf seiner Bahn von unten nach oben durch die Hauptebene fliegt."
+      },
+      "lpe": {
+        "code": "LPE",
+        "label": "Länge des Perihels",
+        "formattedValue": "131.53°",
+        "numericValue": 131.53,
+        "unit": "°",
+        "childExplanation": "Zeigt die Richtung, in der der Körper der Sonne auf seiner Bahn am nächsten kommt."
+      },
+      "mna": {
+        "code": "MNA",
+        "label": "Mittlere Anomalie",
+        "formattedValue": "65.0°",
+        "numericValue": 65.0,
+        "unit": "°",
+        "childExplanation": "Gibt an, an welcher Stelle seiner Umlaufbahn sich der Körper zum Startzeitpunkt J2000 befindet."
+      },
+      "ref": {
+        "code": "REF",
+        "label": "Referenzsystem",
+        "formattedValue": "Venusoberfläche (1982)",
+        "childExplanation": "Das gemeinsame Messsystem und Startdatum (Jahr 2000) der Astronomie."
+      }
+    }
+  },
+  {
+    "id": "lunokhod-1",
+    "name": "Lunochod 1",
+    "subtitle": "Der allererste ferngesteuerte Rover auf einem fremden Himmelskörper (1970)",
+    "category": "spacecraft",
+    "categoryLabel": "Erster Mond-Rover (UdSSR)",
+    "parentId": "moon",
+    "isSurfaceLanded": true,
+    "childrenIds": [],
+    "wikimediaImageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/Soviet_moonrover.JPG/960px-Soviet_moonrover.JPG",
+    "imageUrl": "assets/images/probe.svg",
+    "imageCredit": "Memorial Museum of Cosmonautics – Lunochod 1 (Wikimedia Commons, CC BY-SA 3.0)",
+    "colorHex": "#64748B",
+    "accentColorHex": "#E2E8F0",
+    "diameterKm": 0.002,
+    "distanceFromSunKm": 149600000,
+    "distanceFromSunAu": 1.0,
+    "distanceFromEarthKm": 384400,
+    "orbitalPeriodDays": 27.3,
+    "orbitalPeriodLabel": "Gelandet auf dem Mond · Mare Imbrium (Nov. 1970)",
+    "inclinationToSolarEquatorDeg": 5.14,
+    "overviewOrbitRadiusSvg": 0,
+    "overviewBodyRadiusSvg": 2.8,
+    "orbitAngleDeg": 50,
+    "shortSummary": "Noch bevor Apollo 15 das erste bemannte Mondauto nutzte, landete die Sowjetunion im November 1970 mit Lunochod 1 (‚Mondgänger‘) den allerersten ferngesteuerten Roboter-Rover auf dem Mond! Auf acht Rädern rollte er über 10 Kilometer weit durch das ‚Meer der Regen‘.",
+    "childFriendlyFacts": [
+      "Lunochod 1 sah aus wie eine silberne Badewanne auf acht Speichenrädern und wurde von einem Team auf der Erde live per Joystick gesteuert!",
+      "Er überstand 11 eisige Mondnächte (-150 °C) mithilfe eines kleinen Heizstrahlers."
+    ],
+    "comparisonHint": "Lunochod 1 schickte über 20.000 Bilder und 206 Panoramen vom Mondboden.",
+    "orbitalElements": {
+      "sma": {
+        "code": "SMA",
+        "label": "Große Halbachse",
+        "formattedValue": "0.00257 AE · Mondoberfläche · Mare Imbrium (38,2° N, 35,0° W)",
+        "numericValue": 0.00257,
+        "unit": "AE",
+        "childExplanation": "Das ist der durchschnittliche Abstand der Umlaufbahn zum Zentrum."
+      },
+      "ecc": {
+        "code": "ECC",
+        "label": "Exzentrizität",
+        "formattedValue": "0.0",
+        "numericValue": 0.0,
+        "childExplanation": "Zeigt, ob die Bahn fast kreisrund (nahe 0) oder leicht elliptisch gedehnt ist."
+      },
+      "inc": {
+        "code": "INC",
+        "label": "Bahnneigung",
+        "formattedValue": "5.14°",
+        "numericValue": 5.14,
+        "unit": "°",
+        "childExplanation": "Gibt an, wie stark die Umlaufbahn im Vergleich zum Sonnenäquator gekippt ist."
+      },
+      "lan": {
+        "code": "LAN",
+        "label": "Aufsteigender Knoten",
+        "formattedValue": "125.08°",
+        "numericValue": 125.08,
+        "unit": "°",
+        "childExplanation": "Der Winkelpunkt, an dem der Himmelskörper auf seiner Bahn von unten nach oben durch die Hauptebene fliegt."
+      },
+      "lpe": {
+        "code": "LPE",
+        "label": "Länge des Perihels",
+        "formattedValue": "318.15°",
+        "numericValue": 318.15,
+        "unit": "°",
+        "childExplanation": "Zeigt die Richtung, in der der Körper der Sonne auf seiner Bahn am nächsten kommt."
+      },
+      "mna": {
+        "code": "MNA",
+        "label": "Mittlere Anomalie",
+        "formattedValue": "50.0°",
+        "numericValue": 50.0,
+        "unit": "°",
+        "childExplanation": "Gibt an, an welcher Stelle seiner Umlaufbahn sich der Körper zum Startzeitpunkt J2000 befindet."
+      },
+      "ref": {
+        "code": "REF",
+        "label": "Referenzsystem",
+        "formattedValue": "Selenografisch · Mondoberfläche",
+        "childExplanation": "Das gemeinsame Messsystem und Startdatum (Jahr 2000) der Astronomie."
+      }
+    }
+  },
+  {
+    "id": "change-4",
+    "name": "Chang'e 4 & Yutu-2",
+    "subtitle": "Erste Landung auf der geheimnisvollen Mondrückseite (Januar 2019)",
+    "category": "spacecraft",
+    "categoryLabel": "Mondrückseiten-Rover (CNSA · China)",
+    "parentId": "moon",
+    "isSurfaceLanded": true,
+    "childrenIds": [],
+    "wikimediaImageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/ChangE-4_-_PCAM.png/960px-ChangE-4_-_PCAM.png",
+    "imageUrl": "assets/images/probe.svg",
+    "imageCredit": "CNSA / CLEP – Chang'e 4 & Yutu-2 (Wikimedia Commons)",
+    "colorHex": "#F59E0B",
+    "accentColorHex": "#FEF3C7",
+    "diameterKm": 0.002,
+    "distanceFromSunKm": 149600000,
+    "distanceFromSunAu": 1.0,
+    "distanceFromEarthKm": 384400,
+    "orbitalPeriodDays": 27.3,
+    "orbitalPeriodLabel": "Aktiv auf der Mondrückseite · Von-Kármán-Krater (seit 2019)",
+    "inclinationToSolarEquatorDeg": 5.14,
+    "overviewOrbitRadiusSvg": 0,
+    "overviewBodyRadiusSvg": 2.8,
+    "orbitAngleDeg": 170,
+    "shortSummary": "Am 3. Januar 2019 schaffte China mit Chang'e 4 und dem kleinen Mond-Rover Yutu-2 (‚Jadehase 2‘) eine Weltpremiere: die allererste weiche Landung auf der von der Erde aus unsichtbaren Rückseite des Mondes!",
+    "childFriendlyFacts": [
+      "Weil Funkwellen nicht durch den Mond hindurchgehen, schickte China extra den Relais-Satelliten ‚Queqiao‘ (Elsternbrücke) hinter den Mond, der alle Signale zur Erde weiterleitet!",
+      "An Bord von Chang'e 4 keimte sogar zum allerersten Mal ein kleiner Baumwollsamen auf dem Mond."
+    ],
+    "comparisonHint": "Yutu-2 hält den Rekord für den am längsten aktiven Mond-Rover der Geschichte.",
+    "orbitalElements": {
+      "sma": {
+        "code": "SMA",
+        "label": "Große Halbachse",
+        "formattedValue": "0.00257 AE · Mondrückseite · Von-Kármán-Krater (45,5° S, 177,6° O)",
+        "numericValue": 0.00257,
+        "unit": "AE",
+        "childExplanation": "Das ist der durchschnittliche Abstand der Umlaufbahn zum Zentrum."
+      },
+      "ecc": {
+        "code": "ECC",
+        "label": "Exzentrizität",
+        "formattedValue": "0.0",
+        "numericValue": 0.0,
+        "childExplanation": "Zeigt, ob die Bahn fast kreisrund (nahe 0) oder leicht elliptisch gedehnt ist."
+      },
+      "inc": {
+        "code": "INC",
+        "label": "Bahnneigung",
+        "formattedValue": "5.14°",
+        "numericValue": 5.14,
+        "unit": "°",
+        "childExplanation": "Gibt an, wie stark die Umlaufbahn im Vergleich zum Sonnenäquator gekippt ist."
+      },
+      "lan": {
+        "code": "LAN",
+        "label": "Aufsteigender Knoten",
+        "formattedValue": "125.08°",
+        "numericValue": 125.08,
+        "unit": "°",
+        "childExplanation": "Der Winkelpunkt, an dem der Himmelskörper auf seiner Bahn von unten nach oben durch die Hauptebene fliegt."
+      },
+      "lpe": {
+        "code": "LPE",
+        "label": "Länge des Perihels",
+        "formattedValue": "318.15°",
+        "numericValue": 318.15,
+        "unit": "°",
+        "childExplanation": "Zeigt die Richtung, in der der Körper der Sonne auf seiner Bahn am nächsten kommt."
+      },
+      "mna": {
+        "code": "MNA",
+        "label": "Mittlere Anomalie",
+        "formattedValue": "170.0°",
+        "numericValue": 170.0,
+        "unit": "°",
+        "childExplanation": "Gibt an, an welcher Stelle seiner Umlaufbahn sich der Körper zum Startzeitpunkt J2000 befindet."
+      },
+      "ref": {
+        "code": "REF",
+        "label": "Referenzsystem",
+        "formattedValue": "Selenografisch · Mondrückseite",
+        "childExplanation": "Das gemeinsame Messsystem und Startdatum (Jahr 2000) der Astronomie."
+      }
+    }
+  },
+  {
+    "id": "chandrayaan-3",
+    "name": "Chandrayaan-3 (Vikram & Pragyan)",
+    "subtitle": "Erste Landung am eisigen Mondsüdpol durch Indien (August 2023)",
+    "category": "spacecraft",
+    "categoryLabel": "Südpol-Lander & Rover (ISRO · Indien)",
+    "parentId": "moon",
+    "isSurfaceLanded": true,
+    "childrenIds": [],
+    "wikimediaImageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/aa/Chandrayaan-3_%E2%80%93_Image_of_Vikram_lander_on_lunar_surface_taken_by_Pragyan_rover_navcam_at_1104_IST%2C_30_August_2023_from_15_meters_away_%28with_text%29.webp/960px-Chandrayaan-3_%E2%80%93_Image_of_Vikram_lander_on_lunar_surface_taken_by_Pragyan_rover_navcam_at_1104_IST%2C_30_August_2023_from_15_meters_away_%28with_text%29.webp",
+    "imageUrl": "assets/images/probe.svg",
+    "imageCredit": "ISRO – Lander Vikram auf dem Mond (Wikimedia Commons)",
+    "colorHex": "#F97316",
+    "accentColorHex": "#FFEDD5",
+    "diameterKm": 0.002,
+    "distanceFromSunKm": 149600000,
+    "distanceFromSunAu": 1.0,
+    "distanceFromEarthKm": 384400,
+    "orbitalPeriodDays": 27.3,
+    "orbitalPeriodLabel": "Gelandet nahe Mondsüdpol · Statio Shiv Shakti (Aug. 2023)",
+    "inclinationToSolarEquatorDeg": 5.14,
+    "overviewOrbitRadiusSvg": 0,
+    "overviewBodyRadiusSvg": 2.8,
+    "orbitAngleDeg": 230,
+    "shortSummary": "Am 23. August 2023 landete die indische Raumfahrtbehörde ISRO mit Chandrayaan-3 (‚Mondfahrzeug‘) erfolgreich in der Nähe des Mondsüdpols! Indien wurde damit das vierte Land der Welt auf dem Mond – und das allererste am Südpol.",
+    "childFriendlyFacts": [
+      "Aus dem Lander ‚Vikram‘ rollte der kleine sechsrädrige Rover ‚Pragyan‘ (Weisheit) heraus und prägte das ISRO-Symbol in den Mondstaub!",
+      "Der Rover entdeckte vor Ort Schwefel und andere Elemente im Boden des Mondsüdpols."
+    ],
+    "comparisonHint": "Der kleine Rover Pragyan wog nur 26 Kilogramm – kaum mehr als ein großer Reisekoffer.",
+    "orbitalElements": {
+      "sma": {
+        "code": "SMA",
+        "label": "Große Halbachse",
+        "formattedValue": "0.00257 AE · Mondsüdpol · 69,37° S, 32,35° O",
+        "numericValue": 0.00257,
+        "unit": "AE",
+        "childExplanation": "Das ist der durchschnittliche Abstand der Umlaufbahn zum Zentrum."
+      },
+      "ecc": {
+        "code": "ECC",
+        "label": "Exzentrizität",
+        "formattedValue": "0.0",
+        "numericValue": 0.0,
+        "childExplanation": "Zeigt, ob die Bahn fast kreisrund (nahe 0) oder leicht elliptisch gedehnt ist."
+      },
+      "inc": {
+        "code": "INC",
+        "label": "Bahnneigung",
+        "formattedValue": "5.14°",
+        "numericValue": 5.14,
+        "unit": "°",
+        "childExplanation": "Gibt an, wie stark die Umlaufbahn im Vergleich zum Sonnenäquator gekippt ist."
+      },
+      "lan": {
+        "code": "LAN",
+        "label": "Aufsteigender Knoten",
+        "formattedValue": "125.08°",
+        "numericValue": 125.08,
+        "unit": "°",
+        "childExplanation": "Der Winkelpunkt, an dem der Himmelskörper auf seiner Bahn von unten nach oben durch die Hauptebene fliegt."
+      },
+      "lpe": {
+        "code": "LPE",
+        "label": "Länge des Perihels",
+        "formattedValue": "318.15°",
+        "numericValue": 318.15,
+        "unit": "°",
+        "childExplanation": "Zeigt die Richtung, in der der Körper der Sonne auf seiner Bahn am nächsten kommt."
+      },
+      "mna": {
+        "code": "MNA",
+        "label": "Mittlere Anomalie",
+        "formattedValue": "230.0°",
+        "numericValue": 230.0,
+        "unit": "°",
+        "childExplanation": "Gibt an, an welcher Stelle seiner Umlaufbahn sich der Körper zum Startzeitpunkt J2000 befindet."
+      },
+      "ref": {
+        "code": "REF",
+        "label": "Referenzsystem",
+        "formattedValue": "Selenografisch · Mondsüdpol",
+        "childExplanation": "Das gemeinsame Messsystem und Startdatum (Jahr 2000) der Astronomie."
+      }
+    }
+  },
+  {
+    "id": "slim",
+    "name": "Mond-Lander SLIM",
+    "subtitle": "Japans ‚Moon Sniper‘ mit Punktlandung auf 55 Meter genau (Januar 2024)",
+    "category": "spacecraft",
+    "categoryLabel": "Präzisions-Mondlander (JAXA · Japan)",
+    "parentId": "moon",
+    "isSurfaceLanded": true,
+    "childrenIds": [],
+    "wikimediaImageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/SLIM_half_scale_model_%28close_cropped%29.png/960px-SLIM_half_scale_model_%28close_cropped%29.png",
+    "imageUrl": "assets/images/probe.svg",
+    "imageCredit": "JAXA – SLIM Modell (Wikimedia Commons)",
+    "colorHex": "#EC4899",
+    "accentColorHex": "#FCE7F3",
+    "diameterKm": 0.002,
+    "distanceFromSunKm": 149600000,
+    "distanceFromSunAu": 1.0,
+    "distanceFromEarthKm": 384400,
+    "orbitalPeriodDays": 27.3,
+    "orbitalPeriodLabel": "Gelandet auf dem Mond · Shioli-Krater (19. Jan. 2024)",
+    "inclinationToSolarEquatorDeg": 5.14,
+    "overviewOrbitRadiusSvg": 0,
+    "overviewBodyRadiusSvg": 2.8,
+    "orbitAngleDeg": 290,
+    "shortSummary": "Mit SLIM (‚Smart Lander for Investigating Moon‘) gelang Japan im Januar 2024 eine echte Punktlandung am Hang des Shioli-Kraters: Statt kilometerweit zu streuen, traf die Sonde ihr Ziel auf nur 55 Meter genau!",
+    "childFriendlyFacts": [
+      "SLIM setzte zwei winzige hüpfende Mini-Roboter namens LEV-1 und LEV-2 aus – der kugelförmige LEV-2 (SORA-Q) wurde sogar von einem japanischen Spielzeughersteller mitentwickelt!",
+      "Obwohl SLIM kopfüber auf seiner Nase landete, wachte er nach der eiskalten Mondnacht mehrfach wieder auf."
+    ],
+    "comparisonHint": "SLIM war nur 2,4 Meter hoch und extrem leicht gebaut.",
+    "orbitalElements": {
+      "sma": {
+        "code": "SMA",
+        "label": "Große Halbachse",
+        "formattedValue": "0.00257 AE · Mondoberfläche · Shioli-Krater (13,3° S, 25,2° O)",
+        "numericValue": 0.00257,
+        "unit": "AE",
+        "childExplanation": "Das ist der durchschnittliche Abstand der Umlaufbahn zum Zentrum."
+      },
+      "ecc": {
+        "code": "ECC",
+        "label": "Exzentrizität",
+        "formattedValue": "0.0",
+        "numericValue": 0.0,
+        "childExplanation": "Zeigt, ob die Bahn fast kreisrund (nahe 0) oder leicht elliptisch gedehnt ist."
+      },
+      "inc": {
+        "code": "INC",
+        "label": "Bahnneigung",
+        "formattedValue": "5.14°",
+        "numericValue": 5.14,
+        "unit": "°",
+        "childExplanation": "Gibt an, wie stark die Umlaufbahn im Vergleich zum Sonnenäquator gekippt ist."
+      },
+      "lan": {
+        "code": "LAN",
+        "label": "Aufsteigender Knoten",
+        "formattedValue": "125.08°",
+        "numericValue": 125.08,
+        "unit": "°",
+        "childExplanation": "Der Winkelpunkt, an dem der Himmelskörper auf seiner Bahn von unten nach oben durch die Hauptebene fliegt."
+      },
+      "lpe": {
+        "code": "LPE",
+        "label": "Länge des Perihels",
+        "formattedValue": "318.15°",
+        "numericValue": 318.15,
+        "unit": "°",
+        "childExplanation": "Zeigt die Richtung, in der der Körper der Sonne auf seiner Bahn am nächsten kommt."
+      },
+      "mna": {
+        "code": "MNA",
+        "label": "Mittlere Anomalie",
+        "formattedValue": "290.0°",
+        "numericValue": 290.0,
+        "unit": "°",
+        "childExplanation": "Gibt an, an welcher Stelle seiner Umlaufbahn sich der Körper zum Startzeitpunkt J2000 befindet."
+      },
+      "ref": {
+        "code": "REF",
+        "label": "Referenzsystem",
+        "formattedValue": "Selenografisch · Mondoberfläche",
+        "childExplanation": "Das gemeinsame Messsystem und Startdatum (Jahr 2000) der Astronomie."
+      }
+    }
+  },
+  {
+    "id": "zhurong",
+    "name": "Mars-Rover Zhurong (Tianwen-1)",
+    "subtitle": "Chinas erster Mars-Rover in der Tiefebene Utopia Planitia (2021)",
+    "category": "spacecraft",
+    "categoryLabel": "Mars-Rover auf der Oberfläche (CNSA · China)",
+    "parentId": "mars",
+    "isSurfaceLanded": true,
+    "childrenIds": [],
+    "wikimediaImageUrl": "https://upload.wikimedia.org/wikipedia/commons/b/b9/Zhurong_rover_3x2_crop.png",
+    "imageUrl": "assets/images/probe.svg",
+    "imageCredit": "CNSA – Mars-Rover Zhurong (Wikimedia Commons)",
+    "colorHex": "#E11D48",
+    "accentColorHex": "#FFE4E6",
+    "diameterKm": 0.002,
+    "distanceFromSunKm": 227900000,
+    "distanceFromSunAu": 1.52,
+    "distanceFromEarthKm": 78300000,
+    "orbitalPeriodDays": 687,
+    "orbitalPeriodLabel": "Gelandet auf dem Mars · Utopia Planitia (14. Mai 2021)",
+    "inclinationToSolarEquatorDeg": 5.65,
+    "overviewOrbitRadiusSvg": 0,
+    "overviewBodyRadiusSvg": 2.8,
+    "orbitAngleDeg": 150,
+    "shortSummary": "Mit der Mission Tianwen-1 gelang China im Mai 2021 beim allerersten Versuch die Landung auf dem Mars! Der Rover Zhurong (benannt nach einem Feuergott) rollte über 1,9 Kilometer durch die weite Nord-Ebene Utopia Planitia.",
+    "childFriendlyFacts": [
+      "Zhurong stellte auf dem Mars eine kleine Funkkamera ab, fuhr zurück und machte so ein echtes Gruppen-Selfie zusammen mit seiner Landeplattform!",
+      "Mit einem Bodenradar schaute er bis zu 80 Meter tief unter den Marsboden und fand Hinweise auf früheres Wasser."
+    ],
+    "comparisonHint": "Zhurong ist 240 Kilogramm schwer und trägt vier schmetterlingsförmige Solarflügel.",
+    "orbitalElements": {
+      "sma": {
+        "code": "SMA",
+        "label": "Große Halbachse",
+        "formattedValue": "1.524 AE · Marsoberfläche · Utopia Planitia (25,1° N, 109,9° O)",
+        "numericValue": 1.524,
+        "unit": "AE",
+        "childExplanation": "Das ist der durchschnittliche Abstand der Umlaufbahn zum Zentrum."
+      },
+      "ecc": {
+        "code": "ECC",
+        "label": "Exzentrizität",
+        "formattedValue": "0.0934",
+        "numericValue": 0.0934,
+        "childExplanation": "Zeigt, ob die Bahn fast kreisrund (nahe 0) oder leicht elliptisch gedehnt ist."
+      },
+      "inc": {
+        "code": "INC",
+        "label": "Bahnneigung",
+        "formattedValue": "5.65°",
+        "numericValue": 5.65,
+        "unit": "°",
+        "childExplanation": "Gibt an, wie stark die Umlaufbahn im Vergleich zum Sonnenäquator gekippt ist."
+      },
+      "lan": {
+        "code": "LAN",
+        "label": "Aufsteigender Knoten",
+        "formattedValue": "49.56°",
+        "numericValue": 49.56,
+        "unit": "°",
+        "childExplanation": "Der Winkelpunkt, an dem der Himmelskörper auf seiner Bahn von unten nach oben durch die Hauptebene fliegt."
+      },
+      "lpe": {
+        "code": "LPE",
+        "label": "Länge des Perihels",
+        "formattedValue": "336.04°",
+        "numericValue": 336.04,
+        "unit": "°",
+        "childExplanation": "Zeigt die Richtung, in der der Körper der Sonne auf seiner Bahn am nächsten kommt."
+      },
+      "mna": {
+        "code": "MNA",
+        "label": "Mittlere Anomalie",
+        "formattedValue": "150.0°",
+        "numericValue": 150.0,
+        "unit": "°",
+        "childExplanation": "Gibt an, an welcher Stelle seiner Umlaufbahn sich der Körper zum Startzeitpunkt J2000 befindet."
+      },
+      "ref": {
+        "code": "REF",
+        "label": "Referenzsystem",
+        "formattedValue": "Areografisch · Marsoberfläche",
+        "childExplanation": "Das gemeinsame Messsystem und Startdatum (Jahr 2000) der Astronomie."
+      }
+    }
+  },
+  {
+    "id": "hayabusa-2",
+    "name": "Raumsonde Hayabusa2",
+    "subtitle": "Japans Asteroiden-Jäger mit echten Gesteinsproben von Ryugu",
+    "category": "spacecraft",
+    "categoryLabel": "Asteroiden-Sonde (JAXA · Japan)",
+    "parentId": "asteroid-belt",
+    "childrenIds": [],
+    "wikimediaImageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Hayabusa2_Ion_thruster.jpg/960px-Hayabusa2_Ion_thruster.jpg",
+    "imageUrl": "assets/images/probe.svg",
+    "imageCredit": "JAXA – Hayabusa2 (Wikimedia Commons, CC BY-SA 4.0)",
+    "colorHex": "#0EA5E9",
+    "accentColorHex": "#E0F2FE",
+    "diameterKm": 0.002,
+    "distanceFromSunKm": 178000000,
+    "distanceFromSunAu": 1.19,
+    "distanceFromEarthKm": 30000000,
+    "orbitalPeriodDays": 474,
+    "orbitalPeriodLabel": "474 Tage um die Sonne (Asteroiden-Probenflug)",
+    "inclinationToSolarEquatorDeg": 5.88,
+    "overviewOrbitRadiusSvg": 12,
+    "overviewBodyRadiusSvg": 2.8,
+    "orbitAngleDeg": 240,
+    "shortSummary": "Die japanische Sonde Hayabusa2 (‚Wanderfalke 2‘) flog zum diamantförmigen Asteroiden Ryugu, schoss einen kleinen Kupfer-Einschlagkörper ab, sammelte 5,4 Gramm Ur-Gestein ein und warf die Probenkapsel 2020 sicher über Australien ab!",
+    "childFriendlyFacts": [
+      "Mit dabei war auch der kleine deutsch-französische Hüpf-Roboter ‚MASCOT‘ (vom DLR in Köln gebaut), der sich auf dem Asteroiden durch die Luft katapultierte!",
+      "Hayabusa2 hat noch Treibstoff übrig und fliegt nun weiter zum nächsten kleinen Asteroiden (1998 KY26)."
+    ],
+    "comparisonHint": "Die Proben vom Asteroiden Ryugu sind über 4,5 Milliarden Jahre alt – älter als unsere Erde!",
+    "orbitalElements": {
+      "sma": {
+        "code": "SMA",
+        "label": "Große Halbachse",
+        "formattedValue": "1.19 AE · Asteroiden-Bahn (Ryugu-System)",
+        "numericValue": 1.19,
+        "unit": "AE",
+        "childExplanation": "Das ist der durchschnittliche Abstand der Umlaufbahn zum Zentrum."
+      },
+      "ecc": {
+        "code": "ECC",
+        "label": "Exzentrizität",
+        "formattedValue": "0.19",
+        "numericValue": 0.19,
+        "childExplanation": "Zeigt, ob die Bahn fast kreisrund (nahe 0) oder leicht elliptisch gedehnt ist."
+      },
+      "inc": {
+        "code": "INC",
+        "label": "Bahnneigung",
+        "formattedValue": "5.88°",
+        "numericValue": 5.88,
+        "unit": "°",
+        "childExplanation": "Gibt an, wie stark die Umlaufbahn im Vergleich zum Sonnenäquator gekippt ist."
+      },
+      "lan": {
+        "code": "LAN",
+        "label": "Aufsteigender Knoten",
+        "formattedValue": "251.6°",
+        "numericValue": 251.6,
+        "unit": "°",
+        "childExplanation": "Der Winkelpunkt, an dem der Himmelskörper auf seiner Bahn von unten nach oben durch die Hauptebene fliegt."
+      },
+      "lpe": {
+        "code": "LPE",
+        "label": "Länge des Perihels",
+        "formattedValue": "211.4°",
+        "numericValue": 211.4,
+        "unit": "°",
+        "childExplanation": "Zeigt die Richtung, in der der Körper der Sonne auf seiner Bahn am nächsten kommt."
+      },
+      "mna": {
+        "code": "MNA",
+        "label": "Mittlere Anomalie",
+        "formattedValue": "240.0°",
+        "numericValue": 240.0,
+        "unit": "°",
+        "childExplanation": "Gibt an, an welcher Stelle seiner Umlaufbahn sich der Körper zum Startzeitpunkt J2000 befindet."
+      },
+      "ref": {
+        "code": "REF",
+        "label": "Referenzsystem",
+        "formattedValue": "Heliozentrisch (Ryugu)",
         "childExplanation": "Das gemeinsame Messsystem und Startdatum (Jahr 2000) der Astronomie."
       }
     }

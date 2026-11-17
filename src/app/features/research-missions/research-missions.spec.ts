@@ -124,6 +124,6 @@ describe('ResearchMissionsComponent (P40)', () => {
     comp.onSelectCategory('telescope');
     fixture.detectChanges();
     expect(fixture.nativeElement.textContent).toContain('James-Webb-Weltraumteleskop (JWST)');
-    expect(fixture.nativeElement.textContent).toContain('Mehr Infos auf Wikipedia');
+    expect(fixture.nativeElement.textContent).toContain('Offizielle Missionsseite');
   });
 });

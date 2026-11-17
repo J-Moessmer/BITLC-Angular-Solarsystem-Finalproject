@@ -399,6 +399,8 @@ export class SolarSystemViewComponent implements OnInit, OnDestroy {
   }
 
   readonly historicalMilestones = [
+    { isoDate: '1957-10-04', label: '04.10.1957 · Sputnik 1 (Erster Satellit)', bodyId: 'sputnik-1' },
+    { isoDate: '1961-04-12', label: '12.04.1961 · Wostok 1 (Juri Gagarin)', bodyId: 'vostok-1' },
     { isoDate: '1969-07-20', label: '20.07.1969 · Apollo 11 (Mondlandung)', bodyId: 'apollo-11' },
     { isoDate: '1970-04-14', label: '14.04.1970 · Apollo 13 (Mond-Umrundung)', bodyId: 'apollo-13' },
     { isoDate: '1986-02-09', label: '09.02.1986 · Halleyscher Komet (Sonnennähe)', bodyId: 'halley' },
@@ -566,7 +568,15 @@ export class SolarSystemViewComponent implements OnInit, OnDestroy {
       return null;
     }
     const id = body.id;
-    if (id === 'iss' || id === 'solar-orbiter' || id === 'dawn' || id === 'juno' || id === 'juice') {
+    if (
+      id === 'iss' ||
+      id === 'tiangong' ||
+      id === 'sputnik-1' ||
+      id === 'solar-orbiter' ||
+      id === 'dawn' ||
+      id === 'juno' ||
+      id === 'juice'
+    ) {
       return '\uf7bf'; // fa-satellite
     }
     if (id === 'jwst' || id === 'gaia' || id === 'hubble' || id === 'voyager-1' || id === 'voyager-2') {
@@ -574,6 +584,9 @@ export class SolarSystemViewComponent implements OnInit, OnDestroy {
     }
     if (
       id === 'perseverance' ||
+      id === 'zhurong' ||
+      id === 'lunokhod-1' ||
+      id === 'change-4' ||
       id === 'curiosity' ||
       id === 'opportunity' ||
       id === 'spirit' ||
@@ -581,7 +594,7 @@ export class SolarSystemViewComponent implements OnInit, OnDestroy {
     ) {
       return '\uf544'; // fa-robot
     }
-    if (id.startsWith('apollo') || id === 'artemis') {
+    if (id.startsWith('apollo') || id === 'artemis' || id === 'vostok-1') {
       return '\uf135'; // fa-rocket
     }
     return '\uf197'; // fa-shuttle-space

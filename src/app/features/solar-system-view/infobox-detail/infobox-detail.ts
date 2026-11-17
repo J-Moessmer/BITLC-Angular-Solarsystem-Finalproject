@@ -75,40 +75,42 @@ const EXTRA_BODY_GALLERY: Readonly<Record<string, Array<{ url: string; caption: 
           </button>
         </div>
 
-        <div class="infobox-hero">
-          <div class="image-frame">
-            <button
-              type="button"
-              class="img-zoom-btn"
-              (click)="isLightboxOpen.set(true)"
-              aria-label="Bild in Originalgröße vergrößern"
-            >
-              <img
-                [src]="activeImageSrc()"
-                [alt]="'Bild von ' + current.name"
-                (error)="onImageError(current.imageUrl)"
-              />
-              <span class="zoom-badge">
-                <i class="fa-solid fa-magnifying-glass-plus" aria-hidden="true"></i> Originalgröße
-              </span>
-            </button>
-            @if (galleryItems().length > 1) {
-              <div class="mini-gallery" role="group" aria-label="Weitere Fotos auswählen">
-                @for (item of galleryItems(); track item.url) {
-                  <button
-                    type="button"
-                    class="gallery-thumb-btn"
-                    [class.active-thumb]="activeImageSrc() === item.url"
-                    (click)="selectGalleryPhoto(item.url)"
-                    [title]="item.caption"
-                  >
-                    <img [src]="item.url" [alt]="item.caption" (error)="onThumbError($event, current.imageUrl)" />
-                  </button>
-                }
-              </div>
-            }
-            <span class="image-credit">Quelle: {{ current.imageCredit }}</span>
-          </div>
+        <div class="infobox-hero" [class.no-hero-image]="isImageHidden()">
+          @if (!isImageHidden()) {
+            <div class="image-frame">
+              <button
+                type="button"
+                class="img-zoom-btn"
+                (click)="isLightboxOpen.set(true)"
+                aria-label="Bild in Originalgröße vergrößern"
+              >
+                <img
+                  [src]="activeImageSrc()"
+                  [alt]="'Bild von ' + current.name"
+                  (error)="onImageError()"
+                />
+                <span class="zoom-badge">
+                  <i class="fa-solid fa-magnifying-glass-plus" aria-hidden="true"></i> Originalgröße
+                </span>
+              </button>
+              @if (galleryItems().length > 1) {
+                <div class="mini-gallery" role="group" aria-label="Weitere Fotos auswählen">
+                  @for (item of galleryItems(); track item.url) {
+                    <button
+                      type="button"
+                      class="gallery-thumb-btn"
+                      [class.active-thumb]="activeImageSrc() === item.url"
+                      (click)="selectGalleryPhoto(item.url)"
+                      [title]="item.caption"
+                    >
+                      <img [src]="item.url" [alt]="item.caption" (error)="onThumbError($event)" />
+                    </button>
+                  }
+                </div>
+              }
+              <span class="image-credit">Quelle: {{ current.imageCredit }}</span>
+            </div>
+          }
 
           <div class="hero-content">
             <h3 id="infobox-title">{{ current.name }}</h3>
@@ -118,68 +120,12 @@ const EXTRA_BODY_GALLERY: Readonly<Record<string, Array<{ url: string; caption: 
             <div class="comparison-banner">
               <strong>Größenvergleich:</strong> {{ current.comparisonHint }}
             </div>
-
-            @if (current.id === 'jwst' || current.id === 'gaia') {
-              <div class="lagrange-banner">
-                <strong>Was sind <app-term term="Lagrange-Punkte" />?</strong>
-                Zwischen Sonne und Erde gibt es 5 besondere Gleichgewichts-Orte (L1 bis L5), an denen
-                sich Schwerkraft und Fliehkraft genau ausgleichen. Am
-                <app-term term="Lagrange-Punkt L2" /> (1,5 Mio. km hinter der Erde, immer im
-                Schatten-Schutz vor der heißen Sonne) kreisen Teleskope wie JWST und Gaia stabil
-                mit unserer Erde mit!
-              </div>
-            }
           </div>
         </div>
 
-        <!-- Tabellarische Kennzahlen gemäß P20-A20 -->
-        <div class="metrics-grid" role="region" aria-label="Wichtige Kennzahlen">
-          <div class="metric-box">
-            <span class="metric-label">Durchmesser</span>
-            <strong class="metric-val">{{ current.diameterKm | number: '1.0-2' }} km</strong>
-          </div>
-          <div class="metric-box">
-            <span class="metric-label">
-              Entfernung zur Sonne (<app-term term="AE" />)
-            </span>
-            <strong class="metric-val">
-              @if (current.id === 'sun') {
-                0 km
-              } @else {
-                {{ current.distanceFromSunAu }} AE ·
-                {{ current.distanceFromSunKm / 1000000 | number: '1.1-1' }} Mio. km
-              }
-            </strong>
-          </div>
-          <div class="metric-box">
-            <span class="metric-label">Entfernung zur Erde</span>
-            <strong class="metric-val">
-              @if (current.id === 'earth') {
-                0 km
-              } @else if (current.distanceFromEarthKm < 1000000) {
-                {{ current.distanceFromEarthKm | number: '1.0-0' }} km
-              } @else {
-                {{ current.distanceFromEarthKm / 1000000 | number: '1.1-1' }} Mio. km
-              }
-            </strong>
-          </div>
-          <div class="metric-box">
-            <span class="metric-label">Umlaufdauer</span>
-            <strong class="metric-val">{{ current.orbitalPeriodLabel }}</strong>
-          </div>
-          <div class="metric-box">
-            <span class="metric-label">Geschwindigkeit</span>
-            <strong class="metric-val">{{ orbitalSpeedLabel() }}</strong>
-          </div>
-          <div class="metric-box">
-            <span class="metric-label"><app-term term="Bahnneigung" /></span>
-            <strong class="metric-val">{{ current.inclinationToSolarEquatorDeg }}°</strong>
-          </div>
-        </div>
-
-        <!-- Spannende Fakten für Grundschulkinder -->
+        <!-- 1. Kindgerechte Fun Facts & Entdecker-Sprünge direkt unter dem Bild -->
         <div class="facts-section">
-          <h4>Wissenswertes</h4>
+          <h4>Fun Facts & Wissenswertes</h4>
           <ul class="facts-list">
             @for (fact of current.childFriendlyFacts; track fact) {
               <li>{{ fact }}</li>
@@ -232,7 +178,63 @@ const EXTRA_BODY_GALLERY: Readonly<Record<string, Array<{ url: string; caption: 
           </div>
         }
 
-        <!-- Ausklappbare Astronomen-Box mit den 7 Bahnelementen (P20-A30 / P20-U20) -->
+        <!-- 2. Messwerte & Kennzahlen (Übergang zu detaillierteren Fakten) -->
+        <div class="metrics-grid" role="region" aria-label="Wichtige Kennzahlen">
+          <div class="metric-box">
+            <span class="metric-label">Durchmesser</span>
+            <strong class="metric-val">{{ current.diameterKm | number: '1.0-2' }} km</strong>
+          </div>
+          <div class="metric-box">
+            <span class="metric-label">
+              Entfernung zur Sonne (<app-term term="AE" />)
+            </span>
+            <strong class="metric-val">
+              @if (current.id === 'sun') {
+                0 km
+              } @else {
+                {{ current.distanceFromSunAu }} AE ·
+                {{ current.distanceFromSunKm / 1000000 | number: '1.1-1' }} Mio. km
+              }
+            </strong>
+          </div>
+          <div class="metric-box">
+            <span class="metric-label">Entfernung zur Erde</span>
+            <strong class="metric-val">
+              @if (current.id === 'earth') {
+                0 km
+              } @else if (current.distanceFromEarthKm < 1000000) {
+                {{ current.distanceFromEarthKm | number: '1.0-0' }} km
+              } @else {
+                {{ current.distanceFromEarthKm / 1000000 | number: '1.1-1' }} Mio. km
+              }
+            </strong>
+          </div>
+          <div class="metric-box">
+            <span class="metric-label">Umlaufdauer</span>
+            <strong class="metric-val">{{ current.orbitalPeriodLabel }}</strong>
+          </div>
+          <div class="metric-box">
+            <span class="metric-label">Geschwindigkeit</span>
+            <strong class="metric-val">{{ orbitalSpeedLabel() }}</strong>
+          </div>
+          <div class="metric-box">
+            <span class="metric-label"><app-term term="Bahnneigung" /></span>
+            <strong class="metric-val">{{ current.inclinationToSolarEquatorDeg }}°</strong>
+          </div>
+        </div>
+
+        @if (current.id === 'jwst' || current.id === 'gaia') {
+          <div class="lagrange-banner">
+            <strong>Profi-Info – Was sind <app-term term="Lagrange-Punkte" />?</strong>
+            Zwischen Sonne und Erde gibt es 5 besondere Gleichgewichts-Orte (L1 bis L5), an denen
+            sich Schwerkraft und Fliehkraft genau ausgleichen. Am
+            <app-term term="Lagrange-Punkt L2" /> (1,5 Mio. km hinter der Erde, immer im
+            Schatten-Schutz vor der heißen Sonne) kreisen Teleskope wie JWST und Gaia stabil
+            mit unserer Erde mit!
+          </div>
+        }
+
+        <!-- 3. Profi-Bereich ganz unten: Ausklappbare Astronomen-Box mit den 7 Bahnelementen -->
         <div class="astronomy-box">
           <button
             type="button"
@@ -357,6 +359,9 @@ const EXTRA_BODY_GALLERY: Readonly<Record<string, Array<{ url: string; caption: 
       grid-template-columns: 230px 1fr;
       gap: 1.15rem;
       align-items: start;
+    }
+    .infobox-hero.no-hero-image {
+      grid-template-columns: 1fr;
     }
     .image-frame {
       background-color: var(--space-bg-secondary);
@@ -690,6 +695,7 @@ export class InfoboxDetailComponent implements OnInit {
 
   readonly isOrbitalBoxOpen = signal<boolean>(true);
   readonly isLightboxOpen = signal<boolean>(false);
+  readonly isImageHidden = signal<boolean>(false);
   readonly activeImageSrc = signal<string>('');
 
   readonly galleryItems = computed<Array<{ url: string; caption: string }>>(() => {
@@ -782,7 +788,9 @@ export class InfoboxDetailComponent implements OnInit {
     effect(() => {
       const current = this.body();
       if (current) {
-        this.activeImageSrc.set(current.wikimediaImageUrl || current.imageUrl);
+        const hasRealPhoto = Boolean(current.wikimediaImageUrl);
+        this.isImageHidden.set(!hasRealPhoto);
+        this.activeImageSrc.set(current.wikimediaImageUrl || '');
       }
     });
   }
@@ -792,13 +800,15 @@ export class InfoboxDetailComponent implements OnInit {
   }
 
   selectGalleryPhoto(url: string): void {
+    this.isImageHidden.set(false);
     this.activeImageSrc.set(url);
   }
 
-  onThumbError(event: Event, fallbackUrl: string): void {
+  onThumbError(event: Event): void {
     const img = event.target as HTMLImageElement | null;
-    if (img && !img.src.endsWith(fallbackUrl)) {
-      img.src = fallbackUrl;
+    const btn = img?.closest('button') as HTMLElement | null;
+    if (btn) {
+      btn.style.display = 'none';
     }
   }
 
@@ -806,10 +816,8 @@ export class InfoboxDetailComponent implements OnInit {
     return Object.prototype.hasOwnProperty.call(GLOSSARY_DEFINITIONS, label);
   }
 
-  onImageError(localFallbackUrl: string): void {
-    if (this.activeImageSrc() !== localFallbackUrl) {
-      this.activeImageSrc.set(localFallbackUrl);
-    }
+  onImageError(): void {
+    this.isImageHidden.set(true);
   }
 
   toggleOrbitalBox(): void {
