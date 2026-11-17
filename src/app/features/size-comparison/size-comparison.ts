@@ -138,8 +138,8 @@ export class SizeComparisonComponent implements OnInit {
       };
     });
 
-    // 1. Kompaktes Rand-zu-Rand-Layout für den Zoom-Modus (hält alle Objekte im 1200px Sichtfeld!)
-    const gapPx = 56;
+    // 1. Kompaktes Rand-zu-Rand-Layout für den Zoom-Modus (hält alle Objekte mittig im 1200px Sichtfeld!)
+    const gapPx = bodies.length === 2 ? 160 : 72;
     const edgeCenters: number[] = [];
     for (let i = 0; i < bodies.length; i++) {
       if (i === 0) {
@@ -151,7 +151,7 @@ export class SizeComparisonComponent implements OnInit {
       }
     }
 
-    // Finde das größte Objekt und richte seinen sichtbaren Rand im Viewport aus
+    // Finde das größte Objekt und zentriere die sichtbare Komposition symmetrisch um x = 600
     let largestIdx = 0;
     for (let i = 1; i < bodies.length; i++) {
       if (bodies[i].diameterKm > bodies[largestIdx].diameterKm) {
@@ -160,29 +160,35 @@ export class SizeComparisonComponent implements OnInit {
     }
 
     const largestR = zoomedRadii[largestIdx].svgRadiusPx;
-    let shiftX = 0;
+    const minX = edgeCenters[0] - zoomedRadii[0].svgRadiusPx;
+    const maxX = edgeCenters[bodies.length - 1] + zoomedRadii[bodies.length - 1].svgRadiusPx;
+    const fullSpan = maxX - minX;
+
+    // Wenn ein Riesenobjekt am Rand über die Bühne hinauswächst, blenden wir den Ankerpunkt
+    // fließend von der Außenkante auf den sichtbaren Innenrand, sodass der Abstand zur Mitte (x = 600) gleich bleibt.
+    const overflowBlend = Math.min(1, Math.max(0, (fullSpan - 760) / 360));
+    let anchorLeft = minX;
+    let anchorRight = maxX;
+
     if (largestIdx === 0) {
-      // Größtes Objekt links -> sein rechter Rand liegt bei x ≈ 360 px
-      const targetRightEdge = Math.min(440, Math.max(280, 360));
-      shiftX = targetRightEdge - (edgeCenters[0] + largestR);
-      // Falls kleinere Objekte rechts über 1120 px hinausragen, nach links nachziehen
-      const lastRight = edgeCenters[bodies.length - 1] + zoomedRadii[bodies.length - 1].svgRadiusPx + shiftX;
-      if (lastRight > 1120) {
-        shiftX -= lastRight - 1120;
+      const visibleLimbLeft = edgeCenters[0] + largestR;
+      anchorLeft = minX * (1 - overflowBlend) + visibleLimbLeft * overflowBlend;
+    } else if (largestIdx === bodies.length - 1) {
+      const visibleLimbRight = edgeCenters[largestIdx] - largestR;
+      anchorRight = maxX * (1 - overflowBlend) + visibleLimbRight * overflowBlend;
+    }
+
+    let shiftX = 600 - (anchorLeft + anchorRight) / 2;
+    if (largestIdx === 0) {
+      const lastRight = maxX + shiftX;
+      if (lastRight > 1130) {
+        shiftX -= lastRight - 1130;
       }
     } else if (largestIdx === bodies.length - 1) {
-      // Größtes Objekt rechts -> sein linker Rand liegt bei x ≈ 840 px
-      const targetLeftEdge = 840;
-      shiftX = targetLeftEdge - (edgeCenters[largestIdx] - largestR);
-      const firstLeft = edgeCenters[0] - zoomedRadii[0].svgRadiusPx + shiftX;
-      if (firstLeft < 80) {
-        shiftX += 80 - firstLeft;
+      const firstLeft = minX + shiftX;
+      if (firstLeft < 70) {
+        shiftX += 70 - firstLeft;
       }
-    } else {
-      // Größtes Objekt in der Mitte -> gesamten Block zentrieren
-      const minX = edgeCenters[0] - zoomedRadii[0].svgRadiusPx;
-      const maxX = edgeCenters[bodies.length - 1] + zoomedRadii[bodies.length - 1].svgRadiusPx;
-      shiftX = 600 - (minX + maxX) / 2;
     }
 
     return bodies.map((body, idx) => {
