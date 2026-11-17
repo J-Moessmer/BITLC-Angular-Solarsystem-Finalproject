@@ -169,7 +169,7 @@ h2 {
 .comparison-svg {
   display: block;
   width: 100%;
-  height: 360px;
+  height: clamp(380px, 56vh, 640px);
 }
 
 .ratio-explanation-card {

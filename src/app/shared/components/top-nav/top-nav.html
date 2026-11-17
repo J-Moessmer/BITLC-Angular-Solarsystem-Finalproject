@@ -32,5 +32,20 @@
         </li>
       }
     </ul>
+
+    <button
+      type="button"
+      class="theme-toggle-btn"
+      (click)="theme.toggleTheme()"
+      [attr.aria-label]="theme.isDarkMode() ? 'Zum hellen Tagmodus wechseln' : 'Zum dunklen Nachtmodus wechseln'"
+    >
+      <i
+        class="fa-solid"
+        [class.fa-sun]="theme.isDarkMode()"
+        [class.fa-moon]="!theme.isDarkMode()"
+        aria-hidden="true"
+      ></i>
+      <span class="theme-label">{{ theme.isDarkMode() ? 'Tagmodus' : 'Nachtmodus' }}</span>
+    </button>
   </nav>
 </header>

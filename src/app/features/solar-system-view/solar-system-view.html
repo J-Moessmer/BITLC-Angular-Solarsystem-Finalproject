@@ -103,6 +103,64 @@
           </select>
         </div>
       </div>
+
+      <!-- Objekt- & Historien-Filter -->
+      <div class="object-filter-bar" role="group" aria-label="Sichtbare Objekte filtern">
+        <span class="toolbar-label">
+          <i class="fa-solid fa-filter" aria-hidden="true"></i> Filter:
+        </span>
+        <div class="btn-group">
+          <button
+            type="button"
+            class="scale-chip"
+            [class.active-chip]="showPlanetsAndMoons()"
+            (click)="showPlanetsAndMoons.set(!showPlanetsAndMoons())"
+          >
+            Planeten & Monde
+          </button>
+          <button
+            type="button"
+            class="scale-chip"
+            [class.active-chip]="showDwarfPlanets()"
+            (click)="showDwarfPlanets.set(!showDwarfPlanets())"
+          >
+            Zwergplaneten
+          </button>
+          <button
+            type="button"
+            class="scale-chip"
+            [class.active-chip]="showComets()"
+            (click)="showComets.set(!showComets())"
+          >
+            Kometen
+          </button>
+          <button
+            type="button"
+            class="scale-chip"
+            [class.active-chip]="showBelts()"
+            (click)="showBelts.set(!showBelts())"
+          >
+            Gürtel
+          </button>
+          <button
+            type="button"
+            class="scale-chip"
+            [class.active-chip]="showSpacecraft()"
+            (click)="showSpacecraft.set(!showSpacecraft())"
+          >
+            Raumsonden & Rover
+          </button>
+          <button
+            type="button"
+            class="scale-chip"
+            [class.active-chip]="filterSpacecraftByDate()"
+            (click)="filterSpacecraftByDate.set(!filterSpacecraftByDate())"
+            title="Blendet Raumsonden und Missionen vor ihrem historischen Startdatum aus"
+          >
+            <i class="fa-solid fa-clock-rotate-left" aria-hidden="true"></i> Historisch ab Startdatum
+          </button>
+        </div>
+      </div>
     </section>
 
     <!-- Interaktive 2D-SVG-Bühne (P10-A30 / P10-U30 & P10-U40) -->
@@ -176,6 +234,12 @@
             <stop offset="55%" stop-color="#F59E0B" stop-opacity="0.55" />
             <stop offset="100%" stop-color="#F59E0B" stop-opacity="0" />
           </radialGradient>
+          <radialGradient id="oortCloudGlow" cx="50%" cy="50%" r="50%">
+            <stop offset="68%" stop-color="#1E3A8A" stop-opacity="0" />
+            <stop offset="86%" stop-color="#38BDF8" stop-opacity="0.16" />
+            <stop offset="96%" stop-color="#93C5FD" stop-opacity="0.24" />
+            <stop offset="100%" stop-color="#1E3A8A" stop-opacity="0" />
+          </radialGradient>
         </defs>
 
         <!-- Dezente helle Sterne auf dem Marineblau-Hintergrund (#111D3B) -->
@@ -211,6 +275,21 @@
             >
               Sonnenäquator-Ebene · 0°
             </text>
+
+            @if (oortCloudShell(); as oort) {
+              <g class="oort-cloud-shell" aria-hidden="true">
+                <circle
+                  [attr.cx]="viewport.panX()"
+                  [attr.cy]="viewport.panY()"
+                  [attr.r]="oort.orbitRxPx"
+                  fill="url(#oortCloudGlow)"
+                  stroke="#60A5FA"
+                  stroke-width="1.2"
+                  stroke-dasharray="2 8"
+                  opacity="0.55"
+                />
+              </g>
+            }
 
             @for (pos of primaryOrbitPositions(); track pos.body.id) {
               @if (pos.sideOrbitLine; as line) {
@@ -250,6 +329,21 @@
                   {{ ring.au }} AE
                 </text>
               }
+            }
+
+            @if (oortCloudShell(); as oort) {
+              <g class="oort-cloud-shell" aria-hidden="true">
+                <circle
+                  [attr.cx]="viewport.panX()"
+                  [attr.cy]="viewport.panY()"
+                  [attr.r]="oort.orbitRxPx"
+                  fill="url(#oortCloudGlow)"
+                  stroke="#60A5FA"
+                  stroke-width="1.2"
+                  stroke-dasharray="2 8"
+                  opacity="0.55"
+                />
+              </g>
             }
 
             @for (pos of primaryOrbitPositions(); track pos.body.id) {
@@ -302,6 +396,17 @@
                   "
                 />
               }
+            }
+
+            @if (apollo13FreeReturnPath(); as freeReturnD) {
+              <path
+                [attr.d]="freeReturnD"
+                fill="none"
+                stroke="#F59E0B"
+                stroke-width="1.5"
+                stroke-dasharray="4 4"
+                opacity="0.88"
+              />
             }
 
             <!-- Mond- & Raumsonden-Umlaufbahnen rund um ihren Mutterkörper -->

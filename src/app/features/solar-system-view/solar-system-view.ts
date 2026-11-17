@@ -50,23 +50,94 @@ export class SolarSystemViewComponent implements OnInit, OnDestroy {
   private dragStartY = 0;
   private timeLapseTimerId: ReturnType<typeof setInterval> | null = null;
 
+  /** Objekt- & Zeitfilter für die 2D-SVG-Karte */
+  readonly showPlanetsAndMoons = signal<boolean>(true);
+  readonly showDwarfPlanets = signal<boolean>(true);
+  readonly showComets = signal<boolean>(true);
+  readonly showBelts = signal<boolean>(true);
+  readonly showSpacecraft = signal<boolean>(true);
+  readonly filterSpacecraftByDate = signal<boolean>(true);
+
   /** Alle im SVG-Canvas berechneten Positionen & Bahn-Geometrien (P10-U30, P10-U40) */
   protected readonly svgPositions = computed<SvgBodyPosition[]>(() => {
     const all = this.dataService.bodies();
     return all.map((b) => this.viewport.computeBodyPosition(b, all));
   });
 
-  /** Hauptbahnen um die Sonne, die aktuell im Sichtfenster liegen (mit analytischem Orbit-Clipping!) */
-  protected readonly primaryOrbitPositions = computed<SvgBodyPosition[]>(() =>
-    this.svgPositions().filter(
+  /** Hauptbahnen um die Sonne, die aktuell im Sichtfenster liegen (ohne Oortsche Wolke, die als sphärische Wolke gezeichnet wird) */
+  protected readonly primaryOrbitPositions = computed<SvgBodyPosition[]>(() => {
+    const selectedId = this.dataService.selectedBodyId();
+    return this.svgPositions().filter(
       (p) =>
         p.body.parentId === 'sun' &&
-        p.body.category !== 'spacecraft' &&
-        p.isOrbitVisibleInViewport,
-    ),
-  );
+        p.body.id !== 'oort-cloud' &&
+        (p.body.category !== 'spacecraft' ||
+          p.body.id === 'parker' ||
+          p.body.id === 'solar-orbiter' ||
+          p.body.id === selectedId) &&
+        p.isOrbitVisibleInViewport &&
+        this.isBodyVisibleByFilter(p.body),
+    );
+  });
 
-  /** Sichtbare Mond- und Sonden-Umlaufbahnen rund um den aktuell betrachteten Planeten/Zwergplaneten */
+  /** Sphärische Hülle der Oortschen Wolke (kreist nicht auf einer einzelnen Orbit-Linie) */
+  protected readonly oortCloudShell = computed<SvgBodyPosition | null>(() => {
+    const oort = this.svgPositions().find((p) => p.body.id === 'oort-cloud');
+    if (!oort || !this.isBodyVisibleByFilter(oort.body)) {
+      return null;
+    }
+    return oort;
+  });
+
+  /** Echte Free-Return-Achterbahn für Apollo 13 zwischen Erde und Mondrückseite (keine Mond-Umlaufbahn!) */
+  protected readonly apollo13FreeReturnPath = computed<string | null>(() => {
+    const selectedId = this.dataService.selectedBodyId();
+    const selectedBody = this.dataService.selectedBody();
+    const showApollo13 =
+      selectedId === 'apollo-13' ||
+      selectedBody?.id === 'moon' ||
+      selectedBody?.id === 'earth' ||
+      this.viewport.zoomLevel() >= 12;
+
+    if (!showApollo13) {
+      return null;
+    }
+    const apollo13 = this.svgPositions().find((p) => p.body.id === 'apollo-13');
+    if (!apollo13 || !this.isBodyVisibleByFilter(apollo13.body)) {
+      return null;
+    }
+    const earth = this.svgPositions().find((p) => p.body.id === 'earth');
+    const moon = this.svgPositions().find((p) => p.body.id === 'moon');
+    if (!earth || !moon) {
+      return null;
+    }
+
+    const dx = moon.x - earth.x;
+    const dy = moon.y - earth.y;
+    const dist = Math.hypot(dx, dy);
+    if (dist < 10 || dist > 2000) {
+      return null;
+    }
+    const ux = dx / dist;
+    const uy = dy / dist;
+    const px = -uy;
+    const py = ux;
+
+    const farX = moon.x + ux * (moon.bodyRadiusPx + 14);
+    const farY = moon.y + uy * (moon.bodyRadiusPx + 14);
+    const midX = earth.x + dx * 0.55;
+    const midY = earth.y + dy * 0.55;
+    const spread = Math.max(10, dist * 0.22);
+
+    // Achterbahn-Schleife (Figure-8 Free-Return): Erde -> Mondrückseite -> zurück zur Erde
+    return [
+      `M ${earth.x.toFixed(1)} ${earth.y.toFixed(1)}`,
+      `C ${(midX + px * spread).toFixed(1)} ${(midY + py * spread).toFixed(1)}, ${(farX + px * (spread * 0.6)).toFixed(1)} ${(farY + py * (spread * 0.6)).toFixed(1)}, ${farX.toFixed(1)} ${farY.toFixed(1)}`,
+      `C ${(farX - px * (spread * 0.6)).toFixed(1)} ${(farY - py * (spread * 0.6)).toFixed(1)}, ${(midX - px * spread).toFixed(1)} ${(midY - py * spread).toFixed(1)}, ${earth.x.toFixed(1)} ${earth.y.toFixed(1)}`,
+    ].join(' ');
+  });
+
+  /** Sichtbare Mond- und Sonden-Umlaufbahnen rund um den aktuell betrachteten Planeten/Zwergplaneten (ohne Apollo-13-Kreisbahn) */
   protected readonly satelliteOrbitPositions = computed<SvgBodyPosition[]>(() => {
     const selectedId = this.dataService.selectedBodyId();
     const selectedBody = this.dataService.selectedBody();
@@ -79,12 +150,14 @@ export class SolarSystemViewComponent implements OnInit, OnDestroy {
       (p) =>
         p.body.parentId &&
         p.body.parentId !== 'sun' &&
+        p.body.id !== 'apollo-13' &&
         (p.body.parentId === activeParentId || p.body.id === selectedId) &&
-        p.isOrbitVisibleInViewport,
+        p.isOrbitVisibleInViewport &&
+        this.isBodyVisibleByFilter(p.body),
     );
   });
 
-  /** Sichtbare Himmelskörper in der 2D-SVG-Karte (mit Viewport-Culling außerhalb des Sichtfensters) */
+  /** Sichtbare Himmelskörper in der 2D-SVG-Karte (mit Viewport-Culling & Objekt-/Historien-Filter) */
   protected readonly visibleSvgBodies = computed<SvgBodyPosition[]>(() => {
     const selectedId = this.dataService.selectedBodyId();
     const selectedBody = this.dataService.selectedBody();
@@ -96,6 +169,10 @@ export class SolarSystemViewComponent implements OnInit, OnDestroy {
     const alwaysVisibleProbes = new Set(['voyager-1', 'voyager-2', 'new-horizons', 'parker']);
 
     return this.svgPositions().filter((pos) => {
+      if (!this.isBodyVisibleByFilter(pos.body)) {
+        return false;
+      }
+
       // Viewport-Culling für Körper weit außerhalb des 1080x660 Fensters
       const r = pos.bodyRadiusPx + 40;
       if (pos.x + r < -580 || pos.x - r > 580 || pos.y + r < -370 || pos.y - r > 370) {
@@ -122,6 +199,34 @@ export class SolarSystemViewComponent implements OnInit, OnDestroy {
       return false;
     });
   });
+
+  /** Prüft, ob ein Himmelskörper bzw. eine Raumsonde gemäß Kategorie- und Datumsfilter sichtbar ist */
+  private isBodyVisibleByFilter(body: CelestialBody): boolean {
+    if (body.id === 'sun' || body.id === this.dataService.selectedBodyId()) {
+      return true;
+    }
+    switch (body.category) {
+      case 'planet':
+      case 'moon':
+        return this.showPlanetsAndMoons();
+      case 'dwarf-planet':
+        return this.showDwarfPlanets();
+      case 'comet':
+        return this.showComets();
+      case 'belt':
+        return this.showBelts();
+      case 'spacecraft':
+        if (!this.showSpacecraft()) {
+          return false;
+        }
+        return (
+          !this.filterSpacecraftByDate() ||
+          this.viewport.isSpacecraftActiveAtSimulationDate(body.id)
+        );
+      default:
+        return true;
+    }
+  }
 
   /** Mutterkörper des aktuell ausgewählten Mondes/Raumschiffs (für P20 Rücksprung) */
   protected readonly selectedParentBody = computed<CelestialBody | null>(() => {

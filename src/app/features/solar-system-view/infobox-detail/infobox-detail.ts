@@ -7,13 +7,57 @@
  * Hinweis: Bereinigtes P20-Steckbrief-Layout ohne redundante Klammer-Zusätze, mit 1px Rahmen und dezenten Kurvenradien.
  */
 
-import { Component, computed, effect, input, output, signal } from '@angular/core';
+import { Component, OnInit, computed, effect, inject, input, output, signal } from '@angular/core';
 import { DecimalPipe } from '@angular/common';
+import { RouterLink } from '@angular/router';
 import { CelestialBody, OrbitalElementDetail } from '../../../core/models/celestial-body.model';
+import { MissionDataService } from '../../../core/services/mission-data.service';
+import { ResearchMission } from '../../../core/models/research-mission.model';
+import { ImageLightboxComponent } from '../../../shared/components/image-lightbox/image-lightbox';
+import { GLOSSARY_DEFINITIONS, GlossaryTermComponent } from '../../../shared/components/glossary-term/glossary-term';
+
+const EXTRA_BODY_GALLERY: Readonly<Record<string, Array<{ url: string; caption: string }>>> = {
+  sun: [
+    {
+      url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/The_Sun_by_the_Atmospheric_Imaging_Assembly_of_NASA%27s_Solar_Dynamics_Observatory_-_20100819.jpg/960px-The_Sun_by_the_Atmospheric_Imaging_Assembly_of_NASA%27s_Solar_Dynamics_Observatory_-_20100819.jpg',
+      caption: 'Sonne im UV-Licht (NASA SDO)',
+    },
+  ],
+  earth: [
+    {
+      url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2d/Meteosat-12-fci-march-equinox-2025-noon.jpg/960px-Meteosat-12-fci-march-equinox-2025-noon.jpg',
+      caption: 'Europa & Afrika vom Wettersatelliten',
+    },
+  ],
+  mars: [
+    {
+      url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Perseverance-Selfie-at-Rochette-Horizontal-V2.gif/960px-Perseverance-Selfie-at-Rochette-Horizontal-V2.gif',
+      caption: 'Mars-Rover Perseverance auf dem Mars',
+    },
+  ],
+  jupiter: [
+    {
+      url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Jupiter_and_its_shrunken_Great_Red_Spot.jpg/960px-Jupiter_and_its_shrunken_Great_Red_Spot.jpg',
+      caption: 'Der Große Rote Fleck (Hubble)',
+    },
+  ],
+  saturn: [
+    {
+      url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/Saturn_during_Equinox.jpg/960px-Saturn_during_Equinox.jpg',
+      caption: 'Saturns Schatten auf den Ringen (Cassini)',
+    },
+  ],
+  pluto: [
+    {
+      url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Pluto_in_True_Color_-_High-Res.jpg/960px-Pluto_in_True_Color_-_High-Res.jpg',
+      caption: 'Plutos Eisherz Tombaugh Regio',
+    },
+  ],
+};
 
 @Component({
   selector: 'app-infobox-detail',
-  imports: [DecimalPipe],
+  imports: [DecimalPipe, RouterLink, ImageLightboxComponent, GlossaryTermComponent],
   template: `
     @if (body(); as current) {
       <aside class="infobox-panel" aria-labelledby="infobox-title">
@@ -33,11 +77,36 @@ import { CelestialBody, OrbitalElementDetail } from '../../../core/models/celest
 
         <div class="infobox-hero">
           <div class="image-frame">
-            <img
-              [src]="activeImageSrc()"
-              [alt]="'Bild von ' + current.name"
-              (error)="onImageError(current.imageUrl)"
-            />
+            <button
+              type="button"
+              class="img-zoom-btn"
+              (click)="isLightboxOpen.set(true)"
+              aria-label="Bild in Originalgröße vergrößern"
+            >
+              <img
+                [src]="activeImageSrc()"
+                [alt]="'Bild von ' + current.name"
+                (error)="onImageError(current.imageUrl)"
+              />
+              <span class="zoom-badge">
+                <i class="fa-solid fa-magnifying-glass-plus" aria-hidden="true"></i> Originalgröße
+              </span>
+            </button>
+            @if (galleryItems().length > 1) {
+              <div class="mini-gallery" role="group" aria-label="Weitere Fotos auswählen">
+                @for (item of galleryItems(); track item.url) {
+                  <button
+                    type="button"
+                    class="gallery-thumb-btn"
+                    [class.active-thumb]="activeImageSrc() === item.url"
+                    (click)="selectGalleryPhoto(item.url)"
+                    [title]="item.caption"
+                  >
+                    <img [src]="item.url" [alt]="item.caption" (error)="onThumbError($event, current.imageUrl)" />
+                  </button>
+                }
+              </div>
+            }
             <span class="image-credit">Quelle: {{ current.imageCredit }}</span>
           </div>
 
@@ -59,7 +128,9 @@ import { CelestialBody, OrbitalElementDetail } from '../../../core/models/celest
             <strong class="metric-val">{{ current.diameterKm | number: '1.0-2' }} km</strong>
           </div>
           <div class="metric-box">
-            <span class="metric-label">Entfernung zur Sonne</span>
+            <span class="metric-label">
+              Entfernung zur Sonne (<app-term term="AE" />)
+            </span>
             <strong class="metric-val">
               @if (current.id === 'sun') {
                 0 km
@@ -86,7 +157,7 @@ import { CelestialBody, OrbitalElementDetail } from '../../../core/models/celest
             <strong class="metric-val">{{ current.orbitalPeriodLabel }}</strong>
           </div>
           <div class="metric-box">
-            <span class="metric-label">Bahnneigung</span>
+            <span class="metric-label"><app-term term="Bahnneigung" /></span>
             <strong class="metric-val">{{ current.inclinationToSolarEquatorDeg }}°</strong>
           </div>
         </div>
@@ -125,6 +196,24 @@ import { CelestialBody, OrbitalElementDetail } from '../../../core/models/celest
             <button type="button" class="parent-btn" (click)="bodySelected.emit(parent.id)">
               Zurück zu {{ parent.name }}
             </button>
+          </div>
+        }
+
+        @if (matchingMissions().length > 0) {
+          <div class="missions-jump-section">
+            <h4>Passende Forschungsprojekte</h4>
+            <div class="moon-chips">
+              @for (m of matchingMissions(); track m.id) {
+                <a
+                  class="mission-jump-link"
+                  [routerLink]="['/research']"
+                  [queryParams]="{ mission: m.id }"
+                >
+                  <i class="fa-solid fa-satellite" aria-hidden="true"></i>
+                  {{ m.title }}
+                </a>
+              }
+            </div>
           </div>
         }
 
@@ -167,7 +256,13 @@ import { CelestialBody, OrbitalElementDetail } from '../../../core/models/celest
                     @for (el of orbitalElementsList(); track el.code) {
                       <tr>
                         <td><span class="code-pill">{{ el.code }}</span></td>
-                        <td><strong>{{ el.label }}</strong></td>
+                        <td>
+                          @if (hasGlossaryTerm(el.label)) {
+                            <app-term [term]="el.label" />
+                          } @else {
+                            <strong>{{ el.label }}</strong>
+                          }
+                        </td>
                         <td class="val-cell">{{ el.formattedValue }}</td>
                         <td>{{ el.childExplanation }}</td>
                       </tr>
@@ -179,6 +274,15 @@ import { CelestialBody, OrbitalElementDetail } from '../../../core/models/celest
           }
         </div>
       </aside>
+
+      <app-image-lightbox
+        [isOpen]="isLightboxOpen()"
+        [imageSrc]="activeImageSrc()"
+        [fallbackSrc]="current.imageUrl"
+        [title]="current.name"
+        [credit]="current.imageCredit"
+        (closed)="isLightboxOpen.set(false)"
+      />
     }
   `,
   styles: `
@@ -253,6 +357,75 @@ import { CelestialBody, OrbitalElementDetail } from '../../../core/models/celest
       border-radius: var(--radius-sm);
       display: block;
       background-color: #111d3b;
+    }
+    .img-zoom-btn {
+      position: relative;
+      display: block;
+      width: 100%;
+      padding: 0;
+      border: none;
+      background: transparent;
+      cursor: zoom-in;
+    }
+    .zoom-badge {
+      position: absolute;
+      right: 0.4rem;
+      bottom: 0.4rem;
+      padding: 0.18rem 0.48rem;
+      border-radius: var(--radius-sm);
+      background-color: rgba(11, 19, 43, 0.85);
+      color: #f8fafc;
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      font-size: 0.7rem;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.28rem;
+    }
+    .mini-gallery {
+      display: flex;
+      gap: 0.35rem;
+      flex-wrap: wrap;
+    }
+    .gallery-thumb-btn {
+      padding: 0;
+      width: 44px;
+      height: 34px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--card-border);
+      overflow: hidden;
+      cursor: pointer;
+      background-color: #111d3b;
+    }
+    .gallery-thumb-btn.active-thumb {
+      border: 2px solid #60a5fa;
+    }
+    .gallery-thumb-btn img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .missions-jump-section h4 {
+      margin: 0 0 0.4rem;
+      font-size: 0.95rem;
+    }
+    .mission-jump-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.35rem 0.75rem;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--accent-primary);
+      background-color: var(--card-bg-subtle);
+      color: var(--accent-primary);
+      font-weight: 600;
+      font-size: 0.84rem;
+      text-decoration: none;
+    }
+    .mission-jump-link:hover {
+      background-color: var(--accent-primary);
+      color: #ffffff;
+      text-decoration: none;
     }
     .image-credit {
       font-size: 0.7rem;
@@ -431,7 +604,9 @@ import { CelestialBody, OrbitalElementDetail } from '../../../core/models/celest
     }
   `,
 })
-export class InfoboxDetailComponent {
+export class InfoboxDetailComponent implements OnInit {
+  private readonly missionService = inject(MissionDataService);
+
   readonly body = input<CelestialBody | null>(null);
   readonly childBodies = input<CelestialBody[]>([]);
   readonly parentBody = input<CelestialBody | null>(null);
@@ -440,7 +615,36 @@ export class InfoboxDetailComponent {
   readonly closed = output<void>();
 
   readonly isOrbitalBoxOpen = signal<boolean>(true);
+  readonly isLightboxOpen = signal<boolean>(false);
   readonly activeImageSrc = signal<string>('');
+
+  readonly galleryItems = computed<Array<{ url: string; caption: string }>>(() => {
+    const b = this.body();
+    if (!b) {
+      return [];
+    }
+    const items: Array<{ url: string; caption: string }> = [
+      { url: b.wikimediaImageUrl || b.imageUrl, caption: b.name },
+    ];
+    const extras = EXTRA_BODY_GALLERY[b.id] ?? [];
+    return [...items, ...extras];
+  });
+
+  readonly matchingMissions = computed<ResearchMission[]>(() => {
+    const b = this.body();
+    const allMissions = this.missionService.missions();
+    if (!b || allMissions.length === 0) {
+      return [];
+    }
+    return allMissions
+      .filter(
+        (m) =>
+          m.targetBodyId === b.id ||
+          b.childrenIds.includes(m.targetBodyId) ||
+          (b.parentId && m.targetBodyId === b.parentId && b.category === 'spacecraft'),
+      )
+      .slice(0, 4);
+  });
 
   readonly orbitalElementsList = computed<OrbitalElementDetail[]>(() => {
     const b = this.body();
@@ -458,6 +662,25 @@ export class InfoboxDetailComponent {
         this.activeImageSrc.set(current.wikimediaImageUrl || current.imageUrl);
       }
     });
+  }
+
+  async ngOnInit(): Promise<void> {
+    await this.missionService.loadMissions();
+  }
+
+  selectGalleryPhoto(url: string): void {
+    this.activeImageSrc.set(url);
+  }
+
+  onThumbError(event: Event, fallbackUrl: string): void {
+    const img = event.target as HTMLImageElement | null;
+    if (img && !img.src.endsWith(fallbackUrl)) {
+      img.src = fallbackUrl;
+    }
+  }
+
+  hasGlossaryTerm(label: string): boolean {
+    return Object.prototype.hasOwnProperty.call(GLOSSARY_DEFINITIONS, label);
   }
 
   onImageError(localFallbackUrl: string): void {

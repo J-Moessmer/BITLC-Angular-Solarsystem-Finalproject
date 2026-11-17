@@ -100,16 +100,16 @@ export class SizeComparisonComponent implements OnInit {
     }
 
     const maxDiameter = Math.max(...bodies.map((b) => b.diameterKm), 1);
-    const maxAllowedRadiusPx = bodies.length <= 2 ? 145 : bodies.length === 3 ? 115 : 85;
-    const totalWidth = 960;
+    const totalWidth = 1140;
     const slotWidth = totalWidth / bodies.length;
+    const maxAllowedRadiusPx = Math.min(205, Math.floor(slotWidth * 0.44));
 
     return bodies.map((body, idx) => {
       const trueRatio = body.diameterKm / maxDiameter;
       const truePixelRadius = Number((trueRatio * maxAllowedRadiusPx).toFixed(2));
       // Mindestens 2.5 px für das bloße Auge + Lupenring bei extremem Größenunterschied (z. B. Sonne vs. Erde)
       const svgRadiusPx = Math.max(2.5, truePixelRadius);
-      const centerX = Math.round(slotWidth * idx + slotWidth / 2);
+      const centerX = Math.round(30 + slotWidth * idx + slotWidth / 2);
 
       return {
         slotIndex: idx,

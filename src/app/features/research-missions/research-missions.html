@@ -19,7 +19,8 @@
 
     <p class="intro-text">
       Wähle eine Kategorie und klicke auf eine Missionskarte, um den Steckbrief mit Fotos,
-      Forschungsaufgaben und den aktuellen Flugdaten der Raumstation ISS zu öffnen.
+      Forschungsaufgaben und den aktuellen Flugdaten der Raumstation ISS im
+      <app-term term="Erdorbit" /> zu öffnen.
     </p>
 
     <div class="filter-bar" role="group" aria-label="Forschungsprojekte nach Kategorie filtern">
@@ -45,9 +46,20 @@
           [class.selected-card]="missionService.selectedMission()?.id === mission.id"
           (click)="onSelectMission(mission.id)"
         >
-          <span class="card-cat-pill">{{ mission.categoryLabel }}</span>
-          <h3>{{ mission.title }}</h3>
-          <p>{{ mission.subtitle }}</p>
+          <div class="summary-card-row">
+            <img
+              class="mission-thumb"
+              [src]="mission.wikimediaImageUrl || mission.imageUrl"
+              [alt]="mission.title"
+              loading="lazy"
+              (error)="onThumbnailError($event, mission.imageUrl)"
+            />
+            <div class="summary-card-body">
+              <span class="card-cat-pill">{{ mission.categoryLabel }}</span>
+              <h3>{{ mission.title }}</h3>
+              <p>{{ mission.subtitle }}</p>
+            </div>
+          </div>
           <div class="card-meta">
             <span>Ziel: {{ mission.targetBodyName }}</span>
             <span>{{ mission.agency }}</span>
@@ -65,11 +77,40 @@
 
         <div class="detail-hero">
           <div class="mission-img-frame">
-            <img
-              [src]="activeImageSrc()"
-              [alt]="'Foto zu ' + current.title"
-              (error)="onImageError(current.imageUrl)"
-            />
+            <button
+              type="button"
+              class="img-zoom-trigger"
+              (click)="isLightboxOpen.set(true)"
+              aria-label="Foto in Originalgröße vergrößern"
+            >
+              <img
+                [src]="activeImageSrc()"
+                [alt]="'Foto zu ' + current.title"
+                (error)="onImageError(current.imageUrl)"
+              />
+              <span class="zoom-hint-badge">
+                <i class="fa-solid fa-magnifying-glass-plus" aria-hidden="true"></i> Originalgröße
+              </span>
+            </button>
+            @if (missionGalleryItems().length > 1) {
+              <div class="mission-mini-gallery" role="group" aria-label="Weitere Missionsfotos">
+                @for (item of missionGalleryItems(); track item.url) {
+                  <button
+                    type="button"
+                    class="gallery-thumb-btn"
+                    [class.active-thumb]="activeImageSrc() === item.url"
+                    (click)="selectGalleryPhoto(item.url)"
+                    [title]="item.caption"
+                  >
+                    <img
+                      [src]="item.url"
+                      [alt]="item.caption"
+                      (error)="onThumbnailError($event, current.imageUrl)"
+                    />
+                  </button>
+                }
+              </div>
+            }
             <span class="img-credit">Quelle: {{ current.imageCredit }}</span>
           </div>
 
@@ -109,22 +150,26 @@
               </button>
             </div>
 
-            <div class="iss-metrics-grid">
-              <div class="iss-metric">
-                <span>Breitengrad</span>
-                <strong>{{ iss.latitude | number: '1.2-4' }}°</strong>
-              </div>
-              <div class="iss-metric">
-                <span>Längengrad</span>
-                <strong>{{ iss.longitude | number: '1.2-4' }}°</strong>
-              </div>
-              <div class="iss-metric">
-                <span>Flughöhe</span>
-                <strong>{{ iss.altitudeKm | number: '1.1-1' }} km</strong>
-              </div>
-              <div class="iss-metric">
-                <span>Geschwindigkeit</span>
-                <strong>{{ iss.velocityKmh | number: '1.0-0' }} km/h</strong>
+            <div class="iss-live-layout">
+              <app-iss-world-map [status]="iss" />
+
+              <div class="iss-metrics-grid">
+                <div class="iss-metric">
+                  <span>Breitengrad</span>
+                  <strong>{{ iss.latitude | number: '1.2-4' }}°</strong>
+                </div>
+                <div class="iss-metric">
+                  <span>Längengrad</span>
+                  <strong>{{ iss.longitude | number: '1.2-4' }}°</strong>
+                </div>
+                <div class="iss-metric">
+                  <span>Flughöhe</span>
+                  <strong>{{ iss.altitudeKm | number: '1.1-1' }} km</strong>
+                </div>
+                <div class="iss-metric">
+                  <span>Geschwindigkeit</span>
+                  <strong>{{ iss.velocityKmh | number: '1.0-0' }} km/h</strong>
+                </div>
               </div>
             </div>
             <p class="iss-hint">Status: {{ iss.locationHint }}</p>
@@ -151,6 +196,15 @@
           </a>
         </div>
       </article>
+
+      <app-image-lightbox
+        [isOpen]="isLightboxOpen()"
+        [imageSrc]="activeImageSrc()"
+        [fallbackSrc]="current.imageUrl"
+        [title]="current.title"
+        [credit]="current.imageCredit"
+        (closed)="isLightboxOpen.set(false)"
+      />
     }
   </div>
 </section>

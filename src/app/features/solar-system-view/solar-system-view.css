@@ -35,11 +35,18 @@
 }
 
 .mode-switch-group,
-.true-scale-focus-bar {
+.true-scale-focus-bar,
+.object-filter-bar {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
   gap: 0.45rem;
+}
+
+.object-filter-bar {
+  width: 100%;
+  padding-top: 0.45rem;
+  border-top: 1px solid var(--card-border);
 }
 
 .date-picker-label {

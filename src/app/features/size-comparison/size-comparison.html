@@ -77,15 +77,16 @@
   <div class="svg-comparison-card">
     <svg
       class="comparison-svg"
-      viewBox="0 0 960 360"
+      viewBox="0 0 1200 500"
+      preserveAspectRatio="xMidYMid meet"
       role="img"
       aria-label="Maßstabsgetreuer Größenvergleich der ausgewählten Himmelskörper"
     >
       <line
         x1="40"
-        y1="175"
-        x2="920"
-        y2="175"
+        y1="225"
+        x2="1160"
+        y2="225"
         stroke="#38BDF8"
         stroke-width="1.2"
         stroke-dasharray="6 6"
@@ -93,7 +94,7 @@
       />
 
       @for (item of scaledItems(); track item.slotIndex) {
-        <g [attr.transform]="'translate(' + item.centerX + ', 175)'">
+        <g [attr.transform]="'translate(' + item.centerX + ', 225)'">
           @if (item.body.id === 'saturn') {
             <ellipse
               cx="0"
@@ -130,20 +131,20 @@
 
           <text
             x="0"
-            y="152"
+            y="228"
             text-anchor="middle"
             fill="#F8FAFC"
-            font-size="15"
+            font-size="16"
             font-weight="700"
           >
             {{ item.body.name }}
           </text>
           <text
             x="0"
-            y="172"
+            y="249"
             text-anchor="middle"
             fill="#BAE6FD"
-            font-size="12"
+            font-size="13"
             font-weight="600"
           >
             Ø {{ item.body.diameterKm | number: '1.0-0' }} km

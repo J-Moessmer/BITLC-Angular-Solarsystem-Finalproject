@@ -40,6 +40,27 @@
   --shadow-card: 0 2px 6px rgba(11, 19, 43, 0.16);
 }
 
+/* Nachtmodus (Darkmode) in tiefem Marine-/Nachtblau (KEIN reines Schwarz #000000!) */
+body.theme-dark {
+  --space-bg-primary: #0b132b;
+  --space-bg-secondary: #111d3b;
+  --space-bg-canvas: #162447;
+  --space-orbit-line: #47648a;
+
+  --card-bg: #162342;
+  --card-bg-elevated: #1b2b50;
+  --card-bg-subtle: #233866;
+  --card-border: #364f82;
+  --card-text-primary: #f1f5f9;
+  --card-text-secondary: #cbd5e1;
+  --card-text-muted: #94a3b8;
+
+  --accent-primary: #3b82f6;
+  --accent-primary-hover: #2563eb;
+  --accent-astronomy-box: #1e325c;
+  --shadow-card: 0 2px 10px rgba(11, 19, 43, 0.45);
+}
+
 *,
 *::before,
 *::after {

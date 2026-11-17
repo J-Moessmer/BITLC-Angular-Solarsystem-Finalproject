@@ -67,6 +67,47 @@ export class ViewportStateService {
   readonly pixelsPerAu = 10;
   readonly astronomicalUnitKm = 149597870.7;
 
+  /** Offizielle Start- bzw. Landedaten (ISO) für die historische Sichtbarkeitsfilterung von Raumsonden & Missionen */
+  readonly spacecraftActiveFromIso: Readonly<Record<string, string>> = {
+    'apollo-11': '1969-07-20',
+    'apollo-12': '1969-11-19',
+    'apollo-13': '1970-04-11',
+    'apollo-14': '1971-02-05',
+    'apollo-15': '1971-07-30',
+    'apollo-16': '1972-04-21',
+    'apollo-17': '1972-12-11',
+    'voyager-2': '1977-08-20',
+    'voyager-1': '1977-09-05',
+    hubble: '1990-04-24',
+    sojourner: '1997-07-04',
+    cassini: '1997-10-15',
+    iss: '1998-11-20',
+    spirit: '2004-01-04',
+    opportunity: '2004-01-25',
+    rosetta: '2004-03-02',
+    'new-horizons': '2006-01-19',
+    dawn: '2007-09-27',
+    juno: '2011-08-05',
+    curiosity: '2012-08-06',
+    gaia: '2013-12-19',
+    parker: '2018-08-12',
+    bepicolombo: '2018-10-20',
+    'solar-orbiter': '2020-02-10',
+    perseverance: '2021-02-18',
+    jwst: '2021-12-25',
+    artemis: '2022-11-16',
+    juice: '2023-04-14',
+  };
+
+  /** Prüft, ob eine Raumsonde / Mission zum aktuellen Simulationsdatum bereits gestartet war */
+  isSpacecraftActiveAtSimulationDate(bodyId: string): boolean {
+    const launchIso = this.spacecraftActiveFromIso[bodyId];
+    if (!launchIso) {
+      return true;
+    }
+    return this.isoSimulationDate() >= launchIso;
+  }
+
   /** Offizielle astronomische Epoche J2000.0: 01.01.2000, 12:00:00 UTC */
   private readonly j2000EpochMs = Date.UTC(2000, 0, 1, 12, 0, 0);
   private readonly msPerDay = 86400000;
@@ -669,7 +710,10 @@ export class ViewportStateService {
 
     // Große Halbachse a (SMA) und Exzentrizität e (ECC) für Hauptkörper um die Sonne
     const rawEcc = body.orbitalElements.ecc.numericValue ?? 0;
-    const ecc = Math.min(mode === 'true-scale' ? 0.97 : 0.75, Math.max(0, rawEcc));
+    const ecc = Math.min(
+      mode === 'true-scale' || body.id === 'parker' || body.id === 'solar-orbiter' ? 0.97 : 0.75,
+      Math.max(0, rawEcc),
+    );
     const effectiveAu =
       body.id === 'voyager-1' || body.id === 'voyager-2' || body.id === 'new-horizons'
         ? kepler.currentDistanceAu
@@ -686,7 +730,9 @@ export class ViewportStateService {
 
     const worldSemiMinorPx = Number((worldSemiMajorPx * Math.sqrt(1 - ecc * ecc)).toFixed(3));
     const worldFocusOffsetX =
-      mode === 'true-scale' ? Number((-worldSemiMajorPx * ecc).toFixed(3)) : 0;
+      mode === 'true-scale' || body.id === 'parker' || body.id === 'solar-orbiter'
+        ? Number((-worldSemiMajorPx * ecc).toFixed(3))
+        : 0;
 
     const scaledRx = Number((worldSemiMajorPx * z).toFixed(1));
     const scaledRy = Number((worldSemiMinorPx * z).toFixed(1));

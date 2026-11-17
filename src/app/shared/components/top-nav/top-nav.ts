@@ -7,8 +7,9 @@
  * Hinweis: Fixierte Top-Navigation mit Font Awesome 7.3 Vektor-Icons eingerichtet.
  */
 
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
+import { ThemeService } from '../../../core/services/theme.service';
 
 export interface NavItem {
   label: string;
@@ -24,6 +25,8 @@ export interface NavItem {
   styleUrl: './top-nav.css',
 })
 export class TopNavComponent {
+  protected readonly theme = inject(ThemeService);
+
   protected readonly navItems: readonly NavItem[] = [
     {
       label: 'Sonnensystem',
