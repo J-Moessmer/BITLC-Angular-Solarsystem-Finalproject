@@ -93,7 +93,7 @@ export class SolarSystemViewComponent implements OnInit, OnDestroy {
         ? selectedBody.parentId
         : selectedId;
 
-    const alwaysVisibleProbes = new Set(['voyager', 'new-horizons', 'parker']);
+    const alwaysVisibleProbes = new Set(['voyager-1', 'voyager-2', 'new-horizons', 'parker']);
 
     return this.svgPositions().filter((pos) => {
       // Viewport-Culling für Körper weit außerhalb des 1080x660 Fensters

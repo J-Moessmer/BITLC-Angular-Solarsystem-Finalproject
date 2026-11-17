@@ -89,7 +89,7 @@
           </ul>
         </div>
 
-        @if (missionService.issStatus(); as iss) {
+        @if (current.hasIssLiveTracker && missionService.issStatus(); as iss) {
           <div class="iss-live-box" role="region" aria-label="Live-Status der Raumstation ISS">
             <div class="iss-header">
               <div>

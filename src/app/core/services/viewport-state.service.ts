@@ -244,11 +244,22 @@ export class ViewportStateService {
     const days = this.daysSinceJ2000();
     const yearsSinceJ2000 = days / 365.25;
 
-    if (body.id === 'voyager') {
+    if (body.id === 'voyager-1') {
       const liveDistAu = Math.max(30, Number((76.0 + 3.57 * yearsSinceJ2000).toFixed(2)));
       const lonRad = (255.4 * Math.PI) / 180;
       return {
         longitudeDeg: 255.4,
+        eccentricAnomalyRad: lonRad,
+        trueAnomalyRad: lonRad,
+        currentDistanceAu: liveDistAu,
+      };
+    }
+
+    if (body.id === 'voyager-2') {
+      const liveDistAu = Math.max(30, Number((61.0 + 3.13 * yearsSinceJ2000).toFixed(2)));
+      const lonRad = (289.4 * Math.PI) / 180;
+      return {
+        longitudeDeg: 289.4,
         eccentricAnomalyRad: lonRad,
         trueAnomalyRad: lonRad,
         currentDistanceAu: liveDistAu,
@@ -595,7 +606,7 @@ export class ViewportStateService {
     // Große Halbachse a (SMA) und Exzentrizität e (ECC) für Hauptkörper um die Sonne
     const ecc = Math.min(0.75, Math.max(0, body.orbitalElements.ecc.numericValue ?? 0));
     const effectiveAu =
-      body.id === 'voyager' || body.id === 'new-horizons'
+      body.id === 'voyager-1' || body.id === 'voyager-2' || body.id === 'new-horizons'
         ? kepler.currentDistanceAu
         : body.distanceFromSunAu;
 

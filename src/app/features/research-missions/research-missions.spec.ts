@@ -17,17 +17,36 @@ import { ResearchMission } from '../../core/models/research-mission.model';
 describe('ResearchMissionsComponent (P40)', () => {
   const mockMissions: ResearchMission[] = [
     {
+      id: 'iss',
+      title: 'Internationale Raumstation (ISS)',
+      subtitle: 'Unser Forschungshaus im Erdorbit',
+      category: 'space-station',
+      categoryLabel: 'Raumstationen',
+      targetBodyId: 'iss',
+      targetBodyName: 'Raumstation ISS',
+      agency: 'NASA / ESA',
+      launchYear: '1998',
+      statusLabel: 'Aktiv',
+      wikimediaImageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/The_station_pictured_from_the_SpaceX_Crew_Dragon_5.jpg/960px-The_station_pictured_from_the_SpaceX_Crew_Dragon_5.jpg',
+      imageUrl: 'assets/images/iss.svg',
+      imageCredit: 'NASA',
+      childSummary: 'Forschungslabor in 408 km Höhe.',
+      tasksForKids: ['Schwerelosigkeit erforschen'],
+      wikipediaUrl: 'https://de.wikipedia.org/wiki/Internationale_Raumstation',
+      hasIssLiveTracker: true,
+    },
+    {
       id: 'perseverance',
-      title: 'Mars-Rover Perseverance & Curiosity',
+      title: 'Mars-Rover Perseverance',
       subtitle: 'Roboter auf dem Mars',
       category: 'mars-rover',
       categoryLabel: 'Mars Rover',
-      targetBodyId: 'mars',
-      targetBodyName: 'Mars',
+      targetBodyId: 'perseverance',
+      targetBodyName: 'Rover Perseverance (Mars)',
       agency: 'NASA',
       launchYear: '2020',
       statusLabel: 'Aktiv',
-      wikimediaImageUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/Perseverance.jpg',
+      wikimediaImageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Perseverance-Selfie-at-Rochette-Horizontal-V2.gif/960px-Perseverance-Selfie-at-Rochette-Horizontal-V2.gif',
       imageUrl: 'assets/images/perseverance.svg',
       imageCredit: 'NASA',
       childSummary: 'Sucht nach Spuren von Wasser.',
@@ -40,12 +59,12 @@ describe('ResearchMissionsComponent (P40)', () => {
       subtitle: 'Goldener Spiegel im All',
       category: 'telescope',
       categoryLabel: 'Weltraumteleskope',
-      targetBodyId: 'sun',
-      targetBodyName: 'Sonne',
+      targetBodyId: 'jwst',
+      targetBodyName: 'James-Webb-Teleskop',
       agency: 'NASA / ESA',
       launchYear: '2021',
       statusLabel: 'Aktiv',
-      wikimediaImageUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/JWST.jpg',
+      wikimediaImageUrl: 'https://upload.wikimedia.org/wikipedia/commons/2/2a/JWST_spacecraft_model_3.png',
       imageUrl: 'assets/images/jwst.svg',
       imageCredit: 'NASA / ESA',
       childSummary: 'Blickt tief ins Universum.',
@@ -94,8 +113,13 @@ describe('ResearchMissionsComponent (P40)', () => {
     fixture.detectChanges();
 
     const comp = fixture.componentInstance;
-    expect(fixture.nativeElement.textContent).toContain('Mars-Rover Perseverance & Curiosity');
+    expect(fixture.nativeElement.textContent).toContain('Internationale Raumstation (ISS)');
     expect(fixture.nativeElement.textContent).toContain('416.8 km');
+
+    comp.onSelectCategory('mars-rover');
+    fixture.detectChanges();
+    expect(fixture.nativeElement.textContent).toContain('Mars-Rover Perseverance');
+    expect(fixture.nativeElement.textContent).not.toContain('416.8 km');
 
     comp.onSelectCategory('telescope');
     fixture.detectChanges();
