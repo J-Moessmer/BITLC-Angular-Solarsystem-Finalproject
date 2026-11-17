@@ -125,6 +125,19 @@ import { PathTreeNode } from '../../../core/services/solar-system-data.service';
       border-radius: var(--radius-lg);
       padding: 0.9rem;
       box-shadow: var(--shadow-card);
+      position: sticky;
+      top: 4.5rem;
+      max-height: calc(100vh - 5.5rem);
+      overflow-y: auto;
+      scrollbar-width: thin;
+      scrollbar-color: #cbd5e1 transparent;
+    }
+    @media (max-width: 960px) {
+      .path-tree-card {
+        position: static;
+        max-height: none;
+        overflow-y: visible;
+      }
     }
     .tree-header {
       display: flex;

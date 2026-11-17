@@ -297,14 +297,28 @@ export class SolarSystemViewComponent implements OnInit, OnDestroy {
     this.viewport.setZoomFromSliderPercent(val);
   }
 
-  /** Mausrad-Zoom auf der SVG-Bühne (P10-U30) */
+  /** Mausrad-Zoom auf die aktuelle Mauszeiger-Position innerhalb der SVG-Bühne (P10-U30) */
   onWheelZoom(event: WheelEvent): void {
     event.preventDefault();
-    if (event.deltaY < 0) {
-      this.viewport.zoomIn(0.2);
-    } else {
-      this.viewport.zoomOut(0.2);
+    const wrapper = event.currentTarget as HTMLElement | null;
+    const svgEl = wrapper?.querySelector('svg.solar-system-svg') as SVGSVGElement | null;
+
+    let cursorSvgX = 0;
+    let cursorSvgY = 0;
+    if (svgEl) {
+      const rect = svgEl.getBoundingClientRect();
+      if (rect.width > 0 && rect.height > 0) {
+        const vbWidth = 1080;
+        const vbHeight = 660;
+        const scale = Math.min(rect.width / vbWidth, rect.height / vbHeight);
+        const offsetX = (rect.width - vbWidth * scale) / 2;
+        const offsetY = (rect.height - vbHeight * scale) / 2;
+        cursorSvgX = (event.clientX - rect.left - offsetX) / scale - vbWidth / 2;
+        cursorSvgY = (event.clientY - rect.top - offsetY) / scale - vbHeight / 2;
+      }
     }
+
+    this.viewport.zoomAtPoint(event.deltaY < 0, cursorSvgX, cursorSvgY);
   }
 
   /** Startet das Verschieben (Drag/Pan) der SVG-Bühne (P10-U30) */

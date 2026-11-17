@@ -168,18 +168,38 @@ export class ViewportStateService {
     this.setZoom(targetZ);
   }
 
-  /** Stufenloses, multiplikatives Hineinzoomen (+ Button / Mausrad) (P10-U30) */
+  /** Stufenloses, multiplikatives Hineinzoomen (+ Button) (P10-U30) */
   zoomIn(step = this.zoomStep): void {
     const current = this.zoomLevel();
     const next = current < 1.5 ? current + step : current * 1.38;
     this.setZoom(next);
   }
 
-  /** Stufenloses, multiplikatives Herauszoomen (- Button / Mausrad) (P10-U30) */
+  /** Stufenloses, multiplikatives Herauszoomen (- Button) (P10-U30) */
   zoomOut(step = this.zoomStep): void {
     const current = this.zoomLevel();
     const next = current <= 1.5 ? current - step : current / 1.38;
     this.setZoom(next);
+  }
+
+  /**
+   * Zoomt mit dem Mausrad exakt auf die aktuelle Mauszeiger-Position (cursorSvgX, cursorSvgY)
+   * innerhalb der SVG-ViewBox (-540..540, -330..330), sodass das anvisierte Objekt unter dem
+   * Cursor fixiert bleibt und nicht zur Fenstermitte abdriftet.
+   */
+  zoomAtPoint(zoomInDirection: boolean, cursorSvgX: number, cursorSvgY: number, factor = 1.22): void {
+    this.isTrackingSelectedBody.set(false);
+    const zOld = this.zoomLevel();
+    const rawNext = zoomInDirection ? zOld * factor : zOld / factor;
+    const zNew = Math.min(this.maxZoom, Math.max(this.minZoom, Number(rawNext.toFixed(4))));
+    if (zNew === zOld) {
+      return;
+    }
+
+    const ratio = zNew / zOld;
+    this.panX.update((px) => Number((cursorSvgX - (cursorSvgX - px) * ratio).toFixed(2)));
+    this.panY.update((py) => Number((cursorSvgY - (cursorSvgY - py) * ratio).toFixed(2)));
+    this.zoomLevel.set(zNew);
   }
 
   /** Setzt den Zoomfaktor innerhalb der erlaubten Grenzen [minZoom, maxZoom] */
