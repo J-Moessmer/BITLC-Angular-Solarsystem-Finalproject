@@ -216,15 +216,29 @@
             Im Sonnensystem zeigen: {{ current.targetBodyName }}
           </a>
 
-          <a
-            class="wiki-external-btn"
-            [href]="current.wikipediaUrl"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
-            Offizielle Missionsseite ({{ current.agency }})
-          </a>
+          @if (current.officialUrl) {
+            <a
+              class="wiki-external-btn"
+              [href]="current.officialUrl"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
+              Offizielle Missionsseite ({{ current.agency }})
+            </a>
+          }
+
+          @if (current.wikipediaUrl) {
+            <a
+              class="wiki-external-btn"
+              [href]="current.wikipediaUrl"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <i class="fa-brands fa-wikipedia-w" aria-hidden="true"></i>
+              Wikipedia-Artikel
+            </a>
+          }
         </div>
       </article>
 

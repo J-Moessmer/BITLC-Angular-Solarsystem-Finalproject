@@ -18,7 +18,8 @@
       "Funkte 21 Tage lang ein ‚Piep-Piep‘-Signal rund um die Erde.",
       "Half Forschern erstmals, die Dichte der obersten Erdatmosphäre zu messen."
     ],
-    "wikipediaUrl": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1957-001B"
+    "wikipediaUrl": "https://de.wikipedia.org/wiki/Sputnik_1",
+    "officialUrl": "https://www.nasa.gov/history/sputnik/index.html"
   },
   {
     "id": "vostok-1",
@@ -39,7 +40,7 @@
       "Umrundete die Erde einmal komplett in rund 300 Kilometern Höhe.",
       "Der 12. April wird bis heute weltweit als ‚Tag der bemannten Raumfahrt‘ (Yuri's Night) gefeiert."
     ],
-    "wikipediaUrl": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1961-012A"
+    "wikipediaUrl": "https://de.wikipedia.org/wiki/Wostok_1"
   },
   {
     "id": "tiangong",
@@ -60,7 +61,8 @@
       "Testet neue Lebenserhaltungssysteme, Pflanzenzucht und Weltraum-Aquarien.",
       "Hat einen großen Roboterarm an der Außenseite für Außenbordeinsätze."
     ],
-    "wikipediaUrl": "https://de.wikipedia.org/wiki/Tiangong_(Raumstation)"
+    "wikipediaUrl": "https://de.wikipedia.org/wiki/Chinesische_Raumstation",
+    "officialUrl": "https://en.cmse.gov.cn/"
   },
   {
     "id": "venera-13",
@@ -81,7 +83,7 @@
       "Fotografierte die gelb-orange Landschaft unter den dichten Schwefelsäurewolken der Venus.",
       "Bohrte erstmals eine Bodenprobe direkt auf der Venus an und nahm Windgeräusche auf."
     ],
-    "wikipediaUrl": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1981-106D"
+    "wikipediaUrl": "https://de.wikipedia.org/wiki/Venera-Programm"
   },
   {
     "id": "lunokhod-1",
@@ -102,7 +104,7 @@
       "Fuhr 322 Tage lang über den Mond und untersuchte mehr als 500 Mondboden-Stellen.",
       "Trug einen französischen Laser-Spiegel auf dem Rücken, mit dem der Mondabstand noch heute gemessen wird!"
     ],
-    "wikipediaUrl": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1970-095D"
+    "wikipediaUrl": "https://de.wikipedia.org/wiki/Lunochod_1"
   },
   {
     "id": "change-4",
@@ -123,7 +125,7 @@
       "Nutzt den Relais-Satelliten ‚Queqiao‘ für die Funkverbindung um den Mond herum.",
       "Untersucht tiefes Gestein im uralten Südpol-Aitken-Becken und testete erstes Pflanzenwachstum auf dem Mond."
     ],
-    "wikipediaUrl": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=2018-103A"
+    "wikipediaUrl": "https://de.wikipedia.org/wiki/Chang%E2%80%99e_4"
   },
   {
     "id": "chandrayaan-3",
@@ -144,7 +146,8 @@
       "Pragyan fuhr über 100 Meter durch die Südpol-Region und wies Schwefel im Mondboden nach.",
       "Vikram führte am Ende sogar noch einen kleinen Hüpfer mit seinen Triebwerken auf dem Mond aus!"
     ],
-    "wikipediaUrl": "https://www.isro.gov.in/Chandrayaan3.html"
+    "wikipediaUrl": "https://de.wikipedia.org/wiki/Chandrayaan-3",
+    "officialUrl": "https://www.isro.gov.in/Chandrayaan3.html"
   },
   {
     "id": "slim",
@@ -165,7 +168,8 @@
       "Demonstrierte eine neue Kamera-Navigation für exakte Krater-Punktlandungen.",
       "Der kugelförmige Mini-Rover SORA-Q fotografierte den kopfüber gelandeten SLIM-Lander auf dem Mond."
     ],
-    "wikipediaUrl": "https://global.jaxa.jp/projects/sas/slim/"
+    "wikipediaUrl": "https://de.wikipedia.org/wiki/Smart_Lander_for_Investigating_Moon",
+    "officialUrl": "https://global.jaxa.jp/projects/sas/slim/"
   },
   {
     "id": "zhurong",
@@ -186,7 +190,7 @@
       "Fuhr 1.921 Meter weit über rote Marsdünen und Felsbrocken.",
       "Durchleuchtete den Marsboden mit Radar und entdeckte Schichten eines früheren Ozeans oder Sees."
     ],
-    "wikipediaUrl": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=2020-049A"
+    "wikipediaUrl": "https://de.wikipedia.org/wiki/Tianwen-1"
   },
   {
     "id": "hayabusa-2",
@@ -207,7 +211,8 @@
       "Sammelte 5,4 Gramm Ur-Gestein aus den ersten Tagen unseres Sonnensystems.",
       "Fliegt inzwischen weiter zum nächsten Asteroiden (1998 KY26)!"
     ],
-    "wikipediaUrl": "https://global.jaxa.jp/projects/sas/hayabusa2/"
+    "wikipediaUrl": "https://de.wikipedia.org/wiki/Hayabusa_2",
+    "officialUrl": "https://global.jaxa.jp/projects/sas/hayabusa2/"
   },
   {
     "id": "iss",
@@ -229,8 +234,9 @@
       "Beobachtet Wetter, Vulkane, Gletscher und Meere auf unserer Erde aus dem großen Aussichtsfenster ‚Cupola‘.",
       "Testet neue Technik für zukünftige Flüge zum Mond und zum Mars."
     ],
-    "wikipediaUrl": "https://www.nasa.gov/international-space-station/",
-    "hasIssLiveTracker": true
+    "wikipediaUrl": "https://de.wikipedia.org/wiki/Internationale_Raumstation",
+    "hasIssLiveTracker": true,
+    "officialUrl": "https://www.nasa.gov/international-space-station/"
   },
   {
     "id": "perseverance",
@@ -252,7 +258,8 @@
       "Hat die kleine Mars-Hubschrauberdrohne ‚Ingenuity‘ mitgebracht, die 72 Flüge in der dünnen Marsluft absolvierte!",
       "Füllt Gesteinsröhrchen ab, die später zur Erde gebracht werden sollen, und erzeugte mit dem Gerät MOXIE Sauerstoff auf dem Mars."
     ],
-    "wikipediaUrl": "https://science.nasa.gov/mission/mars-2020-perseverance/"
+    "wikipediaUrl": "https://de.wikipedia.org/wiki/Perseverance_(Rover)",
+    "officialUrl": "https://science.nasa.gov/mission/mars-2020-perseverance/"
   },
   {
     "id": "curiosity",
@@ -274,7 +281,8 @@
       "Analysiert Gesteinsmehl in seinem eingebauten Chemielabor und untersucht Marssteine mit einem Laserstrahl.",
       "Misst die Strahlung auf der Marsoberfläche, um zukünftige Astronauten-Missionen vorzubereiten."
     ],
-    "wikipediaUrl": "https://science.nasa.gov/mission/msl-curiosity/"
+    "wikipediaUrl": "https://de.wikipedia.org/wiki/Curiosity",
+    "officialUrl": "https://science.nasa.gov/mission/msl-curiosity/"
   },
   {
     "id": "opportunity",
@@ -296,7 +304,8 @@
       "Entdeckte Hämatit-Kügelchen (‚Blueberries‘) und Gipsadern als Beweis für früheres flüssiges Wasser.",
       "Untersuchte vier große Einschlagkrater (Eagle, Endurance, Victoria und Endeavour) direkt vor Ort."
     ],
-    "wikipediaUrl": "https://science.nasa.gov/mission/mer-opportunity/"
+    "wikipediaUrl": "https://de.wikipedia.org/wiki/Opportunity",
+    "officialUrl": "https://science.nasa.gov/mission/mer-opportunity/"
   },
   {
     "id": "spirit",
@@ -318,7 +327,8 @@
       "Entdeckte helles Silikat-Gestein, das auf frühere heiße Wasserquellen oder Dampfquellen auf dem Mars hinweist.",
       "Fotografierte wirbelnde Staubteufel (Windhosen), die über die Marsebene fegten und dabei sogar seine Solarzellen vom Staub reinigten!"
     ],
-    "wikipediaUrl": "https://science.nasa.gov/mission/mer-spirit/"
+    "wikipediaUrl": "https://de.wikipedia.org/wiki/Spirit_(Raumsonde)",
+    "officialUrl": "https://science.nasa.gov/mission/mer-spirit/"
   },
   {
     "id": "sojourner",
@@ -339,7 +349,8 @@
       "Bewies, dass ein sechsrädriges Fahrwerk (‚Rocker-Bogie‘) über spitze Marssteine klettern kann – genau diese Technik nutzen auch Curiosity und Perseverance!",
       "Untersuchte die chemische Zusammensetzung von Marssteinen mit einem Röntgenspektrometer."
     ],
-    "wikipediaUrl": "https://science.nasa.gov/mission/mars-pathfinder/"
+    "wikipediaUrl": "https://de.wikipedia.org/wiki/Mars_Pathfinder",
+    "officialUrl": "https://science.nasa.gov/mission/mars-pathfinder/"
   },
   {
     "id": "voyager-1",
@@ -361,7 +372,8 @@
       "Untersuchte 1980 die dichte Stickstoff-Atmosphäre des großen Saturnmondes Titan.",
       "Misst seit August 2012 direkt die Teilchen und Magnetfelder im interstellaren Raum zwischen den Sternen!"
     ],
-    "wikipediaUrl": "https://science.nasa.gov/mission/voyager/"
+    "wikipediaUrl": "https://de.wikipedia.org/wiki/Voyager_1",
+    "officialUrl": "https://science.nasa.gov/mission/voyager/"
   },
   {
     "id": "voyager-2",
@@ -383,7 +395,8 @@
       "Flog 1989 dicht über den tiefblauen Neptun und entdeckte eisige Stickstoff-Geysire auf seinem Mond Triton.",
       "Überquerte im November 2018 ebenfalls die Grenze zum interstellaren Raum auf der Südseite des Sonnensystems."
     ],
-    "wikipediaUrl": "https://science.nasa.gov/mission/voyager/"
+    "wikipediaUrl": "https://de.wikipedia.org/wiki/Voyager_2",
+    "officialUrl": "https://science.nasa.gov/mission/voyager/"
   },
   {
     "id": "apollo-11",
@@ -404,7 +417,8 @@
       "Sammelte 21,5 Kilogramm Basaltgestein und Mondstaub aus dem Mare Tranquillitatis.",
       "Stellte ein Seismometer (für Mondbeben) und einen Laser-Spiegel zur genauen Abstandsmessung Erde–Mond auf."
     ],
-    "wikipediaUrl": "https://www.nasa.gov/mission/apollo-11/"
+    "wikipediaUrl": "https://de.wikipedia.org/wiki/Apollo_11",
+    "officialUrl": "https://www.nasa.gov/mission/apollo-11/"
   },
   {
     "id": "apollo-12",
@@ -425,7 +439,8 @@
       "Baute eine automatische Forschungsstation (ALSEP) auf dem Mondboden auf.",
       "Untersuchte, wie sich zweieinhalb Jahre im extremen Mondklima auf die Bauteile der Sonde Surveyor 3 ausgewirkt hatten."
     ],
-    "wikipediaUrl": "https://www.nasa.gov/mission/apollo-12/"
+    "wikipediaUrl": "https://de.wikipedia.org/wiki/Apollo_12",
+    "officialUrl": "https://www.nasa.gov/mission/apollo-12/"
   },
   {
     "id": "apollo-13",
@@ -446,7 +461,8 @@
       "Nutze die Anziehungskraft des Mondes wie eine Steinschleuder, um ohne großes Haupttriebwerk zur Erde zurückzukehren.",
       "Stellte bei 400.171 Kilometern den Entfernungsrekord für Menschen von der Erde auf."
     ],
-    "wikipediaUrl": "https://www.nasa.gov/mission/apollo-13/"
+    "wikipediaUrl": "https://de.wikipedia.org/wiki/Apollo_13",
+    "officialUrl": "https://www.nasa.gov/mission/apollo-13/"
   },
   {
     "id": "apollo-14",
@@ -467,7 +483,8 @@
       "Nutzte den zweirädrigen Handwagen ‚MET‘ für Werkzeuge und 42,3 Kilogramm Gesteinsproben.",
       "Erforschte die innere Struktur des Mondes mit seismischen Messungen."
     ],
-    "wikipediaUrl": "https://www.nasa.gov/mission/apollo-14/"
+    "wikipediaUrl": "https://de.wikipedia.org/wiki/Apollo_14",
+    "officialUrl": "https://www.nasa.gov/mission/apollo-14/"
   },
   {
     "id": "apollo-15",
@@ -488,7 +505,8 @@
       "Entdeckte den über 4 Milliarden Jahre alten ‚Genesis-Stein‘ aus der Urkruste des Mondes.",
       "Bewies mit dem berühmten Hammer-und-Feder-Experiment vor laufender TV-Kamera das Fallgesetz von Galileo Galilei im Vakuum."
     ],
-    "wikipediaUrl": "https://www.nasa.gov/mission/apollo-15/"
+    "wikipediaUrl": "https://de.wikipedia.org/wiki/Apollo_15",
+    "officialUrl": "https://www.nasa.gov/mission/apollo-15/"
   },
   {
     "id": "apollo-16",
@@ -509,7 +527,8 @@
       "Betrieb das erste astronomische Ultraviolett-Teleskop auf der Oberfläche des Mondes.",
       "Wies nach, dass das Descartes-Hochland nicht durch Vulkane, sondern durch uralte Meteoriteneinschläge geformt wurde."
     ],
-    "wikipediaUrl": "https://www.nasa.gov/mission/apollo-16/"
+    "wikipediaUrl": "https://de.wikipedia.org/wiki/Apollo_16",
+    "officialUrl": "https://www.nasa.gov/mission/apollo-16/"
   },
   {
     "id": "apollo-17",
@@ -530,7 +549,8 @@
       "Entdeckte am Krater Shorty orangefarbene vulkanische Glasperlen (‚Orange Soil‘) aus alten Feuerfontänen des Mondes.",
       "Stellte mit 35,7 Kilometern Fahrstrecke und 22 Stunden Außenbordeinsatz die Rekorde aller Apollo-Missionen auf."
     ],
-    "wikipediaUrl": "https://www.nasa.gov/mission/apollo-17/"
+    "wikipediaUrl": "https://de.wikipedia.org/wiki/Apollo_17",
+    "officialUrl": "https://www.nasa.gov/mission/apollo-17/"
   },
   {
     "id": "artemis",
@@ -552,7 +572,8 @@
       "Am Südpol des Mondes soll nach gefrorenem Wassereis in schattigen Kratern gesucht werden.",
       "Geplant ist außerdem eine kleine Raumstation im Mondorbit namens ‚Lunar Gateway‘."
     ],
-    "wikipediaUrl": "https://www.nasa.gov/humans-in-space/artemis/"
+    "wikipediaUrl": "https://de.wikipedia.org/wiki/Artemis-Programm",
+    "officialUrl": "https://www.nasa.gov/humans-in-space/artemis/"
   },
   {
     "id": "jwst",
@@ -574,7 +595,8 @@
       "Untersucht auch die Wolken von Jupiter, Saturn, Uranus, Neptun sowie die Zwergplaneten Eris und Pluto.",
       "Ein Sonnenschutzschild so groß wie ein Tennisplatz hält die Kameras im Dauerschatten bei unter -220 °C kühl."
     ],
-    "wikipediaUrl": "https://science.nasa.gov/mission/webb/"
+    "wikipediaUrl": "https://de.wikipedia.org/wiki/James-Webb-Weltraumteleskop",
+    "officialUrl": "https://science.nasa.gov/mission/webb/"
   },
   {
     "id": "gaia",
@@ -596,7 +618,8 @@
       "Misst genau, wie weit die Sterne entfernt sind und wohin sie sich bewegen.",
       "Hat außerdem über 150.000 Asteroiden in unserem Sonnensystem genau vermessen!"
     ],
-    "wikipediaUrl": "https://www.esa.int/Science_Exploration/Space_Science/Gaia"
+    "wikipediaUrl": "https://de.wikipedia.org/wiki/Gaia_(Weltraumteleskop)",
+    "officialUrl": "https://www.esa.int/Science_Exploration/Space_Science/Gaia"
   },
   {
     "id": "hubble",
@@ -617,7 +640,8 @@
       "Wurde fünfmal von Space-Shuttle-Astronauten direkt im Weltall gewartet und modernisiert.",
       "Entdeckte unter anderem die kleinen Monde Nix und Hydra bei Pluto sowie MK 2 bei Makemake."
     ],
-    "wikipediaUrl": "https://science.nasa.gov/mission/hubble/"
+    "wikipediaUrl": "https://de.wikipedia.org/wiki/Hubble-Weltraumteleskop",
+    "officialUrl": "https://science.nasa.gov/mission/hubble/"
   },
   {
     "id": "rosetta",
@@ -638,7 +662,8 @@
       "Begleitete den Kometen über zwei Jahre lang auf seinem Weg um die Sonne.",
       "Untersuchte Wassereis, Staub und organische Moleküle direkt auf der Kometenoberfläche."
     ],
-    "wikipediaUrl": "https://www.esa.int/Science_Exploration/Space_Science/Rosetta"
+    "wikipediaUrl": "https://de.wikipedia.org/wiki/Rosetta_(Sonde)",
+    "officialUrl": "https://www.esa.int/Science_Exploration/Space_Science/Rosetta"
   },
   {
     "id": "parker",
@@ -659,7 +684,8 @@
       "Findet heraus, warum die äußere Sonnen-Korona über 1 Million Grad heiß ist, während die Oberfläche darunter ‚nur‘ 5.500 °C warm ist.",
       "Misst vor Ort, wie der schnelle Sonnenwind entsteht und beschleunigt wird."
     ],
-    "wikipediaUrl": "https://science.nasa.gov/mission/parker-solar-probe/"
+    "wikipediaUrl": "https://de.wikipedia.org/wiki/Parker_Solar_Probe",
+    "officialUrl": "https://science.nasa.gov/mission/parker-solar-probe/"
   },
   {
     "id": "solar-orbiter",
@@ -680,7 +706,8 @@
       "Fotografiert durch kleine verschließbare Luken im Hitzeschild die Sonne aus nur 42 Millionen Kilometern Entfernung.",
       "Entdeckte tausende kleine ‚Lagerfeuer‘-Eruptionen auf der Sonnenoberfläche."
     ],
-    "wikipediaUrl": "https://www.esa.int/Science_Exploration/Space_Science/Solar_Orbiter"
+    "wikipediaUrl": "https://de.wikipedia.org/wiki/Solar_Orbiter",
+    "officialUrl": "https://www.esa.int/Science_Exploration/Space_Science/Solar_Orbiter"
   },
   {
     "id": "bepicolombo",
@@ -701,7 +728,8 @@
       "Erklärt, warum der kleine Merkur einen riesigen Eisenkern und ein eigenes Magnetfeld hat.",
       "Sucht in tiefen, ewig schattigen Kratern an Merkurs Nord- und Südpol nach gefrorenem Wassereis – mitten auf einem 430 °C heißen Planeten!"
     ],
-    "wikipediaUrl": "https://www.esa.int/Science_Exploration/Space_Science/BepiColombo"
+    "wikipediaUrl": "https://de.wikipedia.org/wiki/BepiColombo",
+    "officialUrl": "https://www.esa.int/Science_Exploration/Space_Science/BepiColombo"
   },
   {
     "id": "juno",
@@ -722,7 +750,8 @@
       "Misst, wie tief der Große Rote Fleck in Jupiters Gashülle hinabreicht.",
       "Fotografierte Jupiters Nord- und Südpol sowie nahe Vorbeiflüge an den Monden Ganymed, Europa und Io."
     ],
-    "wikipediaUrl": "https://science.nasa.gov/mission/juno/"
+    "wikipediaUrl": "https://de.wikipedia.org/wiki/Juno_(Raumsonde)",
+    "officialUrl": "https://science.nasa.gov/mission/juno/"
   },
   {
     "id": "juice",
@@ -743,7 +772,8 @@
       "Prüft mit Eis-Radar, wie dick die Eiskrusten und wie tief die darunterliegenden Salzwasser-Ozeane sind.",
       "Schwenkt als allererste Raumsonde überhaupt in eine feste Umlaufbahn um einen fremden Mond (Ganymed) ein."
     ],
-    "wikipediaUrl": "https://www.esa.int/Science_Exploration/Space_Science/Juice"
+    "wikipediaUrl": "https://de.wikipedia.org/wiki/JUICE_(Raumsonde)",
+    "officialUrl": "https://www.esa.int/Science_Exploration/Space_Science/Juice"
   },
   {
     "id": "cassini",
@@ -764,7 +794,8 @@
       "Huygens funkte am 14. Januar 2005 die ersten Bilder direkt von der Oberfläche des Saturnmondes Titan mit seinen Methan-Flüssen.",
       "Cassini flog direkt durch die aufsteigenden Wasserdampf-Fontänen am Südpol von Enceladus."
     ],
-    "wikipediaUrl": "https://science.nasa.gov/mission/cassini/"
+    "wikipediaUrl": "https://de.wikipedia.org/wiki/Cassini-Huygens",
+    "officialUrl": "https://science.nasa.gov/mission/cassini/"
   },
   {
     "id": "new-horizons",
@@ -785,6 +816,7 @@
       "Fotografierte das Stickstoff-Eisherz (Tombaugh Regio) und Eisberge aus Wassereis auf Pluto.",
       "Flog am 1. Januar 2019 in 6,5 Milliarden Kilometern Entfernung dicht am schneemannförmigen Kuipergürtel-Objekt ‚Arrokoth‘ vorbei."
     ],
-    "wikipediaUrl": "https://science.nasa.gov/mission/new-horizons/"
+    "wikipediaUrl": "https://de.wikipedia.org/wiki/New_Horizons",
+    "officialUrl": "https://science.nasa.gov/mission/new-horizons/"
   }
 ]

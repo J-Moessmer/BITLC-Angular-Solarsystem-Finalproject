@@ -35,6 +35,9 @@ export interface ResearchMission {
   imageCredit: string;
   childSummary: string;
   tasksForKids: string[];
+  /** Verifizierter Link zur offiziellen Raumfahrtagentur-/Missionsseite (optional) */
+  officialUrl?: string;
+  /** Verifizierter Link zum deutschsprachigen Wikipedia-Artikel */
   wikipediaUrl: string;
   hasIssLiveTracker?: boolean;
 }

@@ -69,6 +69,7 @@ describe('ResearchMissionsComponent (P40)', () => {
       imageCredit: 'NASA / ESA',
       childSummary: 'Blickt tief ins Universum.',
       tasksForKids: ['Infrarotlicht beobachten'],
+      officialUrl: 'https://science.nasa.gov/mission/webb/',
       wikipediaUrl: 'https://de.wikipedia.org/wiki/James-Webb-Weltraumteleskop',
     },
   ];
@@ -125,5 +126,6 @@ describe('ResearchMissionsComponent (P40)', () => {
     fixture.detectChanges();
     expect(fixture.nativeElement.textContent).toContain('James-Webb-Weltraumteleskop (JWST)');
     expect(fixture.nativeElement.textContent).toContain('Offizielle Missionsseite');
+    expect(fixture.nativeElement.textContent).toContain('Wikipedia-Artikel');
   });
 });
