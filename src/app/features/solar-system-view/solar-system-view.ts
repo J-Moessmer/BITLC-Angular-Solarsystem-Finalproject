@@ -9,6 +9,7 @@
 
 import {
   Component,
+  HostListener,
   OnDestroy,
   OnInit,
   computed,
@@ -46,6 +47,7 @@ export class SolarSystemViewComponent implements OnInit, OnDestroy {
   readonly bodyId = input<string>();
 
   private readonly isDragging = signal<boolean>(false);
+  readonly isStageFullscreen = signal<boolean>(false);
   private dragStartX = 0;
   private dragStartY = 0;
   private timeLapseTimerId: ReturnType<typeof setInterval> | null = null;
@@ -135,6 +137,37 @@ export class SolarSystemViewComponent implements OnInit, OnDestroy {
       `C ${(midX + px * spread).toFixed(1)} ${(midY + py * spread).toFixed(1)}, ${(farX + px * (spread * 0.6)).toFixed(1)} ${(farY + py * (spread * 0.6)).toFixed(1)}, ${farX.toFixed(1)} ${farY.toFixed(1)}`,
       `C ${(farX - px * (spread * 0.6)).toFixed(1)} ${(farY - py * (spread * 0.6)).toFixed(1)}, ${(midX - px * spread).toFixed(1)} ${(midY - py * spread).toFixed(1)}, ${earth.x.toFixed(1)} ${earth.y.toFixed(1)}`,
     ].join(' ');
+  });
+
+  /** Zeigt den Sonne -> Erde -> L2-Punkt-Marker, wenn JWST, Gaia oder Erde ausgewählt ist */
+  protected readonly l2GuideLine = computed<{
+    x1: number;
+    y1: number;
+    x2: number;
+    y2: number;
+    labelX: number;
+    labelY: number;
+  } | null>(() => {
+    const selectedId = this.dataService.selectedBodyId();
+    if (selectedId !== 'jwst' && selectedId !== 'gaia' && selectedId !== 'earth') {
+      return null;
+    }
+    const sun = this.svgPositions().find((p) => p.body.id === 'sun');
+    const earth = this.svgPositions().find((p) => p.body.id === 'earth');
+    const jwst = this.svgPositions().find((p) => p.body.id === 'jwst');
+    const gaia = this.svgPositions().find((p) => p.body.id === 'gaia');
+    const l2Target = jwst ?? gaia;
+    if (!sun || !earth || !l2Target) {
+      return null;
+    }
+    return {
+      x1: earth.x,
+      y1: earth.y,
+      x2: l2Target.x,
+      y2: l2Target.y,
+      labelX: l2Target.x + 12,
+      labelY: l2Target.y - 10,
+    };
   });
 
   /** Sichtbare Mond- und Sonden-Umlaufbahnen rund um den aktuell betrachteten Planeten/Zwergplaneten (ohne Apollo-13-Kreisbahn) */
@@ -481,6 +514,37 @@ export class SolarSystemViewComponent implements OnInit, OnDestroy {
 
   onPointerUp(): void {
     this.isDragging.set(false);
+  }
+
+  toggleStageFullscreen(stageWrapper: HTMLElement): void {
+    const entering = !this.isStageFullscreen();
+    this.isStageFullscreen.set(entering);
+
+    if (typeof document !== 'undefined') {
+      if (entering && typeof stageWrapper.requestFullscreen === 'function') {
+        void stageWrapper.requestFullscreen().catch(() => {
+          // CSS-Vollbild-Fallback bleibt aktiv
+        });
+      } else if (!entering && document.fullscreenElement && typeof document.exitFullscreen === 'function') {
+        void document.exitFullscreen().catch(() => {
+          // Ignorieren
+        });
+      }
+    }
+  }
+
+  @HostListener('document:fullscreenchange')
+  onNativeFullscreenChange(): void {
+    if (typeof document !== 'undefined' && !document.fullscreenElement) {
+      this.isStageFullscreen.set(false);
+    }
+  }
+
+  @HostListener('document:keydown.escape')
+  onEscapeFullscreen(): void {
+    if (this.isStageFullscreen()) {
+      this.isStageFullscreen.set(false);
+    }
   }
 
   /** Liefert das passende Font-Awesome-7-Icon-Zeichen für Raumsonden, Rover, Teleskope & Kometen in der 2D-SVG-Karte */

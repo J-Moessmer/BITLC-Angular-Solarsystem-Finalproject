@@ -151,7 +151,24 @@
 .solar-system-svg {
   display: block;
   width: 100%;
-  height: 510px;
+  height: clamp(510px, 60vh, 720px);
+}
+
+.svg-stage-wrapper.stage-fullscreen,
+.svg-stage-wrapper:fullscreen {
+  position: fixed;
+  inset: 0;
+  z-index: 950;
+  width: 100vw;
+  height: 100vh;
+  border-radius: 0;
+  border: none;
+}
+
+.svg-stage-wrapper.stage-fullscreen .solar-system-svg,
+.svg-stage-wrapper:fullscreen .solar-system-svg {
+  width: 100vw;
+  height: 100vh;
 }
 
 .camera-viewport {

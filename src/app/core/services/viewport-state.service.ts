@@ -384,16 +384,23 @@ export class ViewportStateService {
     }
 
     if (body.id === 'jwst' || body.id === 'gaia') {
-      const earthMeanLonDeg = (102.95 + 357.52 + (360 / 365.256) * days) % 360;
-      const normalizedEarthLon = (earthMeanLonDeg + 360) % 360;
-      const offsetDeg = body.id === 'jwst' ? 2.5 : -2.5;
-      const l2LonDeg = (normalizedEarthLon + offsetDeg + 360) % 360;
-      const l2Rad = (l2LonDeg * Math.PI) / 180;
+      const earthPos = this.computeLiveKeplerState({
+        ...body,
+        id: 'earth',
+        orbitalPeriodDays: 365.256,
+        orbitalElements: {
+          ...body.orbitalElements,
+          sma: { ...body.orbitalElements.sma, numericValue: 1.0 },
+          ecc: { ...body.orbitalElements.ecc, numericValue: 0.0167 },
+          lpe: { ...body.orbitalElements.lpe, numericValue: 102.95 },
+          mna: { ...body.orbitalElements.mna, numericValue: 357.52 },
+        },
+      });
       return {
-        longitudeDeg: Number(l2LonDeg.toFixed(1)),
-        eccentricAnomalyRad: l2Rad,
-        trueAnomalyRad: l2Rad,
-        currentDistanceAu: 1.01,
+        longitudeDeg: earthPos.longitudeDeg,
+        eccentricAnomalyRad: earthPos.eccentricAnomalyRad,
+        trueAnomalyRad: earthPos.trueAnomalyRad,
+        currentDistanceAu: Number((earthPos.currentDistanceAu * 1.01).toFixed(3)),
       };
     }
 
@@ -580,6 +587,68 @@ export class ViewportStateService {
         liveLongitudeDeg: 0,
         liveDistanceAu: 0,
       };
+    }
+
+    // Spezialfall: Sonne-Erde Lagrange-Punkt L2 (JWST & Gaia stehen exakt auf der Linie Sonne -> Erde -> 1,5 Mio. km dahinter!)
+    if (body.id === 'jwst' || body.id === 'gaia') {
+      const earth = allBodies.find((b) => b.id === 'earth');
+      const earthPos = earth ? this.computeBodyPosition(earth, allBodies) : null;
+      if (earthPos) {
+        const rEarthWorld = Math.hypot(earthPos.worldX, earthPos.worldY) || 1;
+        const ux = earthPos.worldX / rEarthWorld;
+        const uy = earthPos.worldY / rEarthWorld;
+        const tx = -uy;
+        const ty = ux;
+
+        // Exakter Abstand hinter der Erde: 1,01 AE im echten Maßstab (1,5 Mio. km), +16 Einheiten in der Übersicht
+        const l2WorldDist = mode === 'true-scale' ? rEarthWorld * 1.01 : rEarthWorld + 16;
+        // Kleiner Halo-/Lissajous-Versatz senkrecht zur Linie, damit JWST & Gaia sich nicht überlagern
+        const haloOffsetWorld =
+          mode === 'true-scale'
+            ? (body.id === 'jwst' ? 0.018 : -0.018)
+            : (body.id === 'jwst' ? 5 : -5);
+
+        const worldX = Number((ux * l2WorldDist + tx * haloOffsetWorld).toFixed(4));
+        const worldY =
+          mode === 'side-view'
+            ? earthPos.worldY
+            : Number((uy * l2WorldDist + ty * haloOffsetWorld).toFixed(4));
+
+        const scaledRx =
+          mode === 'true-scale'
+            ? Number((earthPos.orbitRxPx * 1.01).toFixed(1))
+            : Number((earthPos.orbitRxPx + 16 * z).toFixed(1));
+        const scaledRy =
+          mode === 'true-scale'
+            ? Number((earthPos.orbitRyPx * 1.01).toFixed(1))
+            : Number((earthPos.orbitRyPx + 16 * z).toFixed(1));
+
+        const orbitClip = this.computeOrbitClipping(
+          earthPos.orbitCenterX,
+          earthPos.orbitCenterY,
+          scaledRx,
+          scaledRy,
+        );
+
+        return {
+          body,
+          x: Number((px + worldX * z).toFixed(1)),
+          y: Number((py + worldY * z).toFixed(1)),
+          worldX,
+          worldY,
+          orbitRxPx: scaledRx,
+          orbitRyPx: scaledRy,
+          orbitCenterX: earthPos.orbitCenterX,
+          orbitCenterY: earthPos.orbitCenterY,
+          isOrbitVisibleInViewport: mode !== 'side-view' && orbitClip.isVisible,
+          clippedOrbitPath: orbitClip.clippedPath,
+          bodyRadiusPx: displayRadiusPx,
+          strictTrueRadiusPx,
+          inclinationYOffsetPx: earthPos.inclinationYOffsetPx,
+          liveLongitudeDeg: earthPos.liveLongitudeDeg,
+          liveDistanceAu: Number((earthPos.liveDistanceAu * 1.01).toFixed(3)),
+        };
+      }
     }
 
     // Für Monde, planetare Raumstationen (ISS) sowie gelandete Oberflächen-Missionen (Apollo auf dem Mond, Perseverance auf dem Mars):

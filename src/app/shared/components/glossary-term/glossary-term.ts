@@ -34,7 +34,9 @@ export const GLOSSARY_DEFINITIONS: Readonly<Record<string, string>> = {
     'Im freien Fall um die Erde (z. B. auf der ISS) spürt man sein eigenes Gewicht nicht – alles schwebt!',
   Erdorbit: 'Die Umlaufbahn rund um unsere Erde, auf der Satelliten, die ISS und das Hubble-Teleskop fliegen.',
   'Lagrange-Punkt L2':
-    'Ein besonderer Gleichgewichtspunkt 1,5 Millionen Kilometer hinter der Erde, an dem Teleskope wie JWST und Gaia stabil mit der Erde mitfliegen.',
+    'Ein besonderer Gleichgewichtspunkt 1,5 Millionen Kilometer hinter der Erde (auf der Linie Sonne → Erde → L2), an dem Teleskope wie JWST und Gaia stabil mit der Erde mitfliegen.',
+  'Lagrange-Punkte':
+    '5 besondere „Parkplätze“ im Weltall (L1 bis L5), an denen sich die Anziehungskraft von Sonne und Erde sowie die Fliehkraft genau die Waage halten – dort braucht ein Raumfahrzeug kaum Treibstoff!',
   'Interstellarer Raum':
     'Der riesige Raum zwischen den Sternen außerhalb der schützenden Blase unseres Sonnenwindes.',
   Korona:

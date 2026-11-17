@@ -165,7 +165,9 @@
 
     <!-- Interaktive 2D-SVG-Bühne (P10-A30 / P10-U30 & P10-U40) -->
     <div
+      #stageWrapper
       class="svg-stage-wrapper"
+      [class.stage-fullscreen]="isStageFullscreen()"
       (wheel)="onWheelZoom($event)"
       (pointerdown)="onPointerDown($event)"
       (pointermove)="onPointerMove($event)"
@@ -210,6 +212,20 @@
           aria-label="Kamera und Zoom zurücksetzen"
         >
           <i class="fa-solid fa-rotate-left" aria-hidden="true"></i> Reset
+        </button>
+        <button
+          type="button"
+          class="zoom-btn reset-btn"
+          (click)="toggleStageFullscreen(stageWrapper)"
+          [attr.aria-label]="isStageFullscreen() ? 'Vollbild beenden' : 'Sternenkarte im Vollbild anzeigen'"
+        >
+          <i
+            class="fa-solid"
+            [class.fa-compress]="isStageFullscreen()"
+            [class.fa-expand]="!isStageFullscreen()"
+            aria-hidden="true"
+          ></i>
+          {{ isStageFullscreen() ? 'Beenden' : 'Vollbild' }}
         </button>
       </div>
 
@@ -407,6 +423,30 @@
                 stroke-dasharray="4 4"
                 opacity="0.88"
               />
+            }
+
+            @if (l2GuideLine(); as l2) {
+              <g class="l2-guide" aria-hidden="true">
+                <line
+                  [attr.x1]="l2.x1"
+                  [attr.y1]="l2.y1"
+                  [attr.x2]="l2.x2"
+                  [attr.y2]="l2.y2"
+                  stroke="#FDE047"
+                  stroke-width="1.3"
+                  stroke-dasharray="3 3"
+                  opacity="0.85"
+                />
+                <text
+                  [attr.x]="l2.labelX"
+                  [attr.y]="l2.labelY"
+                  fill="#FDE047"
+                  font-size="10"
+                  font-weight="700"
+                >
+                  L2 (1,5 Mio. km hinter der Erde)
+                </text>
+              </g>
             }
 
             <!-- Mond- & Raumsonden-Umlaufbahnen rund um ihren Mutterkörper -->

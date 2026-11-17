@@ -118,6 +118,17 @@ const EXTRA_BODY_GALLERY: Readonly<Record<string, Array<{ url: string; caption: 
             <div class="comparison-banner">
               <strong>Größenvergleich:</strong> {{ current.comparisonHint }}
             </div>
+
+            @if (current.id === 'jwst' || current.id === 'gaia') {
+              <div class="lagrange-banner">
+                <strong>Was sind <app-term term="Lagrange-Punkte" />?</strong>
+                Zwischen Sonne und Erde gibt es 5 besondere Gleichgewichts-Orte (L1 bis L5), an denen
+                sich Schwerkraft und Fliehkraft genau ausgleichen. Am
+                <app-term term="Lagrange-Punkt L2" /> (1,5 Mio. km hinter der Erde, immer im
+                Schatten-Schutz vor der heißen Sonne) kreisen Teleskope wie JWST und Gaia stabil
+                mit unserer Erde mit!
+              </div>
+            }
           </div>
         </div>
 
@@ -455,6 +466,15 @@ const EXTRA_BODY_GALLERY: Readonly<Record<string, Array<{ url: string; caption: 
       padding: 0.5rem 0.75rem;
       border-radius: var(--radius-md);
       font-size: 0.88rem;
+    }
+    .lagrange-banner {
+      margin-top: 0.5rem;
+      background-color: var(--accent-astronomy-box);
+      border: 1px solid var(--card-border);
+      color: var(--card-text-primary);
+      padding: 0.55rem 0.75rem;
+      border-radius: var(--radius-md);
+      font-size: 0.86rem;
     }
     .metrics-grid {
       display: grid;
