@@ -73,8 +73,31 @@
     </div>
   </div>
 
-  <!-- Proportionale SVG-Vergleichsbühne (P30-A30 / P30-U20) -->
-  <div class="svg-comparison-card">
+  <!-- Proportionale SVG-Vergleichsbühne (P30-A30 / P30-U20) mit dynamischem Zoom -->
+  <div class="svg-comparison-card" (wheel)="onWheelZoom($event)">
+    <div class="comparison-zoom-bar" aria-label="Zoom für den Größenvergleich">
+      <span class="zoom-bar-label">Zoom {{ zoomSliderPercent() }}% ({{ zoomFactor() | number: '1.1-1' }}×)</span>
+      <button type="button" class="cmp-zoom-btn" (click)="zoomOut()" aria-label="Herauszoomen">
+        <i class="fa-solid fa-minus" aria-hidden="true"></i>
+      </button>
+      <input
+        type="range"
+        class="cmp-zoom-slider"
+        min="0"
+        max="100"
+        step="1"
+        [value]="zoomSliderPercent()"
+        (input)="onZoomSliderInput($event)"
+        aria-label="Stufenloser Zoom im Größenvergleich"
+      />
+      <button type="button" class="cmp-zoom-btn" (click)="zoomIn()" aria-label="Hineinzoomen">
+        <i class="fa-solid fa-plus" aria-hidden="true"></i>
+      </button>
+      <button type="button" class="cmp-zoom-btn" (click)="resetZoom()" aria-label="Zoom zurücksetzen">
+        <i class="fa-solid fa-rotate-left" aria-hidden="true"></i> Reset
+      </button>
+    </div>
+
     <svg
       class="comparison-svg"
       viewBox="0 0 1200 500"
@@ -82,6 +105,19 @@
       role="img"
       aria-label="Maßstabsgetreuer Größenvergleich der ausgewählten Himmelskörper"
     >
+      <defs>
+        <radialGradient id="sunCompareGlow" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#EA580C" />
+          <stop offset="78%" stop-color="#F59E0B" />
+          <stop offset="96%" stop-color="#FDE047" />
+          <stop offset="100%" stop-color="#FEF08A" />
+        </radialGradient>
+        <radialGradient id="sunCoronaHalo" cx="50%" cy="50%" r="50%">
+          <stop offset="88%" stop-color="#F59E0B" stop-opacity="0.45" />
+          <stop offset="100%" stop-color="#F59E0B" stop-opacity="0" />
+        </radialGradient>
+      </defs>
+
       <line
         x1="40"
         y1="225"
@@ -94,6 +130,15 @@
       />
 
       @for (item of scaledItems(); track item.slotIndex) {
+        @if (item.body.id === 'sun') {
+          <circle
+            [attr.cx]="item.centerX"
+            cy="225"
+            [attr.r]="item.svgRadiusPx * 1.06"
+            fill="url(#sunCoronaHalo)"
+          />
+        }
+
         <g [attr.transform]="'translate(' + item.centerX + ', 225)'">
           @if (item.body.id === 'saturn') {
             <ellipse
@@ -124,32 +169,34 @@
             cx="0"
             cy="0"
             [attr.r]="item.svgRadiusPx"
-            [attr.fill]="item.body.colorHex"
+            [attr.fill]="item.body.id === 'sun' ? 'url(#sunCompareGlow)' : item.body.colorHex"
             stroke="#FFFFFF"
-            stroke-width="1.5"
+            [attr.stroke-width]="item.svgRadiusPx > 300 ? 3 : 1.5"
           />
-
-          <text
-            x="0"
-            y="228"
-            text-anchor="middle"
-            fill="#F8FAFC"
-            font-size="16"
-            font-weight="700"
-          >
-            {{ item.body.name }}
-          </text>
-          <text
-            x="0"
-            y="249"
-            text-anchor="middle"
-            fill="#BAE6FD"
-            font-size="13"
-            font-weight="600"
-          >
-            Ø {{ item.body.diameterKm | number: '1.0-0' }} km
-          </text>
         </g>
+
+        <text
+          [attr.x]="item.labelX"
+          y="453"
+          text-anchor="middle"
+          fill="#F8FAFC"
+          font-size="16"
+          font-weight="700"
+          class="cmp-svg-label"
+        >
+          {{ item.body.name }}
+        </text>
+        <text
+          [attr.x]="item.labelX"
+          y="474"
+          text-anchor="middle"
+          fill="#BAE6FD"
+          font-size="13"
+          font-weight="600"
+          class="cmp-svg-label"
+        >
+          Ø {{ item.body.diameterKm | number: '1.0-0' }} km
+        </text>
       }
     </svg>
   </div>

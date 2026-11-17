@@ -117,7 +117,7 @@ export class SolarSystemViewComponent implements OnInit, OnDestroy {
     const dx = moon.x - earth.x;
     const dy = moon.y - earth.y;
     const dist = Math.hypot(dx, dy);
-    if (dist < 10 || dist > 2000) {
+    if (dist < 10 || dist > 6000) {
       return null;
     }
     const ux = dx / dist;
@@ -125,17 +125,27 @@ export class SolarSystemViewComponent implements OnInit, OnDestroy {
     const px = -uy;
     const py = ux;
 
-    const farX = moon.x + ux * (moon.bodyRadiusPx + 14);
-    const farY = moon.y + uy * (moon.bodyRadiusPx + 14);
-    const midX = earth.x + dx * 0.55;
-    const midY = earth.y + dy * 0.55;
-    const spread = Math.max(10, dist * 0.22);
+    // Sicherer Mindestabstand rund um den Mondkörper, damit die Bahn niemals in den Mond klippt
+    const moonClearance = moon.bodyRadiusPx + 18;
+    const earthStartX = earth.x + ux * (earth.bodyRadiusPx + 4);
+    const earthStartY = earth.y + uy * (earth.bodyRadiusPx + 4);
+    const farX = moon.x + ux * moonClearance;
+    const farY = moon.y + uy * moonClearance;
+    const sideTopX = moon.x + px * moonClearance;
+    const sideTopY = moon.y + py * moonClearance;
+    const sideBotX = moon.x - px * moonClearance;
+    const sideBotY = moon.y - py * moonClearance;
+    const midX = earth.x + dx * 0.52;
+    const midY = earth.y + dy * 0.52;
+    const midSpread = Math.max(moonClearance * 0.9, dist * 0.16);
 
-    // Achterbahn-Schleife (Figure-8 Free-Return): Erde -> Mondrückseite -> zurück zur Erde
+    // Saubere Free-Return-Schleife: Erde -> außen über die Mond-Nordseite -> hinter die Mondrückseite -> außen unter der Mond-Südseite -> zurück zur Erde
     return [
-      `M ${earth.x.toFixed(1)} ${earth.y.toFixed(1)}`,
-      `C ${(midX + px * spread).toFixed(1)} ${(midY + py * spread).toFixed(1)}, ${(farX + px * (spread * 0.6)).toFixed(1)} ${(farY + py * (spread * 0.6)).toFixed(1)}, ${farX.toFixed(1)} ${farY.toFixed(1)}`,
-      `C ${(farX - px * (spread * 0.6)).toFixed(1)} ${(farY - py * (spread * 0.6)).toFixed(1)}, ${(midX - px * spread).toFixed(1)} ${(midY - py * spread).toFixed(1)}, ${earth.x.toFixed(1)} ${earth.y.toFixed(1)}`,
+      `M ${earthStartX.toFixed(1)} ${earthStartY.toFixed(1)}`,
+      `Q ${(midX + px * midSpread).toFixed(1)} ${(midY + py * midSpread).toFixed(1)}, ${sideTopX.toFixed(1)} ${sideTopY.toFixed(1)}`,
+      `Q ${(farX + px * moonClearance).toFixed(1)} ${(farY + py * moonClearance).toFixed(1)}, ${farX.toFixed(1)} ${farY.toFixed(1)}`,
+      `Q ${(farX - px * moonClearance).toFixed(1)} ${(farY - py * moonClearance).toFixed(1)}, ${sideBotX.toFixed(1)} ${sideBotY.toFixed(1)}`,
+      `Q ${(midX - px * midSpread).toFixed(1)} ${(midY - py * midSpread).toFixed(1)}, ${earthStartX.toFixed(1)} ${earthStartY.toFixed(1)}`,
     ].join(' ');
   });
 

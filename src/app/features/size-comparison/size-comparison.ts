@@ -19,6 +19,7 @@ export interface ScaledComparisonItem {
   svgRadiusPx: number;
   truePixelRadius: number;
   centerX: number;
+  labelX: number;
 }
 
 export interface ComparisonPreset {
@@ -39,6 +40,27 @@ export class SizeComparisonComponent implements OnInit {
 
   /** Ausgewählte Himmelskörper-IDs (2 oder mehr gemäß P30-A20) */
   readonly selectedIds = signal<string[]>(['sun', 'earth']);
+
+  /** Stufenloser Zoom-Slider (0 % = Übersicht, 100 % = tiefer Nahvergleich am Rand des größten Körpers) */
+  readonly zoomSliderPercent = signal<number>(0);
+
+  /** Dynamischer Maximal-Zoom passend zum Größenverhältnis der gewählten Körper */
+  readonly maxZoomFactor = computed<number>(() => {
+    const bodies = this.selectedBodies();
+    if (bodies.length < 2) {
+      return 12;
+    }
+    const sorted = [...bodies].sort((a, b) => b.diameterKm - a.diameterKm);
+    const largest = sorted[0].diameterKm;
+    const second = Math.max(1, sorted[1].diameterKm);
+    return Math.min(80, Math.max(8, Math.round((largest / second) * 0.25)));
+  });
+
+  readonly zoomFactor = computed<number>(() => {
+    const pct = this.zoomSliderPercent();
+    const maxZ = this.maxZoomFactor();
+    return Number(Math.pow(maxZ, pct / 100).toFixed(3));
+  });
 
   /** Kindgerechte Schnellwahl-Presets gemäß P30-A20 */
   readonly presets: readonly ComparisonPreset[] = [
@@ -91,7 +113,8 @@ export class SizeComparisonComponent implements OnInit {
 
   /**
    * KI-generierter Block: Berechnet die exakt proportionalen SVG-Radien zum größten gewählten Körper
-   * sowie die horizontale Anordnung nebeneinander auf der SVG-Vergleichsbühne (P30-U20).
+   * sowie die dynamische Rand-zu-Rand-Verschiebung beim Reinzoomen (P30-U20), sodass alle Körper
+   * im Bild bleiben und der gekrümmte Rand des Riesenobjekts neben den kleinen Objekten erscheint.
    */
   readonly scaledItems = computed<ScaledComparisonItem[]>(() => {
     const bodies = this.selectedBodies();
@@ -102,21 +125,79 @@ export class SizeComparisonComponent implements OnInit {
     const maxDiameter = Math.max(...bodies.map((b) => b.diameterKm), 1);
     const totalWidth = 1140;
     const slotWidth = totalWidth / bodies.length;
-    const maxAllowedRadiusPx = Math.min(205, Math.floor(slotWidth * 0.44));
+    const baseMaxRadiusPx = Math.min(205, Math.floor(slotWidth * 0.44));
+    const zoom = this.zoomFactor();
+    const blend = Math.min(1, Math.max(0, (zoom - 1) / 0.8));
+
+    const zoomedRadii = bodies.map((b) => {
+      const trueRatio = b.diameterKm / maxDiameter;
+      const truePixelRadius = Number((trueRatio * baseMaxRadiusPx * zoom).toFixed(2));
+      return {
+        truePixelRadius,
+        svgRadiusPx: Math.max(2.5, truePixelRadius),
+      };
+    });
+
+    // 1. Kompaktes Rand-zu-Rand-Layout für den Zoom-Modus (hält alle Objekte im 1200px Sichtfeld!)
+    const gapPx = 56;
+    const edgeCenters: number[] = [];
+    for (let i = 0; i < bodies.length; i++) {
+      if (i === 0) {
+        edgeCenters.push(0);
+      } else {
+        edgeCenters.push(
+          edgeCenters[i - 1] + zoomedRadii[i - 1].svgRadiusPx + gapPx + zoomedRadii[i].svgRadiusPx,
+        );
+      }
+    }
+
+    // Finde das größte Objekt und richte seinen sichtbaren Rand im Viewport aus
+    let largestIdx = 0;
+    for (let i = 1; i < bodies.length; i++) {
+      if (bodies[i].diameterKm > bodies[largestIdx].diameterKm) {
+        largestIdx = i;
+      }
+    }
+
+    const largestR = zoomedRadii[largestIdx].svgRadiusPx;
+    let shiftX = 0;
+    if (largestIdx === 0) {
+      // Größtes Objekt links -> sein rechter Rand liegt bei x ≈ 360 px
+      const targetRightEdge = Math.min(440, Math.max(280, 360));
+      shiftX = targetRightEdge - (edgeCenters[0] + largestR);
+      // Falls kleinere Objekte rechts über 1120 px hinausragen, nach links nachziehen
+      const lastRight = edgeCenters[bodies.length - 1] + zoomedRadii[bodies.length - 1].svgRadiusPx + shiftX;
+      if (lastRight > 1120) {
+        shiftX -= lastRight - 1120;
+      }
+    } else if (largestIdx === bodies.length - 1) {
+      // Größtes Objekt rechts -> sein linker Rand liegt bei x ≈ 840 px
+      const targetLeftEdge = 840;
+      shiftX = targetLeftEdge - (edgeCenters[largestIdx] - largestR);
+      const firstLeft = edgeCenters[0] - zoomedRadii[0].svgRadiusPx + shiftX;
+      if (firstLeft < 80) {
+        shiftX += 80 - firstLeft;
+      }
+    } else {
+      // Größtes Objekt in der Mitte -> gesamten Block zentrieren
+      const minX = edgeCenters[0] - zoomedRadii[0].svgRadiusPx;
+      const maxX = edgeCenters[bodies.length - 1] + zoomedRadii[bodies.length - 1].svgRadiusPx;
+      shiftX = 600 - (minX + maxX) / 2;
+    }
 
     return bodies.map((body, idx) => {
-      const trueRatio = body.diameterKm / maxDiameter;
-      const truePixelRadius = Number((trueRatio * maxAllowedRadiusPx).toFixed(2));
-      // Mindestens 2.5 px für das bloße Auge + Lupenring bei extremem Größenunterschied (z. B. Sonne vs. Erde)
-      const svgRadiusPx = Math.max(2.5, truePixelRadius);
-      const centerX = Math.round(30 + slotWidth * idx + slotWidth / 2);
+      const baseCenterX = Math.round(30 + slotWidth * idx + slotWidth / 2);
+      const zoomedCenterX = edgeCenters[idx] + shiftX;
+      const centerX = Number((baseCenterX * (1 - blend) + zoomedCenterX * blend).toFixed(1));
+      const labelX = Math.max(110, Math.min(1090, centerX));
 
       return {
         slotIndex: idx,
         body,
-        svgRadiusPx,
-        truePixelRadius,
+        svgRadiusPx: zoomedRadii[idx].svgRadiusPx,
+        truePixelRadius: zoomedRadii[idx].truePixelRadius,
         centerX,
+        labelX,
       };
     });
   });
@@ -197,5 +278,32 @@ export class SizeComparisonComponent implements OnInit {
   /** Aktiviert eine Schnellwahl-Kombination (P30-A20) */
   applyPreset(preset: ComparisonPreset): void {
     this.selectedIds.set([...preset.bodyIds]);
+    this.zoomSliderPercent.set(0);
+  }
+
+  onZoomSliderInput(event: Event): void {
+    const val = Number((event.target as HTMLInputElement).value);
+    this.zoomSliderPercent.set(Math.min(100, Math.max(0, val)));
+  }
+
+  zoomIn(): void {
+    this.zoomSliderPercent.update((v) => Math.min(100, v + 10));
+  }
+
+  zoomOut(): void {
+    this.zoomSliderPercent.update((v) => Math.max(0, v - 10));
+  }
+
+  resetZoom(): void {
+    this.zoomSliderPercent.set(0);
+  }
+
+  onWheelZoom(event: WheelEvent): void {
+    event.preventDefault();
+    if (event.deltaY < 0) {
+      this.zoomIn();
+    } else {
+      this.zoomOut();
+    }
   }
 }

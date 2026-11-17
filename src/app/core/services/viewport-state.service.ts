@@ -464,16 +464,21 @@ export class ViewportStateService {
     // sodass beim Reinzoomen auf 100 % Slider (36.000x) auch kleine Systeme groß und klar dargestellt werden!)
     const earthRadiusKm = 6378;
     const rawRatioToEarth = radiusKm / earthRadiusKm;
-    // Sanfte Anhebung für kleinere Planeten/Monde/Zwergplaneten (Math.pow(..., 0.72)), damit Mars, Merkur, Pluto & Monde bei vollem Zoom nicht zu winzig bleiben
+    const scaleMode = this.bodyScaleMode();
+    // Im 1:1-Modus (strict-distance-scale) exaktes lineares Durchmesserverhältnis (z. B. Erdmond = 27,2 % der Erde);
+    // in der Übersicht sanfte Anhebung für kleine Körper, damit sie gut sichtbar bleiben.
     const effectiveRatio =
-      rawRatioToEarth < 1 ? Math.pow(rawRatioToEarth, 0.68) : Math.pow(rawRatioToEarth, 0.85);
+      scaleMode === 'strict-distance-scale'
+        ? rawRatioToEarth
+        : rawRatioToEarth < 1
+          ? Math.pow(rawRatioToEarth, 0.68)
+          : Math.pow(rawRatioToEarth, 0.85);
     const physicalWorldRadius =
-      body.id === 'sun'
+      body.id === 'sun' && scaleMode !== 'strict-distance-scale'
         ? 0.065
-        : Math.max(0.0008, effectiveRatio * 0.0065);
+        : Math.max(scaleMode === 'strict-distance-scale' ? 0.0002 : 0.0008, effectiveRatio * 0.0065);
 
     const strictTrueRadiusPx = Number((physicalWorldRadius * z).toFixed(3));
-    const scaleMode = this.bodyScaleMode();
 
     let minScreenPinPx = 2.6;
     if (scaleMode === 'strict-distance-scale') {
@@ -705,12 +710,26 @@ export class ViewportStateService {
       // Physikalische Bahnhöhe relativ zum wahren Radius des Mutterplaneten beim Reinzoomen:
       let physicalOrbitPx = parentTrueR * 1.5;
       if (body.id === 'iss') {
-        // ISS kreist in 408 km Höhe über dem 6.378 km Erdradius (r = 1.064 * R_Erde; +18% optischer Mindestspalt für die gestrichelte Linie)
-        physicalOrbitPx = parentTrueR * 1.16;
-      } else if (body.id === 'apollo' || body.id === 'artemis') {
-        physicalOrbitPx = parentTrueR * 2.2;
+        // ISS kreist in 408 km Höhe über dem 6.378 km Erdradius (r = 1.064 * R_Erde)
+        physicalOrbitPx = parentTrueR * 1.12;
+      } else if (body.id === 'hubble') {
+        // Hubble kreist in 540 km Höhe über der Erde (r = 1.085 * R_Erde)
+        physicalOrbitPx = parentTrueR * 1.2;
+      } else if (body.id === 'apollo-13') {
+        // Apollo 13 umrundet den Mond mit Sicherheitsabstand auf der Free-Return-Bahn (kein Clipping in den Mond)
+        physicalOrbitPx = Math.max(parentTrueR * 0.2724 + 22, parentTrueR * 2.4);
+      } else if (body.id === 'artemis') {
+        physicalOrbitPx = parentTrueR * 2.6;
+      } else if (mode === 'true-scale' && body.category === 'moon' && body.orbitalElements.sma.numericValue) {
+        // Im 1:1-Modus (Echter Maßstab): reale Bahnhöhe jedes Mondes aus seiner Großen Halbachse (SMA)
+        // relativ zum wahren Radius seines Mutterkörpers (z. B. Erdmond 60,27×, Phobos 2,76×, Io 5,90×, Titan 20,27×, Charon 16,49×)!
+        const moonDistKm = body.orbitalElements.sma.numericValue * this.astronomicalUnitKm;
+        const parentRadiusKm = Math.max(1, (parent?.diameterKm ?? 12756) / 2);
+        const realRatioToParent = moonDistKm / parentRadiusKm;
+        physicalOrbitPx = parentTrueR * Math.max(1.35, realRatioToParent);
       } else if (body.id === 'moon') {
-        physicalOrbitPx = parentTrueR * 4.2;
+        // In der Übersicht kompakter (6,5 Erdradien), damit Erde und Mond gemeinsam ins Bild passen.
+        physicalOrbitPx = parentTrueR * 6.5;
       } else {
         physicalOrbitPx = parentTrueR * (1.45 + (body.overviewOrbitRadiusSvg - 10) * 0.14);
       }

@@ -168,6 +168,10 @@ const EXTRA_BODY_GALLERY: Readonly<Record<string, Array<{ url: string; caption: 
             <strong class="metric-val">{{ current.orbitalPeriodLabel }}</strong>
           </div>
           <div class="metric-box">
+            <span class="metric-label">Geschwindigkeit</span>
+            <strong class="metric-val">{{ orbitalSpeedLabel() }}</strong>
+          </div>
+          <div class="metric-box">
             <span class="metric-label"><app-term term="Bahnneigung" /></span>
             <strong class="metric-val">{{ current.inclinationToSolarEquatorDeg }}°</strong>
           </div>
@@ -266,16 +270,18 @@ const EXTRA_BODY_GALLERY: Readonly<Record<string, Array<{ url: string; caption: 
                   <tbody>
                     @for (el of orbitalElementsList(); track el.code) {
                       <tr>
-                        <td><span class="code-pill">{{ el.code }}</span></td>
-                        <td>
+                        <td class="code-cell" data-label="Kürzel">
+                          <span class="code-pill">{{ el.code }}</span>
+                        </td>
+                        <td class="name-cell" data-label="Bahnelement">
                           @if (hasGlossaryTerm(el.label)) {
                             <app-term [term]="el.label" />
                           } @else {
                             <strong>{{ el.label }}</strong>
                           }
                         </td>
-                        <td class="val-cell">{{ el.formattedValue }}</td>
-                        <td>{{ el.childExplanation }}</td>
+                        <td class="val-cell" data-label="Messwert">{{ el.formattedValue }}</td>
+                        <td class="desc-cell" data-label="Erklärung">{{ el.childExplanation }}</td>
                       </tr>
                     }
                   </tbody>
@@ -614,12 +620,60 @@ const EXTRA_BODY_GALLERY: Readonly<Record<string, Array<{ url: string; caption: 
     }
     .val-cell {
       font-weight: 600;
-      white-space: nowrap;
-      color: #0369a1;
+      white-space: normal;
+      overflow-wrap: anywhere;
+      color: var(--accent-primary);
     }
     @media (max-width: 720px) {
+      .infobox-panel {
+        padding: 0.85rem;
+      }
       .infobox-hero {
         grid-template-columns: 1fr;
+      }
+      .orbital-table thead {
+        display: none;
+      }
+      .orbital-table,
+      .orbital-table tbody,
+      .orbital-table tr,
+      .orbital-table td {
+        display: block;
+        width: 100%;
+      }
+      .orbital-table {
+        border: none;
+        background: transparent;
+      }
+      .orbital-table tr {
+        margin-bottom: 0.65rem;
+        border: 1px solid var(--card-border);
+        border-radius: var(--radius-md);
+        background-color: var(--card-bg-elevated);
+        padding: 0.45rem 0.6rem;
+      }
+      .orbital-table td {
+        border-bottom: none;
+        padding: 0.2rem 0;
+        white-space: normal;
+        word-break: break-word;
+      }
+      .orbital-table td.code-cell {
+        display: inline-block;
+        width: auto;
+        margin-right: 0.45rem;
+      }
+      .orbital-table td.name-cell {
+        display: inline-block;
+        width: auto;
+      }
+      .orbital-table td.val-cell {
+        margin-top: 0.2rem;
+        font-size: 0.85rem;
+      }
+      .orbital-table td.desc-cell {
+        font-size: 0.82rem;
+        color: var(--card-text-secondary);
       }
     }
   `,
@@ -673,6 +727,55 @@ export class InfoboxDetailComponent implements OnInit {
     }
     const oe = b.orbitalElements;
     return [oe.sma, oe.ecc, oe.inc, oe.lan, oe.lpe, oe.mna, oe.ref];
+  });
+
+  /** Berechnet die durchschnittliche Bahngeschwindigkeit (km/h & km/s) für jedes Objekt */
+  readonly orbitalSpeedLabel = computed<string>(() => {
+    const b = this.body();
+    if (!b) {
+      return '–';
+    }
+    if (b.id === 'sun') {
+      return 'ca. 828.000 km/h (durch die Milchstraße)';
+    }
+    if (b.id === 'voyager-1') {
+      return 'ca. 61.200 km/h (17,0 km/s)';
+    }
+    if (b.id === 'voyager-2') {
+      return 'ca. 55.400 km/h (15,4 km/s)';
+    }
+    if (b.id === 'new-horizons') {
+      return 'ca. 49.500 km/h (13,8 km/s)';
+    }
+    if (b.id === 'parker') {
+      return 'bis zu 692.000 km/h (192 km/s)';
+    }
+    if (b.isSurfaceLanded) {
+      return '0 km/h (auf der Oberfläche gelandet)';
+    }
+    if (b.id === 'iss') {
+      return 'ca. 27.600 km/h (7,66 km/s)';
+    }
+    if (b.id === 'hubble') {
+      return 'ca. 27.300 km/h (7,59 km/s)';
+    }
+    const smaAu = b.orbitalElements.sma.numericValue ?? b.distanceFromSunAu;
+    if (smaAu > 0 && b.orbitalPeriodDays > 0) {
+      const kmPerAu = 149597870.7;
+      const circumferenceKm = 2 * Math.PI * smaAu * kmPerAu;
+      const kmPerHour = circumferenceKm / (b.orbitalPeriodDays * 24);
+      const kmPerSec = kmPerHour / 3600;
+      const formattedKmh =
+        kmPerHour >= 100
+          ? Math.round(kmPerHour).toLocaleString('de-DE')
+          : kmPerHour.toFixed(1).replace('.', ',');
+      const formattedKms =
+        kmPerSec >= 10
+          ? kmPerSec.toFixed(1).replace('.', ',')
+          : kmPerSec.toFixed(2).replace('.', ',');
+      return `ca. ${formattedKmh} km/h (${formattedKms} km/s)`;
+    }
+    return '–';
   });
 
   constructor() {
