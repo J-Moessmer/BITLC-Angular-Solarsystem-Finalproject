@@ -129,7 +129,7 @@ h2 {
 
 .mission-summary-card.selected-card {
   border-color: var(--accent-primary);
-  background-color: #eff6ff;
+  background-color: var(--card-bg-subtle);
 }
 
 .card-cat-pill {
@@ -269,8 +269,8 @@ h2 {
 }
 
 .iss-live-box {
-  background-color: #f0f9ff;
-  border: 1px solid #7dd3fc;
+  background-color: var(--accent-astronomy-box);
+  border: 1px solid var(--card-border);
   border-radius: var(--radius-md);
   padding: 0.9rem;
 }
@@ -288,23 +288,29 @@ h2 {
   display: inline-block;
   font-size: 0.74rem;
   font-weight: 700;
-  color: #0369a1;
+  color: var(--accent-primary);
 }
 
 .iss-header h4 {
   margin: 0.1rem 0 0;
   font-size: 0.96rem;
+  color: var(--card-text-primary);
 }
 
 .refresh-iss-btn {
   padding: 0.35rem 0.75rem;
   border-radius: var(--radius-sm);
-  border: 1px solid #38bdf8;
-  background-color: #ffffff;
-  color: #0369a1;
+  border: 1px solid var(--accent-primary);
+  background-color: var(--card-bg-elevated);
+  color: var(--accent-primary);
   font-weight: 600;
   font-size: 0.8rem;
   cursor: pointer;
+}
+
+.refresh-iss-btn.auto-active {
+  background-color: var(--accent-primary);
+  color: #ffffff;
 }
 
 .iss-metrics-grid {
@@ -314,8 +320,8 @@ h2 {
 }
 
 .iss-metric {
-  background-color: #ffffff;
-  border: 1px solid #bae6fd;
+  background-color: var(--card-bg-elevated);
+  border: 1px solid var(--card-border);
   border-radius: var(--radius-sm);
   padding: 0.45rem 0.65rem;
   display: flex;
@@ -336,7 +342,7 @@ h2 {
 .iss-hint {
   margin: 0.5rem 0 0;
   font-size: 0.78rem;
-  color: #0369a1;
+  color: var(--card-text-secondary);
   font-weight: 600;
 }
 

@@ -525,9 +525,9 @@ const EXTRA_BODY_GALLERY: Readonly<Record<string, Array<{ url: string; caption: 
       font-weight: 600;
     }
     .astronomy-box {
-      border: 1px solid #bae6fd;
+      border: 1px solid var(--card-border);
       border-radius: var(--radius-md);
-      background-color: #f8fafc;
+      background-color: var(--card-bg);
       overflow: hidden;
     }
     .astronomy-toggle-btn {
@@ -538,15 +538,15 @@ const EXTRA_BODY_GALLERY: Readonly<Record<string, Array<{ url: string; caption: 
       gap: 0.75rem;
       padding: 0.6rem 0.9rem;
       border: none;
-      background-color: #e0f2fe;
-      color: #0369a1;
+      background-color: var(--accent-astronomy-box);
+      color: var(--accent-primary);
       font-weight: 700;
       font-size: 0.88rem;
       cursor: pointer;
       text-align: left;
     }
     .astronomy-toggle-btn:hover {
-      background-color: #bae6fd;
+      background-color: var(--card-bg-subtle);
     }
     .toggle-arrow {
       font-size: 0.8rem;
@@ -566,7 +566,7 @@ const EXTRA_BODY_GALLERY: Readonly<Record<string, Array<{ url: string; caption: 
     .orbital-table {
       width: 100%;
       border-collapse: collapse;
-      background-color: #ffffff;
+      background-color: var(--card-bg-elevated);
       border: 1px solid var(--card-border);
       border-radius: var(--radius-sm);
       font-size: 0.83rem;

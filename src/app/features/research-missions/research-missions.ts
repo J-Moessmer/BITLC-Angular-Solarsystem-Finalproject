@@ -7,7 +7,7 @@
  * Hinweis: Bereinigte Kategorien-Bezeichnungen ohne redundante Klammer-Aufzählungen.
  */
 
-import { Component, OnInit, computed, effect, inject, signal } from '@angular/core';
+import { Component, OnDestroy, OnInit, computed, effect, inject, signal } from '@angular/core';
 import { DecimalPipe } from '@angular/common';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { MissionDataService } from '../../core/services/mission-data.service';
@@ -66,13 +66,15 @@ export interface CategoryFilterChip {
   templateUrl: './research-missions.html',
   styleUrl: './research-missions.css',
 })
-export class ResearchMissionsComponent implements OnInit {
+export class ResearchMissionsComponent implements OnInit, OnDestroy {
   protected readonly missionService = inject(MissionDataService);
   private readonly route = inject(ActivatedRoute);
 
   readonly activeImageSrc = signal<string>('');
   readonly isRefreshingIss = signal<boolean>(false);
   readonly isLightboxOpen = signal<boolean>(false);
+  readonly issAutoRefreshEnabled = signal<boolean>(true);
+  private issPollTimerId: ReturnType<typeof setInterval> | null = null;
 
   readonly missionGalleryItems = computed<Array<{ url: string; caption: string }>>(() => {
     const m = this.missionService.selectedMission();
@@ -112,6 +114,41 @@ export class ResearchMissionsComponent implements OnInit {
       this.missionService.selectMission(targetMissionId);
     }
     await this.refreshIssTelemetry();
+    this.startIssAutoRefresh();
+  }
+
+  ngOnDestroy(): void {
+    this.stopIssAutoRefresh();
+  }
+
+  toggleIssAutoRefresh(): void {
+    const next = !this.issAutoRefreshEnabled();
+    this.issAutoRefreshEnabled.set(next);
+    if (next) {
+      this.startIssAutoRefresh();
+    } else {
+      this.stopIssAutoRefresh();
+    }
+  }
+
+  private startIssAutoRefresh(): void {
+    this.stopIssAutoRefresh();
+    this.issPollTimerId = setInterval(() => {
+      if (
+        this.issAutoRefreshEnabled() &&
+        this.missionService.selectedMission()?.hasIssLiveTracker &&
+        !this.isRefreshingIss()
+      ) {
+        void this.refreshIssTelemetry();
+      }
+    }, 5000);
+  }
+
+  private stopIssAutoRefresh(): void {
+    if (this.issPollTimerId !== null) {
+      clearInterval(this.issPollTimerId);
+      this.issPollTimerId = null;
+    }
   }
 
   onThumbnailError(event: Event, fallbackUrl: string): void {

@@ -219,8 +219,8 @@ h2 {
 }
 
 .kpi-card.highlight-kpi {
-  background-color: #f0f9ff;
-  border-color: #7dd3fc;
+  background-color: var(--accent-astronomy-box);
+  border-color: var(--accent-primary);
 }
 
 .kpi-label {
