@@ -127,7 +127,7 @@ export class SizeComparisonComponent implements OnInit {
     const slotWidth = totalWidth / bodies.length;
     const baseMaxRadiusPx = Math.min(205, Math.floor(slotWidth * 0.44));
     const zoom = this.zoomFactor();
-    const blend = Math.min(1, Math.max(0, (zoom - 1) / 0.8));
+    const blend = Math.min(1, Math.max(0, (zoom - 1) / 0.3));
 
     const zoomedRadii = bodies.map((b) => {
       const trueRatio = b.diameterKm / maxDiameter;
@@ -151,43 +151,50 @@ export class SizeComparisonComponent implements OnInit {
       }
     }
 
-    // Finde das größte Objekt und zentriere die sichtbare Komposition symmetrisch um x = 600
-    let largestIdx = 0;
-    for (let i = 1; i < bodies.length; i++) {
-      if (bodies[i].diameterKm > bodies[largestIdx].diameterKm) {
-        largestIdx = i;
+    let shiftX = 0;
+    if (bodies.length === 2) {
+      // Bei 2 Körpern bleibt die Lücke zwischen ihren zugewandten Rändern exakt auf x = 600 zentriert:
+      // Linker Körper-Rand bei 520 px (-80 px), rechter Körper-Rand bei 680 px (+80 px).
+      const leftFacingEdge = edgeCenters[0] + zoomedRadii[0].svgRadiusPx;
+      const rightFacingEdge = edgeCenters[1] - zoomedRadii[1].svgRadiusPx;
+      shiftX = 600 - (leftFacingEdge + rightFacingEdge) / 2;
+    } else {
+      // Bei 3–5 Körpern: Finde das größte Objekt und zentriere die sichtbare Komposition um x = 600
+      let largestIdx = 0;
+      for (let i = 1; i < bodies.length; i++) {
+        if (bodies[i].diameterKm > bodies[largestIdx].diameterKm) {
+          largestIdx = i;
+        }
       }
-    }
 
-    const largestR = zoomedRadii[largestIdx].svgRadiusPx;
-    const minX = edgeCenters[0] - zoomedRadii[0].svgRadiusPx;
-    const maxX = edgeCenters[bodies.length - 1] + zoomedRadii[bodies.length - 1].svgRadiusPx;
-    const fullSpan = maxX - minX;
+      const largestR = zoomedRadii[largestIdx].svgRadiusPx;
+      const minX = edgeCenters[0] - zoomedRadii[0].svgRadiusPx;
+      const maxX = edgeCenters[bodies.length - 1] + zoomedRadii[bodies.length - 1].svgRadiusPx;
+      const fullSpan = maxX - minX;
 
-    // Wenn ein Riesenobjekt am Rand über die Bühne hinauswächst, blenden wir den Ankerpunkt
-    // fließend von der Außenkante auf den sichtbaren Innenrand, sodass der Abstand zur Mitte (x = 600) gleich bleibt.
-    const overflowBlend = Math.min(1, Math.max(0, (fullSpan - 760) / 360));
-    let anchorLeft = minX;
-    let anchorRight = maxX;
+      const overflowBlend = Math.min(1, Math.max(0, (fullSpan - 760) / 360));
+      let anchorLeft = minX;
+      let anchorRight = maxX;
 
-    if (largestIdx === 0) {
-      const visibleLimbLeft = edgeCenters[0] + largestR;
-      anchorLeft = minX * (1 - overflowBlend) + visibleLimbLeft * overflowBlend;
-    } else if (largestIdx === bodies.length - 1) {
-      const visibleLimbRight = edgeCenters[largestIdx] - largestR;
-      anchorRight = maxX * (1 - overflowBlend) + visibleLimbRight * overflowBlend;
-    }
-
-    let shiftX = 600 - (anchorLeft + anchorRight) / 2;
-    if (largestIdx === 0) {
-      const lastRight = maxX + shiftX;
-      if (lastRight > 1130) {
-        shiftX -= lastRight - 1130;
+      if (largestIdx === 0) {
+        const visibleLimbLeft = edgeCenters[0] + largestR;
+        anchorLeft = minX * (1 - overflowBlend) + visibleLimbLeft * overflowBlend;
+      } else if (largestIdx === bodies.length - 1) {
+        const visibleLimbRight = edgeCenters[largestIdx] - largestR;
+        anchorRight = maxX * (1 - overflowBlend) + visibleLimbRight * overflowBlend;
       }
-    } else if (largestIdx === bodies.length - 1) {
-      const firstLeft = minX + shiftX;
-      if (firstLeft < 70) {
-        shiftX += 70 - firstLeft;
+
+      shiftX = 600 - (anchorLeft + anchorRight) / 2;
+      if (largestIdx === 0) {
+        const lastRight = maxX + shiftX;
+        if (lastRight > 1130) {
+          shiftX -= lastRight - 1130;
+        }
+      } else if (largestIdx === bodies.length - 1) {
+        const firstLeft = minX + shiftX;
+        if (firstLeft < 70) {
+          shiftX += 70 - firstLeft;
+        }
       }
     }
 
