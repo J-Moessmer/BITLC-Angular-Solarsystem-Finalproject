@@ -18,7 +18,7 @@ export type BodyCategory =
   | 'lagrange';
 
 export interface OrbitalElementDetail {
-  code: 'SMA' | 'ECC' | 'INC' | 'LAN' | 'LPE' | 'MNA' | 'REF';
+  code: 'SMA' | 'ECC' | 'INC' | 'LAN' | 'AOP' | 'LPE' | 'MNA' | 'REF';
   label: string;
   formattedValue: string;
   numericValue?: number;
@@ -27,7 +27,7 @@ export interface OrbitalElementDetail {
 }
 
 /**
- * Die 7 Bahnelemente (Kepler-Elemente + Referenzsystem) gemäß P20-A30 / P20-U20
+ * Die Bahnelemente (Kepler-Elemente inkl. AOP & Referenzsystem) gemäß P20-A30 / P20-U20
  */
 export interface OrbitalElements {
   /** Semi-Major Axis (Große Halbachse) */
@@ -38,7 +38,9 @@ export interface OrbitalElements {
   inc: OrbitalElementDetail;
   /** Longitude of the Ascending Node (Länge des aufsteigenden Knotens) */
   lan: OrbitalElementDetail;
-  /** Longitude of Perihelion (Länge des Perihels) */
+  /** Argument of Periapsis (Argument der Periapsis / ω) */
+  aop?: OrbitalElementDetail;
+  /** Longitude of Perihelion (Länge des Perihels / ϖ) */
   lpe: OrbitalElementDetail;
   /** Mean Anomaly (Mittlere Anomalie) */
   mna: OrbitalElementDetail;

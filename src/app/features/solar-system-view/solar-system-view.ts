@@ -583,6 +583,7 @@ export class SolarSystemViewComponent implements OnInit, OnDestroy {
     { isoDate: '1997-04-01', label: '01.04.1997 · Komet Hale-Bopp', bodyId: 'hale-bopp' },
     { isoDate: '2014-11-12', label: '12.11.2014 · Rosetta & Philae auf 67P', bodyId: 'rosetta' },
     { isoDate: '2015-07-14', label: '14.07.2015 · New Horizons bei Pluto', bodyId: 'new-horizons' },
+    { isoDate: '2020-07-03', label: '03.07.2020 · Komet NEOWISE (Sonnennähe)', bodyId: 'neowise' },
   ];
 
   resetToLiveNow(): void {
@@ -691,6 +692,13 @@ export class SolarSystemViewComponent implements OnInit, OnDestroy {
     }
     if (target.category === 'dwarf-planet') {
       return isTrueScale ? 28 : 3.2;
+    }
+    if (target.category === 'comet') {
+      if (isTrueScale) {
+        const liveAu = this.viewport.computeLiveKeplerState(target).currentDistanceAu;
+        return Number(Math.min(35, Math.max(0.35, 22 / Math.max(0.28, liveAu))).toFixed(2));
+      }
+      return 1.35;
     }
     if (isTrueScale) {
       if (distAu > 80) {

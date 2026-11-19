@@ -502,5 +502,19 @@
     "correctOptionIndex": 1,
     "childExplanation": "Genau! ‚Perihel‘ bedeutet der Punkt einer Umlaufbahn, an dem ein Himmelskörper der Sonne am nächsten kommt.",
     "relatedBodyId": "mercury"
+  },
+  {
+    "id": "q-ast-13",
+    "category": "astronomy",
+    "questionText": "Warum war der im März 2020 entdeckte Komet NEOWISE (C/2020 F3) im Sommer 2020 am Nachthimmel so gut mit bloßem Auge zu sehen?",
+    "options": [
+      "Weil er auf dem Mond gelandet ist",
+      "Weil er Anfang Juli 2020 dicht an der Sonne vorbeiflog und dabei einen riesigen, hellen Schweif entwickelte",
+      "Weil Astronauten ihn mit Scheinwerfern angeleuchtet haben",
+      "Weil er näher an der Erde war als die ISS"
+    ],
+    "correctOptionIndex": 1,
+    "childExplanation": "Genau! Am 3. Juli 2020 kam Komet NEOWISE der Sonne näher als der Merkur. Durch die große Hitze verdampften Eis und Staub auf seinem Kern zu einem langen, hell leuchtenden Schweif.",
+    "relatedBodyId": "neowise"
   }
 ]

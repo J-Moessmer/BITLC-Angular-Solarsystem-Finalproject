@@ -201,6 +201,7 @@ export class SolarSystemDataService {
               buildBodyNode('halley', 'fa-solid fa-meteor'),
               buildBodyNode('churyumov', 'fa-solid fa-meteor'),
               buildBodyNode('hale-bopp', 'fa-solid fa-meteor'),
+              buildBodyNode('neowise', 'fa-solid fa-meteor'),
             ],
           },
           {

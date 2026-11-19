@@ -387,6 +387,11 @@
                   [attr.cy]="pos.orbitCenterY"
                   [attr.rx]="pos.orbitRxPx"
                   [attr.ry]="pos.orbitRyPx"
+                  [attr.transform]="
+                    pos.orbitRotationDeg
+                      ? 'rotate(' + pos.orbitRotationDeg + ' ' + pos.orbitCenterX + ' ' + pos.orbitCenterY + ')'
+                      : null
+                  "
                   fill="none"
                   [attr.stroke]="
                     viewport.bodyScaleMode() === 'strict-distance-scale' ||

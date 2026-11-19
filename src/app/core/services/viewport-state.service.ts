@@ -30,6 +30,8 @@ export interface SvgBodyPosition {
   /** Brennpunkt-Verschiebung c = a * e inkl. Pan & Zoom */
   orbitCenterX: number;
   orbitCenterY: number;
+  /** Rotationswinkel der Bahnellipse in der 2D-Draufsicht (in Grad, aus LPE/AOP/LAN) */
+  orbitRotationDeg?: number;
   /** Ob die Umlaufbahn im aktuellen Sichtfenster [-600..+600] überhaupt sichtbar ist (Viewport-Culling!) */
   isOrbitVisibleInViewport: boolean;
   /**
@@ -426,17 +428,27 @@ export class ViewportStateService {
 
     const m0Deg = body.orbitalElements.mna.numericValue ?? body.orbitAngleDeg;
     const lpeDeg = body.orbitalElements.lpe.numericValue ?? 0;
-    const ecc = Math.min(0.97, Math.max(0, body.orbitalElements.ecc.numericValue ?? 0));
+    const ecc = Math.min(0.9995, Math.max(0, body.orbitalElements.ecc.numericValue ?? 0));
     const smaAu = body.orbitalElements.sma.numericValue ?? body.distanceFromSunAu;
 
     const meanMotionDegPerDay = 360.0 / body.orbitalPeriodDays;
     const currentMeanAnomalyDeg = (((m0Deg + meanMotionDegPerDay * days) % 360) + 360) % 360;
     const M = (currentMeanAnomalyDeg * Math.PI) / 180;
 
-    let E = M + ecc * Math.sin(M);
-    for (let i = 0; i < 5; i++) {
-      const deltaE = (E - ecc * Math.sin(E) - M) / (1 - ecc * Math.cos(E));
+    let E =
+      ecc > 0.85
+        ? M < Math.PI
+          ? Math.min(Math.PI, Math.max(M, Math.cbrt((6 * M) / ecc)))
+          : Math.max(Math.PI, 2 * Math.PI - Math.cbrt((6 * (2 * Math.PI - M)) / ecc))
+        : M + ecc * Math.sin(M);
+    for (let i = 0; i < 15; i++) {
+      const f = E - ecc * Math.sin(E) - M;
+      const fp = Math.max(1e-7, 1 - ecc * Math.cos(E));
+      const deltaE = f / fp;
       E -= deltaE;
+      if (Math.abs(deltaE) < 1e-9) {
+        break;
+      }
     }
 
     const sinHalfE = Math.sin(E / 2);
@@ -521,47 +533,51 @@ export class ViewportStateService {
    * Verhindert das Stottern in Windows-VMs bei hohem Zoom (> 1.000 % bis 1.800.000 %):
    * - Prüft zuerst, ob der Ellipsenring überhaupt durch das 1080x660 Sichtfenster läuft.
    * - Falls rx > 1.100 px ist, wird statt einer gigantischen <ellipse> nur das kurze sichtbare
-   *   Kurvensegment (24 Stützpunkte im Sichtfenster) als SVG-<path> berechnet!
+   *   Kurvensegment (24 Stützpunkte im Sichtfenster) als SVG-<path> berechnet und mit rotationRad gedreht!
    */
   private computeOrbitClipping(
     centerX: number,
     centerY: number,
     rx: number,
     ry: number,
+    rotationRad = 0,
   ): { isVisible: boolean; clippedPath: string | null } {
     if (rx <= 0 || ry <= 0) {
       return { isVisible: false, clippedPath: null };
     }
 
-    // Bei kleinen/mittleren Radien (< 1.100 px) zeichnet der Browser die normale <ellipse> ohne Probleme
-    if (rx <= 1100 && ry <= 1100) {
-      const inBounds =
-        centerX + rx >= -600 &&
-        centerX - rx <= 600 &&
-        centerY + ry >= -400 &&
-        centerY - ry <= 400;
+    const cosPhi = Math.cos(rotationRad);
+    const sinPhi = Math.sin(rotationRad);
+    const relX = -centerX * cosPhi - centerY * sinPhi;
+    const relY = centerX * sinPhi - centerY * cosPhi;
+
+    // Bei kleinen/mittleren Radien (<= 4.500 px) zeichnet der Browser die native <ellipse> flüssig und vollständig
+    if (rx <= 4500 && ry <= 4500) {
+      const inBounds = Math.abs(relX) <= rx + 650 && Math.abs(relY) <= ry + 450;
       return { isVisible: inBounds, clippedPath: null };
     }
 
-    // Bei riesigem Zoom (rx > 1.100 px): Richtung vom Ellipsenzentrum zur Bildschirmmitte (0, 0) bestimmen
-    const distCenterToOrigin = Math.hypot(centerX, centerY);
-    const meanR = (rx + ry) * 0.5;
-    // Wenn der kürzeste Abstand der Bahnlinie zur Bildschirmmitte > 700 px ist, liegt die Bahn komplett außerhalb des Bildes!
-    if (Math.abs(distCenterToOrigin - meanR) > 750) {
+    // Nächstgelegener Parameter t0 auf der gedrehten Ellipse zum Viewport-Mittelpunkt (0, 0)
+    const t0 = Math.atan2(relY / Math.max(1, ry), relX / Math.max(1, rx));
+    const dMin = Math.hypot(rx * Math.cos(t0) - relX, ry * Math.sin(t0) - relY);
+    if (dMin > 850) {
       return { isVisible: false, clippedPath: null };
     }
 
-    // Winkel von (centerX, centerY) zum Ursprung (0, 0)
-    const baseAngle = Math.atan2(-centerY, -centerX);
-    // Öffnungswinkel, der maximal ~900 px Bogenlänge im Sichtfenster abdeckt
-    const halfSpanRad = Math.min(Math.PI, Math.max(0.0002, 750 / Math.max(1, rx)));
-    const steps = 24;
+    const localSpeed = Math.max(20, Math.hypot(rx * Math.sin(t0), ry * Math.cos(t0)));
+    const halfSpanRad = Math.min(
+      Math.PI,
+      Math.max(0.0002, 850 / localSpeed, Math.sqrt(1700 / Math.max(1, rx))),
+    );
+    const steps = 48;
     const points: string[] = [];
 
     for (let i = 0; i <= steps; i++) {
-      const t = baseAngle - halfSpanRad + (2 * halfSpanRad * i) / steps;
-      const x = (centerX + rx * Math.cos(t)).toFixed(1);
-      const y = (centerY + ry * Math.sin(t)).toFixed(1);
+      const t = t0 - halfSpanRad + (2 * halfSpanRad * i) / steps;
+      const lx = rx * Math.cos(t);
+      const ly = ry * Math.sin(t);
+      const x = (centerX + lx * cosPhi - ly * sinPhi).toFixed(1);
+      const y = (centerY + lx * sinPhi + ly * cosPhi).toFixed(1);
       points.push(`${i === 0 ? 'M' : 'L'}${x} ${y}`);
     }
 
@@ -745,10 +761,13 @@ export class ViewportStateService {
             worldY = Number((-sideProj * Math.sin(incRad) * planetSemiMajorWorld).toFixed(3));
           } else {
             const targetAngle = -planetKepler.eccentricAnomalyRad + angleDelta;
-            worldX = Number(
-              (planetFocusOffsetX + Math.cos(targetAngle) * planetSemiMajorWorld).toFixed(4),
-            );
-            worldY = Number((Math.sin(targetAngle) * planetSemiMinorWorld).toFixed(4));
+            const localX = planetFocusOffsetX + Math.cos(targetAngle) * planetSemiMajorWorld;
+            const localY = Math.sin(targetAngle) * planetSemiMinorWorld;
+            const perihelionRad = (-this.getPerihelionOrientationDeg(planet) * Math.PI) / 180;
+            const cosP = Math.cos(perihelionRad);
+            const sinP = Math.sin(perihelionRad);
+            worldX = Number((localX * cosP - localY * sinP).toFixed(4));
+            worldY = Number((localX * sinP + localY * cosP).toFixed(4));
           }
         }
 
@@ -921,11 +940,11 @@ export class ViewportStateService {
       body.id === 'parker' ||
       body.id === 'solar-orbiter' ||
       body.category === 'comet';
-    let ecc = Math.min(isEllipticalSpotlight ? 0.97 : 0.75, Math.max(0, rawEcc));
+    let ecc = Math.min(isEllipticalSpotlight ? 0.9995 : 0.75, Math.max(0, rawEcc));
     const effectiveAu =
       body.id === 'voyager-1' || body.id === 'voyager-2' || body.id === 'new-horizons'
         ? kepler.currentDistanceAu
-        : body.id === 'parker' || body.id === 'solar-orbiter'
+        : body.id === 'parker' || body.id === 'solar-orbiter' || body.category === 'comet'
           ? (body.orbitalElements.sma.numericValue ?? body.distanceFromSunAu)
           : body.distanceFromSunAu;
 
@@ -943,34 +962,72 @@ export class ViewportStateService {
       }
     }
 
-    // Sicherheitsabstand zur Sonne für Sonnensonden (Parker Solar Probe & Solar Orbiter),
+    let overviewCometE: number | null = null;
+    if (mode === 'overview' && body.category === 'comet') {
+      const smaAu = body.orbitalElements.sma.numericValue ?? body.distanceFromSunAu;
+      if (smaAu > 0) {
+        const qTrue = smaAu * (1 - ecc);
+        const QTrue = smaAu * (1 + ecc);
+        const qOv = this.mapAuToOverviewRadius(qTrue);
+        const QOv = Math.max(qOv + 25, this.mapAuToOverviewRadius(QTrue));
+        worldSemiMajorPx = Number(((QOv + qOv) / 2).toFixed(3));
+        ecc = Number(((QOv - qOv) / (QOv + qOv)).toFixed(6));
+        const rOv = Math.min(QOv, Math.max(qOv, this.mapAuToOverviewRadius(kepler.currentDistanceAu)));
+        const cosEov =
+          ecc > 1e-5
+            ? Math.min(1, Math.max(-1, (worldSemiMajorPx - rOv) / (worldSemiMajorPx * ecc)))
+            : 1;
+        const absEov = Math.acos(cosEov);
+        overviewCometE =
+          Math.sin(kepler.eccentricAnomalyRad) >= 0 ? absEov : 2 * Math.PI - absEov;
+      }
+    }
+
+    // Sicherheitsabstand zur Sonne für Sonnensonden & Kometen im Perihel,
     // damit das Perihel a*(1-e) niemals innerhalb der gezeichneten Sonnenscheibe liegt!
-    if (body.id === 'parker' || body.id === 'solar-orbiter') {
+    if (body.id === 'parker' || body.id === 'solar-orbiter' || body.category === 'comet') {
       const sun = allBodies.find((b) => b.id === 'sun');
       const sunScreenR = sun ? this.computeScaledBodyRadius(sun).displayRadiusPx : 13;
       const minPerihelWorld = (sunScreenR + 4) / Math.max(0.001, z);
       if (worldSemiMajorPx * (1 - ecc) < minPerihelWorld && worldSemiMajorPx > minPerihelWorld) {
-        ecc = Math.max(0.1, Number((1 - minPerihelWorld / worldSemiMajorPx).toFixed(3)));
+        ecc = Math.max(0.1, Number((1 - minPerihelWorld / worldSemiMajorPx).toFixed(6)));
       }
     }
+
+    const isDirectLongitudeBody =
+      body.id === 'voyager-1' ||
+      body.id === 'voyager-2' ||
+      body.id === 'new-horizons' ||
+      body.category === 'belt';
+    const perihelionDeg = isDirectLongitudeBody ? 0 : this.getPerihelionOrientationDeg(body);
+    const perihelionRad = (-perihelionDeg * Math.PI) / 180;
+    const orbitRotationDeg = Number((-perihelionDeg).toFixed(2));
+    const cosPhi = Math.cos(perihelionRad);
+    const sinPhi = Math.sin(perihelionRad);
 
     const worldSemiMinorPx = Number((worldSemiMajorPx * Math.sqrt(1 - ecc * ecc)).toFixed(3));
     const worldFocusOffsetX = isEllipticalSpotlight
       ? Number((-worldSemiMajorPx * ecc).toFixed(3))
       : 0;
+    const rotatedFocusX = worldFocusOffsetX * cosPhi;
+    const rotatedFocusY = worldFocusOffsetX * sinPhi;
 
     const scaledRx = Number((worldSemiMajorPx * z).toFixed(1));
     const scaledRy = Number((worldSemiMinorPx * z).toFixed(1));
-    const scaledCenterX = Number((px + worldFocusOffsetX * z).toFixed(1));
-    const scaledCenterY = py;
+    const scaledCenterX = Number((px + rotatedFocusX * z).toFixed(1));
+    const scaledCenterY = Number((py + rotatedFocusY * z).toFixed(1));
 
     // 2. Seitenansicht (P10-U40): 2D-Querschnitt entlang der Sonnenäquator-Ebene mit echtem INC-Neigungswinkel
     if (mode === 'side-view') {
       const incRad = (body.inclinationToSolarEquatorDeg * Math.PI) / 180;
       const lonRad = (kepler.longitudeDeg * Math.PI) / 180;
       const sideProjection = Math.cos(lonRad) >= 0 ? 1 : -1;
-      const worldX = Number((sideProjection * Math.cos(incRad) * worldSemiMajorPx).toFixed(3));
-      const worldY = Number((-sideProjection * Math.sin(incRad) * worldSemiMajorPx).toFixed(3));
+      const sideOrbitR =
+        body.category === 'comet'
+          ? this.mapAuToOverviewRadius(kepler.currentDistanceAu)
+          : worldSemiMajorPx;
+      const worldX = Number((sideProjection * Math.cos(incRad) * sideOrbitR).toFixed(3));
+      const worldY = Number((-sideProjection * Math.sin(incRad) * sideOrbitR).toFixed(3));
 
       const screenX = Number((px + worldX * z).toFixed(1));
       const screenY = Number((py + worldY * z).toFixed(1));
@@ -1004,26 +1061,25 @@ export class ViewportStateService {
       };
     }
 
-    // 3. Draufsicht auf die elliptische Bahn mit analytischem SVG-Orbit-Clipping gegen VM-Stottern!
-    // Exzentrische Anomalie E bestimmt den exakten Punkt auf der Ellipse (E=0 ist Perihel bei +a(1-e), E=pi ist Aphel bei -a(1+e)).
-    // Bei retrograden Bahnen (INC > 90°, z. B. Halleyscher Komet) läuft die Bewegung im Uhrzeigersinn (+E).
+    // 3. Draufsicht auf die gedrehte elliptische Bahn mit analytischem SVG-Orbit-Clipping gegen VM-Stottern!
+    // Exzentrische Anomalie E bestimmt den Punkt in der ungedrehten Ellipse, der anschließend um ϖ (LPE) um die Sonne rotiert wird.
     const isRetrograde = body.inclinationToSolarEquatorDeg > 90;
-    const angleRad =
-      body.id === 'voyager-1' ||
-      body.id === 'voyager-2' ||
-      body.id === 'new-horizons' ||
-      body.category === 'belt'
-        ? (-kepler.longitudeDeg * Math.PI) / 180
-        : isRetrograde
-          ? kepler.eccentricAnomalyRad
-          : -kepler.eccentricAnomalyRad;
-    const worldX = Number((worldFocusOffsetX + Math.cos(angleRad) * worldSemiMajorPx).toFixed(4));
-    const worldY = Number((Math.sin(angleRad) * worldSemiMinorPx).toFixed(4));
+    const orbitE = overviewCometE ?? kepler.eccentricAnomalyRad;
+    const angleRad = isDirectLongitudeBody
+      ? (-kepler.longitudeDeg * Math.PI) / 180
+      : isRetrograde
+        ? orbitE
+        : -orbitE;
+    const localX = worldFocusOffsetX + Math.cos(angleRad) * worldSemiMajorPx;
+    const localY = Math.sin(angleRad) * worldSemiMinorPx;
+    const worldX = Number((localX * cosPhi - localY * sinPhi).toFixed(4));
+    const worldY = Number((localX * sinPhi + localY * cosPhi).toFixed(4));
     const orbitClip = this.computeOrbitClipping(
       scaledCenterX,
       scaledCenterY,
       scaledRx,
       scaledRy,
+      perihelionRad,
     );
 
     return {
@@ -1036,6 +1092,7 @@ export class ViewportStateService {
       orbitRyPx: scaledRy,
       orbitCenterX: scaledCenterX,
       orbitCenterY: scaledCenterY,
+      orbitRotationDeg,
       isOrbitVisibleInViewport: orbitClip.isVisible,
       clippedOrbitPath: orbitClip.clippedPath,
       bodyRadiusPx: displayRadiusPx,
@@ -1060,5 +1117,48 @@ export class ViewportStateService {
     const z = this.zoomLevel();
     this.panX.set(Math.round(-worldX * z));
     this.panY.set(Math.round(-worldY * z));
+  }
+
+  /** KI-Hinweis: Überträgt reale AE-Abstände (Perihel/Aphel/r(t)) stückweise linear in die Übersichtsbahn-Radien. */
+  private mapAuToOverviewRadius(au: number): number {
+    if (au <= 0) {
+      return 0;
+    }
+    const anchors: ReadonlyArray<readonly [number, number]> = [
+      [0, 0],
+      [0.2, 38],
+      [0.387, 62],
+      [0.723, 94],
+      [1.0, 130],
+      [1.524, 170],
+      [2.77, 210],
+      [5.204, 255],
+      [9.582, 305],
+      [19.191, 350],
+      [30.069, 390],
+      [39.482, 425],
+      [67.781, 470],
+      [750, 492],
+    ];
+    for (let i = 1; i < anchors.length; i++) {
+      const [au0, r0] = anchors[i - 1];
+      const [au1, r1] = anchors[i];
+      if (au <= au1) {
+        return r0 + ((au - au0) / (au1 - au0)) * (r1 - r0);
+      }
+    }
+    return 492;
+  }
+
+  /** KI-Hinweis: Ermittelt den Perihel-Drehwinkel (ϖ in Grad) einer elliptischen Bahn für die 2D-Draufsicht. */
+  private getPerihelionOrientationDeg(body: CelestialBody): number {
+    if (body.orbitalElements.lpe.numericValue !== undefined) {
+      return body.orbitalElements.lpe.numericValue;
+    }
+    const lan = body.orbitalElements.lan.numericValue ?? 0;
+    const aop = body.orbitalElements.aop?.numericValue ?? 0;
+    return body.inclinationToSolarEquatorDeg > 90
+      ? (((lan - aop) % 360) + 360) % 360
+      : (lan + aop) % 360;
   }
 }

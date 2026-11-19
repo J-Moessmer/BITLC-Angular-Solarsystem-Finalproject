@@ -221,6 +221,14 @@ const EXTRA_BODY_GALLERY: Readonly<Record<string, Array<{ url: string; caption: 
             <span class="metric-label"><app-term term="Bahnneigung" /></span>
             <strong class="metric-val">{{ current.inclinationToSolarEquatorDeg }}°</strong>
           </div>
+          <div class="metric-box">
+            <span class="metric-label"><app-term term="Aufsteigender Knoten" /> (LAN)</span>
+            <strong class="metric-val">{{ current.orbitalElements.lan.formattedValue }}</strong>
+          </div>
+          <div class="metric-box">
+            <span class="metric-label"><app-term term="Argument der Periapsis" /> (AOP)</span>
+            <strong class="metric-val">{{ aopElement().formattedValue }}</strong>
+          </div>
         </div>
 
         @if (current.category === 'lagrange' || current.id === 'jwst' || current.id === 'gaia') {
@@ -817,13 +825,54 @@ export class InfoboxDetailComponent implements OnInit {
       .slice(0, 4);
   });
 
+  /** KI-Hinweis: Liefert das Argument der Periapsis (AOP / ω), ggf. berechnet aus (LPE − LAN) mod 360°. */
+  readonly aopElement = computed<OrbitalElementDetail>(() => {
+    const b = this.body();
+    if (!b) {
+      return {
+        code: 'AOP',
+        label: 'Argument der Periapsis',
+        formattedValue: '–',
+        childExplanation: '',
+      };
+    }
+    if (b.orbitalElements.aop) {
+      return b.orbitalElements.aop;
+    }
+    const lpe = b.orbitalElements.lpe.numericValue;
+    const lan = b.orbitalElements.lan.numericValue;
+    if (lpe !== undefined && lan !== undefined) {
+      const isRetro = b.inclinationToSolarEquatorDeg > 90;
+      const rawOmega = isRetro ? lan - lpe : lpe - lan;
+      const omega = Number((((rawOmega % 360) + 360) % 360).toFixed(2));
+      return {
+        code: 'AOP',
+        label: 'Argument der Periapsis',
+        formattedValue: `${omega}°`,
+        numericValue: omega,
+        unit: '°',
+        childExplanation:
+          'Der Winkel vom aufsteigenden Knoten (LAN) entlang der Bahn bis zum sonnennächsten Punkt (Periapsis).',
+      };
+    }
+    return {
+      code: 'AOP',
+      label: 'Argument der Periapsis',
+      formattedValue: '0.0°',
+      numericValue: 0,
+      unit: '°',
+      childExplanation:
+        'Der Winkel vom aufsteigenden Knoten (LAN) entlang der Bahn bis zum sonnennächsten Punkt (Periapsis).',
+    };
+  });
+
   readonly orbitalElementsList = computed<OrbitalElementDetail[]>(() => {
     const b = this.body();
     if (!b) {
       return [];
     }
     const oe = b.orbitalElements;
-    return [oe.sma, oe.ecc, oe.inc, oe.lan, oe.lpe, oe.mna, oe.ref];
+    return [oe.sma, oe.ecc, oe.inc, oe.lan, this.aopElement(), oe.lpe, oe.mna, oe.ref];
   });
 
   /** Berechnet die durchschnittliche Bahngeschwindigkeit (km/h & km/s) für jedes Objekt */

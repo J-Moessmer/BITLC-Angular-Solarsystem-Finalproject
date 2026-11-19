@@ -195,6 +195,77 @@ describe('Core Services (P10–P50)', () => {
     const mL2_3 = viewport.computeBodyPosition(mercL2, allWithJup);
     expect(Math.hypot(mL1_3.x - merc3.x, mL1_3.y - merc3.y)).toBeGreaterThanOrEqual(35);
     expect(Math.hypot(mL2_3.x - merc3.x, mL2_3.y - merc3.y)).toBeGreaterThanOrEqual(35);
+
+    // Kometen-Ellipsen müssen anhand LPE (aus LAN & AOP) in unterschiedliche Richtungen gedreht sein
+    const makeComet = (id: string, lpe: number, ecc = 0.7): CelestialBody => ({
+      ...makeBody(id, 'comet', 210),
+      parentId: 'sun',
+      distanceFromSunAu: 18,
+      orbitalElements: {
+        ...baseOe,
+        ecc: { ...baseOe.ecc, numericValue: ecc },
+        lpe: { ...baseOe.lpe, numericValue: lpe },
+      },
+    });
+    const halley = makeComet('halley', 307.09, 0.967);
+    const churyumov = makeComet('churyumov', 62.92, 0.641);
+    const haleBopp = makeComet('hale-bopp', 149.3, 0.995);
+    const halleyPos = viewport.computeBodyPosition(halley, [bodies[0], halley]);
+    const churyPos = viewport.computeBodyPosition(churyumov, [bodies[0], churyumov]);
+    const halePos = viewport.computeBodyPosition(haleBopp, [bodies[0], haleBopp]);
+    expect(halleyPos.orbitRotationDeg).toBeCloseTo(-307.09, 1);
+    expect(churyPos.orbitRotationDeg).toBeCloseTo(-62.92, 1);
+    expect(halePos.orbitRotationDeg).toBeCloseTo(-149.3, 1);
+    expect(churyPos.orbitCenterX).not.toBeCloseTo(halePos.orbitCenterX, 1);
+
+    // Komet NEOWISE (C/2020 F3): hohe Exzentrizität (0.999176), 2020-07-03 im Perihel (0.295 AE) und 2026-11-19 zwischen Saturn & Uranus (~18.95 AE)
+    const neowise: CelestialBody = {
+      ...makeComet('neowise', 23.73, 0.999176),
+      distanceFromSunAu: 358,
+      orbitalPeriodDays: 2471280,
+      inclinationToSolarEquatorDeg: 128.94,
+      overviewOrbitRadiusSvg: 415,
+      orbitalElements: {
+        ...baseOe,
+        sma: { ...baseOe.sma, numericValue: 358 },
+        ecc: { ...baseOe.ecc, numericValue: 0.999176 },
+        inc: { ...baseOe.inc, numericValue: 128.94 },
+        lan: { ...baseOe.lan, numericValue: 61.01 },
+        aop: { code: 'AOP' as const, label: 'AOP', formattedValue: '37.28°', numericValue: 37.28, childExplanation: '' },
+        lpe: { ...baseOe.lpe, numericValue: 23.73 },
+        mna: { ...baseOe.mna, numericValue: 358.909 },
+      },
+    };
+    const sunOnly = [bodies[0], neowise];
+    const sunOv = viewport.computeBodyPosition(bodies[0], sunOnly);
+
+    viewport.setSimulationDateIso('2020-07-03');
+    viewport.setViewMode('overview');
+    const neoPeriOv = viewport.computeBodyPosition(neowise, sunOnly);
+    expect(neoPeriOv.liveDistanceAu).toBeLessThan(0.4);
+    expect(Math.hypot(neoPeriOv.x, neoPeriOv.y)).toBeGreaterThan(sunOv.bodyRadiusPx + 3);
+
+    viewport.setViewMode('true-scale');
+    const sunTs = viewport.computeBodyPosition(bodies[0], sunOnly);
+    const neoPeriTs = viewport.computeBodyPosition(neowise, sunOnly);
+    expect(neoPeriTs.liveDistanceAu).toBeLessThan(0.4);
+    expect(Math.hypot(neoPeriTs.x, neoPeriTs.y)).toBeGreaterThan(sunTs.bodyRadiusPx + 3);
+
+    viewport.setSimulationDateIso('2026-11-19');
+    const neoNowTs = viewport.computeBodyPosition(neowise, sunOnly);
+    expect(neoNowTs.liveDistanceAu).toBeGreaterThan(9.58);
+    expect(neoNowTs.liveDistanceAu).toBeLessThan(19.2);
+    expect(Math.hypot(neoNowTs.worldX, neoNowTs.worldY)).toBeGreaterThan(170);
+
+    viewport.setViewMode('overview');
+    const neoNowOv = viewport.computeBodyPosition(neowise, sunOnly);
+    const ovDistSun = Math.hypot(neoNowOv.x, neoNowOv.y);
+    expect(ovDistSun).toBeGreaterThan(330);
+    expect(ovDistSun).toBeLessThan(355);
+
+    viewport.resetToRealTimeNow();
+    viewport.setViewMode('overview');
+    viewport.setZoom(1.0);
   });
 
   it('SolarSystemDataService should load fallback bodies with Wikimedia Commons URLs and 7 orbital elements (P20-U20)', async () => {

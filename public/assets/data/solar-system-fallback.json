@@ -69,6 +69,14 @@
         "unit": "°",
         "childExplanation": "Der Winkelpunkt, an dem der Himmelskörper auf seiner Bahn von unten nach oben durch die Hauptebene fliegt."
       },
+      "aop": {
+        "code": "AOP",
+        "label": "Argument der Periapsis",
+        "formattedValue": "0°",
+        "numericValue": 0,
+        "unit": "°",
+        "childExplanation": "Der Winkel vom aufsteigenden Bahnknoten (LAN) entlang der Bahn bis zum sonnennächsten Punkt (Perihel / Periapsis)."
+      },
       "lpe": {
         "code": "LPE",
         "label": "Länge des Perihels",
@@ -151,15 +159,23 @@
       "lan": {
         "code": "LAN",
         "label": "Aufsteigender Knoten",
-        "formattedValue": "75.0°",
+        "formattedValue": "75°",
         "numericValue": 75,
         "unit": "°",
         "childExplanation": "Der Winkelpunkt, an dem der Himmelskörper auf seiner Bahn von unten nach oben durch die Hauptebene fliegt."
       },
+      "aop": {
+        "code": "AOP",
+        "label": "Argument der Periapsis",
+        "formattedValue": "90°",
+        "numericValue": 90,
+        "unit": "°",
+        "childExplanation": "Der Winkel vom aufsteigenden Bahnknoten (LAN) entlang der Bahn bis zum sonnennächsten Punkt (Perihel / Periapsis)."
+      },
       "lpe": {
         "code": "LPE",
         "label": "Länge des Perihels",
-        "formattedValue": "165.0°",
+        "formattedValue": "165°",
         "numericValue": 165,
         "unit": "°",
         "childExplanation": "Zeigt die Richtung, in der der Körper der Sonne auf seiner Bahn am nächsten kommt."
@@ -238,16 +254,24 @@
       "lan": {
         "code": "LAN",
         "label": "Aufsteigender Knoten",
-        "formattedValue": "85.0°",
+        "formattedValue": "85°",
         "numericValue": 85,
         "unit": "°",
         "childExplanation": "Der Winkelpunkt, an dem der Himmelskörper auf seiner Bahn von unten nach oben durch die Hauptebene fliegt."
       },
+      "aop": {
+        "code": "AOP",
+        "label": "Argument der Periapsis",
+        "formattedValue": "155°",
+        "numericValue": 155,
+        "unit": "°",
+        "childExplanation": "Der Winkel vom aufsteigenden Bahnknoten (LAN) entlang der Bahn bis zum sonnennächsten Punkt (Perihel / Periapsis)."
+      },
       "lpe": {
         "code": "LPE",
         "label": "Länge des Perihels",
-        "formattedValue": "120.0°",
-        "numericValue": 120,
+        "formattedValue": "240°",
+        "numericValue": 240,
         "unit": "°",
         "childExplanation": "Zeigt die Richtung, in der der Körper der Sonne auf seiner Bahn am nächsten kommt."
       },
@@ -339,11 +363,19 @@
         "unit": "°",
         "childExplanation": "Der Winkelpunkt, an dem der Himmelskörper auf seiner Bahn von unten nach oben durch die Hauptebene fliegt."
       },
+      "aop": {
+        "code": "AOP",
+        "label": "Argument der Periapsis",
+        "formattedValue": "29.12°",
+        "numericValue": 29.12,
+        "unit": "°",
+        "childExplanation": "Der Winkel vom aufsteigenden Bahnknoten (LAN) entlang der Bahn bis zum sonnennächsten Punkt (Perihel / Periapsis)."
+      },
       "lpe": {
         "code": "LPE",
         "label": "Länge des Perihels",
-        "formattedValue": "77.46°",
-        "numericValue": 77.46,
+        "formattedValue": "77.45°",
+        "numericValue": 77.45,
         "unit": "°",
         "childExplanation": "Zeigt die Richtung, in der der Körper der Sonne auf seiner Bahn am nächsten kommt."
       },
@@ -421,16 +453,24 @@
       "lan": {
         "code": "LAN",
         "label": "Aufsteigender Knoten",
-        "formattedValue": "48.3°",
-        "numericValue": 48.3,
+        "formattedValue": "48.33°",
+        "numericValue": 48.33,
         "unit": "°",
         "childExplanation": "Der Winkelpunkt, an dem der Himmelskörper auf seiner Bahn von unten nach oben durch die Hauptebene fliegt."
+      },
+      "aop": {
+        "code": "AOP",
+        "label": "Argument der Periapsis",
+        "formattedValue": "29.12°",
+        "numericValue": 29.12,
+        "unit": "°",
+        "childExplanation": "Der Winkel vom aufsteigenden Bahnknoten (LAN) entlang der Bahn bis zum engsten Punkt (Periapsis) am Mutterkörper."
       },
       "lpe": {
         "code": "LPE",
         "label": "Länge des Perihels",
-        "formattedValue": "77.5°",
-        "numericValue": 77.5,
+        "formattedValue": "77.45°",
+        "numericValue": 77.45,
         "unit": "°",
         "childExplanation": "Zeigt die Richtung, in der der Körper der Sonne auf seiner Bahn am nächsten kommt."
       },
@@ -522,11 +562,19 @@
         "unit": "°",
         "childExplanation": "Der Winkelpunkt, an dem der Himmelskörper auf seiner Bahn von unten nach oben durch die Hauptebene fliegt."
       },
+      "aop": {
+        "code": "AOP",
+        "label": "Argument der Periapsis",
+        "formattedValue": "54.88°",
+        "numericValue": 54.88,
+        "unit": "°",
+        "childExplanation": "Der Winkel vom aufsteigenden Bahnknoten (LAN) entlang der Bahn bis zum sonnennächsten Punkt (Perihel / Periapsis)."
+      },
       "lpe": {
         "code": "LPE",
         "label": "Länge des Perihels",
-        "formattedValue": "131.53°",
-        "numericValue": 131.53,
+        "formattedValue": "131.56°",
+        "numericValue": 131.56,
         "unit": "°",
         "childExplanation": "Zeigt die Richtung, in der der Körper der Sonne auf seiner Bahn am nächsten kommt."
       },
@@ -623,6 +671,14 @@
         "numericValue": -11.26,
         "unit": "°",
         "childExplanation": "Der Winkelpunkt, an dem der Himmelskörper auf seiner Bahn von unten nach oben durch die Hauptebene fliegt."
+      },
+      "aop": {
+        "code": "AOP",
+        "label": "Argument der Periapsis",
+        "formattedValue": "114.21°",
+        "numericValue": 114.21,
+        "unit": "°",
+        "childExplanation": "Der Winkel vom aufsteigenden Bahnknoten (LAN) entlang der Bahn bis zum sonnennächsten Punkt (Perihel / Periapsis)."
       },
       "lpe": {
         "code": "LPE",
@@ -725,6 +781,14 @@
         "unit": "°",
         "childExplanation": "Der Winkelpunkt, an dem der Himmelskörper auf seiner Bahn von unten nach oben durch die Hauptebene fliegt."
       },
+      "aop": {
+        "code": "AOP",
+        "label": "Argument der Periapsis",
+        "formattedValue": "193.07°",
+        "numericValue": 193.07,
+        "unit": "°",
+        "childExplanation": "Der Winkel vom aufsteigenden Bahnknoten (LAN) entlang der Bahn bis zum engsten Punkt (Periapsis) am Mutterkörper."
+      },
       "lpe": {
         "code": "LPE",
         "label": "Länge des Perihels",
@@ -812,6 +876,14 @@
         "unit": "°",
         "childExplanation": "Der Winkelpunkt, an dem der Himmelskörper auf seiner Bahn von unten nach oben durch die Hauptebene fliegt."
       },
+      "aop": {
+        "code": "AOP",
+        "label": "Argument der Periapsis",
+        "formattedValue": "203.3°",
+        "numericValue": 203.3,
+        "unit": "°",
+        "childExplanation": "Der Winkel vom aufsteigenden Bahnknoten (LAN) entlang der Bahn bis zum engsten Punkt (Periapsis) am Mutterkörper."
+      },
       "lpe": {
         "code": "LPE",
         "label": "Länge des Perihels",
@@ -898,6 +970,14 @@
         "numericValue": 175,
         "unit": "°",
         "childExplanation": "Der Winkelpunkt, an dem der Himmelskörper auf seiner Bahn von unten nach oben durch die Hauptebene fliegt."
+      },
+      "aop": {
+        "code": "AOP",
+        "label": "Argument der Periapsis",
+        "formattedValue": "35°",
+        "numericValue": 35,
+        "unit": "°",
+        "childExplanation": "Der Winkel vom aufsteigenden Bahnknoten (LAN) entlang der Bahn bis zum engsten Punkt (Periapsis) am Mutterkörper."
       },
       "lpe": {
         "code": "LPE",
@@ -987,6 +1067,14 @@
         "unit": "°",
         "childExplanation": "Der Winkelpunkt, an dem der Himmelskörper auf seiner Bahn von unten nach oben durch die Hauptebene fliegt."
       },
+      "aop": {
+        "code": "AOP",
+        "label": "Argument der Periapsis",
+        "formattedValue": "193.07°",
+        "numericValue": 193.07,
+        "unit": "°",
+        "childExplanation": "Der Winkel vom aufsteigenden Bahnknoten (LAN) entlang der Bahn bis zum engsten Punkt (Periapsis) am Mutterkörper."
+      },
       "lpe": {
         "code": "LPE",
         "label": "Länge des Perihels",
@@ -1074,6 +1162,14 @@
         "numericValue": 125.08,
         "unit": "°",
         "childExplanation": "Der Winkelpunkt, an dem der Himmelskörper auf seiner Bahn von unten nach oben durch die Hauptebene fliegt."
+      },
+      "aop": {
+        "code": "AOP",
+        "label": "Argument der Periapsis",
+        "formattedValue": "193.07°",
+        "numericValue": 193.07,
+        "unit": "°",
+        "childExplanation": "Der Winkel vom aufsteigenden Bahnknoten (LAN) entlang der Bahn bis zum engsten Punkt (Periapsis) am Mutterkörper."
       },
       "lpe": {
         "code": "LPE",
@@ -1163,6 +1259,14 @@
         "unit": "°",
         "childExplanation": "Der Winkelpunkt, an dem der Himmelskörper auf seiner Bahn von unten nach oben durch die Hauptebene fliegt."
       },
+      "aop": {
+        "code": "AOP",
+        "label": "Argument der Periapsis",
+        "formattedValue": "193.07°",
+        "numericValue": 193.07,
+        "unit": "°",
+        "childExplanation": "Der Winkel vom aufsteigenden Bahnknoten (LAN) entlang der Bahn bis zum engsten Punkt (Periapsis) am Mutterkörper."
+      },
       "lpe": {
         "code": "LPE",
         "label": "Länge des Perihels",
@@ -1250,6 +1354,14 @@
         "numericValue": 125.08,
         "unit": "°",
         "childExplanation": "Der Winkelpunkt, an dem der Himmelskörper auf seiner Bahn von unten nach oben durch die Hauptebene fliegt."
+      },
+      "aop": {
+        "code": "AOP",
+        "label": "Argument der Periapsis",
+        "formattedValue": "193.07°",
+        "numericValue": 193.07,
+        "unit": "°",
+        "childExplanation": "Der Winkel vom aufsteigenden Bahnknoten (LAN) entlang der Bahn bis zum engsten Punkt (Periapsis) am Mutterkörper."
       },
       "lpe": {
         "code": "LPE",
@@ -1339,6 +1451,14 @@
         "unit": "°",
         "childExplanation": "Der Winkelpunkt, an dem der Himmelskörper auf seiner Bahn von unten nach oben durch die Hauptebene fliegt."
       },
+      "aop": {
+        "code": "AOP",
+        "label": "Argument der Periapsis",
+        "formattedValue": "193.07°",
+        "numericValue": 193.07,
+        "unit": "°",
+        "childExplanation": "Der Winkel vom aufsteigenden Bahnknoten (LAN) entlang der Bahn bis zum engsten Punkt (Periapsis) am Mutterkörper."
+      },
       "lpe": {
         "code": "LPE",
         "label": "Länge des Perihels",
@@ -1426,6 +1546,14 @@
         "numericValue": 125.08,
         "unit": "°",
         "childExplanation": "Der Winkelpunkt, an dem der Himmelskörper auf seiner Bahn von unten nach oben durch die Hauptebene fliegt."
+      },
+      "aop": {
+        "code": "AOP",
+        "label": "Argument der Periapsis",
+        "formattedValue": "193.07°",
+        "numericValue": 193.07,
+        "unit": "°",
+        "childExplanation": "Der Winkel vom aufsteigenden Bahnknoten (LAN) entlang der Bahn bis zum engsten Punkt (Periapsis) am Mutterkörper."
       },
       "lpe": {
         "code": "LPE",
@@ -1515,6 +1643,14 @@
         "unit": "°",
         "childExplanation": "Der Winkelpunkt, an dem der Himmelskörper auf seiner Bahn von unten nach oben durch die Hauptebene fliegt."
       },
+      "aop": {
+        "code": "AOP",
+        "label": "Argument der Periapsis",
+        "formattedValue": "193.07°",
+        "numericValue": 193.07,
+        "unit": "°",
+        "childExplanation": "Der Winkel vom aufsteigenden Bahnknoten (LAN) entlang der Bahn bis zum engsten Punkt (Periapsis) am Mutterkörper."
+      },
       "lpe": {
         "code": "LPE",
         "label": "Länge des Perihels",
@@ -1601,6 +1737,14 @@
         "numericValue": 115,
         "unit": "°",
         "childExplanation": "Der Winkelpunkt, an dem der Himmelskörper auf seiner Bahn von unten nach oben durch die Hauptebene fliegt."
+      },
+      "aop": {
+        "code": "AOP",
+        "label": "Argument der Periapsis",
+        "formattedValue": "170°",
+        "numericValue": 170,
+        "unit": "°",
+        "childExplanation": "Der Winkel vom aufsteigenden Bahnknoten (LAN) entlang der Bahn bis zum engsten Punkt (Periapsis) am Mutterkörper."
       },
       "lpe": {
         "code": "LPE",
@@ -1691,6 +1835,14 @@
         "numericValue": -11.26,
         "unit": "°",
         "childExplanation": "Synchronisiert mit der Knotenlinie der Erdumlaufbahn."
+      },
+      "aop": {
+        "code": "AOP",
+        "label": "Argument der Periapsis",
+        "formattedValue": "114.21°",
+        "numericValue": 114.21,
+        "unit": "°",
+        "childExplanation": "Der Winkel vom aufsteigenden Bahnknoten (LAN) entlang der Bahn bis zum sonnennächsten Punkt (Perihel / Periapsis)."
       },
       "lpe": {
         "code": "LPE",
@@ -1783,6 +1935,14 @@
         "unit": "°",
         "childExplanation": "Synchronisiert mit der Knotenlinie der Erdumlaufbahn."
       },
+      "aop": {
+        "code": "AOP",
+        "label": "Argument der Periapsis",
+        "formattedValue": "114.21°",
+        "numericValue": 114.21,
+        "unit": "°",
+        "childExplanation": "Der Winkel vom aufsteigenden Bahnknoten (LAN) entlang der Bahn bis zum sonnennächsten Punkt (Perihel / Periapsis)."
+      },
       "lpe": {
         "code": "LPE",
         "label": "Länge des Perihels",
@@ -1870,6 +2030,14 @@
         "numericValue": -11.26,
         "unit": "°",
         "childExplanation": "Synchronisiert mit der Knotenlinie der Erdumlaufbahn."
+      },
+      "aop": {
+        "code": "AOP",
+        "label": "Argument der Periapsis",
+        "formattedValue": "114.21°",
+        "numericValue": 114.21,
+        "unit": "°",
+        "childExplanation": "Der Winkel vom aufsteigenden Bahnknoten (LAN) entlang der Bahn bis zum sonnennächsten Punkt (Perihel / Periapsis)."
       },
       "lpe": {
         "code": "LPE",
@@ -1959,6 +2127,14 @@
         "unit": "°",
         "childExplanation": "Synchronisiert mit der Knotenlinie der Erdumlaufbahn."
       },
+      "aop": {
+        "code": "AOP",
+        "label": "Argument der Periapsis",
+        "formattedValue": "114.21°",
+        "numericValue": 114.21,
+        "unit": "°",
+        "childExplanation": "Der Winkel vom aufsteigenden Bahnknoten (LAN) entlang der Bahn bis zum sonnennächsten Punkt (Perihel / Periapsis)."
+      },
       "lpe": {
         "code": "LPE",
         "label": "Länge des Perihels",
@@ -2046,6 +2222,14 @@
         "numericValue": -11.26,
         "unit": "°",
         "childExplanation": "Synchronisiert mit der Knotenlinie der Erdumlaufbahn."
+      },
+      "aop": {
+        "code": "AOP",
+        "label": "Argument der Periapsis",
+        "formattedValue": "114.21°",
+        "numericValue": 114.21,
+        "unit": "°",
+        "childExplanation": "Der Winkel vom aufsteigenden Bahnknoten (LAN) entlang der Bahn bis zum sonnennächsten Punkt (Perihel / Periapsis)."
       },
       "lpe": {
         "code": "LPE",
@@ -2148,11 +2332,19 @@
         "unit": "°",
         "childExplanation": "Der Winkelpunkt, an dem der Himmelskörper auf seiner Bahn von unten nach oben durch die Hauptebene fliegt."
       },
+      "aop": {
+        "code": "AOP",
+        "label": "Argument der Periapsis",
+        "formattedValue": "286.5°",
+        "numericValue": 286.5,
+        "unit": "°",
+        "childExplanation": "Der Winkel vom aufsteigenden Bahnknoten (LAN) entlang der Bahn bis zum sonnennächsten Punkt (Perihel / Periapsis)."
+      },
       "lpe": {
         "code": "LPE",
         "label": "Länge des Perihels",
-        "formattedValue": "336.04°",
-        "numericValue": 336.04,
+        "formattedValue": "336.06°",
+        "numericValue": 336.06,
         "unit": "°",
         "childExplanation": "Zeigt die Richtung, in der der Körper der Sonne auf seiner Bahn am nächsten kommt."
       },
@@ -2235,6 +2427,14 @@
         "numericValue": 164.9,
         "unit": "°",
         "childExplanation": "Der Winkelpunkt, an dem der Himmelskörper auf seiner Bahn von unten nach oben durch die Hauptebene fliegt."
+      },
+      "aop": {
+        "code": "AOP",
+        "label": "Argument der Periapsis",
+        "formattedValue": "345.3°",
+        "numericValue": 345.3,
+        "unit": "°",
+        "childExplanation": "Der Winkel vom aufsteigenden Bahnknoten (LAN) entlang der Bahn bis zum engsten Punkt (Periapsis) am Mutterkörper."
       },
       "lpe": {
         "code": "LPE",
@@ -2324,6 +2524,14 @@
         "unit": "°",
         "childExplanation": "Der Winkelpunkt, an dem der Himmelskörper auf seiner Bahn von unten nach oben durch die Hauptebene fliegt."
       },
+      "aop": {
+        "code": "AOP",
+        "label": "Argument der Periapsis",
+        "formattedValue": "304.1°",
+        "numericValue": 304.1,
+        "unit": "°",
+        "childExplanation": "Der Winkel vom aufsteigenden Bahnknoten (LAN) entlang der Bahn bis zum engsten Punkt (Periapsis) am Mutterkörper."
+      },
       "lpe": {
         "code": "LPE",
         "label": "Länge des Perihels",
@@ -2412,11 +2620,19 @@
         "unit": "°",
         "childExplanation": "Der Winkelpunkt, an dem der Himmelskörper auf seiner Bahn von unten nach oben durch die Hauptebene fliegt."
       },
+      "aop": {
+        "code": "AOP",
+        "label": "Argument der Periapsis",
+        "formattedValue": "286.5°",
+        "numericValue": 286.5,
+        "unit": "°",
+        "childExplanation": "Der Winkel vom aufsteigenden Bahnknoten (LAN) entlang der Bahn bis zum engsten Punkt (Periapsis) am Mutterkörper."
+      },
       "lpe": {
         "code": "LPE",
         "label": "Länge des Perihels",
-        "formattedValue": "336.04°",
-        "numericValue": 336.04,
+        "formattedValue": "336.06°",
+        "numericValue": 336.06,
         "unit": "°",
         "childExplanation": "Zeigt die Richtung, in der der Körper der Sonne auf seiner Bahn am nächsten kommt."
       },
@@ -2500,11 +2716,19 @@
         "unit": "°",
         "childExplanation": "Der Winkelpunkt, an dem der Himmelskörper auf seiner Bahn von unten nach oben durch die Hauptebene fliegt."
       },
+      "aop": {
+        "code": "AOP",
+        "label": "Argument der Periapsis",
+        "formattedValue": "286.5°",
+        "numericValue": 286.5,
+        "unit": "°",
+        "childExplanation": "Der Winkel vom aufsteigenden Bahnknoten (LAN) entlang der Bahn bis zum engsten Punkt (Periapsis) am Mutterkörper."
+      },
       "lpe": {
         "code": "LPE",
         "label": "Länge des Perihels",
-        "formattedValue": "336.04°",
-        "numericValue": 336.04,
+        "formattedValue": "336.06°",
+        "numericValue": 336.06,
         "unit": "°",
         "childExplanation": "Zeigt die Richtung, in der der Körper der Sonne auf seiner Bahn am nächsten kommt."
       },
@@ -2588,11 +2812,19 @@
         "unit": "°",
         "childExplanation": "Der Winkelpunkt, an dem der Himmelskörper auf seiner Bahn von unten nach oben durch die Hauptebene fliegt."
       },
+      "aop": {
+        "code": "AOP",
+        "label": "Argument der Periapsis",
+        "formattedValue": "286.5°",
+        "numericValue": 286.5,
+        "unit": "°",
+        "childExplanation": "Der Winkel vom aufsteigenden Bahnknoten (LAN) entlang der Bahn bis zum engsten Punkt (Periapsis) am Mutterkörper."
+      },
       "lpe": {
         "code": "LPE",
         "label": "Länge des Perihels",
-        "formattedValue": "336.04°",
-        "numericValue": 336.04,
+        "formattedValue": "336.06°",
+        "numericValue": 336.06,
         "unit": "°",
         "childExplanation": "Zeigt die Richtung, in der der Körper der Sonne auf seiner Bahn am nächsten kommt."
       },
@@ -2676,11 +2908,19 @@
         "unit": "°",
         "childExplanation": "Der Winkelpunkt, an dem der Himmelskörper auf seiner Bahn von unten nach oben durch die Hauptebene fliegt."
       },
+      "aop": {
+        "code": "AOP",
+        "label": "Argument der Periapsis",
+        "formattedValue": "286.5°",
+        "numericValue": 286.5,
+        "unit": "°",
+        "childExplanation": "Der Winkel vom aufsteigenden Bahnknoten (LAN) entlang der Bahn bis zum engsten Punkt (Periapsis) am Mutterkörper."
+      },
       "lpe": {
         "code": "LPE",
         "label": "Länge des Perihels",
-        "formattedValue": "336.04°",
-        "numericValue": 336.04,
+        "formattedValue": "336.06°",
+        "numericValue": 336.06,
         "unit": "°",
         "childExplanation": "Zeigt die Richtung, in der der Körper der Sonne auf seiner Bahn am nächsten kommt."
       },
@@ -2764,11 +3004,19 @@
         "unit": "°",
         "childExplanation": "Der Winkelpunkt, an dem der Himmelskörper auf seiner Bahn von unten nach oben durch die Hauptebene fliegt."
       },
+      "aop": {
+        "code": "AOP",
+        "label": "Argument der Periapsis",
+        "formattedValue": "286.5°",
+        "numericValue": 286.5,
+        "unit": "°",
+        "childExplanation": "Der Winkel vom aufsteigenden Bahnknoten (LAN) entlang der Bahn bis zum engsten Punkt (Periapsis) am Mutterkörper."
+      },
       "lpe": {
         "code": "LPE",
         "label": "Länge des Perihels",
-        "formattedValue": "336.04°",
-        "numericValue": 336.04,
+        "formattedValue": "336.06°",
+        "numericValue": 336.06,
         "unit": "°",
         "childExplanation": "Zeigt die Richtung, in der der Körper der Sonne auf seiner Bahn am nächsten kommt."
       },
@@ -2853,6 +3101,14 @@
         "numericValue": 80.3,
         "unit": "°",
         "childExplanation": "Der Winkelpunkt, an dem der Himmelskörper auf seiner Bahn von unten nach oben durch die Hauptebene fliegt."
+      },
+      "aop": {
+        "code": "AOP",
+        "label": "Argument der Periapsis",
+        "formattedValue": "72.5°",
+        "numericValue": 72.5,
+        "unit": "°",
+        "childExplanation": "Der Winkel vom aufsteigenden Bahnknoten (LAN) entlang der Bahn bis zum sonnennächsten Punkt (Perihel / Periapsis)."
       },
       "lpe": {
         "code": "LPE",
@@ -2944,11 +3200,19 @@
         "unit": "°",
         "childExplanation": "Der Winkelpunkt, an dem der Himmelskörper auf seiner Bahn von unten nach oben durch die Hauptebene fliegt."
       },
+      "aop": {
+        "code": "AOP",
+        "label": "Argument der Periapsis",
+        "formattedValue": "73.6°",
+        "numericValue": 73.6,
+        "unit": "°",
+        "childExplanation": "Der Winkel vom aufsteigenden Bahnknoten (LAN) entlang der Bahn bis zum sonnennächsten Punkt (Perihel / Periapsis)."
+      },
       "lpe": {
         "code": "LPE",
         "label": "Länge des Perihels",
-        "formattedValue": "153.9°",
-        "numericValue": 153.9,
+        "formattedValue": "153.93°",
+        "numericValue": 153.93,
         "unit": "°",
         "childExplanation": "Zeigt die Richtung, in der der Körper der Sonne auf seiner Bahn am nächsten kommt."
       },
@@ -3025,16 +3289,24 @@
       "lan": {
         "code": "LAN",
         "label": "Aufsteigender Knoten",
-        "formattedValue": "80.3°",
-        "numericValue": 80.3,
+        "formattedValue": "80.33°",
+        "numericValue": 80.33,
         "unit": "°",
         "childExplanation": "Der Winkelpunkt, an dem der Himmelskörper auf seiner Bahn von unten nach oben durch die Hauptebene fliegt."
+      },
+      "aop": {
+        "code": "AOP",
+        "label": "Argument der Periapsis",
+        "formattedValue": "73.6°",
+        "numericValue": 73.6,
+        "unit": "°",
+        "childExplanation": "Der Winkel vom aufsteigenden Bahnknoten (LAN) entlang der Bahn bis zum engsten Punkt (Periapsis) am Mutterkörper."
       },
       "lpe": {
         "code": "LPE",
         "label": "Länge des Perihels",
-        "formattedValue": "153.9°",
-        "numericValue": 153.9,
+        "formattedValue": "153.93°",
+        "numericValue": 153.93,
         "unit": "°",
         "childExplanation": "Zeigt die Richtung, in der der Körper der Sonne auf seiner Bahn am nächsten kommt."
       },
@@ -3131,11 +3403,19 @@
         "unit": "°",
         "childExplanation": "Der Winkelpunkt, an dem der Himmelskörper auf seiner Bahn von unten nach oben durch die Hauptebene fliegt."
       },
+      "aop": {
+        "code": "AOP",
+        "label": "Argument der Periapsis",
+        "formattedValue": "273.87°",
+        "numericValue": 273.87,
+        "unit": "°",
+        "childExplanation": "Der Winkel vom aufsteigenden Bahnknoten (LAN) entlang der Bahn bis zum sonnennächsten Punkt (Perihel / Periapsis)."
+      },
       "lpe": {
         "code": "LPE",
         "label": "Länge des Perihels",
-        "formattedValue": "14.75°",
-        "numericValue": 14.75,
+        "formattedValue": "14.33°",
+        "numericValue": 14.33,
         "unit": "°",
         "childExplanation": "Zeigt die Richtung, in der der Körper der Sonne auf seiner Bahn am nächsten kommt."
       },
@@ -3218,6 +3498,14 @@
         "numericValue": 43.98,
         "unit": "°",
         "childExplanation": "Der Winkelpunkt, an dem der Himmelskörper auf seiner Bahn von unten nach oben durch die Hauptebene fliegt."
+      },
+      "aop": {
+        "code": "AOP",
+        "label": "Argument der Periapsis",
+        "formattedValue": "40.15°",
+        "numericValue": 40.15,
+        "unit": "°",
+        "childExplanation": "Der Winkel vom aufsteigenden Bahnknoten (LAN) entlang der Bahn bis zum engsten Punkt (Periapsis) am Mutterkörper."
       },
       "lpe": {
         "code": "LPE",
@@ -3307,6 +3595,14 @@
         "unit": "°",
         "childExplanation": "Der Winkelpunkt, an dem der Himmelskörper auf seiner Bahn von unten nach oben durch die Hauptebene fliegt."
       },
+      "aop": {
+        "code": "AOP",
+        "label": "Argument der Periapsis",
+        "formattedValue": "229.8°",
+        "numericValue": 229.8,
+        "unit": "°",
+        "childExplanation": "Der Winkel vom aufsteigenden Bahnknoten (LAN) entlang der Bahn bis zum engsten Punkt (Periapsis) am Mutterkörper."
+      },
       "lpe": {
         "code": "LPE",
         "label": "Länge des Perihels",
@@ -3394,6 +3690,14 @@
         "numericValue": 63.5,
         "unit": "°",
         "childExplanation": "Der Winkelpunkt, an dem der Himmelskörper auf seiner Bahn von unten nach oben durch die Hauptebene fliegt."
+      },
+      "aop": {
+        "code": "AOP",
+        "label": "Argument der Periapsis",
+        "formattedValue": "128.9°",
+        "numericValue": 128.9,
+        "unit": "°",
+        "childExplanation": "Der Winkel vom aufsteigenden Bahnknoten (LAN) entlang der Bahn bis zum engsten Punkt (Periapsis) am Mutterkörper."
       },
       "lpe": {
         "code": "LPE",
@@ -3483,6 +3787,14 @@
         "unit": "°",
         "childExplanation": "Der Winkelpunkt, an dem der Himmelskörper auf seiner Bahn von unten nach oben durch die Hauptebene fliegt."
       },
+      "aop": {
+        "code": "AOP",
+        "label": "Argument der Periapsis",
+        "formattedValue": "113.8°",
+        "numericValue": 113.8,
+        "unit": "°",
+        "childExplanation": "Der Winkel vom aufsteigenden Bahnknoten (LAN) entlang der Bahn bis zum engsten Punkt (Periapsis) am Mutterkörper."
+      },
       "lpe": {
         "code": "LPE",
         "label": "Länge des Perihels",
@@ -3570,6 +3882,14 @@
         "unit": "°",
         "childExplanation": "Der Winkelpunkt, an dem der Himmelskörper auf seiner Bahn von unten nach oben durch die Hauptebene fliegt."
       },
+      "aop": {
+        "code": "AOP",
+        "label": "Argument der Periapsis",
+        "formattedValue": "180°",
+        "numericValue": 180,
+        "unit": "°",
+        "childExplanation": "Der Winkel vom aufsteigenden Bahnknoten (LAN) entlang der Bahn bis zum engsten Punkt (Periapsis) am Mutterkörper."
+      },
       "lpe": {
         "code": "LPE",
         "label": "Länge des Perihels",
@@ -3652,16 +3972,24 @@
       "lan": {
         "code": "LAN",
         "label": "Aufsteigender Knoten",
-        "formattedValue": "100.4°",
-        "numericValue": 100.4,
+        "formattedValue": "100.46°",
+        "numericValue": 100.46,
         "unit": "°",
         "childExplanation": "Der Winkelpunkt, an dem der Himmelskörper auf seiner Bahn von unten nach oben durch die Hauptebene fliegt."
+      },
+      "aop": {
+        "code": "AOP",
+        "label": "Argument der Periapsis",
+        "formattedValue": "273.87°",
+        "numericValue": 273.87,
+        "unit": "°",
+        "childExplanation": "Der Winkel vom aufsteigenden Bahnknoten (LAN) entlang der Bahn bis zum engsten Punkt (Periapsis) am Mutterkörper."
       },
       "lpe": {
         "code": "LPE",
         "label": "Länge des Perihels",
-        "formattedValue": "14.7°",
-        "numericValue": 14.7,
+        "formattedValue": "14.33°",
+        "numericValue": 14.33,
         "unit": "°",
         "childExplanation": "Zeigt die Richtung, in der der Körper der Sonne auf seiner Bahn am nächsten kommt."
       },
@@ -3755,11 +4083,19 @@
         "unit": "°",
         "childExplanation": "Der Winkelpunkt, an dem der Himmelskörper auf seiner Bahn von unten nach oben durch die Hauptebene fliegt."
       },
+      "aop": {
+        "code": "AOP",
+        "label": "Argument der Periapsis",
+        "formattedValue": "339.39°",
+        "numericValue": 339.39,
+        "unit": "°",
+        "childExplanation": "Der Winkel vom aufsteigenden Bahnknoten (LAN) entlang der Bahn bis zum sonnennächsten Punkt (Perihel / Periapsis)."
+      },
       "lpe": {
         "code": "LPE",
         "label": "Länge des Perihels",
-        "formattedValue": "92.43°",
-        "numericValue": 92.43,
+        "formattedValue": "93.05°",
+        "numericValue": 93.05,
         "unit": "°",
         "childExplanation": "Zeigt die Richtung, in der der Körper der Sonne auf seiner Bahn am nächsten kommt."
       },
@@ -3842,6 +4178,14 @@
         "numericValue": 28.06,
         "unit": "°",
         "childExplanation": "Der Winkelpunkt, an dem der Himmelskörper auf seiner Bahn von unten nach oben durch die Hauptebene fliegt."
+      },
+      "aop": {
+        "code": "AOP",
+        "label": "Argument der Periapsis",
+        "formattedValue": "152.44°",
+        "numericValue": 152.44,
+        "unit": "°",
+        "childExplanation": "Der Winkel vom aufsteigenden Bahnknoten (LAN) entlang der Bahn bis zum engsten Punkt (Periapsis) am Mutterkörper."
       },
       "lpe": {
         "code": "LPE",
@@ -3931,6 +4275,14 @@
         "unit": "°",
         "childExplanation": "Der Winkelpunkt, an dem der Himmelskörper auf seiner Bahn von unten nach oben durch die Hauptebene fliegt."
       },
+      "aop": {
+        "code": "AOP",
+        "label": "Argument der Periapsis",
+        "formattedValue": "286.2°",
+        "numericValue": 286.2,
+        "unit": "°",
+        "childExplanation": "Der Winkel vom aufsteigenden Bahnknoten (LAN) entlang der Bahn bis zum engsten Punkt (Periapsis) am Mutterkörper."
+      },
       "lpe": {
         "code": "LPE",
         "label": "Länge des Perihels",
@@ -4013,16 +4365,24 @@
       "lan": {
         "code": "LAN",
         "label": "Aufsteigender Knoten",
-        "formattedValue": "113.6°",
-        "numericValue": 113.6,
+        "formattedValue": "113.66°",
+        "numericValue": 113.66,
         "unit": "°",
         "childExplanation": "Der Winkelpunkt, an dem der Himmelskörper auf seiner Bahn von unten nach oben durch die Hauptebene fliegt."
+      },
+      "aop": {
+        "code": "AOP",
+        "label": "Argument der Periapsis",
+        "formattedValue": "339.39°",
+        "numericValue": 339.39,
+        "unit": "°",
+        "childExplanation": "Der Winkel vom aufsteigenden Bahnknoten (LAN) entlang der Bahn bis zum engsten Punkt (Periapsis) am Mutterkörper."
       },
       "lpe": {
         "code": "LPE",
         "label": "Länge des Perihels",
-        "formattedValue": "92.4°",
-        "numericValue": 92.4,
+        "formattedValue": "93.05°",
+        "numericValue": 93.05,
         "unit": "°",
         "childExplanation": "Zeigt die Richtung, in der der Körper der Sonne auf seiner Bahn am nächsten kommt."
       },
@@ -4115,11 +4475,19 @@
         "unit": "°",
         "childExplanation": "Der Winkelpunkt, an dem der Himmelskörper auf seiner Bahn von unten nach oben durch die Hauptebene fliegt."
       },
+      "aop": {
+        "code": "AOP",
+        "label": "Argument der Periapsis",
+        "formattedValue": "96.99°",
+        "numericValue": 96.99,
+        "unit": "°",
+        "childExplanation": "Der Winkel vom aufsteigenden Bahnknoten (LAN) entlang der Bahn bis zum sonnennächsten Punkt (Perihel / Periapsis)."
+      },
       "lpe": {
         "code": "LPE",
         "label": "Länge des Perihels",
-        "formattedValue": "170.96°",
-        "numericValue": 170.96,
+        "formattedValue": "171°",
+        "numericValue": 171,
         "unit": "°",
         "childExplanation": "Zeigt die Richtung, in der der Körper der Sonne auf seiner Bahn am nächsten kommt."
       },
@@ -4202,6 +4570,14 @@
         "numericValue": 99.8,
         "unit": "°",
         "childExplanation": "Der Winkelpunkt, an dem der Himmelskörper auf seiner Bahn von unten nach oben durch die Hauptebene fliegt."
+      },
+      "aop": {
+        "code": "AOP",
+        "label": "Argument der Periapsis",
+        "formattedValue": "184.6°",
+        "numericValue": 184.6,
+        "unit": "°",
+        "childExplanation": "Der Winkel vom aufsteigenden Bahnknoten (LAN) entlang der Bahn bis zum engsten Punkt (Periapsis) am Mutterkörper."
       },
       "lpe": {
         "code": "LPE",
@@ -4289,6 +4665,14 @@
         "numericValue": 104.4,
         "unit": "°",
         "childExplanation": "Der Winkelpunkt, an dem der Himmelskörper auf seiner Bahn von unten nach oben durch die Hauptebene fliegt."
+      },
+      "aop": {
+        "code": "AOP",
+        "label": "Argument der Periapsis",
+        "formattedValue": "175.3°",
+        "numericValue": 175.3,
+        "unit": "°",
+        "childExplanation": "Der Winkel vom aufsteigenden Bahnknoten (LAN) entlang der Bahn bis zum engsten Punkt (Periapsis) am Mutterkörper."
       },
       "lpe": {
         "code": "LPE",
@@ -4386,11 +4770,19 @@
         "unit": "°",
         "childExplanation": "Der Winkelpunkt, an dem der Himmelskörper auf seiner Bahn von unten nach oben durch die Hauptebene fliegt."
       },
+      "aop": {
+        "code": "AOP",
+        "label": "Argument der Periapsis",
+        "formattedValue": "273.19°",
+        "numericValue": 273.19,
+        "unit": "°",
+        "childExplanation": "Der Winkel vom aufsteigenden Bahnknoten (LAN) entlang der Bahn bis zum sonnennächsten Punkt (Perihel / Periapsis)."
+      },
       "lpe": {
         "code": "LPE",
         "label": "Länge des Perihels",
-        "formattedValue": "44.96°",
-        "numericValue": 44.96,
+        "formattedValue": "44.97°",
+        "numericValue": 44.97,
         "unit": "°",
         "childExplanation": "Zeigt die Richtung, in der der Körper der Sonne auf seiner Bahn am nächsten kommt."
       },
@@ -4473,6 +4865,14 @@
         "numericValue": 177.7,
         "unit": "°",
         "childExplanation": "Der Winkelpunkt, an dem der Himmelskörper auf seiner Bahn von unten nach oben durch die Hauptebene fliegt."
+      },
+      "aop": {
+        "code": "AOP",
+        "label": "Argument der Periapsis",
+        "formattedValue": "244.6°",
+        "numericValue": 244.6,
+        "unit": "°",
+        "childExplanation": "Der Winkel vom aufsteigenden Bahnknoten (LAN) entlang der Bahn bis zum engsten Punkt (Periapsis) am Mutterkörper."
       },
       "lpe": {
         "code": "LPE",
@@ -4562,6 +4962,14 @@
         "unit": "°",
         "childExplanation": "Der Winkelpunkt, an dem der Himmelskörper auf seiner Bahn von unten nach oben durch die Hauptebene fliegt."
       },
+      "aop": {
+        "code": "AOP",
+        "label": "Argument der Periapsis",
+        "formattedValue": "77.4°",
+        "numericValue": 77.4,
+        "unit": "°",
+        "childExplanation": "Der Winkel vom aufsteigenden Bahnknoten (LAN) entlang der Bahn bis zum sonnennächsten Punkt (Perihel / Periapsis)."
+      },
       "lpe": {
         "code": "LPE",
         "label": "Länge des Perihels",
@@ -4649,6 +5057,14 @@
         "numericValue": 131,
         "unit": "°",
         "childExplanation": "Der Winkelpunkt, an dem der Himmelskörper auf seiner Bahn von unten nach oben durch die Hauptebene fliegt."
+      },
+      "aop": {
+        "code": "AOP",
+        "label": "Argument der Periapsis",
+        "formattedValue": "158.4°",
+        "numericValue": 158.4,
+        "unit": "°",
+        "childExplanation": "Der Winkel vom aufsteigenden Bahnknoten (LAN) entlang der Bahn bis zum sonnennächsten Punkt (Perihel / Periapsis)."
       },
       "lpe": {
         "code": "LPE",
@@ -4743,11 +5159,19 @@
         "unit": "°",
         "childExplanation": "Der Winkelpunkt, an dem der Himmelskörper auf seiner Bahn von unten nach oben durch die Hauptebene fliegt."
       },
+      "aop": {
+        "code": "AOP",
+        "label": "Argument der Periapsis",
+        "formattedValue": "113.76°",
+        "numericValue": 113.76,
+        "unit": "°",
+        "childExplanation": "Der Winkel vom aufsteigenden Bahnknoten (LAN) entlang der Bahn bis zum sonnennächsten Punkt (Perihel / Periapsis)."
+      },
       "lpe": {
         "code": "LPE",
         "label": "Länge des Perihels",
-        "formattedValue": "224.07°",
-        "numericValue": 224.07,
+        "formattedValue": "224.06°",
+        "numericValue": 224.06,
         "unit": "°",
         "childExplanation": "Zeigt die Richtung, in der der Körper der Sonne auf seiner Bahn am nächsten kommt."
       },
@@ -4830,6 +5254,14 @@
         "numericValue": 223,
         "unit": "°",
         "childExplanation": "Der Winkelpunkt, an dem der Himmelskörper auf seiner Bahn von unten nach oben durch die Hauptebene fliegt."
+      },
+      "aop": {
+        "code": "AOP",
+        "label": "Argument der Periapsis",
+        "formattedValue": "137°",
+        "numericValue": 137,
+        "unit": "°",
+        "childExplanation": "Der Winkel vom aufsteigenden Bahnknoten (LAN) entlang der Bahn bis zum engsten Punkt (Periapsis) am Mutterkörper."
       },
       "lpe": {
         "code": "LPE",
@@ -4918,6 +5350,14 @@
         "unit": "°",
         "childExplanation": "Der Winkelpunkt, an dem der Himmelskörper auf seiner Bahn von unten nach oben durch die Hauptebene fliegt."
       },
+      "aop": {
+        "code": "AOP",
+        "label": "Argument der Periapsis",
+        "formattedValue": "267°",
+        "numericValue": 267,
+        "unit": "°",
+        "childExplanation": "Der Winkel vom aufsteigenden Bahnknoten (LAN) entlang der Bahn bis zum engsten Punkt (Periapsis) am Mutterkörper."
+      },
       "lpe": {
         "code": "LPE",
         "label": "Länge des Perihels",
@@ -5004,6 +5444,14 @@
         "numericValue": 223,
         "unit": "°",
         "childExplanation": "Der Winkelpunkt, an dem der Himmelskörper auf seiner Bahn von unten nach oben durch die Hauptebene fliegt."
+      },
+      "aop": {
+        "code": "AOP",
+        "label": "Argument der Periapsis",
+        "formattedValue": "327°",
+        "numericValue": 327,
+        "unit": "°",
+        "childExplanation": "Der Winkel vom aufsteigenden Bahnknoten (LAN) entlang der Bahn bis zum engsten Punkt (Periapsis) am Mutterkörper."
       },
       "lpe": {
         "code": "LPE",
@@ -5092,11 +5540,19 @@
         "unit": "°",
         "childExplanation": "Der Winkelpunkt, an dem der Himmelskörper auf seiner Bahn von unten nach oben durch die Hauptebene fliegt."
       },
+      "aop": {
+        "code": "AOP",
+        "label": "Argument der Periapsis",
+        "formattedValue": "113.76°",
+        "numericValue": 113.76,
+        "unit": "°",
+        "childExplanation": "Der Winkel vom aufsteigenden Bahnknoten (LAN) entlang der Bahn bis zum sonnennächsten Punkt (Perihel / Periapsis)."
+      },
       "lpe": {
         "code": "LPE",
         "label": "Länge des Perihels",
-        "formattedValue": "224.0°",
-        "numericValue": 224,
+        "formattedValue": "224.06°",
+        "numericValue": 224.06,
         "unit": "°",
         "childExplanation": "Zeigt die Richtung, in der der Körper der Sonne auf seiner Bahn am nächsten kommt."
       },
@@ -5183,11 +5639,19 @@
         "unit": "°",
         "childExplanation": "Der Winkelpunkt, an dem der Himmelskörper auf seiner Bahn von unten nach oben durch die Hauptebene fliegt."
       },
+      "aop": {
+        "code": "AOP",
+        "label": "Argument der Periapsis",
+        "formattedValue": "240.2°",
+        "numericValue": 240.2,
+        "unit": "°",
+        "childExplanation": "Der Winkel vom aufsteigenden Bahnknoten (LAN) entlang der Bahn bis zum sonnennächsten Punkt (Perihel / Periapsis)."
+      },
       "lpe": {
         "code": "LPE",
         "label": "Länge des Perihels",
-        "formattedValue": "240.2°",
-        "numericValue": 240.2,
+        "formattedValue": "2°",
+        "numericValue": 2,
         "unit": "°",
         "childExplanation": "Zeigt die Richtung, in der der Körper der Sonne auf seiner Bahn am nächsten kommt."
       },
@@ -5268,6 +5732,14 @@
         "numericValue": 206.8,
         "unit": "°",
         "childExplanation": "Der Winkelpunkt, an dem der Himmelskörper auf seiner Bahn von unten nach oben durch die Hauptebene fliegt."
+      },
+      "aop": {
+        "code": "AOP",
+        "label": "Argument der Periapsis",
+        "formattedValue": "52.8°",
+        "numericValue": 52.8,
+        "unit": "°",
+        "childExplanation": "Der Winkel vom aufsteigenden Bahnknoten (LAN) entlang der Bahn bis zum engsten Punkt (Periapsis) am Mutterkörper."
       },
       "lpe": {
         "code": "LPE",
@@ -5354,6 +5826,14 @@
         "numericValue": 205,
         "unit": "°",
         "childExplanation": "Der Winkelpunkt, an dem der Himmelskörper auf seiner Bahn von unten nach oben durch die Hauptebene fliegt."
+      },
+      "aop": {
+        "code": "AOP",
+        "label": "Argument der Periapsis",
+        "formattedValue": "27°",
+        "numericValue": 27,
+        "unit": "°",
+        "childExplanation": "Der Winkel vom aufsteigenden Bahnknoten (LAN) entlang der Bahn bis zum engsten Punkt (Periapsis) am Mutterkörper."
       },
       "lpe": {
         "code": "LPE",
@@ -5444,11 +5924,19 @@
         "unit": "°",
         "childExplanation": "Der Winkelpunkt, an dem der Himmelskörper auf seiner Bahn von unten nach oben durch die Hauptebene fliegt."
       },
+      "aop": {
+        "code": "AOP",
+        "label": "Argument der Periapsis",
+        "formattedValue": "295.1°",
+        "numericValue": 295.1,
+        "unit": "°",
+        "childExplanation": "Der Winkel vom aufsteigenden Bahnknoten (LAN) entlang der Bahn bis zum sonnennächsten Punkt (Perihel / Periapsis)."
+      },
       "lpe": {
         "code": "LPE",
         "label": "Länge des Perihels",
-        "formattedValue": "295.1°",
-        "numericValue": 295.1,
+        "formattedValue": "14.7°",
+        "numericValue": 14.7,
         "unit": "°",
         "childExplanation": "Zeigt die Richtung, in der der Körper der Sonne auf seiner Bahn am nächsten kommt."
       },
@@ -5529,6 +6017,14 @@
         "numericValue": 79.6,
         "unit": "°",
         "childExplanation": "Der Winkelpunkt, an dem der Himmelskörper auf seiner Bahn von unten nach oben durch die Hauptebene fliegt."
+      },
+      "aop": {
+        "code": "AOP",
+        "label": "Argument der Periapsis",
+        "formattedValue": "215.4°",
+        "numericValue": 215.4,
+        "unit": "°",
+        "childExplanation": "Der Winkel vom aufsteigenden Bahnknoten (LAN) entlang der Bahn bis zum engsten Punkt (Periapsis) am Mutterkörper."
       },
       "lpe": {
         "code": "LPE",
@@ -5621,11 +6117,19 @@
         "unit": "°",
         "childExplanation": "Der Winkelpunkt, an dem der Himmelskörper auf seiner Bahn von unten nach oben durch die Hauptebene fliegt."
       },
+      "aop": {
+        "code": "AOP",
+        "label": "Argument der Periapsis",
+        "formattedValue": "151.6°",
+        "numericValue": 151.6,
+        "unit": "°",
+        "childExplanation": "Der Winkel vom aufsteigenden Bahnknoten (LAN) entlang der Bahn bis zum sonnennächsten Punkt (Perihel / Periapsis)."
+      },
       "lpe": {
         "code": "LPE",
         "label": "Länge des Perihels",
-        "formattedValue": "151.6°",
-        "numericValue": 151.6,
+        "formattedValue": "187.47°",
+        "numericValue": 187.47,
         "unit": "°",
         "childExplanation": "Zeigt die Richtung, in der der Körper der Sonne auf seiner Bahn am nächsten kommt."
       },
@@ -5708,6 +6212,14 @@
         "unit": "°",
         "childExplanation": "Der Winkelpunkt, an dem der Himmelskörper auf seiner Bahn von unten nach oben durch die Hauptebene fliegt."
       },
+      "aop": {
+        "code": "AOP",
+        "label": "Argument der Periapsis",
+        "formattedValue": "53.8°",
+        "numericValue": 53.8,
+        "unit": "°",
+        "childExplanation": "Der Winkel vom aufsteigenden Bahnknoten (LAN) entlang der Bahn bis zum engsten Punkt (Periapsis) am Mutterkörper."
+      },
       "lpe": {
         "code": "LPE",
         "label": "Länge des Perihels",
@@ -5789,16 +6301,24 @@
       "lan": {
         "code": "LAN",
         "label": "Aufsteigender Knoten",
-        "formattedValue": "-11.2°",
-        "numericValue": -11.2,
+        "formattedValue": "-11.26°",
+        "numericValue": -11.26,
         "unit": "°",
         "childExplanation": "Der Winkelpunkt, an dem der Himmelskörper auf seiner Bahn von unten nach oben durch die Hauptebene fliegt."
+      },
+      "aop": {
+        "code": "AOP",
+        "label": "Argument der Periapsis",
+        "formattedValue": "114.21°",
+        "numericValue": 114.21,
+        "unit": "°",
+        "childExplanation": "Der Winkel vom aufsteigenden Bahnknoten (LAN) entlang der Bahn bis zum sonnennächsten Punkt (Perihel / Periapsis)."
       },
       "lpe": {
         "code": "LPE",
         "label": "Länge des Perihels",
-        "formattedValue": "102.9°",
-        "numericValue": 102.9,
+        "formattedValue": "102.95°",
+        "numericValue": 102.95,
         "unit": "°",
         "childExplanation": "Zeigt die Richtung, in der der Körper der Sonne auf seiner Bahn am nächsten kommt."
       },
@@ -5875,16 +6395,24 @@
       "lan": {
         "code": "LAN",
         "label": "Aufsteigender Knoten",
-        "formattedValue": "-11.2°",
-        "numericValue": -11.2,
+        "formattedValue": "-11.26°",
+        "numericValue": -11.26,
         "unit": "°",
         "childExplanation": "Der Winkelpunkt, an dem der Himmelskörper auf seiner Bahn von unten nach oben durch die Hauptebene fliegt."
+      },
+      "aop": {
+        "code": "AOP",
+        "label": "Argument der Periapsis",
+        "formattedValue": "114.21°",
+        "numericValue": 114.21,
+        "unit": "°",
+        "childExplanation": "Der Winkel vom aufsteigenden Bahnknoten (LAN) entlang der Bahn bis zum sonnennächsten Punkt (Perihel / Periapsis)."
       },
       "lpe": {
         "code": "LPE",
         "label": "Länge des Perihels",
-        "formattedValue": "102.9°",
-        "numericValue": 102.9,
+        "formattedValue": "102.95°",
+        "numericValue": 102.95,
         "unit": "°",
         "childExplanation": "Zeigt die Richtung, in der der Körper der Sonne auf seiner Bahn am nächsten kommt."
       },
@@ -5968,11 +6496,19 @@
         "unit": "°",
         "childExplanation": "Der Winkelpunkt, an dem der Himmelskörper auf seiner Bahn von unten nach oben durch die Hauptebene fliegt."
       },
+      "aop": {
+        "code": "AOP",
+        "label": "Argument der Periapsis",
+        "formattedValue": "111.33°",
+        "numericValue": 111.33,
+        "unit": "°",
+        "childExplanation": "Der Winkel vom aufsteigenden Bahnknoten (LAN) entlang der Bahn bis zum sonnennächsten Punkt (Perihel / Periapsis)."
+      },
       "lpe": {
         "code": "LPE",
         "label": "Länge des Perihels",
-        "formattedValue": "169.75°",
-        "numericValue": 169.75,
+        "formattedValue": "307.09°",
+        "numericValue": 307.09,
         "unit": "°",
         "childExplanation": "Zeigt die Richtung, in der der Körper der Sonne auf seiner Bahn am nächsten kommt."
       },
@@ -6057,11 +6593,19 @@
         "unit": "°",
         "childExplanation": "Der Winkelpunkt, an dem der Himmelskörper auf seiner Bahn von unten nach oben durch die Hauptebene fliegt."
       },
+      "aop": {
+        "code": "AOP",
+        "label": "Argument der Periapsis",
+        "formattedValue": "12.78°",
+        "numericValue": 12.78,
+        "unit": "°",
+        "childExplanation": "Der Winkel vom aufsteigenden Bahnknoten (LAN) entlang der Bahn bis zum sonnennächsten Punkt (Perihel / Periapsis)."
+      },
       "lpe": {
         "code": "LPE",
         "label": "Länge des Perihels",
-        "formattedValue": "62.9°",
-        "numericValue": 62.9,
+        "formattedValue": "62.92°",
+        "numericValue": 62.92,
         "unit": "°",
         "childExplanation": "Zeigt die Richtung, in der der Körper der Sonne auf seiner Bahn am nächsten kommt."
       },
@@ -6145,11 +6689,19 @@
         "unit": "°",
         "childExplanation": "Der Winkelpunkt, an dem der Himmelskörper auf seiner Bahn von unten nach oben durch die Hauptebene fliegt."
       },
+      "aop": {
+        "code": "AOP",
+        "label": "Argument der Periapsis",
+        "formattedValue": "12.78°",
+        "numericValue": 12.78,
+        "unit": "°",
+        "childExplanation": "Der Winkel vom aufsteigenden Bahnknoten (LAN) entlang der Bahn bis zum engsten Punkt (Periapsis) am Mutterkörper."
+      },
       "lpe": {
         "code": "LPE",
         "label": "Länge des Perihels",
-        "formattedValue": "62.9°",
-        "numericValue": 62.9,
+        "formattedValue": "62.92°",
+        "numericValue": 62.92,
         "unit": "°",
         "childExplanation": "Zeigt die Richtung, in der der Körper der Sonne auf seiner Bahn am nächsten kommt."
       },
@@ -6212,8 +6764,8 @@
       "ecc": {
         "code": "ECC",
         "label": "Exzentrizität",
-        "formattedValue": "0.95",
-        "numericValue": 0.95,
+        "formattedValue": "0.9951",
+        "numericValue": 0.9951,
         "childExplanation": "Zeigt, ob die Bahn fast kreisrund (nahe 0) oder leicht elliptisch gedehnt ist."
       },
       "inc": {
@@ -6232,11 +6784,19 @@
         "unit": "°",
         "childExplanation": "Der Winkelpunkt, an dem der Himmelskörper auf seiner Bahn von unten nach oben durch die Hauptebene fliegt."
       },
+      "aop": {
+        "code": "AOP",
+        "label": "Argument der Periapsis",
+        "formattedValue": "130.59°",
+        "numericValue": 130.59,
+        "unit": "°",
+        "childExplanation": "Der Winkel vom aufsteigenden Bahnknoten (LAN) entlang der Bahn bis zum sonnennächsten Punkt (Perihel / Periapsis)."
+      },
       "lpe": {
         "code": "LPE",
         "label": "Länge des Perihels",
-        "formattedValue": "130.59°",
-        "numericValue": 130.59,
+        "formattedValue": "149.3°",
+        "numericValue": 149.3,
         "unit": "°",
         "childExplanation": "Zeigt die Richtung, in der der Körper der Sonne auf seiner Bahn am nächsten kommt."
       },
@@ -6257,6 +6817,102 @@
     },
     "officialUrl": "https://science.nasa.gov/solar-system/comets/c-1995-o1-hale-bopp/",
     "wikipediaUrl": "https://de.wikipedia.org/wiki/C/1995_O1_(Hale-Bopp)"
+  },
+  {
+    "id": "neowise",
+    "name": "Komet NEOWISE (C/2020 F3)",
+    "subtitle": "Der spektakuläre Sommer-Komet von 2020",
+    "category": "comet",
+    "categoryLabel": "Langperiodischer Komet",
+    "parentId": "sun",
+    "childrenIds": [],
+    "wikimediaImageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Comet_Neowise_C-2020_F3.jpg/960px-Comet_Neowise_C-2020_F3.jpg",
+    "imageUrl": "assets/images/comet.svg",
+    "imageCredit": "Raysastrophotograhy (Wikimedia Commons, CC BY-SA 4.0)",
+    "colorHex": "#60A5FA",
+    "accentColorHex": "#E0F2FE",
+    "diameterKm": 5,
+    "distanceFromSunKm": 53556000000,
+    "distanceFromSunAu": 358,
+    "distanceFromEarthKm": 103500000,
+    "orbitalPeriodDays": 2471280,
+    "orbitalPeriodLabel": "ca. 6.766 Jahre (Rückkehr erst im Jahr 8786!)",
+    "inclinationToSolarEquatorDeg": 128.94,
+    "overviewOrbitRadiusSvg": 415,
+    "overviewBodyRadiusSvg": 5.5,
+    "orbitAngleDeg": 24,
+    "shortSummary": "Komet NEOWISE (C/2020 F3) wurde im März 2020 entdeckt und begeisterte im Juli 2020 Millionen Menschen am Sommer-Nachthimmel! Am 3. Juli 2020 flog er näher an der Sonne vorbei als der Merkur und leuchtete mit einem hellen Schweif.",
+    "childFriendlyFacts": [
+      "Entdeckt wurde er am 27. März 2020 vom NASA-Weltraumteleskop NEOWISE, das mit Wärmebildern nach nahen Asteroiden und Kometen sucht.",
+      "Durch die Hitze der Sonne bildeten sich im Sommer 2020 zwei prächtige Schweife: ein weißer Staubschweif und ein bläulicher Gasschweif.",
+      "NEOWISE zieht auf einer riesigen, rückläufig gekippten Bahn (128,94°) weit hinaus ins äußere Sonnensystem und kehrt erst in rund 6.766 Jahren zurück."
+    ],
+    "comparisonHint": "Sein eisiger Kometenkern ist nur etwa 5 Kilometer breit – so klein wie eine Ortschaft – doch sein leuchtender Schweif spannte sich über Millionen Kilometer!",
+    "orbitalElements": {
+      "sma": {
+        "code": "SMA",
+        "label": "Große Halbachse",
+        "formattedValue": "358.0 AE · Perihel 0,295 AE (03.07.2020) · Aphel ~716 AE",
+        "numericValue": 358,
+        "unit": "AE",
+        "childExplanation": "Das ist der durchschnittliche Abstand der Umlaufbahn zum Zentrum."
+      },
+      "ecc": {
+        "code": "ECC",
+        "label": "Exzentrizität",
+        "formattedValue": "0.9992",
+        "numericValue": 0.999176,
+        "childExplanation": "Zeigt, wie extrem langgestreckt diese Kometenbahn ist – fast wie eine schmale Schleife."
+      },
+      "inc": {
+        "code": "INC",
+        "label": "Bahnneigung",
+        "formattedValue": "128.94° (rückläufig / retrograd)",
+        "numericValue": 128.94,
+        "unit": "°",
+        "childExplanation": "Über 90° bedeutet, dass NEOWISE die Sonne genau andersherum umkreist als alle acht Planeten."
+      },
+      "lan": {
+        "code": "LAN",
+        "label": "Aufsteigender Knoten",
+        "formattedValue": "61.01°",
+        "numericValue": 61.01,
+        "unit": "°",
+        "childExplanation": "Der Winkelpunkt, an dem der Komet auf seiner Bahn von unten nach oben durch die Planetenebene fliegt."
+      },
+      "aop": {
+        "code": "AOP",
+        "label": "Argument der Periapsis",
+        "formattedValue": "37.28°",
+        "numericValue": 37.28,
+        "unit": "°",
+        "childExplanation": "Der Winkel vom aufsteigenden Bahnknoten (LAN) entlang der Bahn bis zum sonnennächsten Punkt (Perihel)."
+      },
+      "lpe": {
+        "code": "LPE",
+        "label": "Länge des Perihels",
+        "formattedValue": "23.73°",
+        "numericValue": 23.73,
+        "unit": "°",
+        "childExplanation": "Zeigt die Richtung, in der der Komet der Sonne auf seiner Bahn am nächsten kommt."
+      },
+      "mna": {
+        "code": "MNA",
+        "label": "Mittlere Anomalie",
+        "formattedValue": "358.91°",
+        "numericValue": 358.909,
+        "unit": "°",
+        "childExplanation": "Gibt an, an welcher Stelle seiner Umlaufbahn sich der Komet zum Startzeitpunkt J2000 befindet."
+      },
+      "ref": {
+        "code": "REF",
+        "label": "Referenzsystem",
+        "formattedValue": "J2000 / Ekliptik",
+        "childExplanation": "Das gemeinsame Messsystem und Startdatum (Jahr 2000) der Astronomie."
+      }
+    },
+    "officialUrl": "https://www.nasa.gov/centers-and-facilities/jpl/comet-neowise-sizzles-as-it-slides-by-the-sun-providing-a-treat-for-observers/",
+    "wikipediaUrl": "https://de.wikipedia.org/wiki/C/2020_F3_(NEOWISE)"
   },
   {
     "id": "sputnik-1",
@@ -6318,6 +6974,14 @@
         "numericValue": 0,
         "unit": "°",
         "childExplanation": "Der Winkelpunkt, an dem der Himmelskörper auf seiner Bahn von unten nach oben durch die Hauptebene fliegt."
+      },
+      "aop": {
+        "code": "AOP",
+        "label": "Argument der Periapsis",
+        "formattedValue": "0°",
+        "numericValue": 0,
+        "unit": "°",
+        "childExplanation": "Der Winkel vom aufsteigenden Bahnknoten (LAN) entlang der Bahn bis zum engsten Punkt (Periapsis) am Mutterkörper."
       },
       "lpe": {
         "code": "LPE",
@@ -6406,6 +7070,14 @@
         "unit": "°",
         "childExplanation": "Der Winkelpunkt, an dem der Himmelskörper auf seiner Bahn von unten nach oben durch die Hauptebene fliegt."
       },
+      "aop": {
+        "code": "AOP",
+        "label": "Argument der Periapsis",
+        "formattedValue": "0°",
+        "numericValue": 0,
+        "unit": "°",
+        "childExplanation": "Der Winkel vom aufsteigenden Bahnknoten (LAN) entlang der Bahn bis zum engsten Punkt (Periapsis) am Mutterkörper."
+      },
       "lpe": {
         "code": "LPE",
         "label": "Länge des Perihels",
@@ -6491,6 +7163,14 @@
         "numericValue": 110,
         "unit": "°",
         "childExplanation": "Der Winkelpunkt, an dem der Himmelskörper auf seiner Bahn von unten nach oben durch die Hauptebene fliegt."
+      },
+      "aop": {
+        "code": "AOP",
+        "label": "Argument der Periapsis",
+        "formattedValue": "295°",
+        "numericValue": 295,
+        "unit": "°",
+        "childExplanation": "Der Winkel vom aufsteigenden Bahnknoten (LAN) entlang der Bahn bis zum engsten Punkt (Periapsis) am Mutterkörper."
       },
       "lpe": {
         "code": "LPE",
@@ -6580,11 +7260,19 @@
         "unit": "°",
         "childExplanation": "Der Winkelpunkt, an dem der Himmelskörper auf seiner Bahn von unten nach oben durch die Hauptebene fliegt."
       },
+      "aop": {
+        "code": "AOP",
+        "label": "Argument der Periapsis",
+        "formattedValue": "54.88°",
+        "numericValue": 54.88,
+        "unit": "°",
+        "childExplanation": "Der Winkel vom aufsteigenden Bahnknoten (LAN) entlang der Bahn bis zum engsten Punkt (Periapsis) am Mutterkörper."
+      },
       "lpe": {
         "code": "LPE",
         "label": "Länge des Perihels",
-        "formattedValue": "131.53°",
-        "numericValue": 131.53,
+        "formattedValue": "131.56°",
+        "numericValue": 131.56,
         "unit": "°",
         "childExplanation": "Zeigt die Richtung, in der der Körper der Sonne auf seiner Bahn am nächsten kommt."
       },
@@ -6666,6 +7354,14 @@
         "numericValue": 125.08,
         "unit": "°",
         "childExplanation": "Der Winkelpunkt, an dem der Himmelskörper auf seiner Bahn von unten nach oben durch die Hauptebene fliegt."
+      },
+      "aop": {
+        "code": "AOP",
+        "label": "Argument der Periapsis",
+        "formattedValue": "193.07°",
+        "numericValue": 193.07,
+        "unit": "°",
+        "childExplanation": "Der Winkel vom aufsteigenden Bahnknoten (LAN) entlang der Bahn bis zum engsten Punkt (Periapsis) am Mutterkörper."
       },
       "lpe": {
         "code": "LPE",
@@ -6754,6 +7450,14 @@
         "unit": "°",
         "childExplanation": "Der Winkelpunkt, an dem der Himmelskörper auf seiner Bahn von unten nach oben durch die Hauptebene fliegt."
       },
+      "aop": {
+        "code": "AOP",
+        "label": "Argument der Periapsis",
+        "formattedValue": "193.07°",
+        "numericValue": 193.07,
+        "unit": "°",
+        "childExplanation": "Der Winkel vom aufsteigenden Bahnknoten (LAN) entlang der Bahn bis zum engsten Punkt (Periapsis) am Mutterkörper."
+      },
       "lpe": {
         "code": "LPE",
         "label": "Länge des Perihels",
@@ -6840,6 +7544,14 @@
         "numericValue": 125.08,
         "unit": "°",
         "childExplanation": "Der Winkelpunkt, an dem der Himmelskörper auf seiner Bahn von unten nach oben durch die Hauptebene fliegt."
+      },
+      "aop": {
+        "code": "AOP",
+        "label": "Argument der Periapsis",
+        "formattedValue": "193.07°",
+        "numericValue": 193.07,
+        "unit": "°",
+        "childExplanation": "Der Winkel vom aufsteigenden Bahnknoten (LAN) entlang der Bahn bis zum engsten Punkt (Periapsis) am Mutterkörper."
       },
       "lpe": {
         "code": "LPE",
@@ -6929,6 +7641,14 @@
         "unit": "°",
         "childExplanation": "Der Winkelpunkt, an dem der Himmelskörper auf seiner Bahn von unten nach oben durch die Hauptebene fliegt."
       },
+      "aop": {
+        "code": "AOP",
+        "label": "Argument der Periapsis",
+        "formattedValue": "193.07°",
+        "numericValue": 193.07,
+        "unit": "°",
+        "childExplanation": "Der Winkel vom aufsteigenden Bahnknoten (LAN) entlang der Bahn bis zum engsten Punkt (Periapsis) am Mutterkörper."
+      },
       "lpe": {
         "code": "LPE",
         "label": "Länge des Perihels",
@@ -7017,11 +7737,19 @@
         "unit": "°",
         "childExplanation": "Der Winkelpunkt, an dem der Himmelskörper auf seiner Bahn von unten nach oben durch die Hauptebene fliegt."
       },
+      "aop": {
+        "code": "AOP",
+        "label": "Argument der Periapsis",
+        "formattedValue": "286.5°",
+        "numericValue": 286.5,
+        "unit": "°",
+        "childExplanation": "Der Winkel vom aufsteigenden Bahnknoten (LAN) entlang der Bahn bis zum engsten Punkt (Periapsis) am Mutterkörper."
+      },
       "lpe": {
         "code": "LPE",
         "label": "Länge des Perihels",
-        "formattedValue": "336.04°",
-        "numericValue": 336.04,
+        "formattedValue": "336.06°",
+        "numericValue": 336.06,
         "unit": "°",
         "childExplanation": "Zeigt die Richtung, in der der Körper der Sonne auf seiner Bahn am nächsten kommt."
       },
@@ -7102,6 +7830,14 @@
         "numericValue": 251.6,
         "unit": "°",
         "childExplanation": "Der Winkelpunkt, an dem der Himmelskörper auf seiner Bahn von unten nach oben durch die Hauptebene fliegt."
+      },
+      "aop": {
+        "code": "AOP",
+        "label": "Argument der Periapsis",
+        "formattedValue": "319.8°",
+        "numericValue": 319.8,
+        "unit": "°",
+        "childExplanation": "Der Winkel vom aufsteigenden Bahnknoten (LAN) entlang der Bahn bis zum engsten Punkt (Periapsis) am Mutterkörper."
       },
       "lpe": {
         "code": "LPE",
@@ -7189,6 +7925,14 @@
         "numericValue": 0,
         "unit": "°",
         "childExplanation": "Der Winkelpunkt, an dem der Himmelskörper auf seiner Bahn von unten nach oben durch die Hauptebene fliegt."
+      },
+      "aop": {
+        "code": "AOP",
+        "label": "Argument der Periapsis",
+        "formattedValue": "180°",
+        "numericValue": 180,
+        "unit": "°",
+        "childExplanation": "Der Winkel vom aufsteigenden Bahnknoten (LAN) entlang der Bahn bis zum sonnennächsten Punkt (Perihel / Periapsis)."
       },
       "lpe": {
         "code": "LPE",
@@ -7280,11 +8024,19 @@
         "unit": "°",
         "childExplanation": "Synchronisiert mit der Knotenlinie der Umlaufbahn von Merkur."
       },
+      "aop": {
+        "code": "AOP",
+        "label": "Argument der Periapsis",
+        "formattedValue": "29.12°",
+        "numericValue": 29.12,
+        "unit": "°",
+        "childExplanation": "Der Winkel vom aufsteigenden Bahnknoten (LAN) entlang der Bahn bis zum sonnennächsten Punkt (Perihel / Periapsis)."
+      },
       "lpe": {
         "code": "LPE",
         "label": "Länge des Perihels",
-        "formattedValue": "77.46°",
-        "numericValue": 77.46,
+        "formattedValue": "77.45°",
+        "numericValue": 77.45,
         "unit": "°",
         "childExplanation": "Dreht sich gemeinsam mit der Bahn von Merkur um die Sonne."
       },
@@ -7368,11 +8120,19 @@
         "unit": "°",
         "childExplanation": "Synchronisiert mit der Knotenlinie der Umlaufbahn von Merkur."
       },
+      "aop": {
+        "code": "AOP",
+        "label": "Argument der Periapsis",
+        "formattedValue": "29.12°",
+        "numericValue": 29.12,
+        "unit": "°",
+        "childExplanation": "Der Winkel vom aufsteigenden Bahnknoten (LAN) entlang der Bahn bis zum sonnennächsten Punkt (Perihel / Periapsis)."
+      },
       "lpe": {
         "code": "LPE",
         "label": "Länge des Perihels",
-        "formattedValue": "77.46°",
-        "numericValue": 77.46,
+        "formattedValue": "77.45°",
+        "numericValue": 77.45,
         "unit": "°",
         "childExplanation": "Dreht sich gemeinsam mit der Bahn von Merkur um die Sonne."
       },
@@ -7456,11 +8216,19 @@
         "unit": "°",
         "childExplanation": "Synchronisiert mit der Knotenlinie der Umlaufbahn von Merkur."
       },
+      "aop": {
+        "code": "AOP",
+        "label": "Argument der Periapsis",
+        "formattedValue": "29.12°",
+        "numericValue": 29.12,
+        "unit": "°",
+        "childExplanation": "Der Winkel vom aufsteigenden Bahnknoten (LAN) entlang der Bahn bis zum sonnennächsten Punkt (Perihel / Periapsis)."
+      },
       "lpe": {
         "code": "LPE",
         "label": "Länge des Perihels",
-        "formattedValue": "77.46°",
-        "numericValue": 77.46,
+        "formattedValue": "77.45°",
+        "numericValue": 77.45,
         "unit": "°",
         "childExplanation": "Dreht sich gemeinsam mit der Bahn von Merkur um die Sonne."
       },
@@ -7544,11 +8312,19 @@
         "unit": "°",
         "childExplanation": "Synchronisiert mit der Knotenlinie der Umlaufbahn von Merkur."
       },
+      "aop": {
+        "code": "AOP",
+        "label": "Argument der Periapsis",
+        "formattedValue": "29.12°",
+        "numericValue": 29.12,
+        "unit": "°",
+        "childExplanation": "Der Winkel vom aufsteigenden Bahnknoten (LAN) entlang der Bahn bis zum sonnennächsten Punkt (Perihel / Periapsis)."
+      },
       "lpe": {
         "code": "LPE",
         "label": "Länge des Perihels",
-        "formattedValue": "77.46°",
-        "numericValue": 77.46,
+        "formattedValue": "77.45°",
+        "numericValue": 77.45,
         "unit": "°",
         "childExplanation": "Dreht sich gemeinsam mit der Bahn von Merkur um die Sonne."
       },
@@ -7632,11 +8408,19 @@
         "unit": "°",
         "childExplanation": "Synchronisiert mit der Knotenlinie der Umlaufbahn von Merkur."
       },
+      "aop": {
+        "code": "AOP",
+        "label": "Argument der Periapsis",
+        "formattedValue": "29.12°",
+        "numericValue": 29.12,
+        "unit": "°",
+        "childExplanation": "Der Winkel vom aufsteigenden Bahnknoten (LAN) entlang der Bahn bis zum sonnennächsten Punkt (Perihel / Periapsis)."
+      },
       "lpe": {
         "code": "LPE",
         "label": "Länge des Perihels",
-        "formattedValue": "77.46°",
-        "numericValue": 77.46,
+        "formattedValue": "77.45°",
+        "numericValue": 77.45,
         "unit": "°",
         "childExplanation": "Dreht sich gemeinsam mit der Bahn von Merkur um die Sonne."
       },
@@ -7720,11 +8504,19 @@
         "unit": "°",
         "childExplanation": "Synchronisiert mit der Knotenlinie der Umlaufbahn von Venus."
       },
+      "aop": {
+        "code": "AOP",
+        "label": "Argument der Periapsis",
+        "formattedValue": "54.88°",
+        "numericValue": 54.88,
+        "unit": "°",
+        "childExplanation": "Der Winkel vom aufsteigenden Bahnknoten (LAN) entlang der Bahn bis zum sonnennächsten Punkt (Perihel / Periapsis)."
+      },
       "lpe": {
         "code": "LPE",
         "label": "Länge des Perihels",
-        "formattedValue": "131.53°",
-        "numericValue": 131.53,
+        "formattedValue": "131.56°",
+        "numericValue": 131.56,
         "unit": "°",
         "childExplanation": "Dreht sich gemeinsam mit der Bahn von Venus um die Sonne."
       },
@@ -7808,11 +8600,19 @@
         "unit": "°",
         "childExplanation": "Synchronisiert mit der Knotenlinie der Umlaufbahn von Venus."
       },
+      "aop": {
+        "code": "AOP",
+        "label": "Argument der Periapsis",
+        "formattedValue": "54.88°",
+        "numericValue": 54.88,
+        "unit": "°",
+        "childExplanation": "Der Winkel vom aufsteigenden Bahnknoten (LAN) entlang der Bahn bis zum sonnennächsten Punkt (Perihel / Periapsis)."
+      },
       "lpe": {
         "code": "LPE",
         "label": "Länge des Perihels",
-        "formattedValue": "131.53°",
-        "numericValue": 131.53,
+        "formattedValue": "131.56°",
+        "numericValue": 131.56,
         "unit": "°",
         "childExplanation": "Dreht sich gemeinsam mit der Bahn von Venus um die Sonne."
       },
@@ -7896,11 +8696,19 @@
         "unit": "°",
         "childExplanation": "Synchronisiert mit der Knotenlinie der Umlaufbahn von Venus."
       },
+      "aop": {
+        "code": "AOP",
+        "label": "Argument der Periapsis",
+        "formattedValue": "54.88°",
+        "numericValue": 54.88,
+        "unit": "°",
+        "childExplanation": "Der Winkel vom aufsteigenden Bahnknoten (LAN) entlang der Bahn bis zum sonnennächsten Punkt (Perihel / Periapsis)."
+      },
       "lpe": {
         "code": "LPE",
         "label": "Länge des Perihels",
-        "formattedValue": "131.53°",
-        "numericValue": 131.53,
+        "formattedValue": "131.56°",
+        "numericValue": 131.56,
         "unit": "°",
         "childExplanation": "Dreht sich gemeinsam mit der Bahn von Venus um die Sonne."
       },
@@ -7984,11 +8792,19 @@
         "unit": "°",
         "childExplanation": "Synchronisiert mit der Knotenlinie der Umlaufbahn von Venus."
       },
+      "aop": {
+        "code": "AOP",
+        "label": "Argument der Periapsis",
+        "formattedValue": "54.88°",
+        "numericValue": 54.88,
+        "unit": "°",
+        "childExplanation": "Der Winkel vom aufsteigenden Bahnknoten (LAN) entlang der Bahn bis zum sonnennächsten Punkt (Perihel / Periapsis)."
+      },
       "lpe": {
         "code": "LPE",
         "label": "Länge des Perihels",
-        "formattedValue": "131.53°",
-        "numericValue": 131.53,
+        "formattedValue": "131.56°",
+        "numericValue": 131.56,
         "unit": "°",
         "childExplanation": "Dreht sich gemeinsam mit der Bahn von Venus um die Sonne."
       },
@@ -8072,11 +8888,19 @@
         "unit": "°",
         "childExplanation": "Synchronisiert mit der Knotenlinie der Umlaufbahn von Venus."
       },
+      "aop": {
+        "code": "AOP",
+        "label": "Argument der Periapsis",
+        "formattedValue": "54.88°",
+        "numericValue": 54.88,
+        "unit": "°",
+        "childExplanation": "Der Winkel vom aufsteigenden Bahnknoten (LAN) entlang der Bahn bis zum sonnennächsten Punkt (Perihel / Periapsis)."
+      },
       "lpe": {
         "code": "LPE",
         "label": "Länge des Perihels",
-        "formattedValue": "131.53°",
-        "numericValue": 131.53,
+        "formattedValue": "131.56°",
+        "numericValue": 131.56,
         "unit": "°",
         "childExplanation": "Dreht sich gemeinsam mit der Bahn von Venus um die Sonne."
       },
@@ -8160,11 +8984,19 @@
         "unit": "°",
         "childExplanation": "Synchronisiert mit der Knotenlinie der Umlaufbahn von Mars."
       },
+      "aop": {
+        "code": "AOP",
+        "label": "Argument der Periapsis",
+        "formattedValue": "286.5°",
+        "numericValue": 286.5,
+        "unit": "°",
+        "childExplanation": "Der Winkel vom aufsteigenden Bahnknoten (LAN) entlang der Bahn bis zum sonnennächsten Punkt (Perihel / Periapsis)."
+      },
       "lpe": {
         "code": "LPE",
         "label": "Länge des Perihels",
-        "formattedValue": "336.04°",
-        "numericValue": 336.04,
+        "formattedValue": "336.06°",
+        "numericValue": 336.06,
         "unit": "°",
         "childExplanation": "Dreht sich gemeinsam mit der Bahn von Mars um die Sonne."
       },
@@ -8248,11 +9080,19 @@
         "unit": "°",
         "childExplanation": "Synchronisiert mit der Knotenlinie der Umlaufbahn von Mars."
       },
+      "aop": {
+        "code": "AOP",
+        "label": "Argument der Periapsis",
+        "formattedValue": "286.5°",
+        "numericValue": 286.5,
+        "unit": "°",
+        "childExplanation": "Der Winkel vom aufsteigenden Bahnknoten (LAN) entlang der Bahn bis zum sonnennächsten Punkt (Perihel / Periapsis)."
+      },
       "lpe": {
         "code": "LPE",
         "label": "Länge des Perihels",
-        "formattedValue": "336.04°",
-        "numericValue": 336.04,
+        "formattedValue": "336.06°",
+        "numericValue": 336.06,
         "unit": "°",
         "childExplanation": "Dreht sich gemeinsam mit der Bahn von Mars um die Sonne."
       },
@@ -8336,11 +9176,19 @@
         "unit": "°",
         "childExplanation": "Synchronisiert mit der Knotenlinie der Umlaufbahn von Mars."
       },
+      "aop": {
+        "code": "AOP",
+        "label": "Argument der Periapsis",
+        "formattedValue": "286.5°",
+        "numericValue": 286.5,
+        "unit": "°",
+        "childExplanation": "Der Winkel vom aufsteigenden Bahnknoten (LAN) entlang der Bahn bis zum sonnennächsten Punkt (Perihel / Periapsis)."
+      },
       "lpe": {
         "code": "LPE",
         "label": "Länge des Perihels",
-        "formattedValue": "336.04°",
-        "numericValue": 336.04,
+        "formattedValue": "336.06°",
+        "numericValue": 336.06,
         "unit": "°",
         "childExplanation": "Dreht sich gemeinsam mit der Bahn von Mars um die Sonne."
       },
@@ -8424,11 +9272,19 @@
         "unit": "°",
         "childExplanation": "Synchronisiert mit der Knotenlinie der Umlaufbahn von Mars."
       },
+      "aop": {
+        "code": "AOP",
+        "label": "Argument der Periapsis",
+        "formattedValue": "286.5°",
+        "numericValue": 286.5,
+        "unit": "°",
+        "childExplanation": "Der Winkel vom aufsteigenden Bahnknoten (LAN) entlang der Bahn bis zum sonnennächsten Punkt (Perihel / Periapsis)."
+      },
       "lpe": {
         "code": "LPE",
         "label": "Länge des Perihels",
-        "formattedValue": "336.04°",
-        "numericValue": 336.04,
+        "formattedValue": "336.06°",
+        "numericValue": 336.06,
         "unit": "°",
         "childExplanation": "Dreht sich gemeinsam mit der Bahn von Mars um die Sonne."
       },
@@ -8512,11 +9368,19 @@
         "unit": "°",
         "childExplanation": "Synchronisiert mit der Knotenlinie der Umlaufbahn von Mars."
       },
+      "aop": {
+        "code": "AOP",
+        "label": "Argument der Periapsis",
+        "formattedValue": "286.5°",
+        "numericValue": 286.5,
+        "unit": "°",
+        "childExplanation": "Der Winkel vom aufsteigenden Bahnknoten (LAN) entlang der Bahn bis zum sonnennächsten Punkt (Perihel / Periapsis)."
+      },
       "lpe": {
         "code": "LPE",
         "label": "Länge des Perihels",
-        "formattedValue": "336.04°",
-        "numericValue": 336.04,
+        "formattedValue": "336.06°",
+        "numericValue": 336.06,
         "unit": "°",
         "childExplanation": "Dreht sich gemeinsam mit der Bahn von Mars um die Sonne."
       },
@@ -8600,11 +9464,19 @@
         "unit": "°",
         "childExplanation": "Synchronisiert mit der Knotenlinie der Umlaufbahn von Jupiter."
       },
+      "aop": {
+        "code": "AOP",
+        "label": "Argument der Periapsis",
+        "formattedValue": "273.87°",
+        "numericValue": 273.87,
+        "unit": "°",
+        "childExplanation": "Der Winkel vom aufsteigenden Bahnknoten (LAN) entlang der Bahn bis zum sonnennächsten Punkt (Perihel / Periapsis)."
+      },
       "lpe": {
         "code": "LPE",
         "label": "Länge des Perihels",
-        "formattedValue": "14.75°",
-        "numericValue": 14.75,
+        "formattedValue": "14.33°",
+        "numericValue": 14.33,
         "unit": "°",
         "childExplanation": "Dreht sich gemeinsam mit der Bahn von Jupiter um die Sonne."
       },
@@ -8688,11 +9560,19 @@
         "unit": "°",
         "childExplanation": "Synchronisiert mit der Knotenlinie der Umlaufbahn von Jupiter."
       },
+      "aop": {
+        "code": "AOP",
+        "label": "Argument der Periapsis",
+        "formattedValue": "273.87°",
+        "numericValue": 273.87,
+        "unit": "°",
+        "childExplanation": "Der Winkel vom aufsteigenden Bahnknoten (LAN) entlang der Bahn bis zum sonnennächsten Punkt (Perihel / Periapsis)."
+      },
       "lpe": {
         "code": "LPE",
         "label": "Länge des Perihels",
-        "formattedValue": "14.75°",
-        "numericValue": 14.75,
+        "formattedValue": "14.33°",
+        "numericValue": 14.33,
         "unit": "°",
         "childExplanation": "Dreht sich gemeinsam mit der Bahn von Jupiter um die Sonne."
       },
@@ -8776,11 +9656,19 @@
         "unit": "°",
         "childExplanation": "Synchronisiert mit der Knotenlinie der Umlaufbahn von Jupiter."
       },
+      "aop": {
+        "code": "AOP",
+        "label": "Argument der Periapsis",
+        "formattedValue": "273.87°",
+        "numericValue": 273.87,
+        "unit": "°",
+        "childExplanation": "Der Winkel vom aufsteigenden Bahnknoten (LAN) entlang der Bahn bis zum sonnennächsten Punkt (Perihel / Periapsis)."
+      },
       "lpe": {
         "code": "LPE",
         "label": "Länge des Perihels",
-        "formattedValue": "14.75°",
-        "numericValue": 14.75,
+        "formattedValue": "14.33°",
+        "numericValue": 14.33,
         "unit": "°",
         "childExplanation": "Dreht sich gemeinsam mit der Bahn von Jupiter um die Sonne."
       },
@@ -8864,11 +9752,19 @@
         "unit": "°",
         "childExplanation": "Synchronisiert mit der Knotenlinie der Umlaufbahn von Jupiter."
       },
+      "aop": {
+        "code": "AOP",
+        "label": "Argument der Periapsis",
+        "formattedValue": "273.87°",
+        "numericValue": 273.87,
+        "unit": "°",
+        "childExplanation": "Der Winkel vom aufsteigenden Bahnknoten (LAN) entlang der Bahn bis zum sonnennächsten Punkt (Perihel / Periapsis)."
+      },
       "lpe": {
         "code": "LPE",
         "label": "Länge des Perihels",
-        "formattedValue": "14.75°",
-        "numericValue": 14.75,
+        "formattedValue": "14.33°",
+        "numericValue": 14.33,
         "unit": "°",
         "childExplanation": "Dreht sich gemeinsam mit der Bahn von Jupiter um die Sonne."
       },
@@ -8952,11 +9848,19 @@
         "unit": "°",
         "childExplanation": "Synchronisiert mit der Knotenlinie der Umlaufbahn von Jupiter."
       },
+      "aop": {
+        "code": "AOP",
+        "label": "Argument der Periapsis",
+        "formattedValue": "273.87°",
+        "numericValue": 273.87,
+        "unit": "°",
+        "childExplanation": "Der Winkel vom aufsteigenden Bahnknoten (LAN) entlang der Bahn bis zum sonnennächsten Punkt (Perihel / Periapsis)."
+      },
       "lpe": {
         "code": "LPE",
         "label": "Länge des Perihels",
-        "formattedValue": "14.75°",
-        "numericValue": 14.75,
+        "formattedValue": "14.33°",
+        "numericValue": 14.33,
         "unit": "°",
         "childExplanation": "Dreht sich gemeinsam mit der Bahn von Jupiter um die Sonne."
       },
@@ -9040,11 +9944,19 @@
         "unit": "°",
         "childExplanation": "Synchronisiert mit der Knotenlinie der Umlaufbahn von Saturn."
       },
+      "aop": {
+        "code": "AOP",
+        "label": "Argument der Periapsis",
+        "formattedValue": "339.39°",
+        "numericValue": 339.39,
+        "unit": "°",
+        "childExplanation": "Der Winkel vom aufsteigenden Bahnknoten (LAN) entlang der Bahn bis zum sonnennächsten Punkt (Perihel / Periapsis)."
+      },
       "lpe": {
         "code": "LPE",
         "label": "Länge des Perihels",
-        "formattedValue": "92.43°",
-        "numericValue": 92.43,
+        "formattedValue": "93.05°",
+        "numericValue": 93.05,
         "unit": "°",
         "childExplanation": "Dreht sich gemeinsam mit der Bahn von Saturn um die Sonne."
       },
@@ -9128,11 +10040,19 @@
         "unit": "°",
         "childExplanation": "Synchronisiert mit der Knotenlinie der Umlaufbahn von Saturn."
       },
+      "aop": {
+        "code": "AOP",
+        "label": "Argument der Periapsis",
+        "formattedValue": "339.39°",
+        "numericValue": 339.39,
+        "unit": "°",
+        "childExplanation": "Der Winkel vom aufsteigenden Bahnknoten (LAN) entlang der Bahn bis zum sonnennächsten Punkt (Perihel / Periapsis)."
+      },
       "lpe": {
         "code": "LPE",
         "label": "Länge des Perihels",
-        "formattedValue": "92.43°",
-        "numericValue": 92.43,
+        "formattedValue": "93.05°",
+        "numericValue": 93.05,
         "unit": "°",
         "childExplanation": "Dreht sich gemeinsam mit der Bahn von Saturn um die Sonne."
       },
@@ -9216,11 +10136,19 @@
         "unit": "°",
         "childExplanation": "Synchronisiert mit der Knotenlinie der Umlaufbahn von Saturn."
       },
+      "aop": {
+        "code": "AOP",
+        "label": "Argument der Periapsis",
+        "formattedValue": "339.39°",
+        "numericValue": 339.39,
+        "unit": "°",
+        "childExplanation": "Der Winkel vom aufsteigenden Bahnknoten (LAN) entlang der Bahn bis zum sonnennächsten Punkt (Perihel / Periapsis)."
+      },
       "lpe": {
         "code": "LPE",
         "label": "Länge des Perihels",
-        "formattedValue": "92.43°",
-        "numericValue": 92.43,
+        "formattedValue": "93.05°",
+        "numericValue": 93.05,
         "unit": "°",
         "childExplanation": "Dreht sich gemeinsam mit der Bahn von Saturn um die Sonne."
       },
@@ -9304,11 +10232,19 @@
         "unit": "°",
         "childExplanation": "Synchronisiert mit der Knotenlinie der Umlaufbahn von Saturn."
       },
+      "aop": {
+        "code": "AOP",
+        "label": "Argument der Periapsis",
+        "formattedValue": "339.39°",
+        "numericValue": 339.39,
+        "unit": "°",
+        "childExplanation": "Der Winkel vom aufsteigenden Bahnknoten (LAN) entlang der Bahn bis zum sonnennächsten Punkt (Perihel / Periapsis)."
+      },
       "lpe": {
         "code": "LPE",
         "label": "Länge des Perihels",
-        "formattedValue": "92.43°",
-        "numericValue": 92.43,
+        "formattedValue": "93.05°",
+        "numericValue": 93.05,
         "unit": "°",
         "childExplanation": "Dreht sich gemeinsam mit der Bahn von Saturn um die Sonne."
       },
@@ -9392,11 +10328,19 @@
         "unit": "°",
         "childExplanation": "Synchronisiert mit der Knotenlinie der Umlaufbahn von Saturn."
       },
+      "aop": {
+        "code": "AOP",
+        "label": "Argument der Periapsis",
+        "formattedValue": "339.39°",
+        "numericValue": 339.39,
+        "unit": "°",
+        "childExplanation": "Der Winkel vom aufsteigenden Bahnknoten (LAN) entlang der Bahn bis zum sonnennächsten Punkt (Perihel / Periapsis)."
+      },
       "lpe": {
         "code": "LPE",
         "label": "Länge des Perihels",
-        "formattedValue": "92.43°",
-        "numericValue": 92.43,
+        "formattedValue": "93.05°",
+        "numericValue": 93.05,
         "unit": "°",
         "childExplanation": "Dreht sich gemeinsam mit der Bahn von Saturn um die Sonne."
       },
@@ -9480,11 +10424,19 @@
         "unit": "°",
         "childExplanation": "Synchronisiert mit der Knotenlinie der Umlaufbahn von Uranus."
       },
+      "aop": {
+        "code": "AOP",
+        "label": "Argument der Periapsis",
+        "formattedValue": "96.99°",
+        "numericValue": 96.99,
+        "unit": "°",
+        "childExplanation": "Der Winkel vom aufsteigenden Bahnknoten (LAN) entlang der Bahn bis zum sonnennächsten Punkt (Perihel / Periapsis)."
+      },
       "lpe": {
         "code": "LPE",
         "label": "Länge des Perihels",
-        "formattedValue": "170.96°",
-        "numericValue": 170.96,
+        "formattedValue": "171°",
+        "numericValue": 171,
         "unit": "°",
         "childExplanation": "Dreht sich gemeinsam mit der Bahn von Uranus um die Sonne."
       },
@@ -9568,11 +10520,19 @@
         "unit": "°",
         "childExplanation": "Synchronisiert mit der Knotenlinie der Umlaufbahn von Uranus."
       },
+      "aop": {
+        "code": "AOP",
+        "label": "Argument der Periapsis",
+        "formattedValue": "96.99°",
+        "numericValue": 96.99,
+        "unit": "°",
+        "childExplanation": "Der Winkel vom aufsteigenden Bahnknoten (LAN) entlang der Bahn bis zum sonnennächsten Punkt (Perihel / Periapsis)."
+      },
       "lpe": {
         "code": "LPE",
         "label": "Länge des Perihels",
-        "formattedValue": "170.96°",
-        "numericValue": 170.96,
+        "formattedValue": "171°",
+        "numericValue": 171,
         "unit": "°",
         "childExplanation": "Dreht sich gemeinsam mit der Bahn von Uranus um die Sonne."
       },
@@ -9656,11 +10616,19 @@
         "unit": "°",
         "childExplanation": "Synchronisiert mit der Knotenlinie der Umlaufbahn von Uranus."
       },
+      "aop": {
+        "code": "AOP",
+        "label": "Argument der Periapsis",
+        "formattedValue": "96.99°",
+        "numericValue": 96.99,
+        "unit": "°",
+        "childExplanation": "Der Winkel vom aufsteigenden Bahnknoten (LAN) entlang der Bahn bis zum sonnennächsten Punkt (Perihel / Periapsis)."
+      },
       "lpe": {
         "code": "LPE",
         "label": "Länge des Perihels",
-        "formattedValue": "170.96°",
-        "numericValue": 170.96,
+        "formattedValue": "171°",
+        "numericValue": 171,
         "unit": "°",
         "childExplanation": "Dreht sich gemeinsam mit der Bahn von Uranus um die Sonne."
       },
@@ -9744,11 +10712,19 @@
         "unit": "°",
         "childExplanation": "Synchronisiert mit der Knotenlinie der Umlaufbahn von Uranus."
       },
+      "aop": {
+        "code": "AOP",
+        "label": "Argument der Periapsis",
+        "formattedValue": "96.99°",
+        "numericValue": 96.99,
+        "unit": "°",
+        "childExplanation": "Der Winkel vom aufsteigenden Bahnknoten (LAN) entlang der Bahn bis zum sonnennächsten Punkt (Perihel / Periapsis)."
+      },
       "lpe": {
         "code": "LPE",
         "label": "Länge des Perihels",
-        "formattedValue": "170.96°",
-        "numericValue": 170.96,
+        "formattedValue": "171°",
+        "numericValue": 171,
         "unit": "°",
         "childExplanation": "Dreht sich gemeinsam mit der Bahn von Uranus um die Sonne."
       },
@@ -9832,11 +10808,19 @@
         "unit": "°",
         "childExplanation": "Synchronisiert mit der Knotenlinie der Umlaufbahn von Uranus."
       },
+      "aop": {
+        "code": "AOP",
+        "label": "Argument der Periapsis",
+        "formattedValue": "96.99°",
+        "numericValue": 96.99,
+        "unit": "°",
+        "childExplanation": "Der Winkel vom aufsteigenden Bahnknoten (LAN) entlang der Bahn bis zum sonnennächsten Punkt (Perihel / Periapsis)."
+      },
       "lpe": {
         "code": "LPE",
         "label": "Länge des Perihels",
-        "formattedValue": "170.96°",
-        "numericValue": 170.96,
+        "formattedValue": "171°",
+        "numericValue": 171,
         "unit": "°",
         "childExplanation": "Dreht sich gemeinsam mit der Bahn von Uranus um die Sonne."
       },
@@ -9920,11 +10904,19 @@
         "unit": "°",
         "childExplanation": "Synchronisiert mit der Knotenlinie der Umlaufbahn von Neptun."
       },
+      "aop": {
+        "code": "AOP",
+        "label": "Argument der Periapsis",
+        "formattedValue": "273.19°",
+        "numericValue": 273.19,
+        "unit": "°",
+        "childExplanation": "Der Winkel vom aufsteigenden Bahnknoten (LAN) entlang der Bahn bis zum sonnennächsten Punkt (Perihel / Periapsis)."
+      },
       "lpe": {
         "code": "LPE",
         "label": "Länge des Perihels",
-        "formattedValue": "44.96°",
-        "numericValue": 44.96,
+        "formattedValue": "44.97°",
+        "numericValue": 44.97,
         "unit": "°",
         "childExplanation": "Dreht sich gemeinsam mit der Bahn von Neptun um die Sonne."
       },
@@ -10008,11 +11000,19 @@
         "unit": "°",
         "childExplanation": "Synchronisiert mit der Knotenlinie der Umlaufbahn von Neptun."
       },
+      "aop": {
+        "code": "AOP",
+        "label": "Argument der Periapsis",
+        "formattedValue": "273.19°",
+        "numericValue": 273.19,
+        "unit": "°",
+        "childExplanation": "Der Winkel vom aufsteigenden Bahnknoten (LAN) entlang der Bahn bis zum sonnennächsten Punkt (Perihel / Periapsis)."
+      },
       "lpe": {
         "code": "LPE",
         "label": "Länge des Perihels",
-        "formattedValue": "44.96°",
-        "numericValue": 44.96,
+        "formattedValue": "44.97°",
+        "numericValue": 44.97,
         "unit": "°",
         "childExplanation": "Dreht sich gemeinsam mit der Bahn von Neptun um die Sonne."
       },
@@ -10096,11 +11096,19 @@
         "unit": "°",
         "childExplanation": "Synchronisiert mit der Knotenlinie der Umlaufbahn von Neptun."
       },
+      "aop": {
+        "code": "AOP",
+        "label": "Argument der Periapsis",
+        "formattedValue": "273.19°",
+        "numericValue": 273.19,
+        "unit": "°",
+        "childExplanation": "Der Winkel vom aufsteigenden Bahnknoten (LAN) entlang der Bahn bis zum sonnennächsten Punkt (Perihel / Periapsis)."
+      },
       "lpe": {
         "code": "LPE",
         "label": "Länge des Perihels",
-        "formattedValue": "44.96°",
-        "numericValue": 44.96,
+        "formattedValue": "44.97°",
+        "numericValue": 44.97,
         "unit": "°",
         "childExplanation": "Dreht sich gemeinsam mit der Bahn von Neptun um die Sonne."
       },
@@ -10184,11 +11192,19 @@
         "unit": "°",
         "childExplanation": "Synchronisiert mit der Knotenlinie der Umlaufbahn von Neptun."
       },
+      "aop": {
+        "code": "AOP",
+        "label": "Argument der Periapsis",
+        "formattedValue": "273.19°",
+        "numericValue": 273.19,
+        "unit": "°",
+        "childExplanation": "Der Winkel vom aufsteigenden Bahnknoten (LAN) entlang der Bahn bis zum sonnennächsten Punkt (Perihel / Periapsis)."
+      },
       "lpe": {
         "code": "LPE",
         "label": "Länge des Perihels",
-        "formattedValue": "44.96°",
-        "numericValue": 44.96,
+        "formattedValue": "44.97°",
+        "numericValue": 44.97,
         "unit": "°",
         "childExplanation": "Dreht sich gemeinsam mit der Bahn von Neptun um die Sonne."
       },
@@ -10272,11 +11288,19 @@
         "unit": "°",
         "childExplanation": "Synchronisiert mit der Knotenlinie der Umlaufbahn von Neptun."
       },
+      "aop": {
+        "code": "AOP",
+        "label": "Argument der Periapsis",
+        "formattedValue": "273.19°",
+        "numericValue": 273.19,
+        "unit": "°",
+        "childExplanation": "Der Winkel vom aufsteigenden Bahnknoten (LAN) entlang der Bahn bis zum sonnennächsten Punkt (Perihel / Periapsis)."
+      },
       "lpe": {
         "code": "LPE",
         "label": "Länge des Perihels",
-        "formattedValue": "44.96°",
-        "numericValue": 44.96,
+        "formattedValue": "44.97°",
+        "numericValue": 44.97,
         "unit": "°",
         "childExplanation": "Dreht sich gemeinsam mit der Bahn von Neptun um die Sonne."
       },

@@ -20,6 +20,14 @@ export const GLOSSARY_DEFINITIONS: Readonly<Record<string, string>> = {
     'Zeigt, wie rund oder eierförmig eine Umlaufbahn ist. 0 bedeutet perfekter Kreis, nahe 1 eine sehr langgezogene Ellipse.',
   Bahnneigung:
     'Der Winkel, um den eine Umlaufbahn im Vergleich zur Hauptebene unseres Sonnensystems gekippt ist.',
+  'Aufsteigender Knoten':
+    'Longitude of the Ascending Node (LAN, Ω): Die Himmelsrichtung, an der die gekippte Umlaufbahn von Süden nach Norden durch die Hauptebene unseres Sonnensystems schneidet.',
+  'Argument der Periapsis':
+    'Argument of Periapsis (AOP, ω): Der Winkel vom aufsteigenden Bahnknoten entlang der Bahn bis zum sonnennächsten Punkt (Perihel / Periapsis).',
+  'Länge des Perihels':
+    'Longitude of Perihelion (LPE, ϖ): Gibt zusammengerechnet aus Aufsteigendem Knoten und Argument der Periapsis die genaue Himmelsrichtung an, in die der sonnennächste Punkt zeigt.',
+  'Große Halbachse':
+    'Semi-Major Axis (SMA, a): Der mittlere Abstand zwischen einem Himmelskörper und dem Zentralgestirn (halbe Länge der Bahnellipse).',
   Gasriese:
     'Ein riesiger Planet (wie Jupiter oder Saturn), der fast nur aus Gas besteht und keinen festen Boden zum Landen hat.',
   Eisriese:

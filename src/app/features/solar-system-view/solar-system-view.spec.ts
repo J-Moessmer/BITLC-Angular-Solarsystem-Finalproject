@@ -147,6 +147,9 @@ describe('SolarSystemViewComponent & InfoboxDetailComponent (P10 & P20)', () => 
     expect(text).toContain('ECC');
     expect(text).toContain('INC');
     expect(text).toContain('LAN');
+    expect(text).toContain('AOP');
+    expect(text).toContain('Argument der Periapsis');
+    expect(text).toContain('Aufsteigender Knoten');
     expect(text).toContain('LPE');
     expect(text).toContain('MNA');
     expect(text).toContain('REF');
