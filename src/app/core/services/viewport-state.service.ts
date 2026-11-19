@@ -630,40 +630,64 @@ export class ViewportStateService {
           neptune: 0.0258,
         };
         const maxOverviewGapByPlanet: Readonly<Record<string, number>> = {
-          mercury: 11,
-          venus: 14,
-          earth: 17,
-          mars: 17,
-          jupiter: 26,
-          saturn: 26,
-          uranus: 24,
-          neptune: 24,
+          mercury: 16,
+          venus: 18,
+          earth: 27,
+          mars: 27,
+          jupiter: 38,
+          saturn: 36,
+          uranus: 31,
+          neptune: 31,
         };
 
+        /** KI-Hinweis: Berechnet den tatsächlichen äußersten Mondbahn-Radius inkl. physikalischer Skalierung bei Nahzoom. */
         const planetMoons = allBodies.filter(
           (m) => m.parentId === planet.id && m.category === 'moon',
         );
-        const maxMoonOverviewSvg = planetMoons.reduce(
-          (max, m) => Math.max(max, m.overviewOrbitRadiusSvg),
-          0,
-        );
-        const moonMinScreenPx =
-          maxMoonOverviewSvg > 0
-            ? planetPos.bodyRadiusPx + Math.max(9, maxMoonOverviewSvg * 0.72)
-            : planetPos.bodyRadiusPx + 7;
+        const parentRadiusKm = Math.max(1, planet.diameterKm / 2);
+        const maxMoonScreenOrbitPx = planetMoons.reduce((maxR, m) => {
+          const minOverviewR =
+            planetPos.bodyRadiusPx + Math.max(9, m.overviewOrbitRadiusSvg * 0.72);
+          let physicalR = planetPos.strictTrueRadiusPx * 1.5;
+          if (mode === 'true-scale' && m.orbitalElements.sma.numericValue) {
+            const moonDistKm = m.orbitalElements.sma.numericValue * this.astronomicalUnitKm;
+            physicalR =
+              planetPos.strictTrueRadiusPx * Math.max(1.35, moonDistKm / parentRadiusKm);
+          } else if (m.id === 'moon') {
+            physicalR = planetPos.strictTrueRadiusPx * 6.5;
+          } else {
+            physicalR =
+              planetPos.strictTrueRadiusPx * (1.45 + (m.overviewOrbitRadiusSvg - 10) * 0.14);
+          }
+          return Math.max(maxR, Math.max(minOverviewR, physicalR));
+        }, 0);
 
         const hillRatio = hillRatioByPlanet[planet.id] ?? 0.01;
-        const maxOverviewGapWorld = maxOverviewGapByPlanet[planet.id] ?? 18;
+        const maxOverviewGapWorld = maxOverviewGapByPlanet[planet.id] ?? 24;
+        const minClearanceOutsideMoonsPx =
+          maxMoonScreenOrbitPx > 0 ? maxMoonScreenOrbitPx + 7.5 : planetPos.bodyRadiusPx + 9;
+        const desiredMoonFactor =
+          planet.id === 'earth' ? (mode === 'true-scale' ? 2.25 : 2.15) : 1.55;
+        const desiredOutsideMoonsPx =
+          maxMoonScreenOrbitPx > 0
+            ? Math.max(maxMoonScreenOrbitPx * desiredMoonFactor, maxMoonScreenOrbitPx + 14)
+            : planetPos.bodyRadiusPx + 12;
 
         const rawL12Px =
           mode === 'true-scale'
-            ? Math.min(
-                rPlanetWorld * 0.14 * z,
-                Math.max(rPlanetWorld * hillRatio * z, moonMinScreenPx + 6),
+            ? Math.max(
+                minClearanceOutsideMoonsPx,
+                Math.min(
+                  Math.max(rPlanetWorld * 0.24 * z, minClearanceOutsideMoonsPx),
+                  Math.max(rPlanetWorld * hillRatio * z, desiredOutsideMoonsPx),
+                ),
               )
-            : Math.min(
-                maxOverviewGapWorld * z,
-                Math.max(moonMinScreenPx + 7, moonMinScreenPx * 1.32),
+            : Math.max(
+                minClearanceOutsideMoonsPx,
+                Math.min(
+                  Math.max(maxOverviewGapWorld * z, minClearanceOutsideMoonsPx),
+                  desiredOutsideMoonsPx,
+                ),
               );
         const l12WorldOffset = rawL12Px / Math.max(0.001, z);
 
@@ -799,7 +823,8 @@ export class ViewportStateService {
         };
       }
 
-      const angleRad = (-kepler.longitudeDeg * Math.PI) / 180;
+      const isRetrogradeMoon = body.inclinationToSolarEquatorDeg > 90;
+      const angleRad = ((isRetrogradeMoon ? 1 : -1) * kepler.longitudeDeg * Math.PI) / 180;
       const parentTrueR = parentPos.strictTrueRadiusPx;
 
       // Physikalische Bahnhöhe relativ zum wahren Radius des Mutterplaneten beim Reinzoomen:

@@ -81,9 +81,19 @@ describe('Core Services (P10–P50)', () => {
       comparisonHint: '',
       orbitalElements: baseOe,
     });
+    const earthMoon: CelestialBody = {
+      ...makeBody('moon', 'moon', 17),
+      diameterKm: 3474,
+      orbitalPeriodDays: 27.3,
+      orbitalElements: {
+        ...baseOe,
+        sma: { ...baseOe.sma, numericValue: 0.00257 },
+      },
+    };
     const bodies: CelestialBody[] = [
       makeBody('sun', 'star', 0),
       { ...makeBody('earth', 'planet', 130), parentId: 'sun' },
+      earthMoon,
       makeBody('lagrange-l1', 'lagrange', 108),
       makeBody('lagrange-l2', 'lagrange', 152),
       makeBody('lagrange-l4', 'lagrange', 130),
@@ -91,10 +101,34 @@ describe('Core Services (P10–P50)', () => {
     ];
 
     const earthPos = viewport.computeBodyPosition(bodies[1], bodies);
-    const l1Pos = viewport.computeBodyPosition(bodies[2], bodies);
-    const l2Pos = viewport.computeBodyPosition(bodies[3], bodies);
-    const l4Pos = viewport.computeBodyPosition(bodies[4], bodies);
-    const l5Pos = viewport.computeBodyPosition(bodies[5], bodies);
+    const moonPos = viewport.computeBodyPosition(earthMoon, bodies);
+    const l1Pos = viewport.computeBodyPosition(bodies[3], bodies);
+    const l2Pos = viewport.computeBodyPosition(bodies[4], bodies);
+    const l4Pos = viewport.computeBodyPosition(bodies[5], bodies);
+    const l5Pos = viewport.computeBodyPosition(bodies[6], bodies);
+
+    // Erd-L1 und Erd-L2 müssen sowohl in Übersicht (Zoom 1x & 3.2x) als auch im Echten Maßstab (22x & 250x) klar außerhalb der Mondbahn liegen
+    const moonDist1x = Math.hypot(moonPos.x - earthPos.x, moonPos.y - earthPos.y);
+    expect(Math.hypot(l1Pos.x - earthPos.x, l1Pos.y - earthPos.y)).toBeGreaterThan(moonDist1x + 5);
+    expect(Math.hypot(l2Pos.x - earthPos.x, l2Pos.y - earthPos.y)).toBeGreaterThan(moonDist1x + 5);
+
+    for (const check of [
+      { mode: 'overview' as const, zoom: 3.2 },
+      { mode: 'true-scale' as const, zoom: 22 },
+      { mode: 'true-scale' as const, zoom: 250 },
+    ]) {
+      viewport.setViewMode(check.mode);
+      viewport.setZoom(check.zoom);
+      const eP = viewport.computeBodyPosition(bodies[1], bodies);
+      const mP = viewport.computeBodyPosition(earthMoon, bodies);
+      const l1P = viewport.computeBodyPosition(bodies[3], bodies);
+      const l2P = viewport.computeBodyPosition(bodies[4], bodies);
+      const moonR = Math.hypot(mP.x - eP.x, mP.y - eP.y);
+      expect(Math.hypot(l1P.x - eP.x, l1P.y - eP.y)).toBeGreaterThan(moonR * 1.5);
+      expect(Math.hypot(l2P.x - eP.x, l2P.y - eP.y)).toBeGreaterThan(moonR * 1.5);
+    }
+    viewport.setViewMode('overview');
+    viewport.setZoom(1.0);
 
     const crossL1 = earthPos.worldX * l1Pos.worldY - earthPos.worldY * l1Pos.worldX;
     const crossL2 = earthPos.worldX * l2Pos.worldY - earthPos.worldY * l2Pos.worldX;

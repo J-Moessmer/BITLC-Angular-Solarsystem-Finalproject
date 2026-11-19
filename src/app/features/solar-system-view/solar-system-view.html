@@ -155,7 +155,7 @@
             class="scale-chip"
             [class.active-chip]="lagrangeFilterMode() !== 'off'"
             (click)="cycleLagrangeFilterMode()"
-            title="Schaltet zwischen Fokus & Zoom (nur gewählter Planet / ab 12x Zoom), Alle 40 Punkte und Aus um"
+            title="Schaltet zwischen Fokus (nur ausgewählter Planet), Alle 40 Punkte und Aus um"
           >
             {{ lagrangeFilterLabel() }}
           </button>
@@ -544,10 +544,11 @@
                 />
               }
 
-              <!-- Dezenter Orbit-Pin im 1:1-Modus oder für den ausgewählten Körper -->
+              <!-- Dezenter Orbit-Pin im 1:1-Modus oder für den ausgewählten Körper (nicht für Lagrange-Rauten) -->
               @if (
-                viewport.bodyScaleMode() === 'strict-distance-scale' ||
-                dataService.selectedBodyId() === pos.body.id
+                pos.body.category !== 'lagrange' &&
+                (viewport.bodyScaleMode() === 'strict-distance-scale' ||
+                  dataService.selectedBodyId() === pos.body.id)
               ) {
                 <circle
                   cx="0"

@@ -3,8 +3,8 @@
  * FCPP-Referenz: P10 (P10-U20, P10-U30, P10-U40) & P20 (P20-U10 bis P20-U40)
  * Erstellt mit: KI-Assistent (Antigravity AI / Pair-Programming Agent)
  * Erstellt für / Autor: Joshua Mößmer (J-Moessmer)
- * Datum / Version: 19.11.2026 / v2.1
- * Hinweis: Interaktive 2D-SVG-Sonnensystem-Bühne mit stufenlosem Zoom, analytischem SVG-Orbit-Clipping, Echtzeit-Kepler-Tracking sowie Darstellung & Filterung aller 5 Sonne-Erde-Lagrange-Punkte (L1-L5).
+ * Datum / Version: 19.11.2026 / v2.2
+ * Hinweis: Interaktive 2D-SVG-Sonnensystem-Bühne mit stufenlosem Zoom, analytischem SVG-Orbit-Clipping, Echtzeit-Kepler-Tracking sowie strikter Fokus-Filterung & maßstabsgerechter Skalierung aller 40 Lagrange-Punkte (L1-L5) auch im Echten Maßstab.
  */
 
 import {
@@ -64,7 +64,7 @@ export class SolarSystemViewComponent implements OnInit, OnDestroy {
   readonly lagrangeFilterLabel = computed<string>(() => {
     switch (this.lagrangeFilterMode()) {
       case 'context':
-        return 'Lagrange-Punkte: Fokus & Zoom';
+        return 'Lagrange-Punkte: Fokus (Planet)';
       case 'all':
         return 'Lagrange-Punkte: Alle (40)';
       case 'off':
@@ -188,7 +188,7 @@ export class SolarSystemViewComponent implements OnInit, OnDestroy {
     ].join(' ');
   });
 
-  /** KI-generierter Block: Berechnet die Hilfslinien für Lagrange-Punkte abhängig vom 3-Stufen-Filter (Fokus & Zoom / Alle / Aus) */
+  /** KI-generierter Block: Berechnet die Hilfslinien für Lagrange-Punkte abhängig vom 3-Stufen-Filter (Fokus (Planet) / Alle / Aus) sowie Mindest-Bahnradius im Echten Maßstab */
   protected readonly lagrangeGuideGeometry = computed<{
     isHighlighted: boolean;
     l1ToL2Lines: Array<{ id: string; x1: number; y1: number; x2: number; y2: number; color: string }>;
@@ -201,11 +201,11 @@ export class SolarSystemViewComponent implements OnInit, OnDestroy {
     }
 
     const focusedPid = this.focusedLagrangePlanetId();
-    const isHighZoom = this.viewport.zoomLevel() >= 12;
-    if (mode === 'context' && !focusedPid && !isHighZoom) {
+    if (mode === 'context' && !focusedPid) {
       return null;
     }
 
+    const isTrueScale = this.viewport.viewMode() === 'true-scale';
     const selectedBody = this.dataService.selectedBody();
     const positions = this.svgPositions();
     const byId = (id: string) => positions.find((p) => p.body.id === id);
@@ -227,16 +227,15 @@ export class SolarSystemViewComponent implements OnInit, OnDestroy {
     for (const pid of planetIds) {
       const prefix = pid === 'earth' ? 'lagrange' : pid;
       const pPos = byId(pid);
-      const l1 = byId(`${prefix}-l1`);
-      const l2 = byId(`${prefix}-l2`);
-      if (!l1 || !l2 || Math.hypot(l1.x - l2.x, l1.y - l2.y) > 3500) {
+      if (!pPos || (isTrueScale && pPos.orbitRxPx < 36)) {
         continue;
       }
-      const inZoomView =
-        (Math.abs(l1.x) <= 700 && Math.abs(l1.y) <= 500) ||
-        (Math.abs(l2.x) <= 700 && Math.abs(l2.y) <= 500);
-      const includeAxis =
-        mode === 'all' || pid === focusedPid || (isHighZoom && inZoomView);
+      const l1 = byId(`${prefix}-l1`);
+      const l2 = byId(`${prefix}-l2`);
+      if (!l1 || !l2 || Math.hypot(l1.x - l2.x, l1.y - l2.y) > 12000) {
+        continue;
+      }
+      const includeAxis = mode === 'all' || pid === focusedPid;
       if (includeAxis) {
         l1ToL2Lines.push({
           id: `${pid}-l1-l2`,
@@ -244,17 +243,19 @@ export class SolarSystemViewComponent implements OnInit, OnDestroy {
           y1: l1.y,
           x2: l2.x,
           y2: l2.y,
-          color: pid === 'earth' ? '#FDE047' : (pPos?.body.colorHex ?? '#FDE047'),
+          color: pid === 'earth' ? '#FDE047' : pPos.body.colorHex,
         });
       }
     }
 
+    const earthPos = byId('earth');
     const earthL2 = byId('lagrange-l2');
     const showEarthL2Halo =
       earthL2 &&
+      (!isTrueScale || (earthPos !== undefined && earthPos.orbitRxPx >= 36)) &&
       Math.abs(earthL2.x) <= 900 &&
       Math.abs(earthL2.y) <= 700 &&
-      (mode === 'all' || focusedPid === 'earth' || isHighZoom);
+      (mode === 'all' || focusedPid === 'earth');
     const l2HaloCircle = showEarthL2Halo ? { cx: earthL2.x, cy: earthL2.y, r: 8 } : null;
 
     const trianglePid = focusedPid ?? (mode === 'all' ? 'earth' : null);
@@ -270,27 +271,28 @@ export class SolarSystemViewComponent implements OnInit, OnDestroy {
     if (trianglePid && this.viewport.viewMode() !== 'side-view') {
       const focusPrefix = trianglePid === 'earth' ? 'lagrange' : trianglePid;
       const focusedPlanet = byId(trianglePid);
-      const l1 = byId(`${focusPrefix}-l1`);
-      const l3 = byId(`${focusPrefix}-l3`);
-      const l4 = byId(`${focusPrefix}-l4`);
-      const l5 = byId(`${focusPrefix}-l5`);
       const focusColor =
         trianglePid === 'earth' ? '#FDE047' : (focusedPlanet?.body.colorHex ?? '#FDE047');
 
-      const addSegment = (
-        id: string,
-        a: SvgBodyPosition | undefined,
-        b: SvgBodyPosition | undefined,
-      ): void => {
-        if (!a || !b) {
-          return;
-        }
-        if (Math.hypot(a.x - b.x, a.y - b.y) <= 3500) {
-          triangleLines.push({ id, x1: a.x, y1: a.y, x2: b.x, y2: b.y, color: focusColor });
-        }
-      };
+      if (focusedPlanet && (!isTrueScale || focusedPlanet.orbitRxPx >= 36)) {
+        const l1 = byId(`${focusPrefix}-l1`);
+        const l3 = byId(`${focusPrefix}-l3`);
+        const l4 = byId(`${focusPrefix}-l4`);
+        const l5 = byId(`${focusPrefix}-l5`);
 
-      if (focusedPlanet) {
+        const addSegment = (
+          id: string,
+          a: SvgBodyPosition | undefined,
+          b: SvgBodyPosition | undefined,
+        ): void => {
+          if (!a || !b) {
+            return;
+          }
+          if (Math.hypot(a.x - b.x, a.y - b.y) <= 12000) {
+            triangleLines.push({ id, x1: a.x, y1: a.y, x2: b.x, y2: b.y, color: focusColor });
+          }
+        };
+
         addSegment('sun-l4', sun, l4);
         addSegment('planet-l4', focusedPlanet, l4);
         addSegment('sun-l5', sun, l5);
@@ -360,7 +362,17 @@ export class SolarSystemViewComponent implements OnInit, OnDestroy {
         return false;
       }
 
-      if (pos.body.id === 'sun' || pos.body.category === 'lagrange') {
+      if (pos.body.category === 'lagrange') {
+        if (
+          this.viewport.viewMode() === 'true-scale' &&
+          pos.orbitRxPx < 36 &&
+          pos.body.id !== selectedId
+        ) {
+          return false;
+        }
+        return true;
+      }
+      if (pos.body.id === 'sun') {
         return true;
       }
       if (
@@ -397,9 +409,7 @@ export class SolarSystemViewComponent implements OnInit, OnDestroy {
       if (mode === 'all') {
         return true;
       }
-      return (
-        body.parentId === this.focusedLagrangePlanetId() || this.viewport.zoomLevel() >= 12
-      );
+      return body.parentId === this.focusedLagrangePlanetId();
     }
     if (body.id === 'sun' || body.id === this.dataService.selectedBodyId()) {
       return true;
@@ -461,54 +471,7 @@ export class SolarSystemViewComponent implements OnInit, OnDestroy {
         if (routeBodyId && bodies.length > 0) {
           const target = bodies.find((b) => b.id === routeBodyId);
           if (target) {
-            const distAu = target.distanceFromSunAu;
-            let targetZoom = 1.65;
-
-            // Für die ISS, gelandete Oberflächen-Missionen (Apollo auf dem Mond, Perseverance auf dem Mars)
-            // oder kleinere Planeten-/Zwergplanetensysteme setzen wir einen großzügigen Start-Zoom:
-            if (target.id === 'iss') {
-              targetZoom = 12000;
-            } else if (target.id === 'jwst' || target.id === 'gaia') {
-              targetZoom = this.viewport.viewMode() === 'true-scale' ? 45 : 6.5;
-            } else if (target.category === 'lagrange') {
-              const pt = target.id.slice(-2).toLowerCase();
-              if (pt === 'l1' || pt === 'l2') {
-                targetZoom =
-                  this.viewport.viewMode() === 'true-scale'
-                    ? Math.max(1.5, 45 / Math.max(1, distAu))
-                    : distAu > 3
-                      ? 2.8
-                      : 6.5;
-              } else {
-                targetZoom =
-                  this.viewport.viewMode() === 'true-scale'
-                    ? Math.max(0.25, 9 / Math.max(0.4, distAu))
-                    : distAu > 10
-                      ? 0.9
-                      : 1.65;
-              }
-            } else if (target.isSurfaceLanded) {
-              targetZoom = 9000; // Direkt nah an die Oberfläche von Erdmond (Apollo) bzw. Mars (Rover)!
-            } else if (target.parentId && target.parentId !== 'sun') {
-              targetZoom = 45; // Großzügiger Überblick über Planet/Zwergplanet + Mond/Raumsonde
-            } else if (
-              target.category === 'dwarf-planet' ||
-              (target.category === 'planet' && target.childrenIds.length > 0)
-            ) {
-              targetZoom = this.viewport.viewMode() === 'true-scale' ? 28 : 3.2;
-            } else if (this.viewport.viewMode() === 'true-scale') {
-              if (distAu > 80) {
-                targetZoom = 0.22; // Voyager
-              } else if (distAu > 35) {
-                targetZoom = 0.75; // Pluto / Eris
-              } else if (distAu > 0 && distAu <= 2.0) {
-                targetZoom = 9.0; // Innere Planeten
-              } else {
-                targetZoom = 1.8;
-              }
-            } else if (target.id === 'sun') {
-              targetZoom = 1.25;
-            }
+            const targetZoom = this.computeTargetZoomForBody(target);
 
             // Einmalig mit dem Ziel-Zoomfaktor berechnen, damit auch Mond-Offsets exakt stimmen
             this.viewport.setZoom(targetZoom);
@@ -551,7 +514,7 @@ export class SolarSystemViewComponent implements OnInit, OnDestroy {
     this.stopTimeLapse();
   }
 
-  /** Startet oder pausiert den Echtzeit-Zeitraffer */
+  /** Startet oder pausiert den Echtzeit-Zeitraffer mit adaptiver, aliasing-freier Schrittweite (~30 FPS) */
   toggleTimeLapse(): void {
     if (this.viewport.isTimeLapsePlaying()) {
       this.stopTimeLapse();
@@ -559,10 +522,47 @@ export class SolarSystemViewComponent implements OnInit, OnDestroy {
     }
     this.viewport.isTimeLapsePlaying.set(true);
     this.timeLapseTimerId = setInterval(() => {
-      // Bei tiefem Zoom auf ISS/Monde langsamere Zeitschritte (0.05 Tage), sonst 4 Tage pro Frame
-      const stepDays = this.viewport.zoomLevel() >= 500 ? 0.02 : 4;
-      this.viewport.addSimulationDays(stepDays);
-    }, 80);
+      this.viewport.addSimulationDays(this.computeTimeLapseStepDays());
+    }, 33);
+  }
+
+  /**
+   * KI-generierter Block: Berechnet eine adaptive, aliasing-freie Zeitraffer-Schrittweite (Tage pro Frame).
+   * Verhindert das Stroboskop-Rückwärtslaufen schneller innerer Monde (z. B. Phobos, Enceladus, Io)
+   * sowie das Einfrieren äußerer/langsamer Monde bei hohem Nahzoom (Earth/Moon, Titan, Kallisto, Hydra).
+   */
+  computeTimeLapseStepDays(): number {
+    const selected = this.dataService.selectedBody();
+    const z = this.viewport.zoomLevel();
+    const leoIds = new Set(['iss', 'tiangong', 'hubble', 'sputnik-1', 'vostok-1']);
+
+    if (selected && (leoIds.has(selected.id) || (selected.id === 'earth' && z >= 2500))) {
+      return 0.004;
+    }
+
+    if (
+      selected &&
+      (selected.category === 'planet' ||
+        selected.category === 'dwarf-planet' ||
+        selected.category === 'moon')
+    ) {
+      const systemParentId =
+        selected.category === 'moon' ? (selected.parentId ?? selected.id) : selected.id;
+      const systemMoons = this.dataService
+        .bodies()
+        .filter(
+          (b) =>
+            b.parentId === systemParentId &&
+            b.category === 'moon' &&
+            b.orbitalPeriodDays > 0,
+        );
+      if (systemMoons.length > 0) {
+        const minMoonPeriodDays = Math.min(...systemMoons.map((m) => m.orbitalPeriodDays));
+        return Number(Math.min(0.65, Math.max(0.025, minMoonPeriodDays * 0.095)).toFixed(4));
+      }
+    }
+
+    return z >= 12 ? 0.14 : 1.2;
   }
 
   stopTimeLapse(): void {
@@ -640,6 +640,74 @@ export class SolarSystemViewComponent implements OnInit, OnDestroy {
   /** Umschalten des Ansichtsmodus (Übersicht, Echter Maßstab, Seitenansicht) (P10-U40) */
   setViewMode(mode: SolarViewMode): void {
     this.viewport.setViewMode(mode);
+    const activeBody = this.dataService.selectedBody();
+    const bodies = this.dataService.bodies();
+    if (activeBody && bodies.length > 0) {
+      const targetZoom = this.computeTargetZoomForBody(activeBody);
+      this.viewport.setZoom(targetZoom);
+      const pos = this.viewport.computeBodyPosition(activeBody, bodies);
+      this.viewport.focusOnPosition(pos.worldX, pos.worldY, targetZoom);
+    }
+  }
+
+  /** KI-Hinweis: Berechnet den passenden Ziel-Zoom für einen Himmelskörper (im Echten Maßstab entfernungsproportional zur Bahn). */
+  private computeTargetZoomForBody(target: CelestialBody): number {
+    const distAu = target.distanceFromSunAu;
+    const isTrueScale = this.viewport.viewMode() === 'true-scale';
+
+    if (target.id === 'iss') {
+      return 12000;
+    }
+    if (target.id === 'jwst' || target.id === 'gaia') {
+      return isTrueScale ? 45 : 6.5;
+    }
+    if (target.category === 'lagrange') {
+      const pt = target.id.slice(-2).toLowerCase();
+      if (pt === 'l1' || pt === 'l2') {
+        return isTrueScale
+          ? Math.max(1.5, 45 / Math.max(1, distAu))
+          : distAu > 3
+            ? 2.8
+            : 6.5;
+      }
+      return isTrueScale
+        ? Math.max(0.25, 9 / Math.max(0.4, distAu))
+        : distAu > 10
+          ? 0.9
+          : 1.65;
+    }
+    if (target.isSurfaceLanded) {
+      return 9000;
+    }
+    if (target.parentId && target.parentId !== 'sun') {
+      return 45;
+    }
+    if (target.category === 'planet') {
+      return isTrueScale
+        ? Number(Math.min(45, Math.max(0.75, 22 / Math.max(0.38, distAu))).toFixed(2))
+        : target.childrenIds.length > 0
+          ? 3.2
+          : 1.65;
+    }
+    if (target.category === 'dwarf-planet') {
+      return isTrueScale ? 28 : 3.2;
+    }
+    if (isTrueScale) {
+      if (distAu > 80) {
+        return 0.22;
+      }
+      if (distAu > 35) {
+        return 0.75;
+      }
+      if (distAu > 0 && distAu <= 2.0) {
+        return 9.0;
+      }
+      return 1.8;
+    }
+    if (target.id === 'sun') {
+      return 1.25;
+    }
+    return 1.65;
   }
 
   /** Umschalten des Körper-Radien-Maßstabs innerhalb der SVG */
