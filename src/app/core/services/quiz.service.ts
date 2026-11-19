@@ -3,8 +3,8 @@
  * FCPP-Referenz: P50-U10, P50-U20, P50-U30 (Weltraum-Quiz, Kategoriewahl & kindgerechte Auswertung)
  * Erstellt mit: KI-Assistent (Antigravity AI / Pair-Programming Agent)
  * Erstellt für / Autor: Joshua Mößmer (J-Moessmer)
- * Datum / Version: 16.11.2026 / v1.0
- * Hinweis: Signal-basierter Quiz-Service für Fragen-Index, Antwortprüfung, Punktestand und kindgerechtes Lob mit KI-Unterstützung erstellt.
+ * Datum / Version: 19.11.2026 / v1.2
+ * Hinweis: Signal-basierter Quiz-Service für 4 Kategorien, Zufalls-Wähler im „Quiz des Tages" (Fisher-Yates), Antwortprüfung, Punktestand und kindgerechtes Lob mit KI-Unterstützung erstellt.
  */
 
 import { Injectable, computed, inject, signal } from '@angular/core';
@@ -24,23 +24,32 @@ export class QuizService {
       id: 'daily',
       label: 'Quiz des Tages',
       icon: '🌟',
-      description: '5 bunt gemischte Weltraum-Fragen für jeden Tag!',
+      description: '7 zufällig ausgewählte Weltraum-Fragen aus allen Kategorien – jede Runde neu gemischt!',
     },
     {
       id: 'missions',
       label: 'Missionsquiz',
       icon: '🛰️',
-      description: 'Fragen zu Mars-Rovern, James-Webb, Gaia, ISS & Mondflügen.',
+      description: 'Fragen zu Rovern, Teleskopen, Raumstationen, Sonden & Raumfahrt-Pionieren.',
     },
     {
       id: 'celestial',
       label: 'Raumkörperquiz',
       icon: '🪐',
-      description: 'Fragen zu Sonne, Planeten, Monden, Gürteln & Bahnelementen.',
+      description: 'Fragen zu Sonne, Planeten, Monden & Zwergplaneten.',
+    },
+    {
+      id: 'astronomy',
+      label: 'Bahnen, Kometen & Rekorde',
+      icon: '☄️',
+      description: 'Fragen zu den 7 Bahnelementen, Größenvergleichen, Kometen, Gürteln & Weltraum-Rekorden.',
     },
   ];
 
+  readonly dailyQuestionCount = 7;
+
   private readonly allQuestionsState = signal<QuizQuestion[]>([]);
+  private readonly dailyQuestionsState = signal<QuizQuestion[]>([]);
 
   /** Signals gemäß FCPP P50-U20 & P50-U30 */
   readonly selectedCategory = signal<QuizCategoryId>('daily');
@@ -56,8 +65,8 @@ export class QuizService {
     const all = this.allQuestionsState();
     const cat = this.selectedCategory();
     if (cat === 'daily') {
-      // Deterministische Mischung aus Raumkörper- und Missionsfragen (5 Fragen)
-      return all.slice(0, 5);
+      const daily = this.dailyQuestionsState();
+      return daily.length > 0 ? daily : all.slice(0, this.dailyQuestionCount);
     }
     return all.filter((q) => q.category === cat);
   });
@@ -112,8 +121,27 @@ export class QuizService {
           .pipe(catchError(() => of([] as QuizQuestion[]))),
       );
       this.allQuestionsState.set(data);
+      this.shuffleDailyQuestions();
+    } else if (this.dailyQuestionsState().length === 0) {
+      this.shuffleDailyQuestions();
     }
     return this.allQuestionsState();
+  }
+
+  /** KI-generierter Block: Mischt den gesamten Fragenpool per Fisher-Yates für das „Quiz des Tages" */
+  shuffleDailyQuestions(): void {
+    const pool = [...this.allQuestionsState()];
+    for (let i = pool.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [pool[i], pool[j]] = [pool[j], pool[i]];
+    }
+    this.dailyQuestionsState.set(pool.slice(0, Math.min(this.dailyQuestionCount, pool.length)));
+  }
+
+  /** Würfelt eine neue Zufallsrunde für das „Quiz des Tages" (P50-U30) */
+  rerollDailyQuiz(): void {
+    this.selectedCategory.set('daily');
+    this.restartQuiz();
   }
 
   /** Wählt eine Quiz-Kategorie links im Menü aus und startet die Runde neu (P50-U30) */
@@ -160,8 +188,11 @@ export class QuizService {
     this.isAnswerChecked.set(false);
   }
 
-  /** Setzt das aktuelle Quiz zurück (--> P50) (P50-A30 / P50-U20) */
+  /** Setzt das aktuelle Quiz zurück (--> P50) und mischt das „Quiz des Tages" bei Bedarf neu (P50-A30 / P50-U20) */
   restartQuiz(): void {
+    if (this.selectedCategory() === 'daily') {
+      this.shuffleDailyQuestions();
+    }
     this.currentQuestionIndex.set(0);
     this.selectedOptionIndex.set(null);
     this.isAnswerChecked.set(false);

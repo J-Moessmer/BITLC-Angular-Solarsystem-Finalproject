@@ -3,8 +3,8 @@
  * FCPP-Referenz: P10-U20, P10-U30, P10-U40, P20-U20, P20-U40
  * Erstellt mit: KI-Assistent (Antigravity AI / Pair-Programming Agent)
  * Erstellt für / Autor: Joshua Mößmer (J-Moessmer)
- * Datum / Version: 16.11.2026 / v2.0
- * Hinweis: Stufenloser logarithmischer Zoom (0 % bis 100 % Slider / 0.08x bis 18.000x) für JEDEN Himmelskörper mit analytischem SVG-Orbit-Clipping (verhindert VM-Stottern bei extremem Zoom) und nahtlosem Übergang bis auf echte Planetenradien & ISS-Flughöhe (408 km) mit KI-Unterstützung erstellt.
+ * Datum / Version: 19.11.2026 / v2.1
+ * Hinweis: Stufenloser logarithmischer Zoom (0 % bis 100 % Slider / 0.08x bis 36.000x) für JEDEN Himmelskörper, analytisches SVG-Orbit-Clipping und präzise Geometrie für alle 5 Sonne-Erde-Lagrange-Punkte (L1-L5) sowie JWST & Gaia mit KI-Unterstützung erstellt.
  */
 
 import { Injectable, computed, signal } from '@angular/core';
@@ -500,8 +500,8 @@ export class ViewportStateService {
           : Number(Math.max(2.6, Math.min(9.0, body.overviewBodyRadiusSvg * 0.62)).toFixed(1));
     }
 
-    // Für Gürtel (Asteroidengürtel, Oortscher Gürtel) oder Raumsonden: immer der feine Symbol-Punkt
-    if (body.category === 'spacecraft' || body.category === 'belt') {
+    // Für Gürtel (Asteroidengürtel, Oortscher Gürtel), Lagrange-Punkte oder Raumsonden: immer der feine Symbol-Punkt
+    if (body.category === 'spacecraft' || body.category === 'belt' || body.category === 'lagrange') {
       return {
         displayRadiusPx: minScreenPinPx,
         strictTrueRadiusPx: minScreenPinPx,
@@ -604,46 +604,131 @@ export class ViewportStateService {
       };
     }
 
-    // Spezialfall: Sonne-Erde Lagrange-Punkt L2 (JWST & Gaia stehen exakt auf der Linie Sonne -> Erde -> 1,5 Mio. km dahinter!)
-    if (body.id === 'jwst' || body.id === 'gaia') {
-      const earth = allBodies.find((b) => b.id === 'earth');
-      const earthPos = earth ? this.computeBodyPosition(earth, allBodies) : null;
-      if (earthPos) {
-        const rEarthWorld = Math.hypot(earthPos.worldX, earthPos.worldY) || 1;
-        const ux = earthPos.worldX / rEarthWorld;
-        const uy = earthPos.worldY / rEarthWorld;
+    // KI-generierter Block: Exakte Positionierung aller 5 Lagrange-Punkte (L1-L5) für alle 8 Planeten sowie JWST & Gaia im Halo-Orbit um Erde-L2!
+    if (body.category === 'lagrange' || body.id === 'jwst' || body.id === 'gaia') {
+      const planetId = body.id === 'jwst' || body.id === 'gaia' ? 'earth' : (body.parentId ?? 'earth');
+      const pointType =
+        body.id === 'jwst' || body.id === 'gaia' ? 'l2' : body.id.slice(-2).toLowerCase();
+      const planet = allBodies.find((b) => b.id === planetId);
+      const planetPos = planet ? this.computeBodyPosition(planet, allBodies) : null;
+
+      if (planetPos && planet) {
+        const rPlanetWorld = Math.hypot(planetPos.worldX, planetPos.worldY) || 1;
+        const ux = planetPos.worldX / rPlanetWorld;
+        const uy = planetPos.worldY / rPlanetWorld;
         const tx = -uy;
         const ty = ux;
 
-        // Exakter Abstand hinter der Erde: 1,01 AE im echten Maßstab (1,5 Mio. km), +16 Einheiten in der Übersicht
-        const l2WorldDist = mode === 'true-scale' ? rEarthWorld * 1.01 : rEarthWorld + 16;
-        // Kleiner Halo-/Lissajous-Versatz senkrecht zur Linie, damit JWST & Gaia sich nicht überlagern
-        const haloOffsetWorld =
-          mode === 'true-scale'
-            ? (body.id === 'jwst' ? 0.018 : -0.018)
-            : (body.id === 'jwst' ? 5 : -5);
+        const hillRatioByPlanet: Readonly<Record<string, number>> = {
+          mercury: 0.0038,
+          venus: 0.0093,
+          earth: 0.01,
+          mars: 0.0047,
+          jupiter: 0.0682,
+          saturn: 0.0455,
+          uranus: 0.0244,
+          neptune: 0.0258,
+        };
+        const maxOverviewGapByPlanet: Readonly<Record<string, number>> = {
+          mercury: 11,
+          venus: 14,
+          earth: 17,
+          mars: 17,
+          jupiter: 26,
+          saturn: 26,
+          uranus: 24,
+          neptune: 24,
+        };
 
-        const worldX = Number((ux * l2WorldDist + tx * haloOffsetWorld).toFixed(4));
-        const worldY =
-          mode === 'side-view'
-            ? earthPos.worldY
-            : Number((uy * l2WorldDist + ty * haloOffsetWorld).toFixed(4));
-
-        const scaledRx =
-          mode === 'true-scale'
-            ? Number((earthPos.orbitRxPx * 1.01).toFixed(1))
-            : Number((earthPos.orbitRxPx + 16 * z).toFixed(1));
-        const scaledRy =
-          mode === 'true-scale'
-            ? Number((earthPos.orbitRyPx * 1.01).toFixed(1))
-            : Number((earthPos.orbitRyPx + 16 * z).toFixed(1));
-
-        const orbitClip = this.computeOrbitClipping(
-          earthPos.orbitCenterX,
-          earthPos.orbitCenterY,
-          scaledRx,
-          scaledRy,
+        const planetMoons = allBodies.filter(
+          (m) => m.parentId === planet.id && m.category === 'moon',
         );
+        const maxMoonOverviewSvg = planetMoons.reduce(
+          (max, m) => Math.max(max, m.overviewOrbitRadiusSvg),
+          0,
+        );
+        const moonMinScreenPx =
+          maxMoonOverviewSvg > 0
+            ? planetPos.bodyRadiusPx + Math.max(9, maxMoonOverviewSvg * 0.72)
+            : planetPos.bodyRadiusPx + 7;
+
+        const hillRatio = hillRatioByPlanet[planet.id] ?? 0.01;
+        const maxOverviewGapWorld = maxOverviewGapByPlanet[planet.id] ?? 18;
+
+        const rawL12Px =
+          mode === 'true-scale'
+            ? Math.min(
+                rPlanetWorld * 0.14 * z,
+                Math.max(rPlanetWorld * hillRatio * z, moonMinScreenPx + 6),
+              )
+            : Math.min(
+                maxOverviewGapWorld * z,
+                Math.max(moonMinScreenPx + 7, moonMinScreenPx * 1.32),
+              );
+        const l12WorldOffset = rawL12Px / Math.max(0.001, z);
+
+        let worldX = planetPos.worldX;
+        let worldY = planetPos.worldY;
+        let liveLongitudeDeg = planetPos.liveLongitudeDeg;
+        let liveDistanceAu = planetPos.liveDistanceAu;
+
+        if (pointType === 'l1') {
+          worldX = Number((planetPos.worldX - ux * l12WorldOffset).toFixed(4));
+          worldY = Number((planetPos.worldY - uy * l12WorldOffset).toFixed(4));
+          liveDistanceAu = Number((planetPos.liveDistanceAu * (1 - hillRatio)).toFixed(3));
+        } else if (body.id === 'jwst' || body.id === 'gaia') {
+          // Kleiner Halo-Orbit direkt um Erde-L2 (8 px Radius auf dem Bildschirm)
+          const l2WorldX = planetPos.worldX + ux * l12WorldOffset;
+          const l2WorldY = planetPos.worldY + uy * l12WorldOffset;
+          const haloWorld = 8 / Math.max(0.001, z);
+          const sign = body.id === 'jwst' ? 1 : -1;
+          worldX = Number((l2WorldX + sign * tx * haloWorld + ux * (haloWorld * 0.35)).toFixed(4));
+          worldY =
+            mode === 'side-view'
+              ? planetPos.worldY
+              : Number((l2WorldY + sign * ty * haloWorld + uy * (haloWorld * 0.35)).toFixed(4));
+          liveDistanceAu = Number((planetPos.liveDistanceAu * (1 + hillRatio)).toFixed(3));
+        } else if (pointType === 'l2') {
+          // Exakt kollinear auf der Achse Sonne -> Planet -> L2
+          worldX = Number((planetPos.worldX + ux * l12WorldOffset).toFixed(4));
+          worldY = Number((planetPos.worldY + uy * l12WorldOffset).toFixed(4));
+          liveDistanceAu = Number((planetPos.liveDistanceAu * (1 + hillRatio)).toFixed(3));
+        } else {
+          // L3 (180°), L4 (+60° voraus) und L5 (-60° dahinter) liegen exakt auf der Planetenbahn-Ellipse!
+          const planetKepler = this.computeLiveKeplerState(planet);
+          const planetEcc = Math.min(
+            mode === 'true-scale' ? 0.97 : 0.75,
+            Math.max(0, planet.orbitalElements.ecc.numericValue ?? 0),
+          );
+          const planetSemiMajorWorld =
+            mode === 'true-scale'
+              ? Number((planet.distanceFromSunAu * this.pixelsPerAu).toFixed(3))
+              : planet.overviewOrbitRadiusSvg;
+          const planetSemiMinorWorld = Number(
+            (planetSemiMajorWorld * Math.sqrt(1 - planetEcc * planetEcc)).toFixed(3),
+          );
+          const planetFocusOffsetX =
+            mode === 'true-scale' ? Number((-planetSemiMajorWorld * planetEcc).toFixed(3)) : 0;
+
+          const angleDelta =
+            pointType === 'l3' ? Math.PI : pointType === 'l4' ? -Math.PI / 3 : Math.PI / 3;
+          const shiftDeg = pointType === 'l3' ? 180 : pointType === 'l4' ? 60 : 300;
+          liveLongitudeDeg = Number(((planetKepler.longitudeDeg + shiftDeg) % 360).toFixed(1));
+
+          if (mode === 'side-view') {
+            const incRad = (planet.inclinationToSolarEquatorDeg * Math.PI) / 180;
+            const lonRad = (liveLongitudeDeg * Math.PI) / 180;
+            const sideProj = Math.cos(lonRad) >= 0 ? 1 : -1;
+            worldX = Number((sideProj * Math.cos(incRad) * planetSemiMajorWorld).toFixed(3));
+            worldY = Number((-sideProj * Math.sin(incRad) * planetSemiMajorWorld).toFixed(3));
+          } else {
+            const targetAngle = -planetKepler.eccentricAnomalyRad + angleDelta;
+            worldX = Number(
+              (planetFocusOffsetX + Math.cos(targetAngle) * planetSemiMajorWorld).toFixed(4),
+            );
+            worldY = Number((Math.sin(targetAngle) * planetSemiMinorWorld).toFixed(4));
+          }
+        }
 
         return {
           body,
@@ -651,17 +736,17 @@ export class ViewportStateService {
           y: Number((py + worldY * z).toFixed(1)),
           worldX,
           worldY,
-          orbitRxPx: scaledRx,
-          orbitRyPx: scaledRy,
-          orbitCenterX: earthPos.orbitCenterX,
-          orbitCenterY: earthPos.orbitCenterY,
-          isOrbitVisibleInViewport: mode !== 'side-view' && orbitClip.isVisible,
-          clippedOrbitPath: orbitClip.clippedPath,
+          orbitRxPx: planetPos.orbitRxPx,
+          orbitRyPx: planetPos.orbitRyPx,
+          orbitCenterX: planetPos.orbitCenterX,
+          orbitCenterY: planetPos.orbitCenterY,
+          isOrbitVisibleInViewport: false,
+          clippedOrbitPath: null,
           bodyRadiusPx: displayRadiusPx,
           strictTrueRadiusPx,
-          inclinationYOffsetPx: earthPos.inclinationYOffsetPx,
-          liveLongitudeDeg: earthPos.liveLongitudeDeg,
-          liveDistanceAu: Number((earthPos.liveDistanceAu * 1.01).toFixed(3)),
+          inclinationYOffsetPx: planetPos.inclinationYOffsetPx,
+          liveLongitudeDeg,
+          liveDistanceAu,
         };
       }
     }

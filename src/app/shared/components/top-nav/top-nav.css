@@ -26,12 +26,25 @@
   display: flex;
   align-items: center;
   gap: 0.65rem;
+  padding: 0.28rem 0.55rem;
+  border-radius: var(--radius-md);
+  border: 1px solid transparent;
   text-decoration: none;
   color: var(--card-text-primary);
+  transition:
+    background-color 0.12s ease,
+    border-color 0.12s ease;
 }
 
 .brand-link:hover {
   text-decoration: none;
+  background-color: var(--card-bg-subtle);
+  border-color: var(--card-border);
+}
+
+.brand-link-active {
+  background-color: var(--card-bg-subtle);
+  border-color: var(--accent-primary);
 }
 
 .brand-icon {

@@ -3,11 +3,11 @@
  * FCPP-Referenz: P50-U10, P50-U20, P50-U30 (Weltraum-Quiz & Auswertung)
  * Erstellt mit: KI-Assistent (Antigravity AI / Pair-Programming Agent)
  * Erstellt für / Autor: Joshua Mößmer (J-Moessmer)
- * Datum / Version: 16.11.2026 / v1.0
- * Hinweis: TypeScript-Interfaces für Quiz-Kategorien, Fragen und kindgerechte Auswertung mit KI-Unterstützung erstellt.
+ * Datum / Version: 19.11.2026 / v1.1
+ * Hinweis: TypeScript-Interfaces für 4 Quiz-Kategorien (inkl. Bahnen/Kometen/Rekorde), Fragen und kindgerechte Auswertung mit KI-Unterstützung erstellt.
  */
 
-export type QuizCategoryId = 'daily' | 'missions' | 'celestial';
+export type QuizCategoryId = 'daily' | 'missions' | 'celestial' | 'astronomy';
 
 export interface QuizCategoryInfo {
   id: QuizCategoryId;

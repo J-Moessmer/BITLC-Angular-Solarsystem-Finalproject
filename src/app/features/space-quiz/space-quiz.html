@@ -3,8 +3,8 @@
   FCPP-Referenz: P50-U10 (A10), P50-U20 (A20, A30), P50-U30 (A40)
   Erstellt mit: KI-Assistent (Antigravity AI / Pair-Programming Agent)
   Erstellt für / Autor: Joshua Mößmer (J-Moessmer)
-  Datum / Version: 16.11.2026 / v2.0
-  Hinweis: Bereinigte Quiz-Oberfläche ohne Deko-Badges und ohne redundante Klammer-Zusätze, mit 1px Rahmen.
+  Datum / Version: 19.11.2026 / v2.1
+  Hinweis: 4 Quiz-Kategorien, Zufalls-Wähler für „Quiz des Tages" und direkt auf der Quiz-Seite eingebetteter Steckbrief mit Bildern nach Klick auf „Lösung prüfen".
 -->
 <section class="p50-workspace" aria-labelledby="p50-heading">
   <aside class="quiz-sidebar-card" aria-label="Quiz-Kategorien wählen">
@@ -45,9 +45,16 @@
     @if (!quizService.isQuizFinished() && quizService.currentQuestion(); as q) {
       <div class="question-stage-card">
         <div class="stage-top-meta">
-          <span class="question-counter">
-            Frage {{ quizService.currentQuestionIndex() + 1 }} von {{ quizService.totalQuestions() }}
-          </span>
+          <div class="stage-meta-left">
+            <span class="question-counter">
+              Frage {{ quizService.currentQuestionIndex() + 1 }} von {{ quizService.totalQuestions() }}
+            </span>
+            @if (quizService.selectedCategory() === 'daily') {
+              <button type="button" class="shuffle-daily-btn" (click)="onRerollDaily()">
+                <i class="fa-solid fa-shuffle" aria-hidden="true"></i> Fragen neu würfeln
+              </button>
+            }
+          </div>
           <a class="home-link" routerLink="/solar-system">Zurück zum Sonnensystem</a>
         </div>
 
@@ -86,10 +93,30 @@
             [class.is-correct]="quizService.selectedOptionIndex() === q.correctOptionIndex"
           >
             <p>{{ q.childExplanation }}</p>
-            @if (q.relatedBodyId) {
-              <a class="jump-body-link" [routerLink]="['/solar-system', q.relatedBodyId]">
-                Steckbrief im Sonnensystem öffnen
-              </a>
+            @if (activeSteckbriefBody(); as steckbriefBody) {
+              <div class="explanation-actions">
+                <button
+                  type="button"
+                  class="toggle-steckbrief-btn"
+                  (click)="onToggleSteckbrief()"
+                >
+                  <i
+                    class="fa-solid"
+                    [class.fa-eye-slash]="isSteckbriefOpen()"
+                    [class.fa-book-open]="!isSteckbriefOpen()"
+                    aria-hidden="true"
+                  ></i>
+                  {{
+                    isSteckbriefOpen()
+                      ? 'Steckbrief ausblenden'
+                      : 'Steckbrief anzeigen (' + steckbriefBody.name + ')'
+                  }}
+                </button>
+                <a class="jump-body-link" [routerLink]="['/solar-system', steckbriefBody.id]">
+                  <i class="fa-solid fa-location-crosshairs" aria-hidden="true"></i>
+                  Auf 2D-Sternenkarte zeigen
+                </a>
+              </div>
             }
           </div>
         }
@@ -115,6 +142,18 @@
           </button>
         </div>
       </div>
+
+      @if (quizService.isAnswerChecked() && isSteckbriefOpen() && activeSteckbriefBody(); as body) {
+        <div class="quiz-local-steckbrief-wrapper">
+          <app-infobox-detail
+            [body]="body"
+            [childBodies]="activeSteckbriefChildren()"
+            [parentBody]="activeSteckbriefParent()"
+            (bodySelected)="onSelectSteckbriefBody($event)"
+            (closed)="isSteckbriefOpen.set(false)"
+          />
+        </div>
+      }
     } @else if (quizService.isQuizFinished()) {
       <div class="result-evaluation-card" aria-labelledby="result-heading">
         <span class="praise-badge">{{ quizService.childPraiseSummary().badge }}</span>

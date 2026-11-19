@@ -153,6 +153,15 @@
           <button
             type="button"
             class="scale-chip"
+            [class.active-chip]="lagrangeFilterMode() !== 'off'"
+            (click)="cycleLagrangeFilterMode()"
+            title="Schaltet zwischen Fokus & Zoom (nur gewählter Planet / ab 12x Zoom), Alle 40 Punkte und Aus um"
+          >
+            {{ lagrangeFilterLabel() }}
+          </button>
+          <button
+            type="button"
+            class="scale-chip"
             [class.active-chip]="filterSpacecraftByDate()"
             (click)="filterSpacecraftByDate.set(!filterSpacecraftByDate())"
             title="Blendet Raumsonden und Missionen vor ihrem historischen Startdatum aus"
@@ -425,27 +434,44 @@
               />
             }
 
-            @if (l2GuideLine(); as l2) {
-              <g class="l2-guide" aria-hidden="true">
-                <line
-                  [attr.x1]="l2.x1"
-                  [attr.y1]="l2.y1"
-                  [attr.x2]="l2.x2"
-                  [attr.y2]="l2.y2"
-                  stroke="#FDE047"
-                  stroke-width="1.3"
-                  stroke-dasharray="3 3"
-                  opacity="0.85"
-                />
-                <text
-                  [attr.x]="l2.labelX"
-                  [attr.y]="l2.labelY"
-                  fill="#FDE047"
-                  font-size="10"
-                  font-weight="700"
-                >
-                  L2 (1,5 Mio. km hinter der Erde)
-                </text>
+            @if (lagrangeGuideGeometry(); as lg) {
+              <g class="lagrange-guides" aria-hidden="true">
+                @for (seg of lg.triangleLines; track seg.id) {
+                  <line
+                    [attr.x1]="seg.x1"
+                    [attr.y1]="seg.y1"
+                    [attr.x2]="seg.x2"
+                    [attr.y2]="seg.y2"
+                    [attr.stroke]="seg.color"
+                    stroke-width="1"
+                    stroke-dasharray="4 4"
+                    [attr.opacity]="lg.isHighlighted ? 0.62 : 0.28"
+                  />
+                }
+                @for (axis of lg.l1ToL2Lines; track axis.id) {
+                  <line
+                    [attr.x1]="axis.x1"
+                    [attr.y1]="axis.y1"
+                    [attr.x2]="axis.x2"
+                    [attr.y2]="axis.y2"
+                    [attr.stroke]="axis.color"
+                    stroke-width="1.35"
+                    stroke-dasharray="3 3"
+                    [attr.opacity]="lg.isHighlighted ? 0.9 : 0.55"
+                  />
+                }
+                @if (lg.l2HaloCircle; as halo) {
+                  <circle
+                    [attr.cx]="halo.cx"
+                    [attr.cy]="halo.cy"
+                    [attr.r]="halo.r"
+                    fill="none"
+                    stroke="#FDE047"
+                    stroke-width="1.1"
+                    stroke-dasharray="2.5 2.5"
+                    [attr.opacity]="lg.isHighlighted ? 0.85 : 0.45"
+                  />
+                }
               </g>
             }
 
@@ -541,8 +567,17 @@
               <!-- Unsichtbare Mindest-Klickfläche (Hitbox) -->
               <circle cx="0" cy="0" [attr.r]="pos.bodyRadiusPx + 6" fill="transparent" />
 
-              <!-- Raumsonden, Rover, Teleskope & Kometen als Font-Awesome-7-Symbol statt schlichtem Kreis -->
-              @if (getSvgIconGlyph(pos.body); as glyph) {
+              <!-- Lagrange-Punkte L1-L5 als Raute mit Fadenkreuz-Kern -->
+              @if (pos.body.category === 'lagrange') {
+                <polygon
+                  points="0,-5.5 5.5,0 0,5.5 -5.5,0"
+                  fill="#111D3B"
+                  [attr.stroke]="pos.body.colorHex"
+                  stroke-width="1.5"
+                />
+                <circle cx="0" cy="0" r="1.8" [attr.fill]="pos.body.colorHex" />
+              } @else if (getSvgIconGlyph(pos.body); as glyph) {
+                <!-- Raumsonden, Rover, Teleskope & Kometen als Font-Awesome-7-Symbol statt schlichtem Kreis -->
                 <circle
                   cx="0"
                   cy="0"
@@ -579,20 +614,27 @@
               @if (
                 pos.body.parentId === 'sun' ||
                 pos.body.id === 'sun' ||
+                pos.body.category === 'lagrange' ||
                 viewport.zoomLevel() >= 12 ||
                 dataService.selectedBodyId() === pos.body.id ||
                 dataService.selectedBodyId() === pos.body.parentId
               ) {
                 <text
                   x="0"
-                  [attr.y]="pos.bodyRadiusPx + 12"
+                  [attr.y]="pos.body.category === 'lagrange' ? -9 : pos.bodyRadiusPx + 12"
                   text-anchor="middle"
-                  fill="#F8FAFC"
+                  [attr.fill]="pos.body.category === 'lagrange' ? '#FEF08A' : '#F8FAFC'"
                   font-size="11"
                   font-weight="700"
                   class="svg-body-label"
                 >
-                  {{ pos.body.name }}
+                  {{
+                    pos.body.category === 'lagrange' &&
+                    dataService.selectedBodyId() !== pos.body.id &&
+                    viewport.zoomLevel() < 4
+                      ? pos.body.id.slice(-2).toUpperCase()
+                      : pos.body.name
+                  }}
                   @if (pos.body.id === 'iss' && viewport.zoomLevel() >= 300) {
                     · 408 km
                   } @else if (viewport.viewMode() === 'side-view' && pos.body.id !== 'sun') {

@@ -42,6 +42,99 @@ describe('Core Services (P10–P50)', () => {
     expect(viewport.panX()).toBe(0);
   });
 
+  it('ViewportStateService should place L1/L2 collinear with Sun-Earth and L4/L5 at 60° on Earth orbit', () => {
+    const viewport = TestBed.inject(ViewportStateService);
+    const baseOe = {
+      sma: { code: 'SMA' as const, label: 'SMA', formattedValue: '1 AE', numericValue: 1, childExplanation: '' },
+      ecc: { code: 'ECC' as const, label: 'ECC', formattedValue: '0.0167', numericValue: 0.0167, childExplanation: '' },
+      inc: { code: 'INC' as const, label: 'INC', formattedValue: '0°', numericValue: 0, childExplanation: '' },
+      lan: { code: 'LAN' as const, label: 'LAN', formattedValue: '0°', numericValue: 0, childExplanation: '' },
+      lpe: { code: 'LPE' as const, label: 'LPE', formattedValue: '102.95°', numericValue: 102.95, childExplanation: '' },
+      mna: { code: 'MNA' as const, label: 'MNA', formattedValue: '357.52°', numericValue: 357.52, childExplanation: '' },
+      ref: { code: 'REF' as const, label: 'REF', formattedValue: 'J2000', childExplanation: '' },
+    };
+    const makeBody = (id: string, category: CelestialBody['category'], overviewOrbitRadiusSvg: number): CelestialBody => ({
+      id,
+      name: id,
+      subtitle: '',
+      category,
+      categoryLabel: category,
+      parentId: id === 'sun' ? undefined : 'earth',
+      childrenIds: [],
+      wikimediaImageUrl: '',
+      imageUrl: '',
+      imageCredit: '',
+      colorHex: '#FDE047',
+      accentColorHex: '#FEF08A',
+      diameterKm: id === 'earth' ? 12756 : 1,
+      distanceFromSunKm: 149600000,
+      distanceFromSunAu: 1,
+      distanceFromEarthKm: 0,
+      orbitalPeriodDays: 365.25,
+      orbitalPeriodLabel: '365 Tage',
+      inclinationToSolarEquatorDeg: 0,
+      overviewOrbitRadiusSvg,
+      overviewBodyRadiusSvg: 8.5,
+      orbitAngleDeg: 0,
+      shortSummary: '',
+      childFriendlyFacts: [],
+      comparisonHint: '',
+      orbitalElements: baseOe,
+    });
+    const bodies: CelestialBody[] = [
+      makeBody('sun', 'star', 0),
+      { ...makeBody('earth', 'planet', 130), parentId: 'sun' },
+      makeBody('lagrange-l1', 'lagrange', 108),
+      makeBody('lagrange-l2', 'lagrange', 152),
+      makeBody('lagrange-l4', 'lagrange', 130),
+      makeBody('lagrange-l5', 'lagrange', 130),
+    ];
+
+    const earthPos = viewport.computeBodyPosition(bodies[1], bodies);
+    const l1Pos = viewport.computeBodyPosition(bodies[2], bodies);
+    const l2Pos = viewport.computeBodyPosition(bodies[3], bodies);
+    const l4Pos = viewport.computeBodyPosition(bodies[4], bodies);
+    const l5Pos = viewport.computeBodyPosition(bodies[5], bodies);
+
+    const crossL1 = earthPos.worldX * l1Pos.worldY - earthPos.worldY * l1Pos.worldX;
+    const crossL2 = earthPos.worldX * l2Pos.worldY - earthPos.worldY * l2Pos.worldX;
+    expect(Math.abs(crossL1)).toBeLessThan(0.05);
+    expect(Math.abs(crossL2)).toBeLessThan(0.05);
+
+    const rE = Math.hypot(earthPos.worldX, earthPos.worldY);
+    const rL1 = Math.hypot(l1Pos.worldX, l1Pos.worldY);
+    const rL2 = Math.hypot(l2Pos.worldX, l2Pos.worldY);
+    expect(rL1).toBeLessThan(rE);
+    expect(rL2).toBeGreaterThan(rE);
+
+    const cosL4 =
+      (earthPos.worldX * l4Pos.worldX + earthPos.worldY * l4Pos.worldY) /
+      (rE * Math.hypot(l4Pos.worldX, l4Pos.worldY));
+    const cosL5 =
+      (earthPos.worldX * l5Pos.worldX + earthPos.worldY * l5Pos.worldY) /
+      (rE * Math.hypot(l5Pos.worldX, l5Pos.worldY));
+    expect(cosL4).toBeCloseTo(0.5, 2);
+    expect(cosL5).toBeCloseTo(0.5, 2);
+
+    const jupiter = { ...makeBody('jupiter', 'planet', 255), parentId: 'sun', distanceFromSunAu: 5.204 };
+    const jupL1 = { ...makeBody('jupiter-l1', 'lagrange', 243), parentId: 'jupiter', distanceFromSunAu: 4.849 };
+    const jupL2 = { ...makeBody('jupiter-l2', 'lagrange', 267), parentId: 'jupiter', distanceFromSunAu: 5.559 };
+    const jupL4 = { ...makeBody('jupiter-l4', 'lagrange', 255), parentId: 'jupiter', distanceFromSunAu: 5.204 };
+    const allWithJup = [...bodies, jupiter, jupL1, jupL2, jupL4];
+    const jupPos = viewport.computeBodyPosition(jupiter, allWithJup);
+    const jL1Pos = viewport.computeBodyPosition(jupL1, allWithJup);
+    const jL2Pos = viewport.computeBodyPosition(jupL2, allWithJup);
+    const jL4Pos = viewport.computeBodyPosition(jupL4, allWithJup);
+    expect(Math.abs(jupPos.worldX * jL1Pos.worldY - jupPos.worldY * jL1Pos.worldX)).toBeLessThan(0.1);
+    expect(Math.abs(jupPos.worldX * jL2Pos.worldY - jupPos.worldY * jL2Pos.worldX)).toBeLessThan(0.1);
+    expect(Math.hypot(jL1Pos.worldX, jL1Pos.worldY)).toBeLessThan(Math.hypot(jupPos.worldX, jupPos.worldY));
+    expect(Math.hypot(jL2Pos.worldX, jL2Pos.worldY)).toBeGreaterThan(Math.hypot(jupPos.worldX, jupPos.worldY));
+    const cosJupL4 =
+      (jupPos.worldX * jL4Pos.worldX + jupPos.worldY * jL4Pos.worldY) /
+      (Math.hypot(jupPos.worldX, jupPos.worldY) * Math.hypot(jL4Pos.worldX, jL4Pos.worldY));
+    expect(cosJupL4).toBeCloseTo(0.5, 2);
+  });
+
   it('SolarSystemDataService should load fallback bodies with Wikimedia Commons URLs and 7 orbital elements (P20-U20)', async () => {
     const service = TestBed.inject(SolarSystemDataService);
     const httpMock = TestBed.inject(HttpTestingController);

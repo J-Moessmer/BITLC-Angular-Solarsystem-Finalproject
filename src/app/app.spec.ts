@@ -32,6 +32,35 @@ describe('App & FCPP Routing Shell (P10–P50)', () => {
     const compiled = fixture.nativeElement as HTMLElement;
     expect(compiled.querySelector('app-top-nav')).toBeTruthy();
     expect(compiled.querySelector('.brand-main')?.textContent).toContain('SSI App');
+    expect(compiled.querySelector('.brand-link')?.getAttribute('href')).toBe('/');
+  });
+
+  it('should render the Landing Page with interactive 5-step tutorial on root route /', async () => {
+    const fixture = TestBed.createComponent(App);
+    const router = TestBed.inject(Router);
+
+    await router.navigateByUrl('/');
+    await fixture.whenStable();
+    fixture.detectChanges();
+
+    const text = fixture.nativeElement.textContent as string;
+    expect(text).toContain('Willkommen in der SSI App');
+    expect(text).toContain('So funktioniert die SSI App');
+    expect(text).toContain('Schritt 1 von 5');
+    expect(text).not.toContain('P10');
+    expect(text).not.toContain('P20');
+    expect(text).not.toContain('P30');
+    expect(text).not.toContain('P40');
+    expect(text).not.toContain('P50');
+
+    const tabButtons = fixture.nativeElement.querySelectorAll(
+      '.tutorial-tab-btn',
+    ) as NodeListOf<HTMLButtonElement>;
+    expect(tabButtons.length).toBe(5);
+    tabButtons[1].click();
+    fixture.detectChanges();
+    expect(fixture.nativeElement.textContent).toContain('Schritt 2 von 5');
+    expect(fixture.nativeElement.textContent).toContain('Steckbriefe, 7 Bahnelemente');
   });
 
   it('should navigate across all FCPP routes (P10, P20, P30, P40, P50)', async () => {

@@ -3,8 +3,8 @@
  * FCPP-Referenz: P10 (P10-U20, P10-U40), P20 (P20-U20, P20-U30), P30 (P30-U20)
  * Erstellt mit: KI-Assistent (Antigravity AI / Pair-Programming Agent)
  * Erstellt für / Autor: Joshua Mößmer (J-Moessmer)
- * Datum / Version: 16.11.2026 / v1.0
- * Hinweis: TypeScript-Interfaces für Himmelskörper, Gürtel, Raumstationen sowie die 7 Bahnelemente (SMA, ECC, INC, LAN, LPE, MNA, REF) inkl. Wikimedia-Commons-Bild-URL und lokalem Bild-Fallback mit KI-Unterstützung erstellt.
+ * Datum / Version: 19.11.2026 / v1.1
+ * Hinweis: TypeScript-Interfaces für Himmelskörper, Gürtel, Raumstationen sowie die 7 Bahnelemente (SMA, ECC, INC, LAN, LPE, MNA, REF) inkl. Wikimedia-Commons-Bild-URL, lokalem Bild-Fallback und Quellen-Links (officialUrl, wikipediaUrl) mit KI-Unterstützung erstellt.
  */
 
 export type BodyCategory =
@@ -14,7 +14,8 @@ export type BodyCategory =
   | 'moon'
   | 'comet'
   | 'belt'
-  | 'spacecraft';
+  | 'spacecraft'
+  | 'lagrange';
 
 export interface OrbitalElementDetail {
   code: 'SMA' | 'ECC' | 'INC' | 'LAN' | 'LPE' | 'MNA' | 'REF';
@@ -80,5 +81,9 @@ export interface CelestialBody {
   shortSummary: string;
   childFriendlyFacts: string[];
   comparisonHint: string;
+  /** Verifizierter Link zur offiziellen NASA / ESA / Agentur-Infoseite (optional) */
+  officialUrl?: string;
+  /** Verifizierter Link zum deutschsprachigen Wikipedia-Artikel (optional) */
+  wikipediaUrl?: string;
   orbitalElements: OrbitalElements;
 }

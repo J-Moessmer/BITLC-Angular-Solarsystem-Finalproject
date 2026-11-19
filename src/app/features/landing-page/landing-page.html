@@ -1,0 +1,238 @@
+<!--
+  Projekt / Modul: SSI App – Solar System Info App / LandingPageComponent Template (landing-page.html)
+  FCPP-Referenz: P10 (Start- & Orientierungspunkt) sowie Schnellzugriff auf P20, P30, P40 und P50
+  Erstellt mit: KI-Assistent (Antigravity AI / Pair-Programming Agent)
+  Erstellt für / Autor: Joshua Mößmer (J-Moessmer)
+  Datum / Version: 19.11.2026 / v1.0
+  Hinweis: Kindgerechte Startseite (Landing Page) mit Weltraum-Illustration, interaktivem 5-Schritt-Entdecker-Tutorial und Modul-Karten mit KI-Unterstützung erstellt.
+-->
+<section class="landing-page" aria-labelledby="landing-hero-title">
+  <!-- Hero-Bereich: Willkommen + Schnellstart + Marineblau-Illustration -->
+  <div class="hero-card">
+    <div class="hero-copy">
+      <span class="hero-badge">
+        <i class="fa-solid fa-compass" aria-hidden="true"></i>
+        Entdecker-Startseite · Solar System Info App
+      </span>
+      <h1 id="landing-hero-title">
+        Willkommen in der SSI App – Deine Reise durch das Sonnensystem!
+      </h1>
+      <p class="hero-subtitle">
+        Finde heraus, wie sich Planeten um die Sonne bewegen, vergleiche die Größe eines Fußballs
+        mit riesigen Sternen, verfolge die Raumstation ISS und teste dein Wissen im Weltraum-Quiz.
+      </p>
+
+      <div class="hero-actions">
+        <a class="hero-btn-primary" routerLink="/solar-system">
+          <i class="fa-solid fa-earth-europe" aria-hidden="true"></i>
+          Sonnensystem-Karte starten
+        </a>
+        <a class="hero-btn-secondary" routerLink="/quiz">
+          <i class="fa-solid fa-rocket" aria-hidden="true"></i>
+          Weltraum-Quiz spielen
+        </a>
+      </div>
+    </div>
+
+    <div class="hero-visual" aria-hidden="true">
+      <svg class="hero-space-svg" viewBox="0 0 360 240" role="presentation">
+        <defs>
+          <radialGradient id="landingSunGlow" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#FEF08A" />
+            <stop offset="55%" stop-color="#F59E0B" />
+            <stop offset="100%" stop-color="#F59E0B" stop-opacity="0" />
+          </radialGradient>
+        </defs>
+
+        <!-- Hintergrund-Sterne -->
+        <circle cx="38" cy="36" r="1.5" fill="#E2E8F0" opacity="0.85" />
+        <circle cx="96" cy="24" r="1.2" fill="#BAE6FD" opacity="0.7" />
+        <circle cx="290" cy="32" r="1.8" fill="#FDE68A" opacity="0.85" />
+        <circle cx="332" cy="88" r="1.4" fill="#E2E8F0" opacity="0.75" />
+        <circle cx="54" cy="196" r="1.6" fill="#BAE6FD" opacity="0.7" />
+        <circle cx="312" cy="204" r="1.4" fill="#E2E8F0" opacity="0.75" />
+
+        <!-- Umlaufbahnen -->
+        <ellipse
+          cx="180"
+          cy="125"
+          rx="74"
+          ry="40"
+          fill="none"
+          stroke="#47648A"
+          stroke-width="1.2"
+          stroke-dasharray="4 4"
+        />
+        <ellipse
+          cx="180"
+          cy="125"
+          rx="126"
+          ry="68"
+          fill="none"
+          stroke="#47648A"
+          stroke-width="1.2"
+          stroke-dasharray="4 4"
+        />
+        <ellipse
+          cx="180"
+          cy="125"
+          rx="162"
+          ry="88"
+          fill="none"
+          stroke="#3A506B"
+          stroke-width="1"
+          stroke-dasharray="5 5"
+        />
+
+        <!-- Sonne im Zentrum -->
+        <circle cx="180" cy="125" r="42" fill="url(#landingSunGlow)" opacity="0.55" />
+        <circle cx="180" cy="125" r="24" fill="#F59E0B" stroke="#FEF08A" stroke-width="2" />
+
+        <!-- Erde mit Mond -->
+        <circle cx="116" cy="154" r="10.5" fill="#2563EB" stroke="#93C5FD" stroke-width="1.5" />
+        <circle cx="131" cy="144" r="3.2" fill="#CBD5E1" />
+
+        <!-- Saturn mit Ring -->
+        <g transform="translate(284, 80)">
+          <ellipse
+            cx="0"
+            cy="0"
+            rx="24"
+            ry="7"
+            fill="none"
+            stroke="#FDE68A"
+            stroke-width="2.5"
+            transform="rotate(-16)"
+          />
+          <circle cx="0" cy="0" r="12" fill="#EAB308" stroke="#FEF08A" stroke-width="1.2" />
+        </g>
+
+        <!-- Kleine Sonde / Komet -->
+        <path d="M 78 60 L 96 72" stroke="#38BDF8" stroke-width="2" stroke-linecap="round" />
+        <circle cx="96" cy="72" r="4" fill="#38BDF8" />
+      </svg>
+    </div>
+  </div>
+
+  <!-- Interaktives Entdecker-Tutorial in 5 Schritten -->
+  <section class="tutorial-section" aria-labelledby="tutorial-heading">
+    <div class="tutorial-header">
+      <div>
+        <h2 id="tutorial-heading">
+          <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>
+          So funktioniert die SSI App – Dein Entdecker-Tutorial
+        </h2>
+        <p class="tutorial-lead">
+          Klicke Schritt für Schritt durch die 5 Funktionen oder starte jeden Bereich direkt mit dem Button.
+        </p>
+      </div>
+      <span class="tutorial-progress-pill" aria-live="polite">
+        Schritt {{ activeStep().stepNumber }} von {{ tutorialSteps.length }}
+      </span>
+    </div>
+
+    <div class="tutorial-tabs" role="tablist" aria-label="Tutorial-Schritte">
+      @for (step of tutorialSteps; track step.stepNumber; let idx = $index) {
+        <button
+          type="button"
+          class="tutorial-tab-btn"
+          [class.active-tab]="activeStepIndex() === idx"
+          [attr.aria-selected]="activeStepIndex() === idx"
+          (click)="selectStep(idx)"
+        >
+          <span class="tab-number">{{ step.stepNumber }}</span>
+          <i [class]="step.icon" aria-hidden="true"></i>
+          <span class="tab-label">{{ step.shortLabel }}</span>
+        </button>
+      }
+    </div>
+
+    @if (activeStep(); as step) {
+      <article class="tutorial-detail-card">
+        <div class="tutorial-detail-head">
+          <div class="tutorial-step-icon">
+            <i [class]="step.icon" aria-hidden="true"></i>
+          </div>
+          <div>
+            <span class="step-category-pill">Schritt {{ step.stepNumber }} · {{ step.shortLabel }}</span>
+            <h3>{{ step.title }}</h3>
+          </div>
+        </div>
+
+        <p class="tutorial-summary">{{ step.summary }}</p>
+
+        <div class="tutorial-tips-box">
+          <h4>Was kannst du hier entdecken &amp; wie funktioniert es?</h4>
+          <ul class="tutorial-tips-list">
+            @for (tip of step.tips; track $index) {
+              <li>{{ tip }}</li>
+            }
+          </ul>
+        </div>
+
+        <div class="tutorial-footer-actions">
+          <div class="step-nav-buttons">
+            <button
+              type="button"
+              class="step-nav-btn"
+              [disabled]="activeStepIndex() === 0"
+              (click)="prevStep()"
+            >
+              <i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
+              Zurück
+            </button>
+            <button
+              type="button"
+              class="step-nav-btn"
+              [disabled]="activeStepIndex() === tutorialSteps.length - 1"
+              (click)="nextStep()"
+            >
+              Weiter
+              <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+            </button>
+          </div>
+
+          <a class="try-now-btn" [routerLink]="step.tryRoute">
+            {{ step.tryLabel }}
+            <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+          </a>
+        </div>
+      </article>
+    }
+  </section>
+
+  <!-- Schnellstart-Karten für alle 4 Hauptbereiche -->
+  <section class="modules-overview-section" aria-labelledby="modules-overview-heading">
+    <h2 id="modules-overview-heading">Alle 4 Entdecker-Bereiche auf einen Blick</h2>
+    <div class="modules-grid">
+      @for (card of moduleCards; track card.route) {
+        <a class="module-card" [routerLink]="card.route">
+          <div class="module-card-top">
+            <span class="module-icon-wrap">
+              <i [class]="card.icon" aria-hidden="true"></i>
+            </span>
+          </div>
+          <h3>{{ card.title }}</h3>
+          <span class="module-metric">{{ card.metricLabel }}</span>
+          <p>{{ card.description }}</p>
+          <span class="module-open-link">
+            Bereich öffnen <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+          </span>
+        </a>
+      }
+    </div>
+  </section>
+
+  <!-- Dezente Projekt- und Quellen-Fußzeile (KI-Hinweis gemäß Aufgabenstellung) -->
+  <footer class="landing-credit-footer" aria-label="Projektinformationen und Datenquellen">
+    <p class="credit-main-line">
+      <strong>SSI App – Solar System Info App</strong> · Entwickelt von
+      <strong>Joshua Mößmer</strong> · Abschlussprojekt Modul Angular (BITLC FIAE) · Mit
+      KI-Unterstützung erstellt
+    </p>
+    <p class="credit-sources-line">
+      Daten- &amp; Bildquellen: NASA, ESA, JAXA, ISRO, Wikimedia Commons, Le Système Solaire
+      OpenData &amp; Where the ISS at?
+    </p>
+  </footer>
+</section>

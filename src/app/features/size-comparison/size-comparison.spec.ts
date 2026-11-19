@@ -115,5 +115,22 @@ describe('SizeComparisonComponent (P30)', () => {
     expect(summary).toBeTruthy();
     expect(summary?.diameterRatio).toBeCloseTo(109.2, 1);
     expect(fixture.nativeElement.textContent).toContain('Wie oft passt Erde in Sonne?');
+
+    comp.selectedIds.set(['stephenson-2-18', 'mount-everest']);
+    comp.zoomSliderPercent.set(100);
+    fixture.detectChanges();
+
+    expect(comp.maxZoomFactor()).toBeGreaterThan(1000000);
+    const items = comp.scaledItems();
+    expect(items[1].svgRadiusPx).toBeGreaterThan(150);
+    expect(fixture.nativeElement.textContent).toContain('Stephenson 2-18');
+    expect(fixture.nativeElement.querySelector('.svg-shape-everest')).toBeTruthy();
+
+    comp.selectedIds.set(['germany-size', 'mount-everest']);
+    fixture.detectChanges();
+    expect(fixture.nativeElement.querySelector('.svg-shape-germany')).toBeTruthy();
+    expect(fixture.nativeElement.querySelector('.svg-shape-everest')).toBeTruthy();
+    expect(fixture.nativeElement.textContent).toContain('Nord–Süd 876 km');
+    expect(fixture.nativeElement.textContent).toContain('Höhe 9 km');
   });
 });

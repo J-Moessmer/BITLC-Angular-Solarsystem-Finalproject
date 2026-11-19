@@ -3,8 +3,8 @@
  * FCPP-Referenz: P10-U20, P20-U20, P20-U30, P20-U40, P30-U20
  * Erstellt mit: KI-Assistent (Antigravity AI / Pair-Programming Agent)
  * Erstellt für / Autor: Joshua Mößmer (J-Moessmer)
- * Datum / Version: 16.11.2026 / v1.0
- * Hinweis: Datenservice für alle 27 Himmelskörper, Monde, Gürtel und Raumstationen inkl. HTTPS-API-Abruf, lokalem JSON-Fallback (assets/data/solar-system-fallback.json) sowie Wikimedia-Commons-Bild-URLs mit lokalem SVG-Fallback mit KI-Unterstützung erstellt.
+ * Datum / Version: 19.11.2026 / v1.1
+ * Hinweis: Datenservice für alle Himmelskörper, Monde, Gürtel, Lagrange-Punkte (L1–L5) und Raumstationen inkl. HTTPS-API-Abruf, lokalem JSON-Fallback (assets/data/solar-system-fallback.json) sowie Wikimedia-Commons-Bild-URLs mit lokalem SVG-Fallback mit KI-Unterstützung erstellt.
  */
 
 import { Injectable, computed, inject, signal } from '@angular/core';
@@ -94,7 +94,7 @@ export class SolarSystemDataService {
       pointer = parent;
     }
 
-    if (current.category === 'planet') {
+    if (current.category === 'planet' || current.category === 'lagrange') {
       trail.push({ id: 'group-planets', label: 'Planeten' });
     } else if (current.category === 'dwarf-planet' && current.parentId !== 'asteroid-belt') {
       trail.push({ id: 'group-dwarfs', label: 'Zwergplaneten' });
@@ -116,7 +116,11 @@ export class SolarSystemDataService {
     const buildBodyNode = (id: string, icon: string): PathTreeNode => {
       const body = byId(id);
       const label = body?.name ?? id;
-      const children = (body?.childrenIds ?? []).map((cid) => {
+      const allChildIds = body?.childrenIds ?? [];
+      const regularChildIds = allChildIds.filter((cid) => byId(cid)?.category !== 'lagrange');
+      const lagrangeChildIds = allChildIds.filter((cid) => byId(cid)?.category === 'lagrange');
+
+      const mapChildNode = (cid: string): PathTreeNode => {
         const childBody = byId(cid);
         const childIcon =
           childBody?.category === 'spacecraft'
@@ -125,9 +129,22 @@ export class SolarSystemDataService {
               : cid === 'jwst' || cid === 'gaia'
                 ? 'fa-solid fa-satellite-dish'
                 : 'fa-solid fa-shuttle-space'
-            : 'fa-regular fa-moon';
+            : childBody?.category === 'lagrange'
+              ? 'fa-solid fa-diamond'
+              : 'fa-regular fa-moon';
         return buildBodyNode(cid, childIcon);
-      });
+      };
+
+      const children: PathTreeNode[] = regularChildIds.map(mapChildNode);
+      if (lagrangeChildIds.length > 0) {
+        children.push({
+          id: `${id}-lagrange-group`,
+          label: 'Lagrange-Punkte (L1–L5)',
+          icon: 'fa-solid fa-diamond',
+          children: lagrangeChildIds.map(mapChildNode),
+        });
+      }
+
       return {
         id,
         label,

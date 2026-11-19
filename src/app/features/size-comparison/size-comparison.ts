@@ -3,8 +3,8 @@
  * FCPP-Referenz: P30-U10 (A10), P30-U20 (A20, A30 – Maßstabs- & Größenvergleich)
  * Erstellt mit: KI-Assistent (Antigravity AI / Pair-Programming Agent)
  * Erstellt für / Autor: Joshua Mößmer (J-Moessmer)
- * Datum / Version: 16.11.2026 / v1.2
- * Hinweis: Vollständige Umsetzung von Plan-Element P30 mit Dropdown-Auswahl, Schnellwahl-Presets, proportionaler SVG-Vergleichsbühne sowie automatischer Durchmesser- und Volumenverhältnis-Berechnung mit KI-Unterstützung erstellt.
+ * Datum / Version: 19.11.2026 / v2.2
+ * Hinweis: Umsetzung von Plan-Element P30 inkl. extrasolarer & alltäglicher Vergleichskörper (Fußball, Basketball, 1-Meter-Kugel), gruppiertem Auswahlmenü, Sub-Meter-Tiefenzoom, automatischer cm/m/km-Einheitenformatierung, maßstabsgetreuen SVG-Silhouetten für Berg & Land sowie geschachtelter Horizont-Staffelung mit KI-Unterstützung erstellt.
  */
 
 import { Component, OnInit, computed, inject, signal } from '@angular/core';
@@ -12,6 +12,12 @@ import { DecimalPipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { SolarSystemDataService } from '../../core/services/solar-system-data.service';
 import { CelestialBody } from '../../core/models/celestial-body.model';
+import {
+  EVERYDAY_COMPARISON_IDS,
+  EXOPLANET_COMPARISON_IDS,
+  EXTRA_COMPARISON_BODIES,
+  GIANT_STAR_COMPARISON_IDS,
+} from './extra-comparison-bodies.data';
 
 export interface ScaledComparisonItem {
   slotIndex: number;
@@ -29,6 +35,11 @@ export interface ComparisonPreset {
   bodyIds: string[];
 }
 
+export interface ComparableBodyGroup {
+  label: string;
+  bodies: CelestialBody[];
+}
+
 @Component({
   selector: 'app-size-comparison',
   imports: [DecimalPipe, RouterLink],
@@ -41,10 +52,14 @@ export class SizeComparisonComponent implements OnInit {
   /** Ausgewählte Himmelskörper-IDs (2 oder mehr gemäß P30-A20) */
   readonly selectedIds = signal<string[]>(['sun', 'earth']);
 
-  /** Stufenloser Zoom-Slider (0 % = Übersicht, 100 % = tiefer Nahvergleich am Rand des größten Körpers) */
+  /** Stufenloser Zoom-Slider (0 % = Übersicht, 100 % = tiefer Nahvergleich bis auf das kleinste Objekt) */
   readonly zoomSliderPercent = signal<number>(0);
 
-  /** Dynamischer Maximal-Zoom passend zum Größenverhältnis der gewählten Körper */
+  /**
+   * KI-generierter Block: Unbegrenzter Maximal-Zoom bezogen auf das kleinste gewählte Objekt,
+   * damit auch winzige Körper (z. B. Komet Tschuri, Mount Everest, Phobos neben Sonne/Überriesen)
+   * bei 100 % Zoom auf ca. 85 % der Bühnengröße heranwachsen.
+   */
   readonly maxZoomFactor = computed<number>(() => {
     const bodies = this.selectedBodies();
     if (bodies.length < 2) {
@@ -52,8 +67,8 @@ export class SizeComparisonComponent implements OnInit {
     }
     const sorted = [...bodies].sort((a, b) => b.diameterKm - a.diameterKm);
     const largest = sorted[0].diameterKm;
-    const second = Math.max(1, sorted[1].diameterKm);
-    return Math.min(80, Math.max(8, Math.round((largest / second) * 0.25)));
+    const smallest = Math.max(0.0000001, sorted[sorted.length - 1].diameterKm);
+    return Math.max(8, Number(((largest / smallest) * 0.85).toFixed(2)));
   });
 
   readonly zoomFactor = computed<number>(() => {
@@ -62,7 +77,7 @@ export class SizeComparisonComponent implements OnInit {
     return Number(Math.pow(maxZ, pct / 100).toFixed(3));
   });
 
-  /** Kindgerechte Schnellwahl-Presets gemäß P30-A20 */
+  /** Kindgerechte Schnellwahl-Presets gemäß P30-A20 inkl. extrasolarer & allgemeiner Vergleiche */
   readonly presets: readonly ComparisonPreset[] = [
     {
       id: 'sun-earth',
@@ -94,14 +109,85 @@ export class SizeComparisonComponent implements OnInit {
       icon: '🪨🌍',
       bodyIds: ['mercury', 'venus', 'earth', 'mars'],
     },
+    {
+      id: 'balls-and-everest',
+      label: 'Fußball, Basketball, 1m-Kugel & Mount Everest',
+      icon: '⚽🏀',
+      bodyIds: ['soccer-ball', 'basketball', 'one-meter-sphere', 'mount-everest'],
+    },
+    {
+      id: 'comets-everest-moon',
+      label: 'Komet, Mount Everest & Mond',
+      icon: '☄️🏔️',
+      bodyIds: ['churyumov', 'mount-everest', 'halley', 'phobos', 'moon'],
+    },
+    {
+      id: 'exoplanets',
+      label: 'Erde vs. Exoplaneten',
+      icon: '🪐✨',
+      bodyIds: ['trappist-1e', 'earth', '55-cancri-e', 'jupiter', 'hd-189733b'],
+    },
+    {
+      id: 'neighbor-stars',
+      label: 'Sonne vs. Nachbarsterne',
+      icon: '⭐☀️',
+      bodyIds: ['jupiter', 'proxima-centauri', 'sun', 'sirius-a', 'pollux'],
+    },
+    {
+      id: 'giant-stars',
+      label: 'Sonne bis Hyperriese Stephenson 2-18',
+      icon: '🌟🔥',
+      bodyIds: ['sun', 'rigel', 'beteigeuze', 'uy-scuti', 'stephenson-2-18'],
+    },
   ];
 
-  /** Vergleichbare Himmelskörper (Sonne, Planeten, Zwergplaneten, Monde – ohne Gürtel) */
-  readonly comparableBodies = computed<CelestialBody[]>(() =>
-    this.dataService
+  /** Vergleichbare Himmelskörper (Sonnensystem ohne Gürtel/Sonden/L-Punkte + Extrasolare & Alltagsobjekte) */
+  readonly comparableBodies = computed<CelestialBody[]>(() => {
+    const solar = this.dataService
       .bodies()
-      .filter((b) => b.category !== 'belt' && b.category !== 'spacecraft'),
-  );
+      .filter(
+        (b) =>
+          b.category !== 'belt' && b.category !== 'spacecraft' && b.category !== 'lagrange',
+      );
+    return [...solar, ...EXTRA_COMPARISON_BODIES];
+  });
+
+  /** Gruppierte Auswahloptionen für übersichtliche <optgroup>-Dropdowns */
+  readonly comparableBodyGroups = computed<ComparableBodyGroup[]>(() => {
+    const all = this.comparableBodies();
+    return [
+      {
+        label: 'Sonne & Planeten (Sonnensystem)',
+        bodies: all.filter(
+          (b) =>
+            (b.category === 'star' || b.category === 'planet') &&
+            !EVERYDAY_COMPARISON_IDS.has(b.id) &&
+            !EXOPLANET_COMPARISON_IDS.has(b.id) &&
+            !GIANT_STAR_COMPARISON_IDS.has(b.id),
+        ),
+      },
+      {
+        label: 'Zwergplaneten, Monde & Kometen (Sonnensystem)',
+        bodies: all.filter(
+          (b) =>
+            (b.category === 'dwarf-planet' || b.category === 'moon' || b.category === 'comet') &&
+            !EVERYDAY_COMPARISON_IDS.has(b.id),
+        ),
+      },
+      {
+        label: 'Alltag & Erde (Bälle, Berge & Länder)',
+        bodies: all.filter((b) => EVERYDAY_COMPARISON_IDS.has(b.id)),
+      },
+      {
+        label: 'Exoplaneten (Fremde Welten)',
+        bodies: all.filter((b) => EXOPLANET_COMPARISON_IDS.has(b.id)),
+      },
+      {
+        label: 'Ferne Sterne, Neutronensterne & Schwarze Löcher',
+        bodies: all.filter((b) => GIANT_STAR_COMPARISON_IDS.has(b.id)),
+      },
+    ].filter((g) => g.bodies.length > 0);
+  });
 
   /** Aktuell gewählte CelestialBody-Objekte */
   readonly selectedBodies = computed<CelestialBody[]>(() => {
@@ -113,8 +199,8 @@ export class SizeComparisonComponent implements OnInit {
 
   /**
    * KI-generierter Block: Berechnet die exakt proportionalen SVG-Radien zum größten gewählten Körper
-   * sowie die dynamische Rand-zu-Rand-Verschiebung beim Reinzoomen (P30-U20), sodass alle Körper
-   * im Bild bleiben und der gekrümmte Rand des Riesenobjekts neben den kleinen Objekten erscheint.
+   * sowie die kontinuierliche Horizont-Staffelung beim tiefen Reinzoomen (P30-U20), sodass auch
+   * extrem große Himmelskörper als gekrümmte Horizonte sichtbar bleiben und kleine Objekte groß herauskommen.
    */
   readonly scaledItems = computed<ScaledComparisonItem[]>(() => {
     const bodies = this.selectedBodies();
@@ -122,97 +208,97 @@ export class SizeComparisonComponent implements OnInit {
       return [];
     }
 
-    const maxDiameter = Math.max(...bodies.map((b) => b.diameterKm), 1);
+    const maxDiameter = Math.max(...bodies.map((b) => b.diameterKm), 0.0000001);
     const totalWidth = 1140;
     const slotWidth = totalWidth / bodies.length;
     const baseMaxRadiusPx = Math.min(205, Math.floor(slotWidth * 0.44));
     const zoom = this.zoomFactor();
     const blend = Math.min(1, Math.max(0, (zoom - 1) / 0.3));
 
-    const zoomedRadii = bodies.map((b) => {
+    let focusIdx = 0;
+    for (let i = 1; i < bodies.length; i++) {
+      if (bodies[i].diameterKm < bodies[focusIdx].diameterKm) {
+        focusIdx = i;
+      }
+    }
+
+    const drawnRadii = bodies.map((b) => {
       const trueRatio = b.diameterKm / maxDiameter;
       const truePixelRadius = Number((trueRatio * baseMaxRadiusPx * zoom).toFixed(2));
+      const rawSvgRadiusPx = Math.max(2.5, truePixelRadius);
+      const drawnR = Math.min(8000, rawSvgRadiusPx);
+      const over = rawSvgRadiusPx > 185 ? Math.min(1, (rawSvgRadiusPx - 185) / 500) : 0;
+      const boxHalf = rawSvgRadiusPx <= 185 ? rawSvgRadiusPx : 185 * (1 - over) + 55 * over;
       return {
         truePixelRadius,
-        svgRadiusPx: Math.max(2.5, truePixelRadius),
+        rawSvgRadiusPx,
+        drawnR,
+        boxHalf,
       };
     });
 
-    // 1. Kompaktes Rand-zu-Rand-Layout für den Zoom-Modus (hält alle Objekte mittig im 1200px Sichtfeld!)
-    const gapPx = bodies.length === 2 ? 160 : 72;
-    const edgeCenters: number[] = [];
+    const gapPx = bodies.length === 2 ? 120 : 54;
+    const boxCenter: number[] = [];
     for (let i = 0; i < bodies.length; i++) {
       if (i === 0) {
-        edgeCenters.push(0);
+        boxCenter.push(0);
       } else {
-        edgeCenters.push(
-          edgeCenters[i - 1] + zoomedRadii[i - 1].svgRadiusPx + gapPx + zoomedRadii[i].svgRadiusPx,
+        boxCenter.push(
+          boxCenter[i - 1] + drawnRadii[i - 1].boxHalf + gapPx + drawnRadii[i].boxHalf,
         );
       }
     }
 
-    let shiftX = 0;
-    if (bodies.length === 2) {
-      // Bei 2 Körpern bleibt die Lücke zwischen ihren zugewandten Rändern exakt auf x = 600 zentriert:
-      // Linker Körper-Rand bei 520 px (-80 px), rechter Körper-Rand bei 680 px (+80 px).
-      const leftFacingEdge = edgeCenters[0] + zoomedRadii[0].svgRadiusPx;
-      const rightFacingEdge = edgeCenters[1] - zoomedRadii[1].svgRadiusPx;
-      shiftX = 600 - (leftFacingEdge + rightFacingEdge) / 2;
-    } else {
-      // Bei 3–5 Körpern: Finde das größte Objekt und zentriere die sichtbare Komposition um x = 600
-      let largestIdx = 0;
-      for (let i = 1; i < bodies.length; i++) {
-        if (bodies[i].diameterKm > bodies[largestIdx].diameterKm) {
-          largestIdx = i;
-        }
-      }
-
-      const largestR = zoomedRadii[largestIdx].svgRadiusPx;
-      const minX = edgeCenters[0] - zoomedRadii[0].svgRadiusPx;
-      const maxX = edgeCenters[bodies.length - 1] + zoomedRadii[bodies.length - 1].svgRadiusPx;
-      const fullSpan = maxX - minX;
-
-      const overflowBlend = Math.min(1, Math.max(0, (fullSpan - 760) / 360));
-      let anchorLeft = minX;
-      let anchorRight = maxX;
-
-      if (largestIdx === 0) {
-        const visibleLimbLeft = edgeCenters[0] + largestR;
-        anchorLeft = minX * (1 - overflowBlend) + visibleLimbLeft * overflowBlend;
-      } else if (largestIdx === bodies.length - 1) {
-        const visibleLimbRight = edgeCenters[largestIdx] - largestR;
-        anchorRight = maxX * (1 - overflowBlend) + visibleLimbRight * overflowBlend;
-      }
-
-      shiftX = 600 - (anchorLeft + anchorRight) / 2;
-      if (largestIdx === 0) {
-        const lastRight = maxX + shiftX;
-        if (lastRight > 1130) {
-          shiftX -= lastRight - 1130;
-        }
-      } else if (largestIdx === bodies.length - 1) {
-        const firstLeft = minX + shiftX;
-        if (firstLeft < 70) {
-          shiftX += 70 - firstLeft;
-        }
-      }
-    }
+    const minBoxLeft = boxCenter[0] - drawnRadii[0].boxHalf;
+    const maxBoxRight = boxCenter[bodies.length - 1] + drawnRadii[bodies.length - 1].boxHalf;
+    const shiftX = 600 - (minBoxLeft + maxBoxRight) / 2;
 
     return bodies.map((body, idx) => {
+      const info = drawnRadii[idx];
+      const anchorX = boxCenter[idx] + shiftX;
+      let zoomedCenterX = anchorX;
+
+      /** KI-Hinweis: Berücksichtigt bei schmaleren SVG-Silhouetten (Berg/Land) die reale horizontale Flankenbreite auf Höhe y = 0. */
+      const edgeFactorX = this.getHorizontalEdgeFactor(body.id);
+      const effectiveReachPx = info.drawnR * edgeFactorX;
+      if (effectiveReachPx > info.boxHalf) {
+        const anchorLeftSide = idx < focusIdx || (idx === focusIdx && idx === 0);
+        zoomedCenterX = anchorLeftSide
+          ? anchorX + info.boxHalf - effectiveReachPx
+          : anchorX - info.boxHalf + effectiveReachPx;
+      }
+
       const baseCenterX = Math.round(30 + slotWidth * idx + slotWidth / 2);
-      const zoomedCenterX = edgeCenters[idx] + shiftX;
       const centerX = Number((baseCenterX * (1 - blend) + zoomedCenterX * blend).toFixed(1));
-      const labelX = Math.max(110, Math.min(1090, centerX));
+      const rawLabelX = baseCenterX * (1 - blend) + anchorX * blend;
+      const labelX = Math.round(Math.max(95, Math.min(1105, rawLabelX)));
 
       return {
         slotIndex: idx,
         body,
-        svgRadiusPx: zoomedRadii[idx].svgRadiusPx,
-        truePixelRadius: zoomedRadii[idx].truePixelRadius,
+        svgRadiusPx: info.drawnR,
+        truePixelRadius: info.truePixelRadius,
         centerX,
         labelX,
       };
     });
+  });
+
+  /** Sortiert die SVG-Kreise von innen (kleinster Körper) nach außen, damit gestaffelte Horizonte sauber übereinanderliegen */
+  readonly renderOrderedItems = computed<ScaledComparisonItem[]>(() => {
+    const items = this.scaledItems();
+    if (items.length <= 1) {
+      return items;
+    }
+    let focusIdx = 0;
+    for (let i = 1; i < items.length; i++) {
+      if (items[i].body.diameterKm < items[focusIdx].body.diameterKm) {
+        focusIdx = i;
+      }
+    }
+    return [...items].sort(
+      (a, b) => Math.abs(a.slotIndex - focusIdx) - Math.abs(b.slotIndex - focusIdx),
+    );
   });
 
   /**
@@ -236,23 +322,42 @@ export class SizeComparisonComponent implements OnInit {
     const largest = sorted[0];
     const smallest = sorted[sorted.length - 1];
 
-    const diameterRatio = Number((largest.diameterKm / Math.max(1, smallest.diameterKm)).toFixed(1));
-    const rawVolumeRatio = Math.pow(largest.diameterKm / Math.max(1, smallest.diameterKm), 3);
+    const diameterRatio = Number(
+      (largest.diameterKm / Math.max(0.0000001, smallest.diameterKm)).toFixed(1),
+    );
+    const rawVolumeRatio = Math.pow(
+      largest.diameterKm / Math.max(0.0000001, smallest.diameterKm),
+      3,
+    );
     const volumeRatio =
       rawVolumeRatio >= 100
         ? Math.round(rawVolumeRatio)
         : Number(rawVolumeRatio.toFixed(1));
+
+    const hasNonSpherical =
+      largest.id === 'mount-everest' ||
+      largest.id === 'germany-size' ||
+      smallest.id === 'mount-everest' ||
+      smallest.id === 'germany-size';
+
+    let childAnswer: string;
+    if (largest.id === smallest.id) {
+      childAnswer = `Du hast zweimal ${largest.name} ausgewählt – beide sind exakt gleich groß (Verhältnis 1 : 1)!`;
+    } else if (hasNonSpherical) {
+      childAnswer = `${largest.name} (${this.formatBodyDimension(largest)}) ist in seiner größten Ausdehnung rund ${diameterRatio.toLocaleString('de-DE')}-mal so groß wie ${smallest.name} (${this.formatBodyDimension(smallest)}).`;
+    } else {
+      childAnswer = `${largest.name} (${this.formatBodyDimension(largest)}) ist vom Durchmesser her rund ${diameterRatio.toLocaleString('de-DE')}-mal so breit wie ${smallest.name} (${this.formatBodyDimension(smallest)}). Vom Volumen (Rauminhalt) her würde ${smallest.name} sogar rund ${volumeRatio.toLocaleString('de-DE')}-mal in ${largest.name} hineinpassen!`;
+    }
 
     return {
       largest,
       smallest,
       diameterRatio,
       volumeRatio,
-      childQuestion: `Wie oft passt ${smallest.name} in ${largest.name}?`,
-      childAnswer:
-        largest.id === smallest.id
-          ? `Du hast zweimal ${largest.name} ausgewählt – beide sind exakt gleich groß (Verhältnis 1 : 1)!`
-          : `${largest.name} (${largest.diameterKm.toLocaleString('de-DE')} km) ist vom Durchmesser her rund ${diameterRatio.toLocaleString('de-DE')}-mal so breit wie ${smallest.name} (${smallest.diameterKm.toLocaleString('de-DE')} km). Vom Volumen (Rauminhalt) her würde ${smallest.name} sogar rund ${volumeRatio.toLocaleString('de-DE')}-mal in ${largest.name} hineinpassen!`,
+      childQuestion: hasNonSpherical
+        ? `Wie groß ist ${smallest.name} im Vergleich zu ${largest.name}?`
+        : `Wie oft passt ${smallest.name} in ${largest.name}?`,
+      childAnswer,
     };
   });
 
@@ -275,7 +380,7 @@ export class SizeComparisonComponent implements OnInit {
     if (current.length >= 5) {
       return;
     }
-    const candidates = ['jupiter', 'mars', 'moon', 'saturn', 'mercury'];
+    const candidates = ['jupiter', 'mars', 'moon', 'saturn', 'mercury', 'beteigeuze'];
     const nextId = candidates.find((id) => !current.includes(id)) ?? 'mars';
     this.selectedIds.set([...current, nextId]);
   }
@@ -300,11 +405,11 @@ export class SizeComparisonComponent implements OnInit {
   }
 
   zoomIn(): void {
-    this.zoomSliderPercent.update((v) => Math.min(100, v + 10));
+    this.zoomSliderPercent.update((v) => Math.min(100, Number((v + 8).toFixed(1))));
   }
 
   zoomOut(): void {
-    this.zoomSliderPercent.update((v) => Math.max(0, v - 10));
+    this.zoomSliderPercent.update((v) => Math.max(0, Number((v - 8).toFixed(1))));
   }
 
   resetZoom(): void {
@@ -318,5 +423,42 @@ export class SizeComparisonComponent implements OnInit {
     } else {
       this.zoomOut();
     }
+  }
+
+  /** KI-Hinweis: Formatiert Durchmesser automatisch passend in cm, m oder km für Grundschulkinder. */
+  formatDiameter(diameterKm: number): string {
+    if (diameterKm < 0.001) {
+      const cm = Number((diameterKm * 100_000).toFixed(1));
+      return `${cm.toLocaleString('de-DE', { maximumFractionDigits: 1 })} cm`;
+    }
+    if (diameterKm < 1) {
+      const meters = Number((diameterKm * 1_000).toFixed(1));
+      return `${meters.toLocaleString('de-DE', { maximumFractionDigits: 1 })} m`;
+    }
+    const km = Number(diameterKm.toFixed(1));
+    return `${km.toLocaleString('de-DE', { maximumFractionDigits: 1 })} km`;
+  }
+
+  /** KI-Hinweis: Liefert die reale horizontale Flankenbreite (Anteil von r auf Höhe y = 0) für nicht-kugelförmige SVGs. */
+  getHorizontalEdgeFactor(bodyId: string): number {
+    if (bodyId === 'mount-everest') {
+      return 0.62;
+    }
+    if (bodyId === 'germany-size') {
+      return 0.72;
+    }
+    return 1;
+  }
+
+  /** KI-Hinweis: Wählt eine sachlich und kindgerecht passende Maß-Bezeichnung (Höhe, Nord–Süd oder Ø). */
+  formatBodyDimension(body: CelestialBody): string {
+    const formatted = this.formatDiameter(body.diameterKm);
+    if (body.id === 'mount-everest') {
+      return `Höhe ${formatted}`;
+    }
+    if (body.id === 'germany-size') {
+      return `Nord–Süd ${formatted}`;
+    }
+    return `Ø ${formatted}`;
   }
 }

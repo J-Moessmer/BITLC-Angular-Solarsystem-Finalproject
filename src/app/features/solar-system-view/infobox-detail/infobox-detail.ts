@@ -3,8 +3,8 @@
  * FCPP-Referenz: P20-U10, P20-U20, P20-U30, P20-U40 (Detailansicht, Wikimedia-Foto mit Offline-Fallback, Mond-Auswahl & 7 Bahnelemente)
  * Erstellt mit: KI-Assistent (Antigravity AI / Pair-Programming Agent)
  * Erstellt für / Autor: Joshua Mößmer (J-Moessmer)
- * Datum / Version: 16.11.2026 / v2.0
- * Hinweis: Bereinigtes P20-Steckbrief-Layout ohne redundante Klammer-Zusätze, mit 1px Rahmen und dezenten Kurvenradien.
+ * Datum / Version: 19.11.2026 / v2.1
+ * Hinweis: Bereinigtes P20-Steckbrief-Layout ohne redundante Klammer-Zusätze, mit 1px Rahmen, dezenten Kurvenradien und Quellen-Links (officialUrl, wikipediaUrl, Wikimedia Commons).
  */
 
 import { Component, OnInit, computed, effect, inject, input, output, signal } from '@angular/core';
@@ -223,7 +223,7 @@ const EXTRA_BODY_GALLERY: Readonly<Record<string, Array<{ url: string; caption: 
           </div>
         </div>
 
-        @if (current.id === 'jwst' || current.id === 'gaia') {
+        @if (current.category === 'lagrange' || current.id === 'jwst' || current.id === 'gaia') {
           <div class="lagrange-banner">
             <strong>Profi-Info – Was sind <app-term term="Lagrange-Punkte" />?</strong>
             Zwischen Sonne und Erde gibt es 5 besondere Gleichgewichts-Orte (L1 bis L5), an denen
@@ -292,6 +292,48 @@ const EXTRA_BODY_GALLERY: Readonly<Record<string, Array<{ url: string; caption: 
             </div>
           }
         </div>
+
+        <!-- 4. Quellen & Weiterführende Links -->
+        @if (current.officialUrl || current.wikipediaUrl || current.wikimediaImageUrl) {
+          <div class="sources-section" aria-label="Quellen und weiterführende Links">
+            <h4>Quellen & Weiterführende Links</h4>
+            <div class="source-links-bar">
+              @if (current.officialUrl) {
+                <a
+                  class="source-external-btn"
+                  [href]="current.officialUrl"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
+                  Offizielle NASA / ESA Infoseite
+                </a>
+              }
+              @if (current.wikipediaUrl) {
+                <a
+                  class="source-external-btn"
+                  [href]="current.wikipediaUrl"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <i class="fa-brands fa-wikipedia-w" aria-hidden="true"></i>
+                  Wikipedia-Artikel ({{ current.name }})
+                </a>
+              }
+              @if (current.wikimediaImageUrl) {
+                <a
+                  class="source-external-btn"
+                  [href]="current.wikimediaImageUrl"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <i class="fa-regular fa-image" aria-hidden="true"></i>
+                  Bildquelle (Wikimedia Commons)
+                </a>
+              }
+            </div>
+          </div>
+        }
       </aside>
 
       <app-image-lightbox
@@ -629,6 +671,38 @@ const EXTRA_BODY_GALLERY: Readonly<Record<string, Array<{ url: string; caption: 
       overflow-wrap: anywhere;
       color: var(--accent-primary);
     }
+    .sources-section h4 {
+      margin: 0 0 0.45rem;
+      font-size: 0.95rem;
+    }
+    .source-links-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .source-external-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.42rem;
+      padding: 0.42rem 0.85rem;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--card-border);
+      background-color: var(--card-bg);
+      color: var(--card-text-primary);
+      font-weight: 600;
+      font-size: 0.84rem;
+      text-decoration: none;
+      transition:
+        background-color 0.12s ease,
+        border-color 0.12s ease,
+        color 0.12s ease;
+    }
+    .source-external-btn:hover {
+      background-color: var(--card-bg-subtle);
+      border-color: var(--accent-primary);
+      color: var(--accent-primary);
+      text-decoration: none;
+    }
     @media (max-width: 720px) {
       .infobox-panel {
         padding: 0.85rem;
@@ -698,16 +772,33 @@ export class InfoboxDetailComponent implements OnInit {
   readonly isImageHidden = signal<boolean>(false);
   readonly activeImageSrc = signal<string>('');
 
+  /** KI-generierter Block: Baut die umschaltbare Mini-Galerie aus Hauptfoto, Extras sowie verknüpften Missionen/Monden (max. 6, dedupliziert) */
   readonly galleryItems = computed<Array<{ url: string; caption: string }>>(() => {
     const b = this.body();
     if (!b) {
       return [];
     }
-    const items: Array<{ url: string; caption: string }> = [
-      { url: b.wikimediaImageUrl || b.imageUrl, caption: b.name },
-    ];
-    const extras = EXTRA_BODY_GALLERY[b.id] ?? [];
-    return [...items, ...extras];
+    const items: Array<{ url: string; caption: string }> = [];
+    const seen = new Set<string>();
+    const addItem = (url: string | undefined, caption: string): void => {
+      if (!url || seen.has(url) || items.length >= 6) {
+        return;
+      }
+      seen.add(url);
+      items.push({ url, caption });
+    };
+
+    addItem(b.wikimediaImageUrl || b.imageUrl, b.name);
+    for (const extra of EXTRA_BODY_GALLERY[b.id] ?? []) {
+      addItem(extra.url, extra.caption);
+    }
+    for (const m of this.matchingMissions()) {
+      addItem(m.wikimediaImageUrl, m.title);
+    }
+    for (const child of this.childBodies()) {
+      addItem(child.wikimediaImageUrl, child.name);
+    }
+    return items;
   });
 
   readonly matchingMissions = computed<ResearchMission[]>(() => {

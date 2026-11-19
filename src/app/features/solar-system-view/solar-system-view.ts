@@ -3,8 +3,8 @@
  * FCPP-Referenz: P10 (P10-U20, P10-U30, P10-U40) & P20 (P20-U10 bis P20-U40)
  * Erstellt mit: KI-Assistent (Antigravity AI / Pair-Programming Agent)
  * Erstellt für / Autor: Joshua Mößmer (J-Moessmer)
- * Datum / Version: 16.11.2026 / v2.0
- * Hinweis: Interaktive 2D-SVG-Sonnensystem-Bühne mit stufenlosem Zoom (0 % bis 100 % Slider, Mausrad & Buttons) für JEDEN Himmelskörper, analytischem SVG-Orbit-Clipping gegen VM-Ruckeln und Echtzeit-Kepler-Tracking.
+ * Datum / Version: 19.11.2026 / v2.1
+ * Hinweis: Interaktive 2D-SVG-Sonnensystem-Bühne mit stufenlosem Zoom, analytischem SVG-Orbit-Clipping, Echtzeit-Kepler-Tracking sowie Darstellung & Filterung aller 5 Sonne-Erde-Lagrange-Punkte (L1-L5).
  */
 
 import {
@@ -58,7 +58,46 @@ export class SolarSystemViewComponent implements OnInit, OnDestroy {
   readonly showComets = signal<boolean>(true);
   readonly showBelts = signal<boolean>(true);
   readonly showSpacecraft = signal<boolean>(true);
+  readonly lagrangeFilterMode = signal<'context' | 'all' | 'off'>('context');
   readonly filterSpacecraftByDate = signal<boolean>(true);
+
+  readonly lagrangeFilterLabel = computed<string>(() => {
+    switch (this.lagrangeFilterMode()) {
+      case 'context':
+        return 'Lagrange-Punkte: Fokus & Zoom';
+      case 'all':
+        return 'Lagrange-Punkte: Alle (40)';
+      case 'off':
+        return 'Lagrange-Punkte: Aus';
+    }
+  });
+
+  /** Ermittelt den zugehörigen Planeten, wenn ein Planet, Mond, L-Punkt oder planetare Sonde ausgewählt ist */
+  readonly focusedLagrangePlanetId = computed<string | null>(() => {
+    const selected = this.dataService.selectedBody();
+    if (!selected) {
+      return null;
+    }
+    if (selected.category === 'planet') {
+      return selected.id;
+    }
+    if (selected.id === 'jwst' || selected.id === 'gaia') {
+      return 'earth';
+    }
+    if (selected.parentId) {
+      const parent = this.dataService.getBodyById(selected.parentId);
+      if (parent?.category === 'planet') {
+        return parent.id;
+      }
+    }
+    return null;
+  });
+
+  cycleLagrangeFilterMode(): void {
+    this.lagrangeFilterMode.update((mode) =>
+      mode === 'context' ? 'all' : mode === 'all' ? 'off' : 'context',
+    );
+  }
 
   /** Alle im SVG-Canvas berechneten Positionen & Bahn-Geometrien (P10-U30, P10-U40) */
   protected readonly svgPositions = computed<SvgBodyPosition[]>(() => {
@@ -149,34 +188,132 @@ export class SolarSystemViewComponent implements OnInit, OnDestroy {
     ].join(' ');
   });
 
-  /** Zeigt den Sonne -> Erde -> L2-Punkt-Marker, wenn JWST, Gaia oder Erde ausgewählt ist */
-  protected readonly l2GuideLine = computed<{
-    x1: number;
-    y1: number;
-    x2: number;
-    y2: number;
-    labelX: number;
-    labelY: number;
+  /** KI-generierter Block: Berechnet die Hilfslinien für Lagrange-Punkte abhängig vom 3-Stufen-Filter (Fokus & Zoom / Alle / Aus) */
+  protected readonly lagrangeGuideGeometry = computed<{
+    isHighlighted: boolean;
+    l1ToL2Lines: Array<{ id: string; x1: number; y1: number; x2: number; y2: number; color: string }>;
+    l2HaloCircle: { cx: number; cy: number; r: number } | null;
+    triangleLines: Array<{ id: string; x1: number; y1: number; x2: number; y2: number; color: string }>;
   } | null>(() => {
-    const selectedId = this.dataService.selectedBodyId();
-    if (selectedId !== 'jwst' && selectedId !== 'gaia' && selectedId !== 'earth') {
+    const mode = this.lagrangeFilterMode();
+    if (mode === 'off') {
       return null;
     }
-    const sun = this.svgPositions().find((p) => p.body.id === 'sun');
-    const earth = this.svgPositions().find((p) => p.body.id === 'earth');
-    const jwst = this.svgPositions().find((p) => p.body.id === 'jwst');
-    const gaia = this.svgPositions().find((p) => p.body.id === 'gaia');
-    const l2Target = jwst ?? gaia;
-    if (!sun || !earth || !l2Target) {
+
+    const focusedPid = this.focusedLagrangePlanetId();
+    const isHighZoom = this.viewport.zoomLevel() >= 12;
+    if (mode === 'context' && !focusedPid && !isHighZoom) {
       return null;
     }
+
+    const selectedBody = this.dataService.selectedBody();
+    const positions = this.svgPositions();
+    const byId = (id: string) => positions.find((p) => p.body.id === id);
+    const sun = byId('sun');
+    if (!sun) {
+      return null;
+    }
+
+    const planetIds = ['mercury', 'venus', 'earth', 'mars', 'jupiter', 'saturn', 'uranus', 'neptune'];
+    const l1ToL2Lines: Array<{
+      id: string;
+      x1: number;
+      y1: number;
+      x2: number;
+      y2: number;
+      color: string;
+    }> = [];
+
+    for (const pid of planetIds) {
+      const prefix = pid === 'earth' ? 'lagrange' : pid;
+      const pPos = byId(pid);
+      const l1 = byId(`${prefix}-l1`);
+      const l2 = byId(`${prefix}-l2`);
+      if (!l1 || !l2 || Math.hypot(l1.x - l2.x, l1.y - l2.y) > 3500) {
+        continue;
+      }
+      const inZoomView =
+        (Math.abs(l1.x) <= 700 && Math.abs(l1.y) <= 500) ||
+        (Math.abs(l2.x) <= 700 && Math.abs(l2.y) <= 500);
+      const includeAxis =
+        mode === 'all' || pid === focusedPid || (isHighZoom && inZoomView);
+      if (includeAxis) {
+        l1ToL2Lines.push({
+          id: `${pid}-l1-l2`,
+          x1: l1.x,
+          y1: l1.y,
+          x2: l2.x,
+          y2: l2.y,
+          color: pid === 'earth' ? '#FDE047' : (pPos?.body.colorHex ?? '#FDE047'),
+        });
+      }
+    }
+
+    const earthL2 = byId('lagrange-l2');
+    const showEarthL2Halo =
+      earthL2 &&
+      Math.abs(earthL2.x) <= 900 &&
+      Math.abs(earthL2.y) <= 700 &&
+      (mode === 'all' || focusedPid === 'earth' || isHighZoom);
+    const l2HaloCircle = showEarthL2Halo ? { cx: earthL2.x, cy: earthL2.y, r: 8 } : null;
+
+    const trianglePid = focusedPid ?? (mode === 'all' ? 'earth' : null);
+    const triangleLines: Array<{
+      id: string;
+      x1: number;
+      y1: number;
+      x2: number;
+      y2: number;
+      color: string;
+    }> = [];
+
+    if (trianglePid && this.viewport.viewMode() !== 'side-view') {
+      const focusPrefix = trianglePid === 'earth' ? 'lagrange' : trianglePid;
+      const focusedPlanet = byId(trianglePid);
+      const l1 = byId(`${focusPrefix}-l1`);
+      const l3 = byId(`${focusPrefix}-l3`);
+      const l4 = byId(`${focusPrefix}-l4`);
+      const l5 = byId(`${focusPrefix}-l5`);
+      const focusColor =
+        trianglePid === 'earth' ? '#FDE047' : (focusedPlanet?.body.colorHex ?? '#FDE047');
+
+      const addSegment = (
+        id: string,
+        a: SvgBodyPosition | undefined,
+        b: SvgBodyPosition | undefined,
+      ): void => {
+        if (!a || !b) {
+          return;
+        }
+        if (Math.hypot(a.x - b.x, a.y - b.y) <= 3500) {
+          triangleLines.push({ id, x1: a.x, y1: a.y, x2: b.x, y2: b.y, color: focusColor });
+        }
+      };
+
+      if (focusedPlanet) {
+        addSegment('sun-l4', sun, l4);
+        addSegment('planet-l4', focusedPlanet, l4);
+        addSegment('sun-l5', sun, l5);
+        addSegment('planet-l5', focusedPlanet, l5);
+        addSegment('sun-l3', sun, l3);
+        addSegment('sun-l1', sun, l1);
+      }
+    }
+
+    const isLagrangeFocused = Boolean(
+      selectedBody &&
+        focusedPid &&
+        (selectedBody.id === focusedPid ||
+          selectedBody.parentId === focusedPid ||
+          selectedBody.id === 'jwst' ||
+          selectedBody.id === 'gaia'),
+    );
+
     return {
-      x1: earth.x,
-      y1: earth.y,
-      x2: l2Target.x,
-      y2: l2Target.y,
-      labelX: l2Target.x + 12,
-      labelY: l2Target.y - 10,
+      isHighlighted: isLagrangeFocused,
+      l1ToL2Lines,
+      l2HaloCircle,
+      triangleLines,
     };
   });
 
@@ -194,6 +331,7 @@ export class SolarSystemViewComponent implements OnInit, OnDestroy {
         p.body.parentId &&
         p.body.parentId !== 'sun' &&
         p.body.id !== 'apollo-13' &&
+        p.body.category !== 'lagrange' &&
         (p.body.parentId === activeParentId || p.body.id === selectedId) &&
         p.isOrbitVisibleInViewport &&
         this.isBodyVisibleByFilter(p.body),
@@ -222,7 +360,13 @@ export class SolarSystemViewComponent implements OnInit, OnDestroy {
         return false;
       }
 
-      if (pos.body.id === 'sun') {
+      if (pos.body.id === 'sun' || pos.body.category === 'lagrange') {
+        return true;
+      }
+      if (
+        (pos.body.id === 'jwst' || pos.body.id === 'gaia') &&
+        (selectedId === 'lagrange-l2' || selectedId === 'earth' || this.viewport.zoomLevel() >= 3)
+      ) {
         return true;
       }
       if (
@@ -245,6 +389,18 @@ export class SolarSystemViewComponent implements OnInit, OnDestroy {
 
   /** Prüft, ob ein Himmelskörper bzw. eine Raumsonde gemäß Kategorie- und Datumsfilter sichtbar ist */
   private isBodyVisibleByFilter(body: CelestialBody): boolean {
+    if (body.category === 'lagrange') {
+      const mode = this.lagrangeFilterMode();
+      if (mode === 'off') {
+        return false;
+      }
+      if (mode === 'all') {
+        return true;
+      }
+      return (
+        body.parentId === this.focusedLagrangePlanetId() || this.viewport.zoomLevel() >= 12
+      );
+    }
     if (body.id === 'sun' || body.id === this.dataService.selectedBodyId()) {
       return true;
     }
@@ -312,6 +468,25 @@ export class SolarSystemViewComponent implements OnInit, OnDestroy {
             // oder kleinere Planeten-/Zwergplanetensysteme setzen wir einen großzügigen Start-Zoom:
             if (target.id === 'iss') {
               targetZoom = 12000;
+            } else if (target.id === 'jwst' || target.id === 'gaia') {
+              targetZoom = this.viewport.viewMode() === 'true-scale' ? 45 : 6.5;
+            } else if (target.category === 'lagrange') {
+              const pt = target.id.slice(-2).toLowerCase();
+              if (pt === 'l1' || pt === 'l2') {
+                targetZoom =
+                  this.viewport.viewMode() === 'true-scale'
+                    ? Math.max(1.5, 45 / Math.max(1, distAu))
+                    : distAu > 3
+                      ? 2.8
+                      : 6.5;
+              } else {
+                targetZoom =
+                  this.viewport.viewMode() === 'true-scale'
+                    ? Math.max(0.25, 9 / Math.max(0.4, distAu))
+                    : distAu > 10
+                      ? 0.9
+                      : 1.65;
+              }
             } else if (target.isSurfaceLanded) {
               targetZoom = 9000; // Direkt nah an die Oberfläche von Erdmond (Apollo) bzw. Mars (Rover)!
             } else if (target.parentId && target.parentId !== 'sun') {

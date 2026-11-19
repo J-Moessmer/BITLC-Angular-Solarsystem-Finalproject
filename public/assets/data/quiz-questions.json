@@ -30,34 +30,6 @@
   {
     "id": "q-cel-3",
     "category": "celestial",
-    "questionText": "Wo befindet sich der große Asteroidengürtel in unserem Sonnensystem?",
-    "options": [
-      "Zwischen den Bahnen von Mars und Jupiter",
-      "Direkt zwischen Erde und Erdmond",
-      "Innerhalb der Bahn von Merkur",
-      "Hinter dem Oortschen Gürtel"
-    ],
-    "correctOptionIndex": 0,
-    "childExplanation": "Genau! Der Asteroidengürtel (mit dem Zwergplaneten Ceres) bildet die Grenze zwischen dem Gesteinsplaneten Mars und dem Gasriesen Jupiter.",
-    "relatedBodyId": "asteroid-belt"
-  },
-  {
-    "id": "q-cel-4",
-    "category": "celestial",
-    "questionText": "Welche riesige Kugelschale aus Milliarden Eisbrocken schließt unser Sonnensystem ganz außen ein?",
-    "options": [
-      "Die Milchstraße",
-      "Der Oortsche Gürtel (Oortsche Wolke)",
-      "Die Ringe des Saturn",
-      "Der Große Rote Fleck"
-    ],
-    "correctOptionIndex": 1,
-    "childExplanation": "Super! Der Oortsche Gürtel umhüllt unser Sonnensystem in bis zu 50.000–100.000 AE Entfernung. Von dort kommen viele langperiodische Kometen!",
-    "relatedBodyId": "oort-cloud"
-  },
-  {
-    "id": "q-cel-5",
-    "category": "celestial",
     "questionText": "Welcher Eisriese ist um fast 98 Grad gekippt und rollt wie eine Murmel auf der Seite um die Sonne?",
     "options": [
       "Uranus",
@@ -70,18 +42,130 @@
     "relatedBodyId": "uranus"
   },
   {
-    "id": "q-cel-6",
+    "id": "q-cel-4",
     "category": "celestial",
-    "questionText": "Wofür steht das Bahnelement ‚INC‘ (Bahnneigung) in unserer Astronomen-Box?",
+    "questionText": "Welcher Planet ist der kleinste in unserem Sonnensystem und umrundet die Sonne in nur 88 Tagen?",
     "options": [
-      "Für die Anzahl der Monde eines Planeten",
-      "Für den Kipp-Winkel der Umlaufbahn zum Sonnenäquator",
-      "Für die Temperatur im Inneren der Sonne",
-      "Für das Gewicht einer Raumsonde"
+      "Venus",
+      "Merkur",
+      "Mars",
+      "Neptun"
     ],
     "correctOptionIndex": 1,
-    "childExplanation": "Spitze! INC (Inclination) verrät uns in Grad, wie stark die Bahn eines Himmelskörpers gegenüber der Referenzebene gekippt ist.",
+    "childExplanation": "Super! Merkur liegt der Sonne am nächsten und flitzt in nur 88 Erdtagen einmal um sie herum.",
+    "relatedBodyId": "mercury"
+  },
+  {
+    "id": "q-cel-5",
+    "category": "celestial",
+    "questionText": "Welcher Planet ist wegen seiner dichten Wolkendecke der heißeste Planet (über 460 °C) und strahlt als ‚Abendstern‘?",
+    "options": [
+      "Mars",
+      "Jupiter",
+      "Venus",
+      "Uranus"
+    ],
+    "correctOptionIndex": 2,
+    "childExplanation": "Genau! Die dichte Atmosphäre der Venus speichert die Sonnenwärme wie ein riesiges Gewächshaus.",
+    "relatedBodyId": "venus"
+  },
+  {
+    "id": "q-cel-6",
+    "category": "celestial",
+    "questionText": "Warum wird unsere Erde vom Weltraum aus auch der ‚Blaue Planet‘ genannt?",
+    "options": [
+      "Weil alle Berge auf der Erde blau angemalt sind",
+      "Weil rund zwei Drittel der Erdoberfläche von Ozeanen bedeckt sind",
+      "Weil auf der Erde niemals Wolken entstehen",
+      "Weil sie aus blauem Eis besteht"
+    ],
+    "correctOptionIndex": 1,
+    "childExplanation": "Richtig! Die riesigen Meere aus flüssigem Wasser lassen unsere Erde aus dem All strahlend blau leuchten.",
     "relatedBodyId": "earth"
+  },
+  {
+    "id": "q-cel-7",
+    "category": "celestial",
+    "questionText": "Warum schimmert unser Nachbarplanet Mars rötlich und wird deshalb ‚Roter Planet‘ genannt?",
+    "options": [
+      "Wegen riesiger Wälder mit roten Blättern",
+      "Weil er ständig brennt wie eine Kerze",
+      "Wegen feinem, eisenhaltigem Roststaub auf seiner Oberfläche",
+      "Weil die Sonne nur rotes Licht zum Mars schickt"
+    ],
+    "correctOptionIndex": 2,
+    "childExplanation": "Klasse! Auf dem Mars gibt es sehr viel Eisenoxid – also genau das, was bei uns als Rost bekannt ist.",
+    "relatedBodyId": "mars"
+  },
+  {
+    "id": "q-cel-8",
+    "category": "celestial",
+    "questionText": "Woraus bestehen die berühmten, hell leuchtenden Ringe des Planeten Saturn hauptsächlich?",
+    "options": [
+      "Aus Millionen von Eis- und Gesteinsbrocken",
+      "Aus einem festen Ring aus gelbem Gold",
+      "Aus heißen Blitzwolken",
+      "Aus alten Weltraumsatelliten"
+    ],
+    "correctOptionIndex": 0,
+    "childExplanation": "Volltreffer! Saturns Ringe bestehen aus unzähligen Eisstücken und Felsbrocken – von winzigen Körnern bis zu hausgroßen Eisblöcken.",
+    "relatedBodyId": "saturn"
+  },
+  {
+    "id": "q-cel-9",
+    "category": "celestial",
+    "questionText": "Welcher Planet ist der achte und äußerste große Planet mit den schnellsten Stürmen im Sonnensystem?",
+    "options": [
+      "Uranus",
+      "Neptun",
+      "Saturn",
+      "Venus"
+    ],
+    "correctOptionIndex": 1,
+    "childExplanation": "Stark! Auf dem tiefblauen Eisriesen Neptun rasen Stürme mit über 2.000 km/h.",
+    "relatedBodyId": "neptune"
+  },
+  {
+    "id": "q-cel-10",
+    "category": "celestial",
+    "questionText": "Welcher Mond des Jupiter ist voller aktiver Vulkane und sieht mit seinem gelben Schwefelboden fast wie eine Pizza aus?",
+    "options": [
+      "Unser Erdmond",
+      "Titan",
+      "Io",
+      "Phobos"
+    ],
+    "correctOptionIndex": 2,
+    "childExplanation": "Genau! Io wird vom riesigen Jupiter kräftig durchgeknetet – deshalb brodeln dort hunderte Vulkane.",
+    "relatedBodyId": "io"
+  },
+  {
+    "id": "q-cel-11",
+    "category": "celestial",
+    "questionText": "Was macht den größten Saturnmond ‚Titan‘ unter allen Monden des Sonnensystems so besonders?",
+    "options": [
+      "Er hat eine dichte Atmosphäre sowie Flüsse und Seen aus flüssigem Methan",
+      "Er leuchtet von selbst so hell wie die Sonne",
+      "Er hat viereckige Krater",
+      "Er kreist um die Venus"
+    ],
+    "correctOptionIndex": 0,
+    "childExplanation": "Super! Titan ist der einzige Mond mit einer dichten, goldenen Dunst-Atmosphäre und echten Seen auf seiner Oberfläche.",
+    "relatedBodyId": "titan"
+  },
+  {
+    "id": "q-cel-12",
+    "category": "celestial",
+    "questionText": "Welcher bekannte Zwergplanet trägt auf seiner eisigen Oberfläche ein riesiges helles ‚Herz‘ (Tombaugh Regio)?",
+    "options": [
+      "Ceres",
+      "Eris",
+      "Pluto",
+      "Merkur"
+    ],
+    "correctOptionIndex": 2,
+    "childExplanation": "Richtig! Auf den Nahaufnahmen der Sonde New Horizons entdeckte man auf Pluto ein riesiges, herzförmiges Gletscherfeld aus Stickstoffeis.",
+    "relatedBodyId": "pluto"
   },
   {
     "id": "q-mis-1",
@@ -95,7 +179,7 @@
     ],
     "correctOptionIndex": 1,
     "childExplanation": "Volltreffer! Auf dem Roten Planeten Mars erforschen die Rover Gestein und alte ausgetrocknete Kraterseen.",
-    "relatedBodyId": "mars"
+    "relatedBodyId": "perseverance"
   },
   {
     "id": "q-mis-2",
@@ -109,7 +193,7 @@
     ],
     "correctOptionIndex": 0,
     "childExplanation": "Richtig! Der 6,5 Meter große Hauptspiegel des James-Webb-Teleskops besteht aus 18 goldbeschichteten Beryllium-Sechsecken.",
-    "relatedBodyId": "sun"
+    "relatedBodyId": "jwst"
   },
   {
     "id": "q-mis-3",
@@ -123,7 +207,7 @@
     ],
     "correctOptionIndex": 1,
     "childExplanation": "Genau! Gaia hat die bisher genaueste 3D-Sternenkarte unserer Milchstraße und vieler Asteroiden erstellt.",
-    "relatedBodyId": "sun"
+    "relatedBodyId": "gaia"
   },
   {
     "id": "q-mis-4",
@@ -151,6 +235,272 @@
     ],
     "correctOptionIndex": 1,
     "childExplanation": "Super! In der griechischen Sage ist Artemis die Zwillingsschwester von Apollo – so heißt auch das neue Mondprogramm mit dem Orion-Raumschiff!",
-    "relatedBodyId": "moon"
+    "relatedBodyId": "artemis"
+  },
+  {
+    "id": "q-mis-6",
+    "category": "missions",
+    "questionText": "Mit welcher historischen Mission betraten Neil Armstrong und Buzz Aldrin am 20. Juli 1969 als erste Menschen den Mond?",
+    "options": [
+      "Apollo 11",
+      "Apollo 13",
+      "Sputnik 1",
+      "Voyager 2"
+    ],
+    "correctOptionIndex": 0,
+    "childExplanation": "Richtig! Die Mondlandefähre ‚Eagle‘ von Apollo 11 landete sicher im ‚Meer der Ruhe‘ auf dem Erdmond.",
+    "relatedBodyId": "apollo-11"
+  },
+  {
+    "id": "q-mis-7",
+    "category": "missions",
+    "questionText": "Welche 1977 gestartete Raumsonde trägt eine ‚Golden Record‘ (Musik und Grüße von der Erde) und fliegt heute im interstellaren Raum?",
+    "options": [
+      "Perseverance",
+      "Voyager 1",
+      "Hubble-Teleskop",
+      "BepiColombo"
+    ],
+    "correctOptionIndex": 1,
+    "childExplanation": "Klasse! Voyager 1 ist weiter von uns entfernt als jedes andere von Menschen gebaute Raumfahrzeug.",
+    "relatedBodyId": "voyager-1"
+  },
+  {
+    "id": "q-mis-8",
+    "category": "missions",
+    "questionText": "Welche Raumsonde rast mit bis zu 692.000 km/h durch die Sonnen-Atmosphäre und wird durch einen Hitzeschild vor fast 1.400 °C geschützt?",
+    "options": [
+      "Parker Solar Probe",
+      "Juno",
+      "New Horizons",
+      "Chandrayaan-3"
+    ],
+    "correctOptionIndex": 0,
+    "childExplanation": "Stark! Die Parker Solar Probe ist das schnellste von Menschen gebaute Objekt aller Zeiten und taucht direkt in die Korona der Sonne ein.",
+    "relatedBodyId": "parker"
+  },
+  {
+    "id": "q-mis-9",
+    "category": "missions",
+    "questionText": "Worauf landete im November 2014 der kleine europäische Forschungs-Roboter ‚Philae‘ der Mission ‚Rosetta‘?",
+    "options": [
+      "Auf dem Planetoiden Ceres",
+      "Auf der Oberfläche des Kometen 67P/Tschuri",
+      "Auf dem Saturnmond Titan",
+      "Auf dem Merkur"
+    ],
+    "correctOptionIndex": 1,
+    "childExplanation": "Volltreffer! Zum ersten Mal in der Geschichte gelang mit Rosetta und Philae eine weiche Landung auf einem Kometen.",
+    "relatedBodyId": "rosetta"
+  },
+  {
+    "id": "q-mis-10",
+    "category": "missions",
+    "questionText": "Wer flog am 12. April 1961 an Bord der Raumkapsel ‚Wostok 1‘ als allererster Mensch in den Weltraum?",
+    "options": [
+      "Neil Armstrong",
+      "Juri Gagarin",
+      "Alexander Gerst",
+      "Alan Shepard"
+    ],
+    "correctOptionIndex": 1,
+    "childExplanation": "Genau! Juri Gagarin umrundete in 106 Minuten einmal die Erde und bewies, dass Menschen im All überleben können.",
+    "relatedBodyId": "vostok-1"
+  },
+  {
+    "id": "q-mis-11",
+    "category": "missions",
+    "questionText": "Welcher kleine Metallball mit vier langen Antennen startete am 4. Oktober 1957 als allererster Satellit in den Erdorbit?",
+    "options": [
+      "Sputnik 1",
+      "Hubble",
+      "Rosetta",
+      "Gaia"
+    ],
+    "correctOptionIndex": 0,
+    "childExplanation": "Super! Das ‚Piep-Piep‘-Funksignal von Sputnik 1 konnte man damals sogar mit Amateurfunkgeräten auf der Erde hören.",
+    "relatedBodyId": "sputnik-1"
+  },
+  {
+    "id": "q-mis-12",
+    "category": "missions",
+    "questionText": "Welcher besondere Erfolg gelang der chinesischen Mission ‚Chang'e 4‘ mit ihrem Rover ‚Yutu-2‘ im Januar 2019?",
+    "options": [
+      "Der erste Flug durch die Ringe des Saturn",
+      "Die allererste weiche Landung auf der erdabgewandten Rückseite des Mondes",
+      "Die erste Landung eines Rovers auf der Venus",
+      "Der Bau einer Basis auf dem Pluto"
+    ],
+    "correctOptionIndex": 1,
+    "childExplanation": "Klasse! Weil die Mondrückseite nie direkt zur Erde zeigt, hilft dort ein eigener Relaissatellit beim Funken.",
+    "relatedBodyId": "change-4"
+  },
+  {
+    "id": "q-ast-1",
+    "category": "astronomy",
+    "questionText": "Wo befindet sich der große Asteroidengürtel in unserem Sonnensystem?",
+    "options": [
+      "Zwischen den Bahnen von Mars und Jupiter",
+      "Direkt zwischen Erde und Erdmond",
+      "Innerhalb der Bahn von Merkur",
+      "Hinter dem Oortschen Gürtel"
+    ],
+    "correctOptionIndex": 0,
+    "childExplanation": "Genau! Der Asteroidengürtel (mit dem Zwergplaneten Ceres) bildet die Grenze zwischen den Gesteinsplaneten und den großen Gasriesen.",
+    "relatedBodyId": "asteroid-belt"
+  },
+  {
+    "id": "q-ast-2",
+    "category": "astronomy",
+    "questionText": "Welche riesige Kugelschale aus Milliarden Eisbrocken schließt unser Sonnensystem ganz außen ein?",
+    "options": [
+      "Die Milchstraße",
+      "Der Oortsche Gürtel (Oortsche Wolke)",
+      "Die Ringe des Saturn",
+      "Der Große Rote Fleck"
+    ],
+    "correctOptionIndex": 1,
+    "childExplanation": "Super! Der Oortsche Gürtel umhüllt unser Sonnensystem weit draußen. Von dort kommen viele langperiodische Kometen!",
+    "relatedBodyId": "oort-cloud"
+  },
+  {
+    "id": "q-ast-3",
+    "category": "astronomy",
+    "questionText": "Wofür steht das Bahnelement ‚INC‘ (Bahnneigung) in unserer Astronomen-Box?",
+    "options": [
+      "Für die Anzahl der Monde eines Planeten",
+      "Für den Kipp-Winkel der Umlaufbahn zum Sonnenäquator",
+      "Für die Temperatur im Inneren der Sonne",
+      "Für das Gewicht einer Raumsonde"
+    ],
+    "correctOptionIndex": 1,
+    "childExplanation": "Spitze! INC (Inclination) verrät uns in Grad, wie stark die Bahn eines Himmelskörpers gegenüber der Referenzebene gekippt ist.",
+    "relatedBodyId": "earth"
+  },
+  {
+    "id": "q-ast-4",
+    "category": "astronomy",
+    "questionText": "Wie weit ist genau ‚1 Astronomische Einheit‘ (1 AE beim Bahnelement SMA)?",
+    "options": [
+      "Die Entfernung von der Erde bis zum Mond (ca. 384.400 km)",
+      "Die mittlere Entfernung zwischen Erde und Sonne (ca. 149,6 Millionen km)",
+      "Der Umfang unserer Erde (ca. 40.000 km)",
+      "Die Länge einer Weltraumrakete"
+    ],
+    "correctOptionIndex": 1,
+    "childExplanation": "Richtig! Weil Kilometer im Weltall riesig groß werden, messen Astronominnen und Astronomen mit dem ‚Erde-Sonne-Abstand‘ = 1 AE!",
+    "relatedBodyId": "earth"
+  },
+  {
+    "id": "q-ast-5",
+    "category": "astronomy",
+    "questionText": "Was bedeutet eine sehr hohe Exzentrizität (Bahnelement ECC nahe 1, wie 0,967 beim Halleyschen Kometen)?",
+    "options": [
+      "Die Umlaufbahn ist ein perfekter Kreis",
+      "Die Umlaufbahn ist eine stark langgezogene Ellipse (mal sehr nah an der Sonne, mal sehr weit weg)",
+      "Der Komet dreht sich gar nicht um die Sonne",
+      "Der Komet hat besonders viele Ringe"
+    ],
+    "correctOptionIndex": 1,
+    "childExplanation": "Klasse! Je näher ECC an 0 liegt, desto runder ist die Bahn. Bei ECC nahe 1 saust der Komet wie auf einer langen Schleife durch das Sonnensystem.",
+    "relatedBodyId": "halley"
+  },
+  {
+    "id": "q-ast-6",
+    "category": "astronomy",
+    "questionText": "Alle wie viele Jahre kehrt der berühmte Halleysche Komet (1P/Halley) ungefähr in die Nähe der Sonne zurück (nächstes Mal 2061)?",
+    "options": [
+      "Jedes einzelne Jahr",
+      "Alle 10 Jahre",
+      "Ungefähr alle 75–76 Jahre",
+      "Nur alle 10.000 Jahre"
+    ],
+    "correctOptionIndex": 2,
+    "childExplanation": "Super! Zuletzt leuchtete der Halleysche Komet 1986 am Himmel – viele Kinder heute können ihn im Jahr 2061 selbst beobachten!",
+    "relatedBodyId": "halley"
+  },
+  {
+    "id": "q-ast-7",
+    "category": "astronomy",
+    "questionText": "Welcher Mond hält den Rekord als größter Mond in unserem gesamten Sonnensystem (er ist sogar größer als der Planet Merkur)?",
+    "options": [
+      "Ganymed (beim Jupiter)",
+      "Phobos (beim Mars)",
+      "Unser Erdmond",
+      "Charon (beim Pluto)"
+    ],
+    "correctOptionIndex": 0,
+    "childExplanation": "Stark! Der Jupitermond Ganymed hat rund 5.268 km Durchmesser und sogar ein eigenes kleines Magnetfeld.",
+    "relatedBodyId": "ganymede"
+  },
+  {
+    "id": "q-ast-8",
+    "category": "astronomy",
+    "questionText": "Welcher blendend weiße Eismond des Saturn schießt riesige Fontänen (Geysire) aus Wassereis durch Risse ins All?",
+    "options": [
+      "Io",
+      "Enceladus",
+      "Deimos",
+      "Triton"
+    ],
+    "correctOptionIndex": 1,
+    "childExplanation": "Richtig! Unter der Eiskruste von Enceladus versteckt sich ein ganzer Ozean aus flüssigem Wasser.",
+    "relatedBodyId": "enceladus"
+  },
+  {
+    "id": "q-ast-9",
+    "category": "astronomy",
+    "questionText": "Wo liegt der ‚Lagrange-Punkt L2‘, an dem Teleskope wie das James-Webb-Teleskop (JWST) und Gaia stabil kreisen?",
+    "options": [
+      "Genau in der Mitte zwischen Sonne und Merkur",
+      "Etwa 1,5 Millionen km hinter der Erde, auf der sonnenabgewandten Seite",
+      "Direkt über dem Nordpol der Erde in 400 km Höhe",
+      "Auf der Rückseite des Jupiter"
+    ],
+    "correctOptionIndex": 1,
+    "childExplanation": "Genau! Dort gleichen sich Schwerkraft und Fliehkraft perfekt aus, und die Erde spendet gemeinsam mit dem Sonnenschild Schutz vor der heißen Sonne.",
+    "relatedBodyId": "jwst"
+  },
+  {
+    "id": "q-ast-10",
+    "category": "astronomy",
+    "questionText": "Wie lange braucht ein Lichtstrahl von der Sonne ungefähr bis zu uns auf die Erde?",
+    "options": [
+      "Genau 1 Sekunde",
+      "Ungefähr 8 Minuten und 20 Sekunden",
+      "Etwa 24 Stunden (1 ganzer Tag)",
+      "Ein halbes Jahr"
+    ],
+    "correctOptionIndex": 1,
+    "childExplanation": "Spitze! Obwohl Licht unfassbar schnell ist (rund 300.000 km pro Sekunde), braucht es für die 150 Millionen km bis zu uns über 8 Minuten.",
+    "relatedBodyId": "sun"
+  },
+  {
+    "id": "q-ast-11",
+    "category": "astronomy",
+    "questionText": "Welcher Zwergplanet dreht sich so rasend schnell (in knapp 4 Stunden), dass er wie ein Ei geformt ist – und besitzt sogar einen eigenen Ring?",
+    "options": [
+      "Ceres",
+      "Haumea",
+      "Pluto",
+      "Mond"
+    ],
+    "correctOptionIndex": 1,
+    "childExplanation": "Klasse! Haumea wirbelt so schnell herum, dass die Fliehkraft ihn zu einer länglichen Rugbyball-Form gedehnt hat.",
+    "relatedBodyId": "haumea"
+  },
+  {
+    "id": "q-ast-12",
+    "category": "astronomy",
+    "questionText": "Was verrät uns das Bahnelement ‚LPE‘ (Länge des Perihels), zum Beispiel bei der Merkurbahn?",
+    "options": [
+      "Wie viele Krater ein Planet hat",
+      "In welcher Richtung der sonnennächste Punkt (das Perihel) der Umlaufbahn liegt",
+      "Wie alt die Sonne ist",
+      "Welche Farbe der Planet hat"
+    ],
+    "correctOptionIndex": 1,
+    "childExplanation": "Genau! ‚Perihel‘ bedeutet der Punkt einer Umlaufbahn, an dem ein Himmelskörper der Sonne am nächsten kommt.",
+    "relatedBodyId": "mercury"
   }
 ]

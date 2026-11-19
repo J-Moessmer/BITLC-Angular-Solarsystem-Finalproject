@@ -3,8 +3,8 @@
   FCPP-Referenz: P30-U10 (A10), P30-U20 (A20, A30 – Maßstabs- & Größenvergleich)
   Erstellt mit: KI-Assistent (Antigravity AI / Pair-Programming Agent)
   Erstellt für / Autor: Joshua Mößmer (J-Moessmer)
-  Datum / Version: 16.11.2026 / v2.0
-  Hinweis: Bereinigte Vergleichsansicht ohne Deko-Tags und redundante Klammern, mit 1px Rahmen.
+  Datum / Version: 19.11.2026 / v2.1
+  Hinweis: Gruppierte Vergleichsauswahl inkl. Exoplaneten, Riesensternen & Alltagsobjekten, geschachtelte Horizont-Darstellung im Tiefen-Zoom sowie kompakte Objekt-Steckbriefe mit Quellen-Links.
 -->
 <section class="p30-container" aria-labelledby="p30-title">
   <!-- Kopfzeile & Schnellwahl-Presets (P30-A20) -->
@@ -19,8 +19,8 @@
     </div>
 
     <p class="intro-text">
-      Wähle zwei oder mehr Himmelskörper über die Auswahlfelder oder klicke auf eine Schnellwahl.
-      Die Vergleichsbühne zeichnet die Durchmesser im wahren Größenverhältnis nebeneinander.
+      Wähle zwei bis fünf Objekte aus unserem Sonnensystem, der Erde oder fernen Sternsystemen und
+      zoome stufenlos bis an das kleinste Objekt heran.
     </p>
 
     <div class="preset-bar" role="group" aria-label="Schnellwahl für Größenvergleiche">
@@ -36,7 +36,7 @@
     <div class="dropdown-slots-row">
       @for (selectedId of selectedIds(); track $index; let idx = $index) {
         <div class="dropdown-slot">
-          <label [for]="'body-select-' + idx">Himmelskörper {{ idx + 1 }}</label>
+          <label [for]="'body-select-' + idx">Vergleichsobjekt {{ idx + 1 }}</label>
           <div class="select-with-remove">
             <select
               [id]="'body-select-' + idx"
@@ -44,10 +44,14 @@
               [value]="selectedId"
               (change)="updateSelectionAt(idx, $any($event.target).value)"
             >
-              @for (body of comparableBodies(); track body.id) {
-                <option [value]="body.id" [selected]="body.id === selectedId">
-                  {{ body.name }} · {{ body.diameterKm | number: '1.0-0' }} km
-                </option>
+              @for (group of comparableBodyGroups(); track group.label) {
+                <optgroup [label]="group.label">
+                  @for (body of group.bodies; track body.id) {
+                    <option [value]="body.id" [selected]="body.id === selectedId">
+                      {{ body.name }} · {{ formatBodyDimension(body) }}
+                    </option>
+                  }
+                </optgroup>
               }
             </select>
 
@@ -56,7 +60,7 @@
                 type="button"
                 class="remove-slot-btn"
                 (click)="removeComparisonSlot(idx)"
-                [attr.aria-label]="'Himmelskörper ' + (idx + 1) + ' entfernen'"
+                [attr.aria-label]="'Vergleichsobjekt ' + (idx + 1) + ' entfernen'"
               >
                 ✕
               </button>
@@ -73,10 +77,10 @@
     </div>
   </div>
 
-  <!-- Proportionale SVG-Vergleichsbühne (P30-A30 / P30-U20) mit dynamischem Zoom -->
+  <!-- Proportionale SVG-Vergleichsbühne (P30-A30 / P30-U20) mit dynamischem Tiefen-Zoom -->
   <div class="svg-comparison-card" (wheel)="onWheelZoom($event)">
     <div class="comparison-zoom-bar" aria-label="Zoom für den Größenvergleich">
-      <span class="zoom-bar-label">Zoom {{ zoomSliderPercent() }}% ({{ zoomFactor() | number: '1.1-1' }}×)</span>
+      <span class="zoom-bar-label">Zoom {{ zoomSliderPercent() }}% ({{ zoomFactor() | number: '1.0-1' }}×)</span>
       <button type="button" class="cmp-zoom-btn" (click)="zoomOut()" aria-label="Herauszoomen">
         <i class="fa-solid fa-minus" aria-hidden="true"></i>
       </button>
@@ -85,7 +89,7 @@
         class="cmp-zoom-slider"
         min="0"
         max="100"
-        step="1"
+        step="0.2"
         [value]="zoomSliderPercent()"
         (input)="onZoomSliderInput($event)"
         aria-label="Stufenloser Zoom im Größenvergleich"
@@ -116,6 +120,24 @@
           <stop offset="88%" stop-color="#F59E0B" stop-opacity="0.45" />
           <stop offset="100%" stop-color="#F59E0B" stop-opacity="0" />
         </radialGradient>
+        <radialGradient id="blackHoleHalo" cx="50%" cy="50%" r="50%">
+          <stop offset="84%" stop-color="#F97316" stop-opacity="0.55" />
+          <stop offset="100%" stop-color="#F97316" stop-opacity="0" />
+        </radialGradient>
+        <linearGradient id="everestRockGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#64748B" />
+          <stop offset="55%" stop-color="#475569" />
+          <stop offset="100%" stop-color="#334155" />
+        </linearGradient>
+        <linearGradient id="everestSnowGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#FFFFFF" />
+          <stop offset="100%" stop-color="#CBD5E1" />
+        </linearGradient>
+        <linearGradient id="germanyMapGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#22C55E" />
+          <stop offset="55%" stop-color="#16A34A" />
+          <stop offset="100%" stop-color="#15803D" />
+        </linearGradient>
       </defs>
 
       <line
@@ -129,13 +151,21 @@
         opacity="0.55"
       />
 
-      @for (item of scaledItems(); track item.slotIndex) {
+      <!-- 1. Kreise & maßstabsgetreue SVG-Silhouetten gestaffelt von innen nach außen zeichnen -->
+      @for (item of renderOrderedItems(); track item.slotIndex) {
         @if (item.body.id === 'sun') {
           <circle
             [attr.cx]="item.centerX"
             cy="225"
             [attr.r]="item.svgRadiusPx * 1.06"
             fill="url(#sunCoronaHalo)"
+          />
+        } @else if (item.body.id === 'sagittarius-a') {
+          <circle
+            [attr.cx]="item.centerX"
+            cy="225"
+            [attr.r]="item.svgRadiusPx * 1.12"
+            fill="url(#blackHoleHalo)"
           />
         }
 
@@ -165,22 +195,92 @@
             />
           }
 
-          <circle
-            cx="0"
-            cy="0"
-            [attr.r]="item.svgRadiusPx"
-            [attr.fill]="item.body.id === 'sun' ? 'url(#sunCompareGlow)' : item.body.colorHex"
-            stroke="#FFFFFF"
-            [attr.stroke-width]="item.svgRadiusPx > 300 ? 3 : 1.5"
-          />
+          <!-- KI-Hinweis: Maßstabsgetreue SVG-Silhouetten für Berg & Land (Gesamthöhe = 2 * svgRadiusPx) -->
+          @if (item.body.id === 'mount-everest') {
+            <g
+              class="svg-shape-everest"
+              [attr.transform]="'scale(' + (item.svgRadiusPx / 100) + ')'"
+            >
+              <path
+                d="M -95 100 L -78 40 L -62 0 L -48 -32 L -32 -22 L -16 -65 L 0 -100 L 18 -68 L 38 -42 L 50 -24 L 62 0 L 78 42 L 95 100 Z"
+                fill="url(#everestRockGrad)"
+                stroke="#F8FAFC"
+                [attr.stroke-width]="item.svgRadiusPx > 300 ? 2.5 : 1.6"
+                vector-effect="non-scaling-stroke"
+              />
+              <path
+                d="M 0 -100 L 18 -68 L 38 -42 L 50 -24 L 62 0 L 78 42 L 95 100 L 10 100 L 4 32 L -5 -28 Z"
+                fill="#94A3B8"
+                opacity="0.75"
+              />
+              <path
+                d="M -48 -32 L -38 -10 L -32 -22 L -16 -65 L 0 -100 L 18 -68 L 38 -42 L 26 -24 L 12 -34 L 2 -16 L -12 -32 L -24 -14 Z"
+                fill="url(#everestSnowGrad)"
+              />
+              <line
+                x1="-98"
+                y1="100"
+                x2="98"
+                y2="100"
+                stroke="#BAE6FD"
+                stroke-width="1.5"
+                vector-effect="non-scaling-stroke"
+              />
+            </g>
+            @if (item.svgRadiusPx >= 14 && item.svgRadiusPx <= 240) {
+              <g [attr.transform]="'translate(0, ' + (-item.svgRadiusPx) + ')'">
+                <line x1="0" y1="0" x2="0" y2="-13" stroke="#F8FAFC" stroke-width="1.6" />
+                <polygon points="0,-13 10,-9 0,-5" fill="#F97316" />
+              </g>
+            }
+          } @else if (item.body.id === 'germany-size') {
+            <g
+              class="svg-shape-germany"
+              [attr.transform]="'scale(' + (item.svgRadiusPx / 100) + ')'"
+            >
+              <path
+                d="M -18 -100 L -4 -95 L 6 -86 L 16 -84 L 10 -74 L 28 -82 L 44 -90 L 52 -78 L 48 -56 L 58 -36 L 62 -20 L 72 0 L 66 12 L 46 18 L 28 28 L 40 42 L 58 58 L 54 66 L 42 74 L 48 88 L 34 86 L 14 92 L -4 100 L -18 92 L -38 90 L -48 88 L -44 62 L -40 46 L -58 48 L -64 34 L -66 16 L -73 0 L -68 -18 L -52 -24 L -54 -40 L -56 -64 L -58 -74 L -40 -72 L -30 -78 L -26 -66 L -32 -84 L -24 -96 Z"
+                fill="url(#germanyMapGrad)"
+                stroke="#F8FAFC"
+                [attr.stroke-width]="item.svgRadiusPx > 300 ? 2.5 : 1.6"
+                stroke-linejoin="round"
+                vector-effect="non-scaling-stroke"
+              />
+              @if (item.svgRadiusPx >= 18) {
+                <line
+                  x1="-11"
+                  y1="-96"
+                  x2="-4"
+                  y2="96"
+                  stroke="#FDE047"
+                  stroke-width="1.4"
+                  stroke-dasharray="4 3"
+                  opacity="0.8"
+                  vector-effect="non-scaling-stroke"
+                />
+              }
+            </g>
+          } @else {
+            <circle
+              cx="0"
+              cy="0"
+              [attr.r]="item.svgRadiusPx"
+              [attr.fill]="item.body.id === 'sun' ? 'url(#sunCompareGlow)' : item.body.colorHex"
+              stroke="#FFFFFF"
+              [attr.stroke-width]="item.svgRadiusPx > 300 ? 3 : 1.5"
+            />
+          }
         </g>
+      }
 
+      <!-- 2. Beschriftungen ganz oben rendern, damit kein vergrößerter Horizont einen Text verdeckt -->
+      @for (item of scaledItems(); track item.slotIndex) {
         <text
           [attr.x]="item.labelX"
           y="453"
           text-anchor="middle"
           fill="#F8FAFC"
-          font-size="16"
+          font-size="15"
           font-weight="700"
           class="cmp-svg-label"
         >
@@ -195,7 +295,7 @@
           font-weight="600"
           class="cmp-svg-label"
         >
-          Ø {{ item.body.diameterKm | number: '1.0-0' }} km
+          {{ formatBodyDimension(item.body) }}
         </text>
       }
     </svg>
@@ -229,6 +329,39 @@
           </span>
         </div>
       </div>
+    </div>
+  }
+
+  <!-- Kurz-Steckbriefe & Quellen der verglichenen Objekte -->
+  @if (selectedBodies().length > 0) {
+    <div class="compared-bodies-info-grid" aria-label="Kurzinfos und Quellen zu den Vergleichsobjekten">
+      @for (body of selectedBodies(); track body.id + '-' + $index) {
+        <article class="compare-info-card">
+          <div class="compare-info-header">
+            <span class="compare-color-dot" [style.background-color]="body.colorHex"></span>
+            <div>
+              <h4>{{ body.name }}</h4>
+              <span class="compare-cat-label">
+                {{ body.categoryLabel }} · {{ formatBodyDimension(body) }}
+              </span>
+            </div>
+          </div>
+          <p class="compare-info-summary">{{ body.shortSummary }}</p>
+          <div class="compare-info-links">
+            @if (body.wikipediaUrl) {
+              <a
+                class="compare-source-link"
+                [href]="body.wikipediaUrl"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <i class="fa-brands fa-wikipedia-w" aria-hidden="true"></i>
+                Wikipedia-Artikel
+              </a>
+            }
+          </div>
+        </article>
+      }
     </div>
   }
 </section>
