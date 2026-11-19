@@ -151,10 +151,21 @@ describe('Core Services (P10–P50)', () => {
     expect(cosL5).toBeCloseTo(0.5, 2);
 
     const jupiter = { ...makeBody('jupiter', 'planet', 255), parentId: 'sun', distanceFromSunAu: 5.204 };
+    const callisto: CelestialBody = {
+      ...makeBody('callisto', 'moon', 31),
+      parentId: 'jupiter',
+      diameterKm: 4821,
+      orbitalPeriodDays: 16.69,
+      orbitalElements: { ...baseOe, sma: { ...baseOe.sma, numericValue: 0.01259 } },
+    };
     const jupL1 = { ...makeBody('jupiter-l1', 'lagrange', 243), parentId: 'jupiter', distanceFromSunAu: 4.849 };
     const jupL2 = { ...makeBody('jupiter-l2', 'lagrange', 267), parentId: 'jupiter', distanceFromSunAu: 5.559 };
     const jupL4 = { ...makeBody('jupiter-l4', 'lagrange', 255), parentId: 'jupiter', distanceFromSunAu: 5.204 };
-    const allWithJup = [...bodies, jupiter, jupL1, jupL2, jupL4];
+    const mercury = { ...makeBody('mercury', 'planet', 62), parentId: 'sun', distanceFromSunAu: 0.387 };
+    const mercL1 = { ...makeBody('mercury-l1', 'lagrange', 52), parentId: 'mercury', distanceFromSunAu: 0.385 };
+    const mercL2 = { ...makeBody('mercury-l2', 'lagrange', 72), parentId: 'mercury', distanceFromSunAu: 0.389 };
+
+    const allWithJup = [...bodies, jupiter, callisto, jupL1, jupL2, jupL4, mercury, mercL1, mercL2];
     const jupPos = viewport.computeBodyPosition(jupiter, allWithJup);
     const jL1Pos = viewport.computeBodyPosition(jupL1, allWithJup);
     const jL2Pos = viewport.computeBodyPosition(jupL2, allWithJup);
@@ -167,6 +178,23 @@ describe('Core Services (P10–P50)', () => {
       (jupPos.worldX * jL4Pos.worldX + jupPos.worldY * jL4Pos.worldY) /
       (Math.hypot(jupPos.worldX, jupPos.worldY) * Math.hypot(jL4Pos.worldX, jL4Pos.worldY));
     expect(cosJupL4).toBeCloseTo(0.5, 2);
+
+    // Großzügiger Abstand auch bei Jupiter (Kallisto) & mondlosem Planeten Merkur bei 3.2x Zoom in Übersicht
+    viewport.setViewMode('overview');
+    viewport.setZoom(3.2);
+    const jup3 = viewport.computeBodyPosition(jupiter, allWithJup);
+    const cal3 = viewport.computeBodyPosition(callisto, allWithJup);
+    const jL1_3 = viewport.computeBodyPosition(jupL1, allWithJup);
+    const jL2_3 = viewport.computeBodyPosition(jupL2, allWithJup);
+    const calDist = Math.hypot(cal3.x - jup3.x, cal3.y - jup3.y);
+    expect(Math.hypot(jL1_3.x - jup3.x, jL1_3.y - jup3.y)).toBeGreaterThan(calDist * 1.8);
+    expect(Math.hypot(jL2_3.x - jup3.x, jL2_3.y - jup3.y)).toBeGreaterThan(calDist * 1.8);
+
+    const merc3 = viewport.computeBodyPosition(mercury, allWithJup);
+    const mL1_3 = viewport.computeBodyPosition(mercL1, allWithJup);
+    const mL2_3 = viewport.computeBodyPosition(mercL2, allWithJup);
+    expect(Math.hypot(mL1_3.x - merc3.x, mL1_3.y - merc3.y)).toBeGreaterThanOrEqual(35);
+    expect(Math.hypot(mL2_3.x - merc3.x, mL2_3.y - merc3.y)).toBeGreaterThanOrEqual(35);
   });
 
   it('SolarSystemDataService should load fallback bodies with Wikimedia Commons URLs and 7 orbital elements (P20-U20)', async () => {

@@ -73,7 +73,7 @@ describe('SpaceQuizComponent (P50)', () => {
       questionText: 'Was beschreibt das Bahnelement INC?',
       options: ['Farbe', 'Bahnneigung', 'Masse', 'Temperatur'],
       correctOptionIndex: 1,
-      childExplanation: 'INC steht für die Bahnneigung!',
+      childExplanation: 'Genau! INC steht für die Bahnneigung!',
       relatedBodyId: 'mars',
     },
   ];
@@ -134,5 +134,23 @@ describe('SpaceQuizComponent (P50)', () => {
     fixture.detectChanges();
 
     expect(fixture.nativeElement.textContent).toContain('Bestanden! :)');
+
+    // Bei einer falschen Antwort darf kein Lobwort ("Genau!" / "Richtig!") als Einleitung stehen
+    comp.onSelectCategory('astronomy');
+    fixture.detectChanges();
+    comp.onChooseOption(0);
+    comp.onCheckAnswer();
+    fixture.detectChanges();
+    httpMock
+      .match('assets/data/missions.json')
+      .forEach((req) => req.flush([]));
+    await fixture.whenStable();
+    fixture.detectChanges();
+
+    const bannerText =
+      (fixture.nativeElement.querySelector('.explanation-banner p')?.textContent as string) ?? '';
+    expect(bannerText).toContain('Schade, nicht ganz! Richtig ist Antwort B: INC steht für die Bahnneigung!');
+    expect(bannerText.startsWith('Genau!')).toBe(false);
+    expect(bannerText.startsWith('Richtig!')).toBe(false);
   });
 });

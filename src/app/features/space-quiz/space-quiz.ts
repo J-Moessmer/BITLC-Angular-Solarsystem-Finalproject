@@ -11,7 +11,7 @@ import { Component, OnInit, computed, inject, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { QuizService } from '../../core/services/quiz.service';
 import { SolarSystemDataService } from '../../core/services/solar-system-data.service';
-import { QuizCategoryId } from '../../core/models/quiz.model';
+import { QuizCategoryId, QuizQuestion } from '../../core/models/quiz.model';
 import { CelestialBody } from '../../core/models/celestial-body.model';
 import { InfoboxDetailComponent } from '../solar-system-view/infobox-detail/infobox-detail';
 
@@ -104,5 +104,17 @@ export class SpaceQuizComponent implements OnInit {
 
   onToggleSteckbrief(): void {
     this.isSteckbriefOpen.update((open) => !open);
+  }
+
+  /** KI-Hinweis: Zeigt bei falscher Antwort eine motivierende Korrektur ohne Lobwort („Genau!“, „Richtig!“ etc.). */
+  getFormattedExplanation(q: QuizQuestion): string {
+    if (this.quizService.selectedOptionIndex() === q.correctOptionIndex) {
+      return q.childExplanation;
+    }
+    const cleanText = q.childExplanation
+      .replace(/^(?:Richtig|Genau|Super|Stark|Klasse|Volltreffer|Spitze|Stimmt)!\s*/i, '')
+      .trim();
+    const correctLetter = this.optionLetters[q.correctOptionIndex] ?? '';
+    return `Schade, nicht ganz! Richtig ist Antwort ${correctLetter}: ${cleanText}`;
   }
 }

@@ -630,14 +630,14 @@ export class ViewportStateService {
           neptune: 0.0258,
         };
         const maxOverviewGapByPlanet: Readonly<Record<string, number>> = {
-          mercury: 16,
-          venus: 18,
+          mercury: 21,
+          venus: 23,
           earth: 27,
-          mars: 27,
+          mars: 29,
           jupiter: 38,
-          saturn: 36,
-          uranus: 31,
-          neptune: 31,
+          saturn: 37,
+          uranus: 33,
+          neptune: 34,
         };
 
         /** KI-Hinweis: Berechnet den tatsächlichen äußersten Mondbahn-Radius inkl. physikalischer Skalierung bei Nahzoom. */
@@ -665,13 +665,11 @@ export class ViewportStateService {
         const hillRatio = hillRatioByPlanet[planet.id] ?? 0.01;
         const maxOverviewGapWorld = maxOverviewGapByPlanet[planet.id] ?? 24;
         const minClearanceOutsideMoonsPx =
-          maxMoonScreenOrbitPx > 0 ? maxMoonScreenOrbitPx + 7.5 : planetPos.bodyRadiusPx + 9;
-        const desiredMoonFactor =
-          planet.id === 'earth' ? (mode === 'true-scale' ? 2.25 : 2.15) : 1.55;
+          maxMoonScreenOrbitPx > 0 ? maxMoonScreenOrbitPx + 6.5 : planetPos.bodyRadiusPx + 14;
         const desiredOutsideMoonsPx =
           maxMoonScreenOrbitPx > 0
-            ? Math.max(maxMoonScreenOrbitPx * desiredMoonFactor, maxMoonScreenOrbitPx + 14)
-            : planetPos.bodyRadiusPx + 12;
+            ? Math.max(maxMoonScreenOrbitPx * 2.2, maxMoonScreenOrbitPx + 26)
+            : Math.max(planetPos.bodyRadiusPx * 2.8 + 30, 40);
 
         const rawL12Px =
           mode === 'true-scale'

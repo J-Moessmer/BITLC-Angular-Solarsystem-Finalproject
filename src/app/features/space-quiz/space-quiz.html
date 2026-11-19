@@ -92,7 +92,7 @@
             class="explanation-banner"
             [class.is-correct]="quizService.selectedOptionIndex() === q.correctOptionIndex"
           >
-            <p>{{ q.childExplanation }}</p>
+            <p>{{ getFormattedExplanation(q) }}</p>
             @if (activeSteckbriefBody(); as steckbriefBody) {
               <div class="explanation-actions">
                 <button
