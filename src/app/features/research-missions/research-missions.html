@@ -110,7 +110,7 @@
                   }
                 </div>
               }
-              <span class="img-credit">Quelle: {{ current.imageCredit }}</span>
+              <span class="img-credit">{{ activeImageCaption() }} · Quelle: {{ current.imageCredit }}</span>
             </div>
           }
 
@@ -246,8 +246,10 @@
         [isOpen]="isLightboxOpen()"
         [imageSrc]="activeImageSrc()"
         [fallbackSrc]="current.imageUrl"
-        [title]="current.title"
+        [title]="activeImageCaption()"
         [credit]="current.imageCredit"
+        [galleryItems]="missionGalleryItems()"
+        (imageSelected)="selectGalleryPhoto($event)"
         (closed)="isLightboxOpen.set(false)"
       />
     }

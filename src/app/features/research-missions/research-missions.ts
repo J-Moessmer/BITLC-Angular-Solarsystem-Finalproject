@@ -15,39 +15,7 @@ import { MissionCategory } from '../../core/models/research-mission.model';
 import { ImageLightboxComponent } from '../../shared/components/image-lightbox/image-lightbox';
 import { GlossaryTermComponent } from '../../shared/components/glossary-term/glossary-term';
 import { IssWorldMapComponent } from './iss-world-map/iss-world-map';
-
-const EXTRA_MISSION_GALLERY: Readonly<Record<string, Array<{ url: string; caption: string }>>> = {
-  iss: [
-    {
-      url: 'https://images-assets.nasa.gov/image/iss039e005387/iss039e005387~thumb.jpg',
-      caption: 'Blick aus der ISS-Kuppel auf die Erde (NASA)',
-    },
-  ],
-  'apollo-11': [
-    {
-      url: 'https://images-assets.nasa.gov/image/PIA24439/PIA24439~thumb.jpg',
-      caption: 'Apollo 11 auf dem Mond (NASA)',
-    },
-  ],
-  perseverance: [
-    {
-      url: 'https://images-assets.nasa.gov/image/PIA24542/PIA24542~thumb.jpg',
-      caption: 'Perseverance zusammen mit Mars-Hubschrauber Ingenuity (NASA)',
-    },
-  ],
-  jwst: [
-    {
-      url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Webb%27s_First_Deep_Field.jpg/960px-Webb%27s_First_Deep_Field.jpg',
-      caption: 'Erstes Deep-Field-Foto des James-Webb-Teleskops',
-    },
-  ],
-  hubble: [
-    {
-      url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/HST-SM4.jpeg/960px-HST-SM4.jpeg',
-      caption: 'Hubble im Erdorbit (Space Shuttle SM4)',
-    },
-  ],
-};
+import { buildMissionGallery, GalleryMediaItem } from '../../core/data/media-gallery.data';
 
 export interface CategoryFilterChip {
   id: MissionCategory;
@@ -77,25 +45,28 @@ export class ResearchMissionsComponent implements OnInit, OnDestroy {
   readonly issAutoRefreshEnabled = signal<boolean>(true);
   private issPollTimerId: ReturnType<typeof setInterval> | null = null;
 
-  readonly missionGalleryItems = computed<Array<{ url: string; caption: string }>>(() => {
+  readonly missionGalleryItems = computed<GalleryMediaItem[]>(() => {
     const m = this.missionService.selectedMission();
     if (!m) {
       return [];
     }
-    const items: Array<{ url: string; caption: string }> = [
-      { url: m.wikimediaImageUrl || m.imageUrl, caption: m.title },
-    ];
-    return [...items, ...(EXTRA_MISSION_GALLERY[m.id] ?? [])];
+    return buildMissionGallery(m);
+  });
+
+  readonly activeImageCaption = computed<string>(() => {
+    const src = this.activeImageSrc();
+    const match = this.missionGalleryItems().find((item) => item.url === src);
+    return match?.caption ?? this.missionService.selectedMission()?.title ?? '';
   });
 
   readonly categoryFilters: readonly CategoryFilterChip[] = [
     { id: 'all', label: 'Alle Projekte' },
-    { id: 'solar-probe', label: 'Sonnensonden' },
-    { id: 'mars-rover', label: 'Mars Rover' },
-    { id: 'deep-space', label: 'Äußere Raumsonden' },
-    { id: 'telescope', label: 'Weltraumteleskope' },
+    { id: 'probe', label: 'Sonden' },
+    { id: 'mars-rover', label: 'Rover' },
+    { id: 'telescope', label: 'Teleskope' },
     { id: 'space-station', label: 'Raumstationen' },
     { id: 'moon-mission', label: 'Mondflüge' },
+    { id: 'crewed-mission', label: 'Bemannte Missionen' },
   ];
 
   constructor() {

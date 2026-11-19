@@ -143,6 +143,8 @@ describe('SolarSystemViewComponent & InfoboxDetailComponent (P10 & P20)', () => 
 
     const text = fixture.nativeElement.textContent;
     expect(text).toContain('Unser blauer Heimatplanet');
+    const galleryBtns = fixture.nativeElement.querySelectorAll('.mini-gallery .gallery-thumb-btn');
+    expect(galleryBtns.length).toBeGreaterThanOrEqual(5);
     expect(text).toContain('SMA');
     expect(text).toContain('ECC');
     expect(text).toContain('INC');

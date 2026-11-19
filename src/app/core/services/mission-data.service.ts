@@ -53,7 +53,31 @@ export class MissionDataService {
     if (category === 'all') {
       return all;
     }
-    return all.filter((m) => m.category === category);
+    const normalize = (cat: string): string => {
+      if (cat === 'rover') {
+        return 'mars-rover';
+      }
+      if (cat === 'solar-probe' || cat === 'deep-space') {
+        return 'probe';
+      }
+      return cat;
+    };
+    const normalizedTarget = normalize(category);
+    const matches = all.filter((m) => {
+      const primary = normalize(m.category);
+      const extras = (m.categories ?? []).map((c) => normalize(c));
+      return (
+        primary === normalizedTarget ||
+        m.category === category ||
+        extras.includes(normalizedTarget) ||
+        (m.categories ?? []).includes(category)
+      );
+    });
+    return [...matches].sort((a, b) => {
+      const aPrimary = normalize(a.category) === normalizedTarget ? 0 : 1;
+      const bPrimary = normalize(b.category) === normalizedTarget ? 0 : 1;
+      return aPrimary - bPrimary;
+    });
   });
 
   /** Aktuell für den Detail-Steckbrief ausgewählte Mission (P40-A30 / P40-U20) */

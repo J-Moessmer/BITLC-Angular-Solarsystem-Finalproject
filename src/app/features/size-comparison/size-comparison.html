@@ -275,6 +275,26 @@
 
       <!-- 2. Beschriftungen ganz oben rendern, damit kein vergrößerter Horizont einen Text verdeckt -->
       @for (item of scaledItems(); track item.slotIndex) {
+        @if (item.showLeaderLine) {
+          <line
+            [attr.x1]="item.labelX"
+            y1="434"
+            [attr.x2]="item.pointerTargetX"
+            [attr.y2]="item.pointerTargetY"
+            stroke="#94A3B8"
+            stroke-width="1.2"
+            stroke-dasharray="4 3"
+            opacity="0.72"
+          />
+          <circle
+            [attr.cx]="item.pointerTargetX"
+            [attr.cy]="item.pointerTargetY"
+            r="3"
+            [attr.fill]="item.body.accentColorHex"
+            stroke="#111D3B"
+            stroke-width="1"
+          />
+        }
         <text
           [attr.x]="item.labelX"
           y="453"
@@ -284,7 +304,7 @@
           font-weight="700"
           class="cmp-svg-label"
         >
-          {{ item.body.name }}
+          {{ item.svgLabelName }}
         </text>
         <text
           [attr.x]="item.labelX"
@@ -295,7 +315,7 @@
           font-weight="600"
           class="cmp-svg-label"
         >
-          {{ formatBodyDimension(item.body) }}
+          {{ item.dimensionLabel }}
         </text>
       }
     </svg>

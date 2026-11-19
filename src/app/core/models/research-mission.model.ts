@@ -9,10 +9,13 @@
 
 export type MissionCategory =
   | 'all'
+  | 'probe'
+  | 'rover'
   | 'mars-rover'
   | 'telescope'
   | 'space-station'
   | 'moon-mission'
+  | 'crewed-mission'
   | 'solar-probe'
   | 'deep-space';
 
@@ -21,6 +24,8 @@ export interface ResearchMission {
   title: string;
   subtitle: string;
   category: Exclude<MissionCategory, 'all'>;
+  /** Zusätzliche Kategorien für Mehrfachzuordnung (z. B. Mondflüge & bemannte Missionen) */
+  categories?: Array<Exclude<MissionCategory, 'all'>>;
   categoryLabel: string;
   /** Ziel-Himmelskörper für den Sprung-Button "Im Sonnensystem zeigen" (--> P20) */
   targetBodyId: string;

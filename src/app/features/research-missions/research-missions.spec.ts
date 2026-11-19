@@ -72,6 +72,42 @@ describe('ResearchMissionsComponent (P40)', () => {
       officialUrl: 'https://science.nasa.gov/mission/webb/',
       wikipediaUrl: 'https://de.wikipedia.org/wiki/James-Webb-Weltraumteleskop',
     },
+    {
+      id: 'parker',
+      title: 'Parker Solar Probe',
+      subtitle: 'Hitzeschutz bis in die Sonnenkorona',
+      category: 'probe',
+      categoryLabel: 'Sonden',
+      targetBodyId: 'parker',
+      targetBodyName: 'Parker Solar Probe',
+      agency: 'NASA',
+      launchYear: '2018',
+      statusLabel: 'Aktiv',
+      wikimediaImageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Parker_Solar_Probe_spacecraft_model.png/960px-Parker_Solar_Probe_spacecraft_model.png',
+      imageUrl: 'assets/images/probe.svg',
+      imageCredit: 'NASA',
+      childSummary: 'Fliegt bis dicht an die Sonne.',
+      tasksForKids: ['Misst den Sonnenwind'],
+      wikipediaUrl: 'https://de.wikipedia.org/wiki/Parker_Solar_Probe',
+    },
+    {
+      id: 'gemini-4',
+      title: 'Gemini 4 – Erster US-Weltraumspaziergang',
+      subtitle: 'Ed White schwebt 1965 frei über der Erde',
+      category: 'crewed-mission',
+      categoryLabel: 'Bemannte Missionen',
+      targetBodyId: 'earth',
+      targetBodyName: 'Erde (Erdorbit)',
+      agency: 'NASA',
+      launchYear: '1965',
+      statusLabel: 'Meilenstein',
+      wikimediaImageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/The_Earth_seen_from_Apollo_17.jpg/960px-The_Earth_seen_from_Apollo_17.jpg',
+      imageUrl: 'assets/images/probe.svg',
+      imageCredit: 'NASA',
+      childSummary: 'Wichtige Vorbereitung vor Apollo.',
+      tasksForKids: ['Erster US-EVA'],
+      wikipediaUrl: 'https://de.wikipedia.org/wiki/Gemini_4',
+    },
   ];
 
   beforeEach(async () => {
@@ -114,18 +150,51 @@ describe('ResearchMissionsComponent (P40)', () => {
     fixture.detectChanges();
 
     const comp = fixture.componentInstance;
+    expect(comp.categoryFilters.map((c) => c.label)).toEqual([
+      'Alle Projekte',
+      'Sonden',
+      'Rover',
+      'Teleskope',
+      'Raumstationen',
+      'Mondflüge',
+      'Bemannte Missionen',
+    ]);
     expect(fixture.nativeElement.textContent).toContain('Internationale Raumstation (ISS)');
     expect(fixture.nativeElement.textContent).toContain('416.8 km');
+    expect(comp.missionGalleryItems().length).toBeGreaterThanOrEqual(5);
+
+    comp.onSelectCategory('probe');
+    fixture.detectChanges();
+    expect(fixture.nativeElement.textContent).toContain('Parker Solar Probe');
 
     comp.onSelectCategory('mars-rover');
     fixture.detectChanges();
     expect(fixture.nativeElement.textContent).toContain('Mars-Rover Perseverance');
     expect(fixture.nativeElement.textContent).not.toContain('416.8 km');
+    expect(comp.missionGalleryItems().length).toBeGreaterThanOrEqual(5);
 
     comp.onSelectCategory('telescope');
     fixture.detectChanges();
     expect(fixture.nativeElement.textContent).toContain('James-Webb-Weltraumteleskop (JWST)');
     expect(fixture.nativeElement.textContent).toContain('Offizielle Missionsseite');
     expect(fixture.nativeElement.textContent).toContain('Wikipedia-Artikel');
+    expect(comp.missionGalleryItems().length).toBeGreaterThanOrEqual(5);
+
+    comp.onSelectCategory('crewed-mission');
+    fixture.detectChanges();
+    expect(fixture.nativeElement.textContent).toContain('Gemini 4');
+
+    // Lightbox-Galerie: Vor/Zurück-Navigation ohne Schließen des Fensters
+    const items = comp.missionGalleryItems();
+    comp.isLightboxOpen.set(true);
+    fixture.detectChanges();
+    expect(fixture.nativeElement.querySelector('.lb-counter-badge')?.textContent).toContain('Bild 1 von');
+    const nextBtn = fixture.nativeElement.querySelector('.lb-nav-next') as HTMLButtonElement | null;
+    expect(nextBtn).toBeTruthy();
+    nextBtn?.click();
+    fixture.detectChanges();
+    expect(comp.isLightboxOpen()).toBe(true);
+    expect(fixture.nativeElement.querySelector('.lb-counter-badge')?.textContent).toContain('Bild 2 von');
+    expect(comp.activeImageSrc()).toBe(items[1].url);
   });
 });

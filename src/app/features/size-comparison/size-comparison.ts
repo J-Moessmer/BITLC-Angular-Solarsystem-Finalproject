@@ -26,6 +26,12 @@ export interface ScaledComparisonItem {
   truePixelRadius: number;
   centerX: number;
   labelX: number;
+  svgLabelName: string;
+  dimensionLabel: string;
+  labelWidthPx: number;
+  pointerTargetX: number;
+  pointerTargetY: number;
+  showLeaderLine: boolean;
 }
 
 export interface ComparisonPreset {
@@ -253,7 +259,7 @@ export class SizeComparisonComponent implements OnInit {
     const maxBoxRight = boxCenter[bodies.length - 1] + drawnRadii[bodies.length - 1].boxHalf;
     const shiftX = 600 - (minBoxLeft + maxBoxRight) / 2;
 
-    return bodies.map((body, idx) => {
+    const provisional = bodies.map((body, idx) => {
       const info = drawnRadii[idx];
       const anchorX = boxCenter[idx] + shiftX;
       let zoomedCenterX = anchorX;
@@ -261,8 +267,8 @@ export class SizeComparisonComponent implements OnInit {
       /** KI-Hinweis: Berücksichtigt bei schmaleren SVG-Silhouetten (Berg/Land) die reale horizontale Flankenbreite auf Höhe y = 0. */
       const edgeFactorX = this.getHorizontalEdgeFactor(body.id);
       const effectiveReachPx = info.drawnR * edgeFactorX;
+      const anchorLeftSide = idx < focusIdx || (idx === focusIdx && idx === 0);
       if (effectiveReachPx > info.boxHalf) {
-        const anchorLeftSide = idx < focusIdx || (idx === focusIdx && idx === 0);
         zoomedCenterX = anchorLeftSide
           ? anchorX + info.boxHalf - effectiveReachPx
           : anchorX - info.boxHalf + effectiveReachPx;
@@ -270,8 +276,28 @@ export class SizeComparisonComponent implements OnInit {
 
       const baseCenterX = Math.round(30 + slotWidth * idx + slotWidth / 2);
       const centerX = Number((baseCenterX * (1 - blend) + zoomedCenterX * blend).toFixed(1));
-      const rawLabelX = baseCenterX * (1 - blend) + anchorX * blend;
-      const labelX = Math.round(Math.max(95, Math.min(1105, rawLabelX)));
+
+      const limbEdgeX = anchorLeftSide ? anchorX + info.boxHalf : anchorX - info.boxHalf;
+      const zoomedTargetX =
+        effectiveReachPx > info.boxHalf
+          ? anchorLeftSide
+            ? limbEdgeX - Math.min(36, info.boxHalf * 0.55)
+            : limbEdgeX + Math.min(36, info.boxHalf * 0.55)
+          : zoomedCenterX;
+      const pointerTargetX = Number(
+        (baseCenterX * (1 - blend) + zoomedTargetX * blend).toFixed(1),
+      );
+      const pointerTargetY =
+        effectiveReachPx > info.boxHalf
+          ? 410
+          : Math.min(410, Math.round(225 + Math.max(12, info.drawnR) + 8));
+
+      const rawLabelX = baseCenterX * (1 - blend) + zoomedTargetX * blend;
+      const svgLabelName = this.getSvgLabelName(body);
+      const dimensionLabel = this.formatBodyDimension(body);
+      const labelWidthPx = Math.ceil(
+        Math.max(112, svgLabelName.length * 8.8 + 24, dimensionLabel.length * 7.6 + 24),
+      );
 
       return {
         slotIndex: idx,
@@ -279,7 +305,71 @@ export class SizeComparisonComponent implements OnInit {
         svgRadiusPx: info.drawnR,
         truePixelRadius: info.truePixelRadius,
         centerX,
+        rawLabelX,
+        svgLabelName,
+        dimensionLabel,
+        labelWidthPx,
+        pointerTargetX,
+        pointerTargetY,
+      };
+    });
+
+    const n = provisional.length;
+    const halfWidths = provisional.map((it) => Math.ceil(it.labelWidthPx / 2));
+    const xs = provisional.map((it) => it.rawLabelX);
+    const minLabelGapPx = 18;
+    const minBound = 36 + halfWidths[0];
+    const maxBound = 1164 - halfWidths[n - 1];
+
+    for (let pass = 0; pass < 16; pass++) {
+      for (let i = 0; i < n - 1; i++) {
+        const minDist = halfWidths[i] + halfWidths[i + 1] + minLabelGapPx;
+        const diff = xs[i + 1] - xs[i];
+        if (diff < minDist) {
+          const push = (minDist - diff) / 2;
+          xs[i] -= push;
+          xs[i + 1] += push;
+        }
+      }
+      if (xs[0] < minBound) {
+        xs[0] = minBound;
+      }
+      if (xs[n - 1] > maxBound) {
+        xs[n - 1] = maxBound;
+      }
+    }
+    for (let i = 1; i < n; i++) {
+      const minDist = halfWidths[i - 1] + halfWidths[i] + minLabelGapPx;
+      if (xs[i] < xs[i - 1] + minDist) {
+        xs[i] = xs[i - 1] + minDist;
+      }
+    }
+    if (xs[n - 1] > maxBound) {
+      xs[n - 1] = maxBound;
+      for (let i = n - 2; i >= 0; i--) {
+        const minDist = halfWidths[i] + halfWidths[i + 1] + minLabelGapPx;
+        if (xs[i] > xs[i + 1] - minDist) {
+          xs[i] = xs[i + 1] - minDist;
+        }
+      }
+    }
+
+    return provisional.map((item, idx) => {
+      const labelX = Math.round(xs[idx]);
+      return {
+        slotIndex: item.slotIndex,
+        body: item.body,
+        svgRadiusPx: item.svgRadiusPx,
+        truePixelRadius: item.truePixelRadius,
+        centerX: item.centerX,
         labelX,
+        svgLabelName: item.svgLabelName,
+        dimensionLabel: item.dimensionLabel,
+        labelWidthPx: item.labelWidthPx,
+        pointerTargetX: item.pointerTargetX,
+        pointerTargetY: item.pointerTargetY,
+        showLeaderLine:
+          Math.abs(labelX - item.pointerTargetX) > 12 || item.svgRadiusPx > 185,
       };
     });
   });
@@ -448,6 +538,11 @@ export class SizeComparisonComponent implements OnInit {
       return 0.72;
     }
     return 1;
+  }
+
+  /** KI-Hinweis: Kürzt erklärende Klammer-Zusätze für kompakte SVG-Canvas-Beschriftungen ohne Überlappung. */
+  getSvgLabelName(body: CelestialBody): string {
+    return body.name.replace(/\s*\([^)]*\)\s*$/, '').trim();
   }
 
   /** KI-Hinweis: Wählt eine sachlich und kindgerecht passende Maß-Bezeichnung (Höhe, Nord–Süd oder Ø). */

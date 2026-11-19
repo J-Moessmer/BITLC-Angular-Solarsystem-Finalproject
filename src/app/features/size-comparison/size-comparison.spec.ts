@@ -132,5 +132,16 @@ describe('SizeComparisonComponent (P30)', () => {
     expect(fixture.nativeElement.querySelector('.svg-shape-everest')).toBeTruthy();
     expect(fixture.nativeElement.textContent).toContain('Nord–Süd 876 km');
     expect(fixture.nativeElement.textContent).toContain('Höhe 9 km');
+
+    // Auch beim tiefen Reinzoomen mit mehreren Objekten (z. B. Sonne, Stephenson 2-18 & Erde) dürfen Beschriftungen nicht überlappen
+    comp.selectedIds.set(['sun', 'stephenson-2-18', 'earth']);
+    comp.zoomSliderPercent.set(76);
+    fixture.detectChanges();
+    const zoomedItems = comp.scaledItems();
+    for (let i = 0; i < zoomedItems.length - 1; i++) {
+      const minGap = (zoomedItems[i].labelWidthPx + zoomedItems[i + 1].labelWidthPx) / 2 + 12;
+      expect(zoomedItems[i + 1].labelX - zoomedItems[i].labelX).toBeGreaterThanOrEqual(minGap);
+    }
+    expect(zoomedItems[1].svgLabelName).toBe('Stephenson 2-18');
   });
 });

@@ -15,45 +15,7 @@ import { MissionDataService } from '../../../core/services/mission-data.service'
 import { ResearchMission } from '../../../core/models/research-mission.model';
 import { ImageLightboxComponent } from '../../../shared/components/image-lightbox/image-lightbox';
 import { GLOSSARY_DEFINITIONS, GlossaryTermComponent } from '../../../shared/components/glossary-term/glossary-term';
-
-const EXTRA_BODY_GALLERY: Readonly<Record<string, Array<{ url: string; caption: string }>>> = {
-  sun: [
-    {
-      url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/The_Sun_by_the_Atmospheric_Imaging_Assembly_of_NASA%27s_Solar_Dynamics_Observatory_-_20100819.jpg/960px-The_Sun_by_the_Atmospheric_Imaging_Assembly_of_NASA%27s_Solar_Dynamics_Observatory_-_20100819.jpg',
-      caption: 'Sonne im UV-Licht (NASA SDO)',
-    },
-  ],
-  earth: [
-    {
-      url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2d/Meteosat-12-fci-march-equinox-2025-noon.jpg/960px-Meteosat-12-fci-march-equinox-2025-noon.jpg',
-      caption: 'Europa & Afrika vom Wettersatelliten',
-    },
-  ],
-  mars: [
-    {
-      url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Perseverance-Selfie-at-Rochette-Horizontal-V2.gif/960px-Perseverance-Selfie-at-Rochette-Horizontal-V2.gif',
-      caption: 'Mars-Rover Perseverance auf dem Mars',
-    },
-  ],
-  jupiter: [
-    {
-      url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Jupiter_and_its_shrunken_Great_Red_Spot.jpg/960px-Jupiter_and_its_shrunken_Great_Red_Spot.jpg',
-      caption: 'Der Große Rote Fleck (Hubble)',
-    },
-  ],
-  saturn: [
-    {
-      url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/Saturn_during_Equinox.jpg/960px-Saturn_during_Equinox.jpg',
-      caption: 'Saturns Schatten auf den Ringen (Cassini)',
-    },
-  ],
-  pluto: [
-    {
-      url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Pluto_in_True_Color_-_High-Res.jpg/960px-Pluto_in_True_Color_-_High-Res.jpg',
-      caption: 'Plutos Eisherz Tombaugh Regio',
-    },
-  ],
-};
+import { buildBodyGallery, GalleryMediaItem } from '../../../core/data/media-gallery.data';
 
 @Component({
   selector: 'app-infobox-detail',
@@ -108,6 +70,7 @@ const EXTRA_BODY_GALLERY: Readonly<Record<string, Array<{ url: string; caption: 
                   }
                 </div>
               }
+              <span class="active-photo-caption">{{ activeImageCaption() }}</span>
               <span class="image-credit">Quelle: {{ current.imageCredit }}</span>
             </div>
           }
@@ -348,8 +311,10 @@ const EXTRA_BODY_GALLERY: Readonly<Record<string, Array<{ url: string; caption: 
         [isOpen]="isLightboxOpen()"
         [imageSrc]="activeImageSrc()"
         [fallbackSrc]="current.imageUrl"
-        [title]="current.name"
+        [title]="activeImageCaption()"
         [credit]="current.imageCredit"
+        [galleryItems]="galleryItems()"
+        (imageSelected)="selectGalleryPhoto($event)"
         (closed)="isLightboxOpen.set(false)"
       />
     }
@@ -498,6 +463,12 @@ const EXTRA_BODY_GALLERY: Readonly<Record<string, Array<{ url: string; caption: 
       background-color: var(--accent-primary);
       color: #ffffff;
       text-decoration: none;
+    }
+    .active-photo-caption {
+      font-size: 0.74rem;
+      font-weight: 600;
+      color: #f8fafc;
+      line-height: 1.3;
     }
     .image-credit {
       font-size: 0.7rem;
@@ -780,33 +751,19 @@ export class InfoboxDetailComponent implements OnInit {
   readonly isImageHidden = signal<boolean>(false);
   readonly activeImageSrc = signal<string>('');
 
-  /** KI-generierter Block: Baut die umschaltbare Mini-Galerie aus Hauptfoto, Extras sowie verknüpften Missionen/Monden (max. 6, dedupliziert) */
-  readonly galleryItems = computed<Array<{ url: string; caption: string }>>(() => {
+  /** KI-generierter Block: Baut die umschaltbare Mini-Galerie aus verifizierten NASA-/Wikimedia-Fotos (mindestens 5, max. 6, dedupliziert) */
+  readonly galleryItems = computed<GalleryMediaItem[]>(() => {
     const b = this.body();
     if (!b) {
       return [];
     }
-    const items: Array<{ url: string; caption: string }> = [];
-    const seen = new Set<string>();
-    const addItem = (url: string | undefined, caption: string): void => {
-      if (!url || seen.has(url) || items.length >= 6) {
-        return;
-      }
-      seen.add(url);
-      items.push({ url, caption });
-    };
+    return buildBodyGallery(b, this.childBodies(), this.matchingMissions(), this.parentBody());
+  });
 
-    addItem(b.wikimediaImageUrl || b.imageUrl, b.name);
-    for (const extra of EXTRA_BODY_GALLERY[b.id] ?? []) {
-      addItem(extra.url, extra.caption);
-    }
-    for (const m of this.matchingMissions()) {
-      addItem(m.wikimediaImageUrl, m.title);
-    }
-    for (const child of this.childBodies()) {
-      addItem(child.wikimediaImageUrl, child.name);
-    }
-    return items;
+  readonly activeImageCaption = computed<string>(() => {
+    const src = this.activeImageSrc();
+    const match = this.galleryItems().find((item) => item.url === src);
+    return match?.caption ?? this.body()?.name ?? '';
   });
 
   readonly matchingMissions = computed<ResearchMission[]>(() => {
