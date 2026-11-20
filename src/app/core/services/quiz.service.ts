@@ -3,20 +3,22 @@
  * FCPP-Referenz: P50-U10, P50-U20, P50-U30 (Weltraum-Quiz, Kategoriewahl & kindgerechte Auswertung)
  * Erstellt mit: KI-Assistent (Antigravity AI / Pair-Programming Agent)
  * Erstellt für / Autor: Joshua Mößmer (J-Moessmer)
- * Datum / Version: 19.11.2026 / v1.2
- * Hinweis: Signal-basierter Quiz-Service für 4 Kategorien, Zufalls-Wähler im „Quiz des Tages" (Fisher-Yates), Antwortprüfung, Punktestand und kindgerechtes Lob mit KI-Unterstützung erstellt.
+ * Datum / Version: 20.11.2026 / v1.3
+ * Hinweis: Signal-basierter Quiz-Service für 4 Kategorien, Zufalls-Wähler im „Quiz des Tages" (Fisher-Yates), Antwortprüfung, Punktestand, Bestwert-Speicherung über ExplorerProgressService und kindgerechtes Lob mit KI-Unterstützung erstellt.
  */
 
 import { Injectable, computed, inject, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { catchError, firstValueFrom, of } from 'rxjs';
 import { QuizCategoryId, QuizCategoryInfo, QuizQuestion } from '../models/quiz.model';
+import { ExplorerProgressService, QuizBestScore } from './explorer-progress.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class QuizService {
   private readonly http = inject(HttpClient);
+  private readonly explorerProgress = inject(ExplorerProgressService);
   private readonly questionsUrl = 'assets/data/quiz-questions.json';
 
   readonly categories: readonly QuizCategoryInfo[] = [
@@ -59,6 +61,11 @@ export class QuizService {
   readonly scoreCorrect = signal<number>(0);
   readonly scoreWrong = signal<number>(0);
   readonly isQuizFinished = signal<boolean>(false);
+  readonly isNewPersonalRecord = signal<boolean>(false);
+
+  getCategoryBestScore(category: QuizCategoryId): QuizBestScore | null {
+    return this.explorerProgress.getBestScore(category);
+  }
 
   /** Fragenliste der aktuell gewählten Kategorie (P50-U30) */
   readonly activeQuestions = computed<QuizQuestion[]>(() => {
@@ -180,6 +187,12 @@ export class QuizService {
       return;
     }
     if (this.isLastQuestion()) {
+      const isRecord = this.explorerProgress.recordQuizScore(
+        this.selectedCategory(),
+        this.scoreCorrect(),
+        this.totalQuestions(),
+      );
+      this.isNewPersonalRecord.set(isRecord);
       this.isQuizFinished.set(true);
       return;
     }
@@ -199,5 +212,6 @@ export class QuizService {
     this.scoreCorrect.set(0);
     this.scoreWrong.set(0);
     this.isQuizFinished.set(false);
+    this.isNewPersonalRecord.set(false);
   }
 }

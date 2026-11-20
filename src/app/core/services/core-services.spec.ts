@@ -3,8 +3,8 @@
  * FCPP-Referenz: P10-U30, P10-U40, P20-U20, P40-U20, P50-U20, P50-U30
  * Erstellt mit: KI-Assistent (Antigravity AI / Pair-Programming Agent)
  * Erstellt für / Autor: Joshua Mößmer (J-Moessmer)
- * Datum / Version: 16.11.2026 / v1.0
- * Hinweis: Unit-Tests für ViewportStateService, SolarSystemDataService, MissionDataService und QuizService mit KI-Unterstützung erstellt.
+ * Datum / Version: 20.11.2026 / v1.2
+ * Hinweis: Unit-Tests für ViewportStateService, SolarSystemDataService, MissionDataService, ExplorerProgressService und QuizService mit KI-Unterstützung erstellt.
  */
 
 import { TestBed } from '@angular/core/testing';
@@ -14,11 +14,16 @@ import { ViewportStateService } from './viewport-state.service';
 import { SolarSystemDataService } from './solar-system-data.service';
 import { MissionDataService } from './mission-data.service';
 import { QuizService } from './quiz.service';
+import { ExplorerProgressService } from './explorer-progress.service';
 import { CelestialBody } from '../models/celestial-body.model';
 import { QuizQuestion } from '../models/quiz.model';
+import { ResearchMission } from '../models/research-mission.model';
 
 describe('Core Services (P10–P50)', () => {
   beforeEach(() => {
+    if (typeof localStorage !== 'undefined') {
+      localStorage.clear();
+    }
     TestBed.configureTestingModule({
       providers: [provideHttpClient(), provideHttpClientTesting()],
     });
@@ -40,6 +45,14 @@ describe('Core Services (P10–P50)', () => {
     expect(viewport.viewMode()).toBe('side-view');
     expect(viewport.zoomLevel()).toBe(1);
     expect(viewport.panX()).toBe(0);
+
+    // Historischer Startdatum-Filter für Vanguard 1 (17. März 1958)
+    viewport.setSimulationDateIso('1958-03-16');
+    expect(viewport.isSpacecraftActiveAtSimulationDate('vanguard-1')).toBe(false);
+    viewport.setSimulationDateIso('1958-03-17');
+    expect(viewport.isSpacecraftActiveAtSimulationDate('vanguard-1')).toBe(true);
+    viewport.resetToRealTimeNow();
+    expect(viewport.isSpacecraftActiveAtSimulationDate('vanguard-1')).toBe(true);
   });
 
   it('ViewportStateService should place L1/L2 collinear with Sun-Earth and L4/L5 at 60° on Earth orbit', () => {
@@ -385,6 +398,121 @@ describe('Core Services (P10–P50)', () => {
 
     quizService.nextQuestion();
     expect(quizService.isQuizFinished()).toBe(true);
+    expect(quizService.isNewPersonalRecord()).toBe(true);
     expect(quizService.childPraiseSummary().badge).toContain('Sternen-Kapitän');
+  });
+
+  it('ExplorerProgressService should persist discovered bodies and best quiz scores in localStorage', () => {
+    const progress = TestBed.inject(ExplorerProgressService);
+
+    expect(progress.discoveredCount()).toBe(0);
+    progress.markBodyDiscovered('earth');
+    progress.markBodyDiscovered('earth');
+    progress.markBodyDiscovered('mars');
+    expect(progress.discoveredCount()).toBe(2);
+    expect(progress.isBodyDiscovered('earth')).toBe(true);
+
+    expect(progress.recordQuizScore('missions', 3, 5)).toBe(true);
+    expect(progress.getBestScore('missions')?.correct).toBe(3);
+
+    // Niedrigeres Ergebnis überschreibt den Bestwert nicht
+    expect(progress.recordQuizScore('missions', 2, 5)).toBe(false);
+    expect(progress.getBestScore('missions')?.correct).toBe(3);
+
+    // Höheres Ergebnis wird als neuer Rekord gespeichert
+    expect(progress.recordQuizScore('missions', 4, 5)).toBe(true);
+    expect(progress.getBestScore('missions')?.correct).toBe(4);
+
+    if (typeof localStorage !== 'undefined') {
+      expect(localStorage.getItem('ssi_app_discovered_bodies_v1')).toContain('mars');
+      expect(localStorage.getItem('ssi_app_quiz_best_scores_v1')).toContain('"correct":4');
+    }
+
+    progress.resetProgress();
+    expect(progress.discoveredCount()).toBe(0);
+    expect(progress.getBestScore('missions')).toBeNull();
+  });
+
+  it('MissionDataService should support text search and chronological timeline sorting (1957 -> heute)', async () => {
+    const missionService = TestBed.inject(MissionDataService);
+    const httpMock = TestBed.inject(HttpTestingController);
+
+    const sampleMissions: ResearchMission[] = [
+      {
+        id: 'tiangong',
+        title: 'Chinesische Raumstation Tiangong',
+        subtitle: 'Himmelspalast',
+        category: 'space-station',
+        categoryLabel: 'Raumstationen',
+        targetBodyId: 'tiangong',
+        targetBodyName: 'Tiangong',
+        agency: 'CNSA',
+        launchYear: 'Seit April 2021 im Bau',
+        statusLabel: 'Aktiv',
+        wikimediaImageUrl: '',
+        imageUrl: 'assets/images/iss.svg',
+        imageCredit: 'CMSA',
+        childSummary: 'Moderne Raumstation im Erdorbit.',
+        tasksForKids: ['Forschung'],
+        wikipediaUrl: 'https://de.wikipedia.org/wiki/Tiangong',
+      },
+      {
+        id: 'gemini-4',
+        title: 'Gemini 4',
+        subtitle: 'Erster US-EVA',
+        category: 'crewed-mission',
+        categoryLabel: 'Bemannte Missionen',
+        targetBodyId: 'earth',
+        targetBodyName: 'Erde',
+        agency: 'NASA',
+        launchYear: '1965',
+        statusLabel: 'Abgeschlossen',
+        wikimediaImageUrl: '',
+        imageUrl: 'assets/images/probe.svg',
+        imageCredit: 'NASA',
+        childSummary: 'Vorbereitung für Apollo.',
+        tasksForKids: ['Weltraumspaziergang'],
+        wikipediaUrl: 'https://de.wikipedia.org/wiki/Gemini_4',
+      },
+      {
+        id: 'spacelab-columbus',
+        title: 'Spacelab & Columbus',
+        subtitle: 'Europas Weltraumlabore',
+        category: 'space-station',
+        categoryLabel: 'Raumstationen',
+        targetBodyId: 'iss',
+        targetBodyName: 'ISS',
+        agency: 'ESA / DLR',
+        launchYear: '1983 (Spacelab) & 2008 (Columbus)',
+        statusLabel: 'Aktiv',
+        wikimediaImageUrl: '',
+        imageUrl: 'assets/images/iss.svg',
+        imageCredit: 'ESA',
+        childSummary: 'Europäische Forschung im Orbit.',
+        tasksForKids: ['Experimente'],
+        wikipediaUrl: 'https://de.wikipedia.org/wiki/Columbus_(Raumlabor)',
+      },
+    ];
+
+    const loadPromise = missionService.loadMissions();
+    httpMock.expectOne('assets/data/missions.json').flush(sampleMissions);
+    await loadPromise;
+
+    expect(missionService.extractLaunchYear('1983 (Spacelab) & 2008 (Columbus)')).toBe(1983);
+    expect(missionService.extractLaunchYear('Seit April 2021 im Bau')).toBe(2021);
+
+    missionService.setSortMode('timeline');
+    expect(missionService.filteredMissions().map((m) => m.id)).toEqual([
+      'gemini-4',
+      'spacelab-columbus',
+      'tiangong',
+    ]);
+
+    missionService.setSearchQuery('DLR');
+    expect(missionService.filteredMissions().map((m) => m.id)).toEqual(['spacelab-columbus']);
+
+    missionService.resetFilters();
+    expect(missionService.filteredMissions().length).toBe(3);
+    expect(missionService.sortMode()).toBe('category');
   });
 });

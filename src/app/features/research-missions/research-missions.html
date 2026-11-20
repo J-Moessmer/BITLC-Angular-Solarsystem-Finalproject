@@ -3,8 +3,8 @@
   FCPP-Referenz: P40-U10 (A10), P40-U20 (A20, A30 – Forschungsprojekte & Raumfahrt)
   Erstellt mit: KI-Assistent (Antigravity AI / Pair-Programming Agent)
   Erstellt für / Autor: Joshua Mößmer (J-Moessmer)
-  Datum / Version: 16.11.2026 / v2.0
-  Hinweis: Bereinigte Missionsansicht ohne Deko-Badges und ohne redundante Klammer-Zusätze.
+  Datum / Version: 20.11.2026 / v2.1
+  Hinweis: Missionsansicht mit Textsuche, chronologischem Zeitstrahl-Umschalter (1957 -> heute), Galerie-Lightbox und ISS-Live-Telemetrie.
 -->
 <section class="p40-container" aria-labelledby="p40-heading">
   <div class="p40-header-card">
@@ -18,8 +18,8 @@
     </div>
 
     <p class="intro-text">
-      Wähle eine Kategorie und klicke auf eine Missionskarte, um den Steckbrief mit Fotos,
-      Forschungsaufgaben und den aktuellen Flugdaten der Raumstation ISS im
+      Wähle eine Kategorie oder durchsuche alle Missionen nach Name, Ziel, Agentur oder Startjahr,
+      um den Steckbrief mit Fotos und den aktuellen Flugdaten der ISS im
       <app-term term="Erdorbit" /> zu öffnen.
     </p>
 
@@ -35,42 +35,112 @@
         </button>
       }
     </div>
-  </div>
 
-  <div class="p40-content-grid">
-    <div class="missions-list-column" role="list" aria-label="Missions-Übersichtskarten">
-      @for (mission of missionService.filteredMissions(); track mission.id) {
+    <div class="p40-controls-row">
+      <div class="mission-search-box">
+        <i class="fa-solid fa-magnifying-glass mission-search-icon" aria-hidden="true"></i>
+        <input
+          type="search"
+          class="mission-search-input"
+          [value]="missionService.searchQuery()"
+          (input)="onSearchInput($event)"
+          placeholder="Mission, Ziel, Agentur oder Jahr suchen…"
+          aria-label="Forschungsprojekte durchsuchen"
+        />
+        @if (missionService.searchQuery().length > 0) {
+          <button
+            type="button"
+            class="mission-search-clear-btn"
+            (click)="onClearSearch()"
+            aria-label="Missionssuche zurücksetzen"
+            title="Suche zurücksetzen"
+          >
+            ×
+          </button>
+        }
+      </div>
+
+      <div class="sort-toggle-group" role="group" aria-label="Sortierung wählen">
         <button
           type="button"
-          class="mission-summary-card"
-          [class.selected-card]="missionService.selectedMission()?.id === mission.id"
-          (click)="onSelectMission(mission.id)"
+          class="sort-btn"
+          [class.active-sort]="missionService.sortMode() === 'category'"
+          (click)="onSelectSortMode('category')"
         >
-          <div class="summary-card-row">
-            @if (mission.wikimediaImageUrl) {
-              <img
-                class="mission-thumb"
-                [src]="mission.wikimediaImageUrl"
-                [alt]="mission.title"
-                loading="lazy"
-                (error)="onThumbnailError($event)"
-              />
-            }
-            <div class="summary-card-body">
-              <span class="card-cat-pill">{{ mission.categoryLabel }}</span>
-              <h3>{{ mission.title }}</h3>
-              <p>{{ mission.subtitle }}</p>
-            </div>
-          </div>
-          <div class="card-meta">
-            <span>Ziel: {{ mission.targetBodyName }}</span>
-            <span>{{ mission.agency }}</span>
-          </div>
+          <i class="fa-solid fa-layer-group" aria-hidden="true"></i>
+          Nach Kategorie
         </button>
-      }
-    </div>
+        <button
+          type="button"
+          class="sort-btn"
+          [class.active-sort]="missionService.sortMode() === 'timeline'"
+          (click)="onSelectSortMode('timeline')"
+        >
+          <i class="fa-solid fa-clock-rotate-left" aria-hidden="true"></i>
+          Zeitstrahl (1957 → heute)
+        </button>
+      </div>
 
-    @if (missionService.selectedMission(); as current) {
+      <span class="results-count-pill" aria-live="polite">
+        {{ missionService.filteredMissions().length }} von {{ missionService.missions().length }} Projekten
+      </span>
+    </div>
+  </div>
+
+  @if (missionService.filteredMissions().length === 0) {
+    <div class="empty-missions-card" role="status">
+      <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+      <h3>Keine passenden Forschungsprojekte gefunden</h3>
+      <p>
+        Für deine aktuelle Auswahl gibt es leider keinen Treffer. Setze Suche oder Kategoriefilter
+        zurück, um wieder alle Missionen zu sehen.
+      </p>
+      <button type="button" class="reset-filters-btn" (click)="onResetAllFilters()">
+        <i class="fa-solid fa-rotate-left" aria-hidden="true"></i> Filter zurücksetzen
+      </button>
+    </div>
+  } @else {
+    <div class="p40-content-grid">
+      <div class="missions-list-column" role="list" aria-label="Missions-Übersichtskarten">
+        @for (mission of missionService.filteredMissions(); track mission.id) {
+          <button
+            type="button"
+            class="mission-summary-card"
+            [class.selected-card]="missionService.selectedMission()?.id === mission.id"
+            (click)="onSelectMission(mission.id)"
+          >
+            <div class="summary-card-row">
+              @if (mission.wikimediaImageUrl) {
+                <img
+                  class="mission-thumb"
+                  [src]="mission.wikimediaImageUrl"
+                  [alt]="mission.title"
+                  loading="lazy"
+                  (error)="onThumbnailError($event)"
+                />
+              }
+              <div class="summary-card-body">
+                <div class="card-badges-row">
+                  <span class="card-cat-pill">{{ mission.categoryLabel }}</span>
+                  @if (missionService.sortMode() === 'timeline') {
+                    <span class="timeline-year-badge">
+                      {{ missionService.extractLaunchYear(mission.launchYear) }}
+                    </span>
+                  }
+                </div>
+                <h3>{{ mission.title }}</h3>
+                <p>{{ mission.subtitle }}</p>
+              </div>
+            </div>
+            <div class="card-meta">
+              <span>Ziel: {{ mission.targetBodyName }}</span>
+              <span>{{ mission.agency }}</span>
+            </div>
+          </button>
+        }
+      </div>
+
+      @if (missionService.selectedMission(); as current) {
       <article class="mission-detail-card" aria-labelledby="detail-mission-title">
         <!-- 1. Kindgerechter Entdecker-Bereich oben: Großes Bild, Galerie, verständliche Erklärung & Fun Facts -->
         <div class="detail-hero" [class.no-hero-image]="isHeroImageHidden()">
@@ -253,5 +323,6 @@
         (closed)="isLightboxOpen.set(false)"
       />
     }
-  </div>
+    </div>
+  }
 </section>

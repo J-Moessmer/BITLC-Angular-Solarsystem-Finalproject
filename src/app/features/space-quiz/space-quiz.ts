@@ -3,14 +3,15 @@
  * FCPP-Referenz: P50-U10 (A10), P50-U20 (A20, A30 – Signal-gesteuertes Quiz & Auswertung), P50-U30 (A40 – Kategoriewahl links)
  * Erstellt mit: KI-Assistent (Antigravity AI / Pair-Programming Agent)
  * Erstellt für / Autor: Joshua Mößmer (J-Moessmer)
- * Datum / Version: 19.11.2026 / v2.0
- * Hinweis: Umsetzung von Plan-Element P50 inkl. 4 Kategorien, Zufalls-Wähler für „Quiz des Tages", Lösungsprüfung sowie lokal eingebettetem Bild-Steckbrief (InfoboxDetailComponent) direkt auf der Quiz-Seite mit KI-Unterstützung erstellt.
+ * Datum / Version: 20.11.2026 / v2.2
+ * Hinweis: Umsetzung von Plan-Element P50 inkl. 4 Kategorien, Zufalls-Wähler für „Quiz des Tages", Lösungsprüfung, lokalem Entdecker-Pass & Quiz-Bestwerten sowie eingebettetem Bild-Steckbrief (InfoboxDetailComponent).
  */
 
 import { Component, OnInit, computed, inject, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { QuizService } from '../../core/services/quiz.service';
 import { SolarSystemDataService } from '../../core/services/solar-system-data.service';
+import { ExplorerProgressService } from '../../core/services/explorer-progress.service';
 import { QuizCategoryId, QuizQuestion } from '../../core/models/quiz.model';
 import { CelestialBody } from '../../core/models/celestial-body.model';
 import { InfoboxDetailComponent } from '../solar-system-view/infobox-detail/infobox-detail';
@@ -24,6 +25,22 @@ import { InfoboxDetailComponent } from '../solar-system-view/infobox-detail/info
 export class SpaceQuizComponent implements OnInit {
   protected readonly quizService = inject(QuizService);
   protected readonly solarDataService = inject(SolarSystemDataService);
+  protected readonly explorerProgress = inject(ExplorerProgressService);
+
+  readonly totalCatalogCount = computed<number>(() => this.solarDataService.bodies().length);
+
+  readonly discoveredCatalogCount = computed<number>(() => {
+    const discoveredSet = this.explorerProgress.discoveredBodyIdSet();
+    return this.solarDataService.bodies().filter((b) => discoveredSet.has(b.id)).length;
+  });
+
+  readonly discoveredPercent = computed<number>(() => {
+    const total = this.totalCatalogCount();
+    if (total <= 0) {
+      return 0;
+    }
+    return Math.min(100, Math.round((this.discoveredCatalogCount() / total) * 100));
+  });
 
   protected readonly optionLetters = ['A', 'B', 'C', 'D'] as const;
 
@@ -80,9 +97,13 @@ export class SpaceQuizComponent implements OnInit {
   }
 
   onCheckAnswer(): void {
-    this.previewBodyId.set(this.quizService.currentQuestion()?.relatedBodyId ?? null);
+    const relatedId = this.quizService.currentQuestion()?.relatedBodyId ?? null;
+    this.previewBodyId.set(relatedId);
     this.isSteckbriefOpen.set(true);
     this.quizService.checkCurrentAnswer();
+    if (relatedId) {
+      this.explorerProgress.markBodyDiscovered(relatedId);
+    }
   }
 
   onNextQuestion(): void {
@@ -100,6 +121,7 @@ export class SpaceQuizComponent implements OnInit {
   onSelectSteckbriefBody(bodyId: string): void {
     this.previewBodyId.set(bodyId);
     this.isSteckbriefOpen.set(true);
+    this.explorerProgress.markBodyDiscovered(bodyId);
   }
 
   onToggleSteckbrief(): void {

@@ -3,8 +3,8 @@
  * FCPP-Referenz: P10 (P10-U20, P10-U30, P10-U40) & P20 (P20-U10 bis P20-U40)
  * Erstellt mit: KI-Assistent (Antigravity AI / Pair-Programming Agent)
  * Erstellt für / Autor: Joshua Mößmer (J-Moessmer)
- * Datum / Version: 19.11.2026 / v2.2
- * Hinweis: Interaktive 2D-SVG-Sonnensystem-Bühne mit stufenlosem Zoom, analytischem SVG-Orbit-Clipping, Echtzeit-Kepler-Tracking sowie strikter Fokus-Filterung & maßstabsgerechter Skalierung aller 40 Lagrange-Punkte (L1-L5) auch im Echten Maßstab.
+ * Datum / Version: 20.11.2026 / v2.3
+ * Hinweis: Interaktive 2D-SVG-Sonnensystem-Bühne mit stufenlosem Zoom, analytischem SVG-Orbit-Clipping, dynamischem Anti-Solar-Kometenschweif (Staub- & Ionenschweif), Entdecker-Pass-Erfassung sowie Fokussierung aller 40 Lagrange-Punkte (L1-L5).
  */
 
 import {
@@ -21,6 +21,7 @@ import {
 } from '@angular/core';
 import { Router } from '@angular/router';
 import { SolarSystemDataService } from '../../core/services/solar-system-data.service';
+import { ExplorerProgressService } from '../../core/services/explorer-progress.service';
 import {
   BodyRadiusScaleMode,
   SolarViewMode,
@@ -32,6 +33,20 @@ import { BreadcrumbBarComponent } from '../../shared/components/breadcrumb-bar/b
 import { InfoboxDetailComponent } from './infobox-detail/infobox-detail';
 import { CelestialBody } from '../../core/models/celestial-body.model';
 
+export interface CometTailGeometry {
+  id: string;
+  x: number;
+  y: number;
+  angleDeg: number;
+  ionPoints: string;
+  dustPath: string;
+  ionOpacity: number;
+  dustOpacity: number;
+  comaRadiusPx: number;
+  comaOpacity: number;
+  liveDistanceAu: number;
+}
+
 @Component({
   selector: 'app-solar-system-view',
   imports: [PathSidebarComponent, BreadcrumbBarComponent, InfoboxDetailComponent],
@@ -40,8 +55,14 @@ import { CelestialBody } from '../../core/models/celestial-body.model';
 })
 export class SolarSystemViewComponent implements OnInit, OnDestroy {
   protected readonly dataService = inject(SolarSystemDataService);
+  protected readonly explorerProgress = inject(ExplorerProgressService);
   protected readonly viewport = inject(ViewportStateService);
   private readonly router = inject(Router);
+
+  protected readonly discoveredCatalogCount = computed<number>(() => {
+    const discoveredSet = this.explorerProgress.discoveredBodyIdSet();
+    return this.dataService.bodies().filter((b) => discoveredSet.has(b.id)).length;
+  });
 
   /** Route-Parameter :bodyId aus /solar-system/:bodyId (via withComponentInputBinding) */
   readonly bodyId = input<string>();
@@ -399,6 +420,61 @@ export class SolarSystemViewComponent implements OnInit, OnDestroy {
     });
   });
 
+  /** KI-generierter Block: Berechnet dynamische Staub- und Ionenschweife für alle sichtbaren Kometen streng entlang des Anti-Solar-Vektors (Sonne -> Komet) */
+  readonly cometTails = computed<CometTailGeometry[]>(() => {
+    const sunPos = this.svgPositions().find((p) => p.body.id === 'sun');
+    const sunX = sunPos ? sunPos.x : this.viewport.panX();
+    const sunY = sunPos ? sunPos.y : this.viewport.panY();
+    const zoomBoost = Math.min(1.8, Math.max(0.85, Math.pow(this.viewport.zoomLevel(), 0.14)));
+
+    const tails: CometTailGeometry[] = [];
+    for (const pos of this.visibleSvgBodies()) {
+      if (pos.body.category !== 'comet') {
+        continue;
+      }
+      const dx = pos.x - sunX;
+      const dy = pos.y - sunY;
+      const distPx = Math.hypot(dx, dy);
+      if (distPx < 2) {
+        continue;
+      }
+
+      const angleDeg = Number(((Math.atan2(dy, dx) * 180) / Math.PI).toFixed(2));
+      const dAu = Math.max(0.25, pos.liveDistanceAu > 0 ? pos.liveDistanceAu : pos.body.distanceFromSunAu || 1);
+      const activity = Math.max(0.2, Math.min(1.0, 1.0 / (0.6 + 0.55 * dAu)));
+
+      const ionLen = Number((18 + activity * 78 * zoomBoost).toFixed(1));
+      const dustLen = Number((ionLen * 0.78).toFixed(1));
+      const ionHalfW = Number((Math.max(2.2, pos.bodyRadiusPx * 0.45) + activity * 2.2).toFixed(1));
+      const dustHalfW = Number((ionHalfW * 1.9).toFixed(1));
+      const dustCurveSign = pos.body.inclinationToSolarEquatorDeg > 90 ? -1 : 1;
+      const dustCurveY = Number((dustCurveSign * dustLen * 0.24).toFixed(1));
+
+      const ionPoints = `0,${(-ionHalfW * 0.55).toFixed(1)} ${ionLen},${(-ionHalfW * 1.15).toFixed(1)} ${(ionLen + 6).toFixed(1)},0 ${ionLen},${(ionHalfW * 1.15).toFixed(1)} 0,${(ionHalfW * 0.55).toFixed(1)}`;
+      const dustPath = [
+        `M 0 ${(-dustHalfW * 0.45).toFixed(1)}`,
+        `Q ${(dustLen * 0.52).toFixed(1)} ${(dustCurveY * 0.32 - dustHalfW * 0.95).toFixed(1)}, ${dustLen} ${(dustCurveY - dustHalfW * 0.85).toFixed(1)}`,
+        `Q ${(dustLen + 4).toFixed(1)} ${dustCurveY}, ${dustLen} ${(dustCurveY + dustHalfW * 0.85).toFixed(1)}`,
+        `Q ${(dustLen * 0.52).toFixed(1)} ${(dustCurveY * 0.5 + dustHalfW * 0.95).toFixed(1)}, 0 ${(dustHalfW * 0.45).toFixed(1)} Z`,
+      ].join(' ');
+
+      tails.push({
+        id: pos.body.id,
+        x: pos.x,
+        y: pos.y,
+        angleDeg,
+        ionPoints,
+        dustPath,
+        ionOpacity: Number((0.28 + activity * 0.67).toFixed(2)),
+        dustOpacity: Number((0.22 + activity * 0.62).toFixed(2)),
+        comaRadiusPx: Number((pos.bodyRadiusPx + 4 + activity * 8).toFixed(1)),
+        comaOpacity: Number((0.3 + activity * 0.55).toFixed(2)),
+        liveDistanceAu: pos.liveDistanceAu,
+      });
+    }
+    return tails;
+  });
+
   /** Prüft, ob ein Himmelskörper bzw. eine Raumsonde gemäß Kategorie- und Datumsfilter sichtbar ist */
   private isBodyVisibleByFilter(body: CelestialBody): boolean {
     if (body.category === 'lagrange') {
@@ -534,7 +610,7 @@ export class SolarSystemViewComponent implements OnInit, OnDestroy {
   computeTimeLapseStepDays(): number {
     const selected = this.dataService.selectedBody();
     const z = this.viewport.zoomLevel();
-    const leoIds = new Set(['iss', 'tiangong', 'hubble', 'sputnik-1', 'vostok-1']);
+    const leoIds = new Set(['iss', 'tiangong', 'hubble', 'sputnik-1', 'vanguard-1', 'vostok-1']);
 
     if (selected && (leoIds.has(selected.id) || (selected.id === 'earth' && z >= 2500))) {
       return 0.004;
@@ -575,6 +651,7 @@ export class SolarSystemViewComponent implements OnInit, OnDestroy {
 
   readonly historicalMilestones = [
     { isoDate: '1957-10-04', label: '04.10.1957 · Sputnik 1 (Erster Satellit)', bodyId: 'sputnik-1' },
+    { isoDate: '1958-03-17', label: '17.03.1958 · Vanguard 1 (Ältester Satellit im Orbit)', bodyId: 'vanguard-1' },
     { isoDate: '1961-04-12', label: '12.04.1961 · Wostok 1 (Juri Gagarin)', bodyId: 'vostok-1' },
     { isoDate: '1969-07-20', label: '20.07.1969 · Apollo 11 (Mondlandung)', bodyId: 'apollo-11' },
     { isoDate: '1970-04-14', label: '14.04.1970 · Apollo 13 (Mond-Umrundung)', bodyId: 'apollo-13' },
@@ -823,6 +900,7 @@ export class SolarSystemViewComponent implements OnInit, OnDestroy {
       id === 'iss' ||
       id === 'tiangong' ||
       id === 'sputnik-1' ||
+      id === 'vanguard-1' ||
       id === 'solar-orbiter' ||
       id === 'dawn' ||
       id === 'juno' ||

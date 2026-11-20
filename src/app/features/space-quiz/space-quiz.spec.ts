@@ -3,8 +3,8 @@
  * FCPP-Referenz: P50-U10, P50-U20, P50-U30 (Unit-Test für Weltraum-Quiz, Zufallswähler & lokalen Steckbrief)
  * Erstellt mit: KI-Assistent (Antigravity AI / Pair-Programming Agent)
  * Erstellt für / Autor: Joshua Mößmer (J-Moessmer)
- * Datum / Version: 19.11.2026 / v2.0
- * Hinweis: Prüft die 4 Kategorien (inkl. „Quiz des Tages" mit Zufallswähler), Antwortprüfung (A-D), den direkt eingebetteten P20-Steckbrief sowie die kindgerechte Auswertungskarte (P50-U20, P50-U30).
+ * Datum / Version: 20.11.2026 / v2.1
+ * Hinweis: Prüft die 4 Kategorien (inkl. „Quiz des Tages" mit Zufallswähler), Antwortprüfung (A-D), den direkt eingebetteten P20-Steckbrief sowie lokalen Entdecker-Pass & gespeicherte Bestwerte (P50-U20, P50-U30).
  */
 
 import { TestBed } from '@angular/core/testing';
@@ -79,6 +79,9 @@ describe('SpaceQuizComponent (P50)', () => {
   ];
 
   beforeEach(async () => {
+    if (typeof localStorage !== 'undefined') {
+      localStorage.clear();
+    }
     await TestBed.configureTestingModule({
       imports: [SpaceQuizComponent],
       providers: [provideRouter([]), provideHttpClient(), provideHttpClientTesting()],
@@ -134,6 +137,12 @@ describe('SpaceQuizComponent (P50)', () => {
     fixture.detectChanges();
 
     expect(fixture.nativeElement.textContent).toContain('Bestanden! :)');
+    expect(fixture.nativeElement.querySelector('.record-badge')?.textContent).toContain(
+      'Neuer persönlicher Bestwert gespeichert!',
+    );
+    expect(fixture.nativeElement.querySelector('.category-best-summary')?.textContent).toContain('1 / 1');
+    expect(fixture.nativeElement.querySelector('.cat-best-badge')?.textContent).toContain('Bestwert: 1 / 1');
+    expect(fixture.nativeElement.querySelector('.explorer-pass-box')?.textContent).toContain('1 / 1 entdeckt');
 
     // Bei einer falschen Antwort darf kein Lobwort ("Genau!" / "Richtig!") als Einleitung stehen
     comp.onSelectCategory('astronomy');

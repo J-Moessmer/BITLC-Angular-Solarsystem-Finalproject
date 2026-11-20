@@ -3,8 +3,8 @@
  * FCPP-Referenz: P40-U10, P40-U20 (Forschungsprojekte, Kategorie-Filter & ISS-Live-API mit Fallback)
  * Erstellt mit: KI-Assistent (Antigravity AI / Pair-Programming Agent)
  * Erstellt für / Autor: Joshua Mößmer (J-Moessmer)
- * Datum / Version: 16.11.2026 / v1.0
- * Hinweis: Service für die Raumfahrtmissionen (Mars Rover, JWST, Gaia, ISS, Artemis) sowie den Live-Status der ISS über api.wheretheiss.at mit lokalem JSON-Fallback (assets/data/iss-fallback.json) mit KI-Unterstützung erstellt.
+ * Datum / Version: 20.11.2026 / v1.1
+ * Hinweis: Service für die Raumfahrtmissionen inkl. Textsuche, Kategoriefilter, chronologischer Zeitstrahl-Sortierung (1957 -> heute) sowie Live-Status der ISS über api.wheretheiss.at mit lokalem JSON-Fallback (assets/data/iss-fallback.json).
  */
 
 import { Injectable, computed, inject, signal } from '@angular/core';
@@ -15,6 +15,8 @@ import {
   MissionCategory,
   ResearchMission,
 } from '../models/research-mission.model';
+
+export type MissionSortMode = 'category' | 'timeline';
 
 interface WhereTheIssApiResponse {
   latitude: number;
@@ -38,21 +40,31 @@ export class MissionDataService {
 
   private readonly missionsState = signal<ResearchMission[]>([]);
   private readonly selectedCategoryState = signal<MissionCategory>('all');
+  private readonly searchQueryState = signal<string>('');
+  private readonly sortModeState = signal<MissionSortMode>('category');
   private readonly selectedMissionIdState = signal<string | null>(null);
   private readonly issStatusState = signal<IssLiveStatus | null>(null);
 
   readonly missions = this.missionsState.asReadonly();
   readonly selectedCategory = this.selectedCategoryState.asReadonly();
+  readonly searchQuery = this.searchQueryState.asReadonly();
+  readonly sortMode = this.sortModeState.asReadonly();
   readonly selectedMissionId = this.selectedMissionIdState.asReadonly();
   readonly issStatus = this.issStatusState.asReadonly();
 
-  /** Gefilterte Missionskarten nach gewählter Kategorie (P40-A20 / P40-U20) */
+  /** Extrahiert das früheste vierstellige Startjahr (1957..heute) für die chronologische Zeitstrahl-Sortierung */
+  extractLaunchYear(launchYear: string): number {
+    const match = /(19|20)\d{2}/.exec(launchYear ?? '');
+    return match ? Number(match[0]) : 9999;
+  }
+
+  /** Gefilterte und sortierte Missionskarten nach Kategorie, Textsuche und Sortiermodus (P40-A20 / P40-U20) */
   readonly filteredMissions = computed<ResearchMission[]>(() => {
     const category = this.selectedCategoryState();
+    const query = this.searchQueryState().trim().toLowerCase();
+    const sortMode = this.sortModeState();
     const all = this.missionsState();
-    if (category === 'all') {
-      return all;
-    }
+
     const normalize = (cat: string): string => {
       if (cat === 'rover') {
         return 'mars-rover';
@@ -62,17 +74,50 @@ export class MissionDataService {
       }
       return cat;
     };
+
     const normalizedTarget = normalize(category);
-    const matches = all.filter((m) => {
-      const primary = normalize(m.category);
-      const extras = (m.categories ?? []).map((c) => normalize(c));
-      return (
-        primary === normalizedTarget ||
-        m.category === category ||
-        extras.includes(normalizedTarget) ||
-        (m.categories ?? []).includes(category)
+    let matches =
+      category === 'all'
+        ? all
+        : all.filter((m) => {
+            const primary = normalize(m.category);
+            const extras = (m.categories ?? []).map((c) => normalize(c));
+            return (
+              primary === normalizedTarget ||
+              m.category === category ||
+              extras.includes(normalizedTarget) ||
+              (m.categories ?? []).includes(category)
+            );
+          });
+
+    if (query.length > 0) {
+      matches = matches.filter((m) => {
+        const haystack = [
+          m.title,
+          m.subtitle,
+          m.agency,
+          m.targetBodyName,
+          m.launchYear,
+          m.categoryLabel,
+          m.statusLabel,
+          m.childSummary,
+        ]
+          .join(' ')
+          .toLowerCase();
+        return haystack.includes(query);
+      });
+    }
+
+    if (sortMode === 'timeline') {
+      return [...matches].sort(
+        (a, b) => this.extractLaunchYear(a.launchYear) - this.extractLaunchYear(b.launchYear),
       );
-    });
+    }
+
+    if (category === 'all') {
+      return matches;
+    }
+
     return [...matches].sort((a, b) => {
       const aPrimary = normalize(a.category) === normalizedTarget ? 0 : 1;
       const bPrimary = normalize(b.category) === normalizedTarget ? 0 : 1;
@@ -84,8 +129,11 @@ export class MissionDataService {
   readonly selectedMission = computed<ResearchMission | null>(() => {
     const id = this.selectedMissionIdState();
     const list = this.filteredMissions();
+    if (list.length === 0) {
+      return null;
+    }
     if (id) {
-      const match = list.find((m) => m.id === id) ?? this.missionsState().find((m) => m.id === id);
+      const match = list.find((m) => m.id === id);
       if (match) {
         return match;
       }
@@ -159,9 +207,35 @@ export class MissionDataService {
   setCategory(category: MissionCategory): void {
     this.selectedCategoryState.set(category);
     const filtered = this.filteredMissions();
-    if (filtered.length > 0) {
+    this.selectedMissionIdState.set(filtered.length > 0 ? filtered[0].id : null);
+  }
+
+  setSearchQuery(query: string): void {
+    this.searchQueryState.set(query);
+    const filtered = this.filteredMissions();
+    const currentId = this.selectedMissionIdState();
+    if (filtered.length === 0) {
+      this.selectedMissionIdState.set(null);
+    } else if (!currentId || !filtered.some((m) => m.id === currentId)) {
       this.selectedMissionIdState.set(filtered[0].id);
     }
+  }
+
+  setSortMode(mode: MissionSortMode): void {
+    this.sortModeState.set(mode);
+    const filtered = this.filteredMissions();
+    const currentId = this.selectedMissionIdState();
+    if (filtered.length > 0 && (!currentId || !filtered.some((m) => m.id === currentId))) {
+      this.selectedMissionIdState.set(filtered[0].id);
+    }
+  }
+
+  resetFilters(): void {
+    this.selectedCategoryState.set('all');
+    this.searchQueryState.set('');
+    this.sortModeState.set('category');
+    const filtered = this.filteredMissions();
+    this.selectedMissionIdState.set(filtered.length > 0 ? filtered[0].id : null);
   }
 
   selectMission(missionId: string): void {

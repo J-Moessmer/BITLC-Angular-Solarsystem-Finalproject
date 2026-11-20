@@ -3,14 +3,14 @@
  * FCPP-Referenz: P40-U10 (A10), P40-U20 (A20, A30 – Forschungsprojekte, ISS-Live-API mit Fallback & Sprung nach P20)
  * Erstellt mit: KI-Assistent (Antigravity AI / Pair-Programming Agent)
  * Erstellt für / Autor: Joshua Mößmer (J-Moessmer)
- * Datum / Version: 16.11.2026 / v2.0
- * Hinweis: Bereinigte Kategorien-Bezeichnungen ohne redundante Klammer-Aufzählungen.
+ * Datum / Version: 20.11.2026 / v2.1
+ * Hinweis: Forschungsprojekte mit Textsuche, Kategoriefilter sowie Umschalter zwischen Kategorie-Sortierung und chronologischem Zeitstrahl (1957 bis heute).
  */
 
 import { Component, OnDestroy, OnInit, computed, effect, inject, signal } from '@angular/core';
 import { DecimalPipe } from '@angular/common';
 import { ActivatedRoute, RouterLink } from '@angular/router';
-import { MissionDataService } from '../../core/services/mission-data.service';
+import { MissionDataService, MissionSortMode } from '../../core/services/mission-data.service';
 import { MissionCategory } from '../../core/models/research-mission.model';
 import { ImageLightboxComponent } from '../../shared/components/image-lightbox/image-lightbox';
 import { GlossaryTermComponent } from '../../shared/components/glossary-term/glossary-term';
@@ -85,6 +85,7 @@ export class ResearchMissionsComponent implements OnInit, OnDestroy {
     const targetMissionId = this.route.snapshot.queryParamMap.get('mission');
     if (targetMissionId) {
       this.missionService.setCategory('all');
+      this.missionService.setSearchQuery('');
       this.missionService.selectMission(targetMissionId);
     }
     await this.refreshIssTelemetry();
@@ -147,6 +148,23 @@ export class ResearchMissionsComponent implements OnInit, OnDestroy {
 
   onSelectCategory(category: MissionCategory): void {
     this.missionService.setCategory(category);
+  }
+
+  onSearchInput(event: Event): void {
+    const inputEl = event.target as HTMLInputElement | null;
+    this.missionService.setSearchQuery(inputEl?.value ?? '');
+  }
+
+  onClearSearch(): void {
+    this.missionService.setSearchQuery('');
+  }
+
+  onSelectSortMode(mode: MissionSortMode): void {
+    this.missionService.setSortMode(mode);
+  }
+
+  onResetAllFilters(): void {
+    this.missionService.resetFilters();
   }
 
   onSelectMission(missionId: string): void {

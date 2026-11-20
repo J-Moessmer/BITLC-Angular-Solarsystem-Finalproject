@@ -3,8 +3,8 @@
  * FCPP-Referenz: P20-U10, P20-U20, P20-U30, P20-U40 (Detailansicht, Wikimedia-Foto mit Offline-Fallback, Mond-Auswahl & 7 Bahnelemente)
  * Erstellt mit: KI-Assistent (Antigravity AI / Pair-Programming Agent)
  * Erstellt für / Autor: Joshua Mößmer (J-Moessmer)
- * Datum / Version: 19.11.2026 / v2.1
- * Hinweis: Bereinigtes P20-Steckbrief-Layout ohne redundante Klammer-Zusätze, mit 1px Rahmen, dezenten Kurvenradien und Quellen-Links (officialUrl, wikipediaUrl, Wikimedia Commons).
+ * Datum / Version: 20.11.2026 / v2.2
+ * Hinweis: Bereinigtes P20-Steckbrief-Layout mit kindgerechtem Reisezeit-Vergleich (Auto, Flugzeug, Raumsonde, Lichtstrahl), 1px Rahmen, dezenten Kurvenradien und Quellen-Links (officialUrl, wikipediaUrl, Wikimedia Commons).
  */
 
 import { Component, OnInit, computed, effect, inject, input, output, signal } from '@angular/core';
@@ -16,6 +16,62 @@ import { ResearchMission } from '../../../core/models/research-mission.model';
 import { ImageLightboxComponent } from '../../../shared/components/image-lightbox/image-lightbox';
 import { GLOSSARY_DEFINITIONS, GlossaryTermComponent } from '../../../shared/components/glossary-term/glossary-term';
 import { buildBodyGallery, GalleryMediaItem } from '../../../core/data/media-gallery.data';
+
+export interface TravelTimeComparison {
+  id: string;
+  label: string;
+  speedLabel: string;
+  icon: string;
+  durationLabel: string;
+}
+
+/** KI-generierter Block: Formatiert Reisezeiten in Sekunden bis Milliarden Jahre kindgerecht auf Deutsch */
+function formatTravelDuration(seconds: number): string {
+  if (!Number.isFinite(seconds) || seconds < 0.05) {
+    return 'unter 0,1 Sekunden';
+  }
+  if (seconds < 60) {
+    return seconds < 10
+      ? `${seconds.toFixed(1).replace('.', ',')} Sekunden`
+      : `${Math.round(seconds)} Sekunden`;
+  }
+  if (seconds < 3600) {
+    const mins = Math.floor(seconds / 60);
+    const remSec = Math.round(seconds - mins * 60);
+    if (remSec === 60) {
+      return `${mins + 1} Minuten`;
+    }
+    if (mins < 15 && remSec > 0) {
+      return `${mins} Min. ${remSec} Sek.`;
+    }
+    return `${Math.round(seconds / 60)} Minuten`;
+  }
+  const hours = seconds / 3600;
+  if (hours < 48) {
+    return hours < 10
+      ? `${hours.toFixed(1).replace('.', ',')} Stunden`
+      : `${Math.round(hours)} Stunden`;
+  }
+  const days = hours / 24;
+  if (days < 365.25) {
+    return days < 20
+      ? `${days.toFixed(1).replace('.', ',')} Tage`
+      : `${Math.round(days)} Tage`;
+  }
+  const years = days / 365.25;
+  if (years < 100) {
+    return `${years.toFixed(1).replace('.', ',')} Jahre`;
+  }
+  if (years < 1_000_000) {
+    return `${Math.round(years).toLocaleString('de-DE')} Jahre`;
+  }
+  const mioYears = years / 1_000_000;
+  if (mioYears < 1_000) {
+    return `${mioYears.toFixed(1).replace('.', ',')} Mio. Jahre`;
+  }
+  const mrdYears = mioYears / 1_000;
+  return `${Math.round(mrdYears).toLocaleString('de-DE')} Mrd. Jahre`;
+}
 
 @Component({
   selector: 'app-infobox-detail',
@@ -145,7 +201,13 @@ import { buildBodyGallery, GalleryMediaItem } from '../../../core/data/media-gal
         <div class="metrics-grid" role="region" aria-label="Wichtige Kennzahlen">
           <div class="metric-box">
             <span class="metric-label">Durchmesser</span>
-            <strong class="metric-val">{{ current.diameterKm | number: '1.0-2' }} km</strong>
+            <strong class="metric-val">
+              @if (current.diameterKm < 1) {
+                {{ formatSubKmDiameter(current.diameterKm) }}
+              } @else {
+                {{ current.diameterKm | number: '1.0-2' }} km
+              }
+            </strong>
           </div>
           <div class="metric-box">
             <span class="metric-label">
@@ -193,6 +255,34 @@ import { buildBodyGallery, GalleryMediaItem } from '../../../core/data/media-gal
             <strong class="metric-val">{{ aopElement().formattedValue }}</strong>
           </div>
         </div>
+
+        @if (travelTimes().length > 0) {
+          <section class="travel-time-section" aria-label="Reisezeit-Vergleich von der Erde">
+            <div class="travel-time-header">
+              <h4>
+                <i class="fa-solid fa-route" aria-hidden="true"></i>
+                Wie lange bräuchtest du von der Erde bis hierher?
+              </h4>
+              <span class="travel-distance-note">
+                Bei mittlerem Erdabstand ohne Pause unterwegs
+              </span>
+            </div>
+            <div class="travel-time-grid">
+              @for (item of travelTimes(); track item.id) {
+                <div class="travel-card">
+                  <div class="travel-card-head">
+                    <span class="travel-vehicle">
+                      <i [class]="item.icon" aria-hidden="true"></i>
+                      {{ item.label }}
+                    </span>
+                    <span class="travel-speed">{{ item.speedLabel }}</span>
+                  </div>
+                  <strong class="travel-duration">{{ item.durationLabel }}</strong>
+                </div>
+              }
+            </div>
+          </section>
+        }
 
         @if (current.category === 'lagrange' || current.id === 'jwst' || current.id === 'gaia') {
           <div class="lagrange-banner">
@@ -507,6 +597,78 @@ import { buildBodyGallery, GalleryMediaItem } from '../../../core/data/media-gal
       padding: 0.55rem 0.75rem;
       border-radius: var(--radius-md);
       font-size: 0.86rem;
+    }
+    .travel-time-section {
+      background-color: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-md);
+      padding: 0.75rem 0.85rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+    }
+    .travel-time-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+    }
+    .travel-time-header h4 {
+      margin: 0;
+      font-size: 0.94rem;
+      color: var(--card-text-primary);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .travel-time-header h4 i {
+      color: var(--accent-primary);
+    }
+    .travel-distance-note {
+      font-size: 0.75rem;
+      color: var(--card-text-muted);
+    }
+    .travel-time-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 0.5rem;
+    }
+    .travel-card {
+      background-color: var(--card-bg-elevated);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-sm);
+      padding: 0.5rem 0.65rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+    }
+    .travel-card-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.35rem;
+      font-size: 0.76rem;
+      color: var(--card-text-secondary);
+    }
+    .travel-vehicle {
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.32rem;
+      color: var(--card-text-primary);
+    }
+    .travel-vehicle i {
+      color: var(--accent-primary);
+    }
+    .travel-speed {
+      font-size: 0.72rem;
+      color: var(--card-text-muted);
+    }
+    .travel-duration {
+      font-size: 0.9rem;
+      font-weight: 800;
+      color: var(--accent-primary);
     }
     .metrics-grid {
       display: grid;
@@ -832,6 +994,45 @@ export class InfoboxDetailComponent implements OnInit {
     return [oe.sma, oe.ecc, oe.inc, oe.lan, this.aopElement(), oe.lpe, oe.mna, oe.ref];
   });
 
+  /** KI-generierter Block: Berechnet kindgerechte Reisezeiten von der Erde aus dem Erdabstand (Auto, Flugzeug, Raumsonde, Lichtstrahl) */
+  readonly travelTimes = computed<TravelTimeComparison[]>(() => {
+    const b = this.body();
+    if (!b || b.id === 'earth' || b.distanceFromEarthKm <= 0) {
+      return [];
+    }
+    const km = b.distanceFromEarthKm;
+    return [
+      {
+        id: 'auto',
+        label: 'Auto',
+        speedLabel: '100 km/h',
+        icon: 'fa-solid fa-car-side',
+        durationLabel: formatTravelDuration((km / 100) * 3600),
+      },
+      {
+        id: 'plane',
+        label: 'Flugzeug',
+        speedLabel: '900 km/h',
+        icon: 'fa-solid fa-plane',
+        durationLabel: formatTravelDuration((km / 900) * 3600),
+      },
+      {
+        id: 'probe',
+        label: 'Raumsonde',
+        speedLabel: '60.000 km/h',
+        icon: 'fa-solid fa-rocket',
+        durationLabel: formatTravelDuration((km / 60000) * 3600),
+      },
+      {
+        id: 'light',
+        label: 'Lichtstrahl',
+        speedLabel: '300.000 km/s',
+        icon: 'fa-solid fa-bolt',
+        durationLabel: formatTravelDuration(km / 299792.458),
+      },
+    ];
+  });
+
   /** Berechnet die durchschnittliche Bahngeschwindigkeit (km/h & km/s) für jedes Objekt */
   readonly orbitalSpeedLabel = computed<string>(() => {
     const b = this.body();
@@ -911,6 +1112,16 @@ export class InfoboxDetailComponent implements OnInit {
 
   hasGlossaryTerm(label: string): boolean {
     return Object.prototype.hasOwnProperty.call(GLOSSARY_DEFINITIONS, label);
+  }
+
+  /** Formatiert Durchmesser unter 1 km anschaulich in cm oder m für kleine Satelliten wie Vanguard 1 (16,5 cm) oder ISS (109 m) */
+  formatSubKmDiameter(diameterKm: number): string {
+    if (diameterKm < 0.001) {
+      const cm = Number((diameterKm * 100_000).toFixed(1));
+      return `${cm.toLocaleString('de-DE', { maximumFractionDigits: 1 })} cm`;
+    }
+    const meters = Number((diameterKm * 1_000).toFixed(1));
+    return `${meters.toLocaleString('de-DE', { maximumFractionDigits: 1 })} m`;
   }
 
   onImageError(): void {

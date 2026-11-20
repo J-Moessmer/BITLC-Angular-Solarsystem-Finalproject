@@ -3,8 +3,8 @@
  * FCPP-Referenz: P30-U10 (A10), P30-U20 (A20, A30 – Maßstabs- & Größenvergleich)
  * Erstellt mit: KI-Assistent (Antigravity AI / Pair-Programming Agent)
  * Erstellt für / Autor: Joshua Mößmer (J-Moessmer)
- * Datum / Version: 19.11.2026 / v2.2
- * Hinweis: Umsetzung von Plan-Element P30 inkl. extrasolarer & alltäglicher Vergleichskörper (Fußball, Basketball, 1-Meter-Kugel), gruppiertem Auswahlmenü, Sub-Meter-Tiefenzoom, automatischer cm/m/km-Einheitenformatierung, maßstabsgetreuen SVG-Silhouetten für Berg & Land sowie geschachtelter Horizont-Staffelung mit KI-Unterstützung erstellt.
+ * Datum / Version: 20.11.2026 / v2.3
+ * Hinweis: Umsetzung von Plan-Element P30 inkl. Vanguard 1 (16,5 cm) neben Alltagsgrößen (Fußball, Basketball, 1-Meter-Kugel), extrasolarer Vergleichskörper, Sub-Meter-Tiefenzoom, automatischer cm/m/km-Einheitenformatierung sowie SVG-Silhouetten mit KI-Unterstützung erstellt.
  */
 
 import { Component, OnInit, computed, inject, signal } from '@angular/core';
@@ -147,13 +147,15 @@ export class SizeComparisonComponent implements OnInit {
     },
   ];
 
-  /** Vergleichbare Himmelskörper (Sonnensystem ohne Gürtel/Sonden/L-Punkte + Extrasolare & Alltagsobjekte) */
+  /** Vergleichbare Himmelskörper (Sonnensystem ohne Gürtel/L-Punkte + Vanguard 1 + Extrasolare & Alltagsobjekte) */
   readonly comparableBodies = computed<CelestialBody[]>(() => {
     const solar = this.dataService
       .bodies()
       .filter(
         (b) =>
-          b.category !== 'belt' && b.category !== 'spacecraft' && b.category !== 'lagrange',
+          b.category !== 'belt' &&
+          (b.category !== 'spacecraft' || b.id === 'vanguard-1') &&
+          b.category !== 'lagrange',
       );
     return [...solar, ...EXTRA_COMPARISON_BODIES];
   });

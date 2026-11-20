@@ -22,6 +22,29 @@
     "officialUrl": "https://www.nasa.gov/history/sputnik/index.html"
   },
   {
+    "id": "vanguard-1",
+    "title": "Vanguard 1 – Ältester Satellit im Erdorbit",
+    "subtitle": "Der winzige ‚Grapefruit-Satellit‘ mit Solarzellen kreist seit 1958",
+    "category": "probe",
+    "categoryLabel": "Sonden (USA)",
+    "targetBodyId": "vanguard-1",
+    "targetBodyName": "Vanguard 1 (Erdorbit)",
+    "agency": "USA (NRL / US Navy)",
+    "launchYear": "17. März 1958",
+    "statusLabel": "Im Erdorbit seit 1958 (Funk inaktiv seit 1964)",
+    "wikimediaImageUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c1/Vanguard_1_satellite_%28flight_backup%29_-_Udvar-Hazy_Center.JPG/960px-Vanguard_1_satellite_%28flight_backup%29_-_Udvar-Hazy_Center.JPG",
+    "imageUrl": "assets/images/probe.svg",
+    "imageCredit": "Smithsonian Air & Space Museum / NASA / NRL (Wikimedia Commons)",
+    "childSummary": "Am 17. März 1958 schickten die USA mit Vanguard 1 eine nur 16,5 Zentimeter große Metallkugel ins All. Sie war der allererste Satellit mit Solarzellen – und weil ihre hohe Umlaufbahn so stabil ist, umkreist Vanguard 1 als ältestes menschengemachtes Objekt bis heute unsere Erde!",
+    "tasksForKids": [
+      "Testete erstmals weltweit Solarzellen im Weltraum und funkte dank Sonnenenergie sechs Jahre lang bis 1964.",
+      "Half Wissenschaftlern zu beweisen, dass unsere Erde an Äquator und Polen leicht birnenförmig ist.",
+      "Kreist zusammen mit seiner oberen Raketenstufe schon über 68 Jahre um die Erde – viel länger als Sputnik 1!"
+    ],
+    "wikipediaUrl": "https://de.wikipedia.org/wiki/Vanguard_1",
+    "officialUrl": "https://www.nasa.gov/image-article/vanguard-satellite-1958/"
+  },
+  {
     "id": "venera-13",
     "title": "Venera 13 – Landung in der Venus-Hitze",
     "subtitle": "Die ersten Farbfotos von der Oberfläche der Venus (1982)",

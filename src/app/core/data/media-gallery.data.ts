@@ -3,8 +3,8 @@
  * FCPP-Referenz: P20-U10, P20-U20, P40-U20, P50-U20
  * Erstellt mit: KI-Assistent (Antigravity AI / Pair-Programming Agent)
  * Erstellt für / Autor: Joshua Mößmer (J-Moessmer)
- * Datum / Version: 19.11.2026 / v1.0
- * Hinweis: Kuratierte und per API/HTTP geprüfte Fotogalerien (>= 5 Fotos pro Objekt & Mission) für Infobox (P20) und Forschungsprojekte (P40).
+ * Datum / Version: 20.11.2026 / v1.1
+ * Hinweis: Kuratierte und per API/HTTP geprüfte Fotogalerien (>= 5 Fotos pro Objekt & Mission) inkl. Vanguard 1 für Infobox (P20) und Forschungsprojekte (P40).
  */
 
 import type { CelestialBody } from '../models/celestial-body.model';
@@ -1651,6 +1651,28 @@ export const BODY_AND_MISSION_GALLERY: Readonly<Record<string, ReadonlyArray<Gal
     {
       "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3d/The_ten-member_Expedition_74_crew_poses_for_a_portrait_inside_the_Kibo_laboratory_module_%28iss074e0835261%29.jpg/960px-The_ten-member_Expedition_74_crew_poses_for_a_portrait_inside_the_Kibo_laboratory_module_%28iss074e0835261%29.jpg",
       "caption": "Astronauten arbeiten im japanischen Forschungsmodul Kibō"
+    }
+  ],
+  "vanguard-1": [
+    {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/d/dc/Vanguard_1_TV-4.jpg",
+      "caption": "Start der Vanguard-TV-4-Rakete am 17. März 1958 in Cape Canaveral"
+    },
+    {
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4b/A_team_of_Vanguard_I_scientists_mount_the_satellite_in_the_rocket.jpg/960px-A_team_of_Vanguard_I_scientists_mount_the_satellite_in_the_rocket.jpg",
+      "caption": "Ingenieure setzen den winzigen Satelliten auf die Raketenspitze"
+    },
+    {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/7/7f/Vanguard_1.jpg",
+      "caption": "Vanguard 1 mit 6 Solarzellen-Fenstern und 6 Funkantennen (Ø 16,5 cm)"
+    },
+    {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/b/b1/Vanguard_1_electronics.jpg",
+      "caption": "Blick ins Innere: Die kompakte Funk-Elektronik von Vanguard 1"
+    },
+    {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/e/e6/Vanguard_satellite-01.jpg",
+      "caption": "Nahaufnahme der glänzenden Aluminiumkugel im Museum"
     }
   ]
 };

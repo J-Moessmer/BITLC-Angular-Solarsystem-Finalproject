@@ -3,14 +3,15 @@
  * FCPP-Referenz: P10-U20, P20-U20, P20-U30, P20-U40, P30-U20
  * Erstellt mit: KI-Assistent (Antigravity AI / Pair-Programming Agent)
  * Erstellt für / Autor: Joshua Mößmer (J-Moessmer)
- * Datum / Version: 19.11.2026 / v1.1
- * Hinweis: Datenservice für alle Himmelskörper, Monde, Gürtel, Lagrange-Punkte (L1–L5) und Raumstationen inkl. HTTPS-API-Abruf, lokalem JSON-Fallback (assets/data/solar-system-fallback.json) sowie Wikimedia-Commons-Bild-URLs mit lokalem SVG-Fallback mit KI-Unterstützung erstellt.
+ * Datum / Version: 20.11.2026 / v1.2
+ * Hinweis: Datenservice für alle Himmelskörper, Monde, Gürtel, Lagrange-Punkte (L1–L5) und Raumstationen inkl. HTTPS-API-Abruf, lokalem JSON-Fallback (assets/data/solar-system-fallback.json), Wikimedia-Commons-Bild-URLs sowie automatischer Entdecker-Pass-Erfassung mit KI-Unterstützung erstellt.
  */
 
 import { Injectable, computed, inject, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { catchError, firstValueFrom, of, timeout } from 'rxjs';
 import { CelestialBody } from '../models/celestial-body.model';
+import { ExplorerProgressService } from './explorer-progress.service';
 
 export interface PathTreeNode {
   id: string;
@@ -35,6 +36,7 @@ interface OpenSolarSystemApiResponse {
 })
 export class SolarSystemDataService {
   private readonly http = inject(HttpClient);
+  private readonly explorerProgress = inject(ExplorerProgressService);
 
   /** Relativer Pfad für GitHub Pages (--base-href kompatibel) */
   private readonly localFallbackUrl = 'assets/data/solar-system-fallback.json';
@@ -210,6 +212,7 @@ export class SolarSystemDataService {
             icon: 'fa-solid fa-satellite',
             children: [
               buildBodyNode('sputnik-1', 'fa-solid fa-satellite'),
+              buildBodyNode('vanguard-1', 'fa-solid fa-satellite'),
               buildBodyNode('vostok-1', 'fa-solid fa-rocket'),
               buildBodyNode('tiangong', 'fa-solid fa-satellite'),
               buildBodyNode('venera-13', 'fa-solid fa-shuttle-space'),
@@ -335,9 +338,12 @@ export class SolarSystemDataService {
     }
   }
 
-  /** Setzt den ausgewählten Himmelskörper für P20 (P10-U20, P20-U30) */
+  /** Setzt den ausgewählten Himmelskörper für P20 und markiert ihn im Entdecker-Pass (P10-U20, P20-U30) */
   selectBody(bodyId: string | null): void {
     this.selectedBodyIdState.set(bodyId);
+    if (bodyId) {
+      this.explorerProgress.markBodyDiscovered(bodyId);
+    }
   }
 
   /** Schließt die Infobox und kehrt zur Sonnensystem-Ansicht zurück (P20-U40) */

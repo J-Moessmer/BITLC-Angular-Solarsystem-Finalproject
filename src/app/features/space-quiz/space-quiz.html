@@ -3,8 +3,8 @@
   FCPP-Referenz: P50-U10 (A10), P50-U20 (A20, A30), P50-U30 (A40)
   Erstellt mit: KI-Assistent (Antigravity AI / Pair-Programming Agent)
   Erstellt für / Autor: Joshua Mößmer (J-Moessmer)
-  Datum / Version: 19.11.2026 / v2.1
-  Hinweis: 4 Quiz-Kategorien, Zufalls-Wähler für „Quiz des Tages" und direkt auf der Quiz-Seite eingebetteter Steckbrief mit Bildern nach Klick auf „Lösung prüfen".
+  Datum / Version: 20.11.2026 / v2.2
+  Hinweis: 4 Quiz-Kategorien mit gespeicherten Bestwerten, Entdecker-Pass, Zufalls-Wähler für „Quiz des Tages" und direkt eingebettetem Steckbrief nach Klick auf „Lösung prüfen".
 -->
 <section class="p50-workspace" aria-labelledby="p50-heading">
   <aside class="quiz-sidebar-card" aria-label="Quiz-Kategorien wählen">
@@ -21,7 +21,12 @@
             (click)="onSelectCategory(cat.id)"
           >
             <div class="cat-texts">
-              <strong>{{ cat.label }}</strong>
+              <div class="cat-title-row">
+                <strong>{{ cat.label }}</strong>
+                @if (quizService.getCategoryBestScore(cat.id); as best) {
+                  <span class="cat-best-badge">Bestwert: {{ best.correct }} / {{ best.total }}</span>
+                }
+              </div>
               <span>{{ cat.description }}</span>
             </div>
           </button>
@@ -39,6 +44,26 @@
         <strong>{{ quizService.scoreWrong() }}</strong>
       </div>
     </div>
+
+    @if (totalCatalogCount() > 0) {
+      <div class="explorer-pass-box" aria-label="Entdecker-Pass Fortschritt">
+        <div class="explorer-pass-header">
+          <span>
+            <i class="fa-solid fa-passport" aria-hidden="true"></i> Entdecker-Pass
+          </span>
+          <strong>{{ discoveredCatalogCount() }} / {{ totalCatalogCount() }} entdeckt</strong>
+        </div>
+        <div
+          class="explorer-progress-track"
+          role="progressbar"
+          [attr.aria-valuenow]="discoveredCatalogCount()"
+          aria-valuemin="0"
+          [attr.aria-valuemax]="totalCatalogCount()"
+        >
+          <div class="explorer-progress-fill" [style.width.%]="discoveredPercent()"></div>
+        </div>
+      </div>
+    }
   </aside>
 
   <div class="quiz-stage-column">
@@ -157,8 +182,19 @@
     } @else if (quizService.isQuizFinished()) {
       <div class="result-evaluation-card" aria-labelledby="result-heading">
         <span class="praise-badge">{{ quizService.childPraiseSummary().badge }}</span>
+        @if (quizService.isNewPersonalRecord()) {
+          <div class="record-badge">
+            <i class="fa-solid fa-trophy" aria-hidden="true"></i> Neuer persönlicher Bestwert gespeichert!
+          </div>
+        }
         <h3 id="result-heading">{{ quizService.childPraiseSummary().title }}</h3>
         <p class="praise-message">{{ quizService.childPraiseSummary().message }}</p>
+        @if (quizService.getCategoryBestScore(quizService.selectedCategory()); as categoryBest) {
+          <p class="category-best-summary">
+            Dein Bestwert in dieser Kategorie:
+            <strong>{{ categoryBest.correct }} / {{ categoryBest.total }}</strong> richtig
+          </p>
+        }
 
         <div class="final-score-grid">
           <div class="final-score-box good-box">

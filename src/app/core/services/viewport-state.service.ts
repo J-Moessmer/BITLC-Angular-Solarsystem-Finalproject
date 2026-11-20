@@ -3,8 +3,8 @@
  * FCPP-Referenz: P10-U20, P10-U30, P10-U40, P20-U20, P20-U40
  * Erstellt mit: KI-Assistent (Antigravity AI / Pair-Programming Agent)
  * Erstellt für / Autor: Joshua Mößmer (J-Moessmer)
- * Datum / Version: 19.11.2026 / v2.1
- * Hinweis: Stufenloser logarithmischer Zoom (0 % bis 100 % Slider / 0.08x bis 36.000x) für JEDEN Himmelskörper, analytisches SVG-Orbit-Clipping und präzise Geometrie für alle 5 Sonne-Erde-Lagrange-Punkte (L1-L5) sowie JWST & Gaia mit KI-Unterstützung erstellt.
+ * Datum / Version: 20.11.2026 / v2.2
+ * Hinweis: Stufenloser logarithmischer Zoom (0 % bis 100 % Slider / 0.08x bis 36.000x) für JEDEN Himmelskörper, analytisches SVG-Orbit-Clipping, Vanguard-1-Startdatum-Filter (1958) und präzise Geometrie für alle 40 Lagrange-Punkte (L1-L5) sowie JWST & Gaia mit KI-Unterstützung erstellt.
  */
 
 import { Injectable, computed, signal } from '@angular/core';
@@ -72,6 +72,7 @@ export class ViewportStateService {
   /** Offizielle Start- bzw. Landedaten (ISO) für die historische Sichtbarkeitsfilterung von Raumsonden & Missionen */
   readonly spacecraftActiveFromIso: Readonly<Record<string, string>> = {
     'sputnik-1': '1957-10-04',
+    'vanguard-1': '1958-03-17',
     'vostok-1': '1961-04-12',
     'apollo-11': '1969-07-20',
     'apollo-12': '1969-11-19',
@@ -852,6 +853,9 @@ export class ViewportStateService {
       } else if (body.id === 'hubble') {
         // Hubble kreist in 540 km Höhe über der Erde (r = 1.085 * R_Erde)
         physicalOrbitPx = parentTrueR * 1.2;
+      } else if (body.id === 'vanguard-1') {
+        // Vanguard 1 kreist im mittleren Erdorbit (654–3.840 km Höhe, im Mittel ca. 2.250 km über der Oberfläche)
+        physicalOrbitPx = parentTrueR * 1.38;
       } else if (body.id === 'apollo-13') {
         // Apollo 13 umrundet den Mond mit Sicherheitsabstand auf der Free-Return-Bahn (kein Clipping in den Mond)
         physicalOrbitPx = Math.max(parentTrueR * 0.2724 + 22, parentTrueR * 2.4);

@@ -3,14 +3,17 @@
   FCPP-Referenz: P10 (P10-U20, P10-U30, P10-U40) & P20 (P20-U10 bis P20-U40)
   Erstellt mit: KI-Assistent (Antigravity AI / Pair-Programming Agent)
   Erstellt für / Autor: Joshua Mößmer (J-Moessmer)
-  Datum / Version: 16.11.2026 / v2.1
-  Hinweis: Bereinigtes UI ohne redundante Klammer-Zusätze, ohne Deko-Badges, mit 1px Rahmen und dezenten Kurvenradien.
+  Datum / Version: 20.11.2026 / v2.2
+  Hinweis: Bereinigtes UI mit Entdecker-Pass-Leiste, dynamischem SVG-Kometenschweif, 1px Rahmen und dezenten Kurvenradien.
 -->
 <div class="p10-workspace">
   <!-- Linke Spalte: Rekursive Pfad-Seitenleiste (P10-A20 / P10-U20 & P20-U10) -->
   <app-path-sidebar
     [nodes]="dataService.navigationTree()"
     [activeBodyId]="dataService.selectedBodyId()"
+    [discoveredBodyIds]="explorerProgress.discoveredBodyIdSet()"
+    [discoveredCount]="discoveredCatalogCount()"
+    [totalBodiesCount]="dataService.bodies().length"
     (bodySelected)="onSelectBody($event)"
   />
 
@@ -265,6 +268,21 @@
             <stop offset="96%" stop-color="#93C5FD" stop-opacity="0.24" />
             <stop offset="100%" stop-color="#1E3A8A" stop-opacity="0" />
           </radialGradient>
+          <linearGradient id="cometIonTailGrad" x1="0%" y1="50%" x2="100%" y2="50%">
+            <stop offset="0%" stop-color="#E0F2FE" stop-opacity="0.95" />
+            <stop offset="45%" stop-color="#38BDF8" stop-opacity="0.55" />
+            <stop offset="100%" stop-color="#0284C7" stop-opacity="0" />
+          </linearGradient>
+          <linearGradient id="cometDustTailGrad" x1="0%" y1="50%" x2="100%" y2="50%">
+            <stop offset="0%" stop-color="#FEF9C3" stop-opacity="0.9" />
+            <stop offset="48%" stop-color="#FDE68A" stop-opacity="0.5" />
+            <stop offset="100%" stop-color="#F59E0B" stop-opacity="0" />
+          </linearGradient>
+          <radialGradient id="cometComaGlow" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#E0F2FE" stop-opacity="0.9" />
+            <stop offset="55%" stop-color="#38BDF8" stop-opacity="0.45" />
+            <stop offset="100%" stop-color="#38BDF8" stop-opacity="0" />
+          </radialGradient>
         </defs>
 
         <!-- Dezente helle Sterne auf dem Marineblau-Hintergrund (#111D3B) -->
@@ -505,6 +523,37 @@
               }
             }
           }
+
+          <!-- 2b. Dynamische Anti-Solar-Kometenschweife (Staub- & Ionenschweif) hinter den Kometenkernen -->
+          <g class="comet-tails-layer" aria-hidden="true" pointer-events="none">
+            @for (tail of cometTails(); track tail.id) {
+              <g
+                class="comet-tail-group"
+                [attr.data-comet-id]="tail.id"
+                [attr.transform]="'translate(' + tail.x + ',' + tail.y + ') rotate(' + tail.angleDeg + ')'"
+              >
+                <circle
+                  cx="0"
+                  cy="0"
+                  [attr.r]="tail.comaRadiusPx"
+                  fill="url(#cometComaGlow)"
+                  [attr.opacity]="tail.comaOpacity"
+                />
+                <path
+                  class="comet-dust-tail"
+                  [attr.d]="tail.dustPath"
+                  fill="url(#cometDustTailGrad)"
+                  [attr.opacity]="tail.dustOpacity"
+                />
+                <polygon
+                  class="comet-ion-tail"
+                  [attr.points]="tail.ionPoints"
+                  fill="url(#cometIonTailGrad)"
+                  [attr.opacity]="tail.ionOpacity"
+                />
+              </g>
+            }
+          </g>
 
           <!-- 3. Sichtbare Himmelskörper, Monde & Raumsonden stufenlos rendern -->
           @for (pos of visibleSvgBodies(); track pos.body.id) {

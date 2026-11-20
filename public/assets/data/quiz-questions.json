@@ -336,6 +336,76 @@
     "relatedBodyId": "change-4"
   },
   {
+    "id": "q-mis-13",
+    "category": "missions",
+    "questionText": "Wofür waren die amerikanischen Gemini-Missionen (z. B. Gemini 4 und Gemini 8) in den 1960er-Jahren so wichtig?",
+    "options": [
+      "Sie bauten die erste Basis auf dem Mars",
+      "Sie übten erfolgreich den ersten US-Weltraumspaziergang und das Andocken zweier Raumschiffe im Orbit",
+      "Sie schossen das erste Foto vom Jupiter-Sturm",
+      "Sie landeten auf dem Saturnmond Titan"
+    ],
+    "correctOptionIndex": 1,
+    "childExplanation": "Genau! Ohne das Training von Weltraumspaziergängen (EVA) und Kopplungsmanövern bei Gemini hätten spätere Mondflüge nicht funktioniert.",
+    "relatedBodyId": "earth"
+  },
+  {
+    "id": "q-mis-14",
+    "category": "missions",
+    "questionText": "Was erlebten die drei Astronauten von Apollo 8 zu Weihnachten 1968 zum allerersten Mal?",
+    "options": [
+      "Sie umkreisten als erste Menschen unseren Mond und fotografierten den berühmten ‚Erdaufgang‘",
+      "Sie landeten als erste Menschen auf der Venus",
+      "Sie fuhren mit einem Mondauto über den Mars",
+      "Sie reparierten das Hubble-Weltraumteleskop"
+    ],
+    "correctOptionIndex": 0,
+    "childExplanation": "Genau! Bei Apollo 8 verließen Menschen erstmals die Nähe der Erde, sahen die Rückseite des Mondes mit eigenen Augen und machten das weltberühmte Foto ‚Earthrise‘.",
+    "relatedBodyId": "moon"
+  },
+  {
+    "id": "q-mis-15",
+    "category": "missions",
+    "questionText": "Welches spektakuläre Bild schoss die europäische ESA-Raumsonde ‚Giotto‘ im März 1986 bei ihrem nahen Vorbeiflug?",
+    "options": [
+      "Die allererste Nahaufnahme eines echten Kometenkerns (beim Halleyschen Kometen)",
+      "Das erste Foto der Ringe des Uranus von der Erdoberfläche",
+      "Ein Selfie auf der Oberfläche der Sonne",
+      "Eine Landung auf dem Zwergplaneten Eris"
+    ],
+    "correctOptionIndex": 0,
+    "childExplanation": "Genau! Giotto flog nur 596 km am Halleyschen Kometen vorbei und zeigte der Welt erstmals, dass sein Kometenkern wie eine dunkle Kartoffel aussieht.",
+    "relatedBodyId": "halley"
+  },
+  {
+    "id": "q-mis-16",
+    "category": "missions",
+    "questionText": "Was entdeckte die europäische Raumsonde ‚Mars Express‘ (seit 2003 im Marsorbit) unter anderem unter der Mars-Oberfläche?",
+    "options": [
+      "Riesige Wälder aus grünen Bäumen",
+      "Große Mengen von gefrorenem Wassereis an den Polen und tief unter der Oberfläche",
+      "Aktive Dampflokomotiven auf alten Schienen",
+      "Ozeane aus flüssigem Gold"
+    ],
+    "correctOptionIndex": 1,
+    "childExplanation": "Genau! Mit ihrem speziellen Bodenradar spürte Mars Express große Vorräte an Wassereis auf und fotografierte gewaltige Schluchten sowie alte Flussbetten auf dem Mars.",
+    "relatedBodyId": "mars"
+  },
+  {
+    "id": "q-mis-17",
+    "category": "missions",
+    "questionText": "Welcher nur 16,5 cm große US-Satellit startete im März 1958 als erster Satellit mit Solarzellen – und ist heute das älteste menschengemachte Objekt im Erdorbit?",
+    "options": [
+      "Vanguard 1",
+      "Sputnik 1",
+      "Apollo 11",
+      "Hubble-Teleskop"
+    ],
+    "correctOptionIndex": 0,
+    "childExplanation": "Genau! Die winzige Alukugel ‚Vanguard 1‘ fliegt so hoch über der Erde (bis 3.840 km), dass sie seit 1958 bis heute im Orbit kreist – während Sputnik 1 schon nach wenigen Monaten verglühte!",
+    "relatedBodyId": "vanguard-1"
+  },
+  {
     "id": "q-ast-1",
     "category": "astronomy",
     "questionText": "Wo befindet sich der große Asteroidengürtel in unserem Sonnensystem?",

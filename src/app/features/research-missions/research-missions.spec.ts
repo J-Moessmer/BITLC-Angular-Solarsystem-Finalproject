@@ -13,6 +13,7 @@ import { HttpTestingController, provideHttpClientTesting } from '@angular/common
 import { provideRouter } from '@angular/router';
 import { ResearchMissionsComponent } from './research-missions';
 import { ResearchMission } from '../../core/models/research-mission.model';
+import { MissionDataService } from '../../core/services/mission-data.service';
 
 describe('ResearchMissionsComponent (P40)', () => {
   const mockMissions: ResearchMission[] = [
@@ -196,5 +197,33 @@ describe('ResearchMissionsComponent (P40)', () => {
     expect(comp.isLightboxOpen()).toBe(true);
     expect(fixture.nativeElement.querySelector('.lb-counter-badge')?.textContent).toContain('Bild 2 von');
     expect(comp.activeImageSrc()).toBe(items[1].url);
+    comp.isLightboxOpen.set(false);
+
+    // P40 Textsuche & chronologischer Zeitstrahl (1957 -> heute)
+    const missionService = TestBed.inject(MissionDataService);
+    comp.onSelectCategory('all');
+    comp.onSelectSortMode('timeline');
+    fixture.detectChanges();
+    const timelineIds = missionService.filteredMissions().map((m) => m.id);
+    expect(timelineIds).toEqual(['gemini-4', 'iss', 'parker', 'perseverance', 'jwst']);
+    expect(fixture.nativeElement.querySelector('.timeline-year-badge')?.textContent).toContain('1965');
+
+    const searchInput = fixture.nativeElement.querySelector('.mission-search-input') as HTMLInputElement;
+    searchInput.value = 'Gemini';
+    searchInput.dispatchEvent(new Event('input'));
+    fixture.detectChanges();
+    expect(missionService.filteredMissions().map((m) => m.id)).toEqual(['gemini-4']);
+    expect(fixture.nativeElement.querySelector('.results-count-pill')?.textContent).toContain('1 von 5 Projekten');
+
+    searchInput.value = 'unbekanntes-raumschiff-999';
+    searchInput.dispatchEvent(new Event('input'));
+    fixture.detectChanges();
+    expect(fixture.nativeElement.querySelector('.empty-missions-card')).toBeTruthy();
+
+    const resetFiltersBtn = fixture.nativeElement.querySelector('.reset-filters-btn') as HTMLButtonElement;
+    resetFiltersBtn.click();
+    fixture.detectChanges();
+    expect(missionService.filteredMissions().length).toBe(5);
+    expect(missionService.sortMode()).toBe('category');
   });
 });

@@ -3,8 +3,8 @@
  * FCPP-Referenz: P10-U20, P10-U30, P10-U40, P20-U10..U40
  * Erstellt mit: KI-Assistent (Antigravity AI / Pair-Programming Agent)
  * Erstellt für / Autor: Joshua Mößmer (J-Moessmer)
- * Datum / Version: 16.11.2026 / v1.0
- * Hinweis: Prüft die SVG-Maßstabsberechnungen (Übersicht, Echter AE-Maßstab, Seitenansicht mit INC-Winkel), Pfad-Baum und P20-Infobox mit den 7 Bahnelementen.
+ * Datum / Version: 20.11.2026 / v1.2
+ * Hinweis: Prüft die SVG-Maßstabsberechnungen (Übersicht, Echter AE-Maßstab, Seitenansicht mit INC-Winkel), Pfad-Schnellsuche, Reisezeit-Vergleich, dynamischen Anti-Solar-Kometenschweif, Entdecker-Pass und P20-Infobox mit den 7 Bahnelementen.
  */
 
 import { TestBed } from '@angular/core/testing';
@@ -91,6 +91,9 @@ describe('SolarSystemViewComponent & InfoboxDetailComponent (P10 & P20)', () => 
   ];
 
   beforeEach(async () => {
+    if (typeof localStorage !== 'undefined') {
+      localStorage.clear();
+    }
     await TestBed.configureTestingModule({
       imports: [SolarSystemViewComponent],
       providers: [provideRouter([]), provideHttpClient(), provideHttpClientTesting()],
@@ -305,5 +308,128 @@ describe('SolarSystemViewComponent & InfoboxDetailComponent (P10 & P20)', () => 
     // Bei extremem ISS-/Erd-Oberflächenzoom (>= 2500x) feiner Nahzoom-Schritt für LEO-Satelliten
     viewport.setZoom(3000);
     expect(comp.computeTimeLapseStepDays()).toBeLessThanOrEqual(0.01);
+  });
+
+  it('should support sidebar quick search, explorer pass tracking, child travel times, and anti-solar comet tails (Phase 7d)', async () => {
+    const baseOe = mockBodies[1].orbitalElements;
+    const neowise: CelestialBody = {
+      ...mockBodies[1],
+      id: 'neowise',
+      name: 'Komet NEOWISE (C/2020 F3)',
+      subtitle: 'Heller Komet im Sommer 2020',
+      category: 'comet',
+      categoryLabel: 'Komet',
+      parentId: 'sun',
+      childrenIds: [],
+      diameterKm: 5,
+      distanceFromSunKm: 53556000000,
+      distanceFromSunAu: 358,
+      distanceFromEarthKm: 103000000,
+      orbitalPeriodDays: 2471280,
+      orbitalPeriodLabel: 'ca. 6.766 Jahre',
+      inclinationToSolarEquatorDeg: 128.94,
+      overviewOrbitRadiusSvg: 415,
+      overviewBodyRadiusSvg: 4.5,
+      orbitalElements: {
+        ...baseOe,
+        sma: { ...baseOe.sma, formattedValue: '358 AE', numericValue: 358 },
+        ecc: { ...baseOe.ecc, formattedValue: '0.999176', numericValue: 0.999176 },
+        inc: { ...baseOe.inc, formattedValue: '128.94°', numericValue: 128.94 },
+        lan: { ...baseOe.lan, formattedValue: '61.01°', numericValue: 61.01 },
+        aop: {
+          code: 'AOP',
+          label: 'Argument der Periapsis',
+          formattedValue: '37.28°',
+          numericValue: 37.28,
+          childExplanation: 'AOP',
+        },
+        lpe: { ...baseOe.lpe, formattedValue: '23.73°', numericValue: 23.73 },
+        mna: { ...baseOe.mna, formattedValue: '358.909°', numericValue: 358.909 },
+      },
+    };
+    const bodies = [mockBodies[0], mockBodies[1], neowise];
+
+    const fixture = TestBed.createComponent(SolarSystemViewComponent);
+    const httpMock = TestBed.inject(HttpTestingController);
+    fixture.detectChanges();
+
+    httpMock.expectOne('assets/data/solar-system-fallback.json').flush(bodies);
+    await Promise.resolve();
+    httpMock.expectOne((req) => req.url.includes('api.le-systeme-solaire.net')).error(new ProgressEvent('offline'));
+    await fixture.whenStable();
+    fixture.detectChanges();
+
+    const comp = fixture.componentInstance;
+    const viewport = TestBed.inject(ViewportStateService);
+
+    // 1. Entdecker-Pass startet bei 0 / 3
+    expect(fixture.nativeElement.querySelector('.explorer-pass-mini')?.textContent).toContain('0 / 3 entdeckt');
+
+    // 2. Schnellsuche im Entdecker-Pfad
+    const searchInput = fixture.nativeElement.querySelector('.tree-search-input') as HTMLInputElement;
+    expect(searchInput).toBeTruthy();
+    searchInput.value = 'Sonne';
+    searchInput.dispatchEvent(new Event('input'));
+    fixture.detectChanges();
+    const sidebarTextAfterMatch = fixture.nativeElement.querySelector('.path-tree-card')?.textContent ?? '';
+    expect(sidebarTextAfterMatch).toContain('Sonne');
+    expect(sidebarTextAfterMatch).not.toContain('NEOWISE');
+
+    searchInput.value = 'xyz-gibts-nicht-123';
+    searchInput.dispatchEvent(new Event('input'));
+    fixture.detectChanges();
+    expect(fixture.nativeElement.querySelector('.tree-empty-hint')?.textContent).toContain('Kein Objekt');
+
+    const clearBtn = fixture.nativeElement.querySelector('.tree-search-clear-btn') as HTMLButtonElement;
+    clearBtn.click();
+    fixture.detectChanges();
+    expect(fixture.nativeElement.querySelector('.tree-empty-hint')).toBeNull();
+
+    // 3. Reisezeit-Vergleich & Entdecker-Pass bei Auswahl von Sonne vs. Erde
+    fixture.componentRef.setInput('bodyId', 'sun');
+    await fixture.whenStable();
+    fixture.detectChanges();
+
+    expect(fixture.nativeElement.querySelector('.explorer-pass-mini')?.textContent).toContain('1 / 3 entdeckt');
+    const travelText = fixture.nativeElement.querySelector('.travel-time-section')?.textContent ?? '';
+    expect(travelText).toContain('Wie lange bräuchtest du von der Erde bis hierher?');
+    expect(travelText).toContain('Auto');
+    expect(travelText).toContain('Flugzeug');
+    expect(travelText).toContain('Raumsonde');
+    expect(travelText).toContain('Lichtstrahl');
+    expect(travelText).toContain('8 Min. 19 Sek.');
+
+    fixture.componentRef.setInput('bodyId', 'earth');
+    await fixture.whenStable();
+    fixture.detectChanges();
+    expect(fixture.nativeElement.querySelector('.travel-time-section')).toBeNull();
+    expect(fixture.nativeElement.querySelector('.explorer-pass-mini')?.textContent).toContain('2 / 3 entdeckt');
+
+    // 4. Dynamischer Anti-Solar-Kometenschweif (Perihel 03.07.2020 heller als 19.11.2026)
+    viewport.setViewMode('overview');
+    viewport.setZoom(1.0);
+    viewport.setSimulationDateIso('2020-07-03');
+    fixture.detectChanges();
+
+    const sunPeri = viewport.computeBodyPosition(mockBodies[0], bodies);
+    const cometPeri = viewport.computeBodyPosition(neowise, bodies);
+    const expectedAngle = Number(
+      ((Math.atan2(cometPeri.y - sunPeri.y, cometPeri.x - sunPeri.x) * 180) / Math.PI).toFixed(2),
+    );
+
+    const periTail = comp.cometTails().find((t) => t.id === 'neowise');
+    expect(periTail).toBeTruthy();
+    expect(periTail?.angleDeg).toBeCloseTo(expectedAngle, 1);
+
+    const tailGroupEl = fixture.nativeElement.querySelector('.comet-tail-group[data-comet-id="neowise"]');
+    expect(tailGroupEl).toBeTruthy();
+    expect(tailGroupEl?.querySelector('.comet-dust-tail')).toBeTruthy();
+    expect(tailGroupEl?.querySelector('.comet-ion-tail')).toBeTruthy();
+
+    viewport.setSimulationDateIso('2026-11-19');
+    fixture.detectChanges();
+    const farTail = comp.cometTails().find((t) => t.id === 'neowise');
+    expect(farTail).toBeTruthy();
+    expect((periTail?.ionOpacity ?? 0)).toBeGreaterThan(farTail?.ionOpacity ?? 1);
   });
 });

@@ -610,6 +610,7 @@
       "tiangong",
       "hubble",
       "sputnik-1",
+      "vanguard-1",
       "vostok-1",
       "artemis",
       "lagrange-l1",
@@ -7008,6 +7009,103 @@
     },
     "officialUrl": "https://www.nasa.gov/history/sputnik/index.html",
     "wikipediaUrl": "https://de.wikipedia.org/wiki/Sputnik_1"
+  },
+  {
+    "id": "vanguard-1",
+    "name": "Vanguard 1",
+    "subtitle": "Das älteste menschengemachte Objekt, das noch heute im Orbit kreist (1958)",
+    "category": "spacecraft",
+    "categoryLabel": "Ältester Satellit im Erdorbit (USA)",
+    "parentId": "earth",
+    "childrenIds": [],
+    "wikimediaImageUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c1/Vanguard_1_satellite_%28flight_backup%29_-_Udvar-Hazy_Center.JPG/960px-Vanguard_1_satellite_%28flight_backup%29_-_Udvar-Hazy_Center.JPG",
+    "imageUrl": "assets/images/probe.svg",
+    "imageCredit": "Smithsonian Air & Space Museum / NASA / NRL (Wikimedia Commons)",
+    "colorHex": "#38BDF8",
+    "accentColorHex": "#E0F2FE",
+    "diameterKm": 0.000165,
+    "distanceFromSunKm": 149600000,
+    "distanceFromSunAu": 1,
+    "distanceFromEarthKm": 2247,
+    "orbitalPeriodDays": 0.093,
+    "orbitalPeriodLabel": "134 Minuten (kreist seit 1958 bis heute!)",
+    "inclinationToSolarEquatorDeg": 34.25,
+    "overviewOrbitRadiusSvg": 15,
+    "overviewBodyRadiusSvg": 2.8,
+    "orbitAngleDeg": 155,
+    "shortSummary": "Der US-Satellit Vanguard 1 startete am 17. März 1958 als vierter künstlicher Erdsatellit – und kreist im Gegensatz zu Sputnik 1 und Explorer 1 noch immer um unsere Erde! Damit ist die nur 16,5 Zentimeter große Metallkugel das älteste von Menschen gebaute Objekt im Weltall.",
+    "childFriendlyFacts": [
+      "Mit nur 16,5 Zentimetern Durchmesser ist Vanguard 1 sogar kleiner als ein Fußball (22 cm) – deshalb nannte man ihn liebevoll den ‚Grapefruit-Satelliten‘.",
+      "Er war der weltweit erste Satellit mit Solarzellen! Dank Sonnenstrom funkte sein Sender sechs Jahre lang bis Mai 1964.",
+      "Durch seine genaue Flugbahn entdeckten Forschende, dass die Erde keine perfekte Kugel ist, sondern leicht birnenförmig geformt ist.",
+      "Weil seine Bahn hoch über den dichtesten Luftschichten verläuft (654 bis 3.840 km Höhe), bleibt Vanguard 1 voraussichtlich noch rund 200 Jahre im Orbit!"
+    ],
+    "comparisonHint": "Vanguard 1 misst nur 16,5 cm (kleiner als ein Fußball) und wog bloß 1,47 Kilogramm.",
+    "orbitalElements": {
+      "sma": {
+        "code": "SMA",
+        "label": "Große Halbachse",
+        "formattedValue": "5.77e-05 AE · ca. 654–3.840 km Erdorbit",
+        "numericValue": 0.00005765,
+        "unit": "AE",
+        "childExplanation": "Das ist der durchschnittliche Abstand der Umlaufbahn zum Erdmittelpunkt."
+      },
+      "ecc": {
+        "code": "ECC",
+        "label": "Exzentrizität",
+        "formattedValue": "0.185",
+        "numericValue": 0.185,
+        "childExplanation": "Seine Bahn ist leicht eiförmig – mal ist er 654 km, mal über 3.800 km über der Erde."
+      },
+      "inc": {
+        "code": "INC",
+        "label": "Bahnneigung",
+        "formattedValue": "34.25°",
+        "numericValue": 34.25,
+        "unit": "°",
+        "childExplanation": "Gibt an, wie stark die Umlaufbahn gegenüber dem Äquator geneigt ist."
+      },
+      "lan": {
+        "code": "LAN",
+        "label": "Aufsteigender Knoten",
+        "formattedValue": "140.0°",
+        "numericValue": 140,
+        "unit": "°",
+        "childExplanation": "Der Winkelpunkt, an dem der Satellit die Bezugsebene nach oben durchkreuzt."
+      },
+      "aop": {
+        "code": "AOP",
+        "label": "Argument der Periapsis",
+        "formattedValue": "120.0°",
+        "numericValue": 120,
+        "unit": "°",
+        "childExplanation": "Der Winkel vom aufsteigenden Knoten bis zum erdnächsten Punkt der Bahn."
+      },
+      "lpe": {
+        "code": "LPE",
+        "label": "Länge des Perihels",
+        "formattedValue": "260.0°",
+        "numericValue": 260,
+        "unit": "°",
+        "childExplanation": "Zeigt die Richtung des erdnächsten Bahnpunktes."
+      },
+      "mna": {
+        "code": "MNA",
+        "label": "Mittlere Anomalie",
+        "formattedValue": "155.0°",
+        "numericValue": 155,
+        "unit": "°",
+        "childExplanation": "Position auf der Umlaufbahn zum Referenzzeitpunkt."
+      },
+      "ref": {
+        "code": "REF",
+        "label": "Referenzsystem",
+        "formattedValue": "Erdorbit · MEO (seit 1958)",
+        "childExplanation": "Mittlerer Erdorbit seit dem Start am 17. März 1958."
+      }
+    },
+    "officialUrl": "https://www.nasa.gov/image-article/vanguard-satellite-1958/",
+    "wikipediaUrl": "https://de.wikipedia.org/wiki/Vanguard_1"
   },
   {
     "id": "vostok-1",

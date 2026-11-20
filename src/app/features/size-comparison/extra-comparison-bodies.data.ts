@@ -3,8 +3,8 @@
  * FCPP-Referenz: P30-U10, P30-U20 (Maßstabs- & Größenvergleich – Extrasolare & allgemeine Vergleichskörper)
  * Erstellt mit: KI-Assistent (Antigravity AI / Pair-Programming Agent)
  * Erstellt für / Autor: Joshua Mößmer (J-Moessmer)
- * Datum / Version: 19.11.2026 / v1.0
- * Hinweis: Kindgerechter Zusatzkatalog für Alltagsgrößen, Exoplaneten, ferne Sterne, Überriesen und Schwarze Löcher im Größenvergleich mit KI-Unterstützung erstellt.
+ * Datum / Version: 20.11.2026 / v1.1
+ * Hinweis: Kindgerechter Zusatzkatalog für Alltagsgrößen (inkl. Satellit Vanguard 1 in P30), Exoplaneten, ferne Sterne, Überriesen und Schwarze Löcher im Größenvergleich mit KI-Unterstützung erstellt.
  */
 
 import { CelestialBody, OrbitalElements } from '../../core/models/celestial-body.model';
@@ -64,6 +64,7 @@ function makeExtraBody(config: {
 }
 
 export const EVERYDAY_COMPARISON_IDS = new Set([
+  'vanguard-1',
   'soccer-ball',
   'basketball',
   'one-meter-sphere',
