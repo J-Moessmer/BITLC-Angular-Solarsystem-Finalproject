@@ -510,15 +510,21 @@
                   opacity="0.8"
                 />
               } @else {
-                <circle
+                <ellipse
                   [attr.cx]="satPos.orbitCenterX"
                   [attr.cy]="satPos.orbitCenterY"
-                  [attr.r]="satPos.orbitRxPx"
+                  [attr.rx]="satPos.orbitRxPx"
+                  [attr.ry]="satPos.orbitRyPx"
+                  [attr.transform]="
+                    satPos.orbitRotationDeg
+                      ? 'rotate(' + satPos.orbitRotationDeg + ' ' + satPos.orbitCenterX + ' ' + satPos.orbitCenterY + ')'
+                      : null
+                  "
                   fill="none"
                   [attr.stroke]="satPos.body.colorHex"
-                  [attr.stroke-width]="satPos.body.id === 'iss' ? 1.8 : 1.2"
+                  [attr.stroke-width]="satPos.body.id === 'iss' || satPos.body.id === 'vanguard-1' ? 1.8 : 1.2"
                   stroke-dasharray="3 3"
-                  opacity="0.8"
+                  opacity="0.85"
                 />
               }
             }

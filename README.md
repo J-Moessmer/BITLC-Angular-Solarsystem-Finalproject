@@ -77,7 +77,7 @@ flowchart TD
 - **Framework:** Angular `22.2.0` (`@angular/cli` `22.2.7`), TypeScript `~6.0.2`, Standalone Components, Angular Signals (`signal`, `computed`, `effect`, `untracked`), `@angular/router` (`withHashLocation()`, `withComponentInputBinding()`).
 - **Icons & Visualisierung:** `@fortawesome/fontawesome-free` `7.3.1`, interaktive 2D-SVGs mit analytischem Orbit-Clipping.
 - **Design-Regel für die Projektdokumentation:** Weltraum-Hintergrund in tiefem Marine-/Nachtblau (`#0B132B` / `#111D3B` – kein `#000000`) kombiniert mit Tag-/Nachtmodus (`ThemeService`) und kontraststarken UI-Karten für prüfungskonforme Screenshots ohne schwarze Bilder.
-- **Unit-Tests:** Vitest `5` (`7` Test-Dateien, `19` Unit-Tests).
+- **Unit-Tests:** Vitest `5` (`7` Test-Dateien, `20` Unit-Tests).
 
 ---
 

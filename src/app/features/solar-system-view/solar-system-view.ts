@@ -736,6 +736,9 @@ export class SolarSystemViewComponent implements OnInit, OnDestroy {
     if (target.id === 'iss') {
       return 12000;
     }
+    if (target.id === 'vanguard-1') {
+      return 8000;
+    }
     if (target.id === 'jwst' || target.id === 'gaia') {
       return isTrueScale ? 45 : 6.5;
     }

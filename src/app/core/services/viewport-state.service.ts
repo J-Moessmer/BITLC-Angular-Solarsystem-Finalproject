@@ -842,7 +842,6 @@ export class ViewportStateService {
       }
 
       const isRetrogradeMoon = body.inclinationToSolarEquatorDeg > 90;
-      const angleRad = ((isRetrogradeMoon ? 1 : -1) * kepler.longitudeDeg * Math.PI) / 180;
       const parentTrueR = parentPos.strictTrueRadiusPx;
 
       // Physikalische Bahnhöhe relativ zum wahren Radius des Mutterplaneten beim Reinzoomen:
@@ -877,36 +876,71 @@ export class ViewportStateService {
 
       const minOverviewOrbitPx =
         parentPos.bodyRadiusPx + Math.max(9, body.overviewOrbitRadiusSvg * 0.72);
-      const screenOrbitRadius = Number(
+      let screenOrbitRx = Number(
         Math.max(minOverviewOrbitPx, physicalOrbitPx).toFixed(1),
       );
 
-      // Welt-Koordinaten des Mondes/Satelliten (damit Kamera-Tracking auch direkt auf die ISS oder einen Mond zoomen kann!)
-      const worldOffsetRadius = screenOrbitRadius / Math.max(0.001, z);
-      const childWorldX = Number((parentPos.worldX + Math.cos(angleRad) * worldOffsetRadius).toFixed(5));
-      const childWorldY = Number((parentPos.worldY + Math.sin(angleRad) * worldOffsetRadius).toFixed(5));
+      // Echte elliptische Geometrie (z. B. Vanguard 1 mit e = 0.185, Juno, Cassini, Namaka) inkl. Perigäums-Schutzabstand
+      const rawSatEcc = body.id === 'apollo-13' ? 0 : (body.orbitalElements.ecc.numericValue ?? 0);
+      let satEcc = Math.min(0.85, Math.max(0, rawSatEcc));
+      const minPeriapsisPx = parentPos.bodyRadiusPx + 3.5;
+      if (satEcc > 0 && screenOrbitRx * (1 - satEcc) < minPeriapsisPx) {
+        if (satEcc <= 0.6) {
+          screenOrbitRx = Number((minPeriapsisPx / (1 - satEcc)).toFixed(1));
+        } else {
+          satEcc = Math.max(0.15, Number((1 - minPeriapsisPx / screenOrbitRx).toFixed(4)));
+        }
+      }
+
+      const screenOrbitRy = Number((screenOrbitRx * Math.sqrt(1 - satEcc * satEcc)).toFixed(1));
+      const focalOffsetPx = Number((-screenOrbitRx * satEcc).toFixed(2));
+      const satPeriapsisDeg = satEcc > 0 ? this.getPerihelionOrientationDeg(body) : 0;
+      const satPeriapsisRad = (-satPeriapsisDeg * Math.PI) / 180;
+      const satOrbitRotationDeg = Number((-satPeriapsisDeg).toFixed(2));
+      const cosSatPhi = Math.cos(satPeriapsisRad);
+      const sinSatPhi = Math.sin(satPeriapsisRad);
+      const satOrbitCenterX = Number((parentPos.x + focalOffsetPx * cosSatPhi).toFixed(1));
+      const satOrbitCenterY = Number((parentPos.y + focalOffsetPx * sinSatPhi).toFixed(1));
+
+      const orbitAngleRad = isRetrogradeMoon
+        ? kepler.eccentricAnomalyRad
+        : -kepler.eccentricAnomalyRad;
+      const localX = focalOffsetPx + Math.cos(orbitAngleRad) * screenOrbitRx;
+      const localY = Math.sin(orbitAngleRad) * screenOrbitRy;
+      const offsetScreenX = localX * cosSatPhi - localY * sinSatPhi;
+      const offsetScreenY = localX * sinSatPhi + localY * cosSatPhi;
+
+      // Welt-Koordinaten des Mondes/Satelliten (damit Kamera-Tracking auch direkt auf Vanguard 1, die ISS oder einen Mond zoomen kann!)
+      const childWorldX = Number(
+        (parentPos.worldX + offsetScreenX / Math.max(0.001, z)).toFixed(5),
+      );
+      const childWorldY = Number(
+        (parentPos.worldY + offsetScreenY / Math.max(0.001, z)).toFixed(5),
+      );
 
       const orbitClip = this.computeOrbitClipping(
-        parentPos.x,
-        parentPos.y,
-        screenOrbitRadius,
-        screenOrbitRadius,
+        satOrbitCenterX,
+        satOrbitCenterY,
+        screenOrbitRx,
+        screenOrbitRy,
+        satPeriapsisRad,
       );
 
       if (mode === 'side-view') {
         const incDeg = Math.min(60, body.inclinationToSolarEquatorDeg);
         const incRad = (incDeg * Math.PI) / 180;
-        const yOff = Number((-Math.sin(incRad) * screenOrbitRadius * 0.5).toFixed(1));
+        const yOff = Number((-Math.sin(incRad) * screenOrbitRx * 0.5).toFixed(1));
         return {
           body,
-          x: Number((parentPos.x + Math.cos(angleRad) * screenOrbitRadius).toFixed(1)),
+          x: Number((parentPos.x + offsetScreenX).toFixed(1)),
           y: Number((parentPos.y + yOff).toFixed(1)),
           worldX: childWorldX,
           worldY: Number((parentPos.worldY + yOff / Math.max(0.001, z)).toFixed(5)),
-          orbitRxPx: screenOrbitRadius,
-          orbitRyPx: screenOrbitRadius,
-          orbitCenterX: parentPos.x,
-          orbitCenterY: parentPos.y,
+          orbitRxPx: screenOrbitRx,
+          orbitRyPx: screenOrbitRy,
+          orbitCenterX: satOrbitCenterX,
+          orbitCenterY: satOrbitCenterY,
+          orbitRotationDeg: satOrbitRotationDeg,
           isOrbitVisibleInViewport: orbitClip.isVisible,
           clippedOrbitPath: orbitClip.clippedPath,
           bodyRadiusPx: Math.max(2.2, displayRadiusPx),
@@ -919,14 +953,15 @@ export class ViewportStateService {
 
       return {
         body,
-        x: Number((parentPos.x + Math.cos(angleRad) * screenOrbitRadius).toFixed(1)),
-        y: Number((parentPos.y + Math.sin(angleRad) * screenOrbitRadius).toFixed(1)),
+        x: Number((parentPos.x + offsetScreenX).toFixed(1)),
+        y: Number((parentPos.y + offsetScreenY).toFixed(1)),
         worldX: childWorldX,
         worldY: childWorldY,
-        orbitRxPx: screenOrbitRadius,
-        orbitRyPx: screenOrbitRadius,
-        orbitCenterX: parentPos.x,
-        orbitCenterY: parentPos.y,
+        orbitRxPx: screenOrbitRx,
+        orbitRyPx: screenOrbitRy,
+        orbitCenterX: satOrbitCenterX,
+        orbitCenterY: satOrbitCenterY,
+        orbitRotationDeg: satOrbitRotationDeg,
         isOrbitVisibleInViewport: orbitClip.isVisible,
         clippedOrbitPath: orbitClip.clippedPath,
         bodyRadiusPx: Math.max(2.2, displayRadiusPx),

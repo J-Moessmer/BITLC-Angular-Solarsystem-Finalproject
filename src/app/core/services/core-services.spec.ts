@@ -55,6 +55,106 @@ describe('Core Services (P10–P50)', () => {
     expect(viewport.isSpacecraftActiveAtSimulationDate('vanguard-1')).toBe(true);
   });
 
+  it('ViewportStateService should render Vanguard 1 with a true eccentric ellipse orbit around Earth', () => {
+    const viewport = TestBed.inject(ViewportStateService);
+    const oeBase = {
+      sma: { code: 'SMA' as const, label: 'SMA', formattedValue: '1 AE', numericValue: 1, childExplanation: '' },
+      ecc: { code: 'ECC' as const, label: 'ECC', formattedValue: '0.0167', numericValue: 0.0167, childExplanation: '' },
+      inc: { code: 'INC' as const, label: 'INC', formattedValue: '0°', numericValue: 0, childExplanation: '' },
+      lan: { code: 'LAN' as const, label: 'LAN', formattedValue: '0°', numericValue: 0, childExplanation: '' },
+      lpe: { code: 'LPE' as const, label: 'LPE', formattedValue: '102.95°', numericValue: 102.95, childExplanation: '' },
+      mna: { code: 'MNA' as const, label: 'MNA', formattedValue: '357.52°', numericValue: 357.52, childExplanation: '' },
+      ref: { code: 'REF' as const, label: 'REF', formattedValue: 'J2000', childExplanation: '' },
+    };
+    const sun: CelestialBody = {
+      id: 'sun',
+      name: 'Sonne',
+      subtitle: '',
+      category: 'star',
+      categoryLabel: 'Stern',
+      childrenIds: ['earth'],
+      wikimediaImageUrl: '',
+      imageUrl: '',
+      imageCredit: '',
+      colorHex: '#F59E0B',
+      accentColorHex: '#FEF08A',
+      diameterKm: 1392700,
+      distanceFromSunKm: 0,
+      distanceFromSunAu: 0,
+      distanceFromEarthKm: 149600000,
+      orbitalPeriodDays: 0,
+      orbitalPeriodLabel: '',
+      inclinationToSolarEquatorDeg: 0,
+      overviewOrbitRadiusSvg: 0,
+      overviewBodyRadiusSvg: 28,
+      orbitAngleDeg: 0,
+      shortSummary: '',
+      childFriendlyFacts: [],
+      comparisonHint: '',
+      orbitalElements: oeBase,
+    };
+    const earth: CelestialBody = {
+      ...sun,
+      id: 'earth',
+      name: 'Erde',
+      category: 'planet',
+      parentId: 'sun',
+      childrenIds: ['vanguard-1'],
+      diameterKm: 12756,
+      distanceFromSunAu: 1,
+      distanceFromEarthKm: 0,
+      orbitalPeriodDays: 365.25,
+      overviewOrbitRadiusSvg: 130,
+      overviewBodyRadiusSvg: 10,
+      orbitalElements: oeBase,
+    };
+    const vanguard: CelestialBody = {
+      ...earth,
+      id: 'vanguard-1',
+      name: 'Vanguard 1',
+      category: 'spacecraft',
+      parentId: 'earth',
+      childrenIds: [],
+      diameterKm: 0.000165,
+      distanceFromEarthKm: 2247,
+      orbitalPeriodDays: 0.093,
+      inclinationToSolarEquatorDeg: 34.25,
+      overviewOrbitRadiusSvg: 15,
+      overviewBodyRadiusSvg: 2.8,
+      orbitAngleDeg: 155,
+      orbitalElements: {
+        ...oeBase,
+        sma: { code: 'SMA', label: 'SMA', formattedValue: '5.77e-05 AE', numericValue: 0.00005765, childExplanation: '' },
+        ecc: { code: 'ECC', label: 'ECC', formattedValue: '0.185', numericValue: 0.185, childExplanation: '' },
+        inc: { code: 'INC', label: 'INC', formattedValue: '34.25°', numericValue: 34.25, childExplanation: '' },
+        lan: { code: 'LAN', label: 'LAN', formattedValue: '140.0°', numericValue: 140, childExplanation: '' },
+        aop: { code: 'AOP', label: 'AOP', formattedValue: '120.0°', numericValue: 120, childExplanation: '' },
+        lpe: { code: 'LPE', label: 'LPE', formattedValue: '260.0°', numericValue: 260, childExplanation: '' },
+        mna: { code: 'MNA', label: 'MNA', formattedValue: '155.0°', numericValue: 155, childExplanation: '' },
+      },
+    };
+
+    for (const zoom of [1.0, 8000]) {
+      viewport.setZoom(zoom);
+      const earthPos = viewport.computeBodyPosition(earth, [sun, earth, vanguard]);
+      const vanPos = viewport.computeBodyPosition(vanguard, [sun, earth, vanguard]);
+
+      expect(vanPos.orbitRxPx).toBeGreaterThan(vanPos.orbitRyPx);
+      expect(vanPos.orbitRotationDeg).toBe(-260);
+      expect(Math.hypot(vanPos.orbitCenterX - earthPos.x, vanPos.orbitCenterY - earthPos.y)).toBeGreaterThan(0.5);
+      expect(vanPos.orbitRxPx * (1 - 0.185)).toBeGreaterThan(earthPos.bodyRadiusPx);
+
+      const rotRad = ((vanPos.orbitRotationDeg ?? 0) * Math.PI) / 180;
+      const dx = vanPos.x - vanPos.orbitCenterX;
+      const dy = vanPos.y - vanPos.orbitCenterY;
+      const lx = dx * Math.cos(-rotRad) - dy * Math.sin(-rotRad);
+      const ly = dx * Math.sin(-rotRad) + dy * Math.cos(-rotRad);
+      const ellipseNorm = (lx / vanPos.orbitRxPx) ** 2 + (ly / vanPos.orbitRyPx) ** 2;
+      expect(ellipseNorm).toBeCloseTo(1.0, 1);
+    }
+    viewport.resetCamera();
+  });
+
   it('ViewportStateService should place L1/L2 collinear with Sun-Earth and L4/L5 at 60° on Earth orbit', () => {
     const viewport = TestBed.inject(ViewportStateService);
     const baseOe = {
